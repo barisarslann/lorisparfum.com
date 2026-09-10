@@ -1,0 +1,48 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "main-page",
+      "disabled": true,
+      "settings": {
+        "compact-size-enabled": true,
+        "size_heading": 140,
+        "size_heading_mobile": 100,
+        "color-body-text": "rgba(0,0,0,0)",
+        "color-bg-overlay": "rgba(0,0,0,0)",
+        "color-overlay-opacity": 100,
+        "margin-top": 40,
+        "margin-bottom": 0
+      }
+    },
+    "1756372719ea7aa10e": {
+      "type": "apps",
+      "blocks": {
+        "bixgrow_affiliate_landing_page_DEGVDe": {
+          "type": "shopify://apps/bixgrow-affiliate/blocks/landing_page/b4f8e2e0-5ee6-49dd-b333-2e5542feb60a",
+          "settings": {
+            "affiliate_signup_url": ""
+          }
+        }
+      },
+      "block_order": [
+        "bixgrow_affiliate_landing_page_DEGVDe"
+      ],
+      "settings": {
+        "include_margins": true
+      }
+    }
+  },
+  "order": [
+    "main",
+    "1756372719ea7aa10e"
+  ]
+}

@@ -1,0 +1,90 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "layout": "theme",
+  "sections": {
+    "image_banner_qEaTUd": {
+      "type": "image-banner",
+      "blocks": {
+        "subheading_LBftpr": {
+          "type": "subheading",
+          "settings": {
+            "subheading": "",
+            "subheading_disable_on_mobile": false
+          }
+        },
+        "heading_zRyGG9": {
+          "type": "heading",
+          "settings": {
+            "heading": "",
+            "disable_on_mobile": false,
+            "size_heading": 100,
+            "size_heading_mobile": 100
+          }
+        },
+        "text_wNBxPy": {
+          "type": "text",
+          "settings": {
+            "text": "",
+            "disable_on_mobile": false
+          }
+        },
+        "button_hUpjEf": {
+          "type": "button",
+          "settings": {
+            "button_select": "link",
+            "button_label": "",
+            "disable_on_mobile": true,
+            "button_link": "/",
+            "second_button_select": "link",
+            "second_button_label": "",
+            "second_disable_on_mobile": true,
+            "second_button_link": ""
+          }
+        }
+      },
+      "block_order": [
+        "subheading_LBftpr",
+        "heading_zRyGG9",
+        "text_wNBxPy",
+        "button_hUpjEf"
+      ],
+      "name": "t:sections.image-banner.presets.name",
+      "settings": {
+        "heading": "",
+        "full-width-enabled": false,
+        "slide_height": "adapt_to_first_image",
+        "desktop_fixed_height": 320,
+        "mobile_fixed_height": 460,
+        "desktop_image": "shopify://shop_images/LORIS_CLUB.png",
+        "desktop_text_vertical_position": "center",
+        "desktop_text_horizontal_position": "center",
+        "mobile_text_vertical_position": "center",
+        "mobile_text_horizontal_position": "center",
+        "color-heading": "transparent",
+        "section-color-overlay": "transparent",
+        "section-color-overlay-opacity": 100,
+        "color-body-text": "transparent",
+        "text-container-color": "transparent",
+        "color-overlay-opacity": 100,
+        "margin-top": 20,
+        "margin-bottom": 20
+      }
+    },
+    "ecom-affilate-page": {
+      "type": "ecom-affilate-page",
+      "settings": {}
+    }
+  },
+  "order": [
+    "image_banner_qEaTUd",
+    "ecom-affilate-page"
+  ]
+}

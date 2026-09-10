@@ -1,0 +1,1535 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "1756739283be35f791": {
+      "type": "apps",
+      "blocks": {
+        "rivyo_product_reviews_wc_referral_program_VFtn4C": {
+          "type": "shopify://apps/rivyo-reviews-loyalty/blocks/wc-referral-program/f1860e84-309f-40ca-a2df-188435a622f3",
+          "settings": {}
+        }
+      },
+      "block_order": [
+        "rivyo_product_reviews_wc_referral_program_VFtn4C"
+      ],
+      "disabled": true,
+      "settings": {
+        "include_margins": true
+      }
+    },
+    "rich_text_with_image_d9iPb9": {
+      "type": "rich-text-with-image",
+      "blocks": {
+        "heading_xqAqaP": {
+          "type": "heading",
+          "settings": {
+            "subheading": "<p>Loris’in Gizemli Hikayesi</p>",
+            "font_uppercase": "none",
+            "disable_on_mobile": false
+          }
+        },
+        "text_yXHg9h": {
+          "type": "text",
+          "settings": {
+            "text": "Özel olarak tasarlanmış kokular PICTURE1 etkileyici ve çarpıcı notalar PICTURE2 her notada gizli bir dokunuş PICTURE3 Loris.",
+            "font_uppercase": "none",
+            "disable_on_mobile": false,
+            "size_heading": 100,
+            "size_heading_mobile": 100,
+            "line_height": 1.5,
+            "picture1": "shopify://shop_images/b2a.png",
+            "button_link1": "",
+            "picture2": "shopify://shop_images/b2b.png",
+            "button_link2": "",
+            "picture3": "shopify://shop_images/b2c.png",
+            "button_link3": ""
+          }
+        }
+      },
+      "block_order": [
+        "heading_xqAqaP",
+        "text_yXHg9h"
+      ],
+      "disabled": true,
+      "settings": {
+        "desktop_text_horizontal_position": "center",
+        "color-body-text": "rgba(0,0,0,0)",
+        "background_color": "#f6f2e9",
+        "margin-top": 0,
+        "margin-bottom": 16
+      }
+    },
+    "image_banner_y6zBRz": {
+      "type": "image-banner",
+      "custom_css": [],
+      "name": "t:sections.image-banner.presets.name",
+      "settings": {
+        "heading": "",
+        "full-width-enabled": true,
+        "slide_height": "adapt_to_first_image",
+        "desktop_fixed_height": 200,
+        "mobile_fixed_height": 200,
+        "desktop_image": "shopify://shop_images/c.odakli-marka_web.jpg",
+        "desktop_text_vertical_position": "center",
+        "desktop_text_horizontal_position": "center",
+        "mobile_image": "shopify://shop_images/c.odakli-marka_mobil.jpg",
+        "mobile_text_vertical_position": "center",
+        "mobile_text_horizontal_position": "center",
+        "color-heading": "rgba(0,0,0,0)",
+        "section-color-overlay": "rgba(0,0,0,0)",
+        "section-color-overlay-opacity": 100,
+        "color-body-text": "rgba(0,0,0,0)",
+        "text-container-color": "rgba(0,0,0,0)",
+        "color-overlay-opacity": 100,
+        "margin-top": 8,
+        "margin-bottom": 8
+      }
+    },
+    "slideshow_9TWGab": {
+      "type": "slideshow",
+      "blocks": {
+        "slide_gzDJwg": {
+          "type": "slide",
+          "settings": {
+            "subheading": "",
+            "subheading_disable_on_mobile": false,
+            "heading": "",
+            "heading_disable_on_mobile": false,
+            "size_heading": 100,
+            "size_heading_mobile": 100,
+            "text": "",
+            "text_disable_on_mobile": false,
+            "button_select": "primary",
+            "button_label": "Hemen Al",
+            "button_disable_on_mobile": false,
+            "button_link": "shopify://collections/tum-urunler",
+            "second_button_select": "secondary",
+            "second_button_label": "",
+            "button_disable_on_mobile_second": false,
+            "second_button_link": "shopify://collections/tum-urunler",
+            "color-body-text": "rgba(0,0,0,0)",
+            "color-overlay": "rgba(0,0,0,0)",
+            "color-overlay-opacity": 0,
+            "desktop_image": "shopify://shop_images/banner_69bedd3f-6031-468f-b6c6-cf1d1f8ac0c6.jpg",
+            "desktop_text_vertical_position": "bottom",
+            "desktop_text_horizontal_position": "center",
+            "mobile_image": "shopify://shop_images/ST_a9b04a7c-917a-4e0f-8153-fe7230aa258e.jpg",
+            "mobile_text_vertical_position": "bottom",
+            "mobile_text_horizontal_position": "center",
+            "out-background-color": "rgba(0,0,0,0)",
+            "out-text-color": "rgba(0,0,0,0)"
+          }
+        },
+        "slide_tDdCgk": {
+          "type": "slide",
+          "settings": {
+            "subheading": "",
+            "subheading_disable_on_mobile": false,
+            "heading": "",
+            "heading_disable_on_mobile": false,
+            "size_heading": 100,
+            "size_heading_mobile": 100,
+            "text": "",
+            "text_disable_on_mobile": false,
+            "button_select": "primary",
+            "button_label": "Hemen Al",
+            "button_disable_on_mobile": false,
+            "button_link": "shopify://collections/ozel-koleksiyon-hamdan-aqua-woods-i̇stanbulnight-earth",
+            "second_button_select": "primary",
+            "second_button_label": "",
+            "button_disable_on_mobile_second": false,
+            "second_button_link": "",
+            "color-body-text": "#ffffff",
+            "color-overlay": "rgba(0,0,0,0)",
+            "color-overlay-opacity": 0,
+            "desktop_image": "shopify://shop_images/Banner_3bd75dab-d0a2-4ce5-960a-ea5ccaf81d2e.jpg",
+            "desktop_text_vertical_position": "bottom",
+            "desktop_text_horizontal_position": "center",
+            "mobile_image": "shopify://shop_images/story.jpg",
+            "mobile_text_vertical_position": "bottom",
+            "mobile_text_horizontal_position": "center",
+            "out-background-color": "rgba(0,0,0,0)",
+            "out-text-color": "rgba(0,0,0,0)"
+          }
+        },
+        "slide_G88KU6": {
+          "type": "slide",
+          "settings": {
+            "subheading": "",
+            "subheading_disable_on_mobile": false,
+            "heading": "",
+            "heading_disable_on_mobile": false,
+            "size_heading": 100,
+            "size_heading_mobile": 100,
+            "text": "",
+            "text_disable_on_mobile": false,
+            "button_select": "secondary",
+            "button_label": "Yeni Ürünü Keşfet",
+            "button_disable_on_mobile": false,
+            "button_link": "shopify://collections/i̇nflunce-serisi",
+            "second_button_select": "primary",
+            "second_button_label": "",
+            "button_disable_on_mobile_second": false,
+            "second_button_link": "",
+            "color-body-text": "rgba(0,0,0,0)",
+            "color-overlay": "rgba(0,0,0,0)",
+            "color-overlay-opacity": 0,
+            "desktop_image": "shopify://shop_images/1905x1071_INFLUENCE_BANNER-TR.jpg",
+            "desktop_text_vertical_position": "bottom",
+            "desktop_text_horizontal_position": "center",
+            "mobile_image": "shopify://shop_images/WhatsApp_Image_2026-08-19_at_08.02.24.jpg",
+            "mobile_text_vertical_position": "center",
+            "mobile_text_horizontal_position": "center",
+            "out-background-color": "rgba(0,0,0,0)",
+            "out-text-color": "rgba(0,0,0,0)"
+          }
+        },
+        "slide_bG9nNH": {
+          "type": "slide",
+          "settings": {
+            "subheading": "",
+            "subheading_disable_on_mobile": false,
+            "heading": "",
+            "heading_disable_on_mobile": false,
+            "size_heading": 100,
+            "size_heading_mobile": 100,
+            "text": "",
+            "text_disable_on_mobile": false,
+            "button_select": "primary",
+            "button_label": "Keşfet",
+            "button_disable_on_mobile": false,
+            "button_link": "shopify://collections/online-ozel-net-30-i̇ndirim",
+            "second_button_select": "secondary",
+            "second_button_label": "Kampanylar",
+            "button_disable_on_mobile_second": false,
+            "second_button_link": "shopify://pages/indirimler",
+            "color-body-text": "rgba(0,0,0,0)",
+            "color-overlay": "rgba(0,0,0,0)",
+            "color-overlay-opacity": 0,
+            "desktop_image": "shopify://shop_images/BANNER_2a7a88d0-eba1-40fd-a164-6accd959cf88.jpg",
+            "desktop_text_vertical_position": "bottom",
+            "desktop_text_horizontal_position": "right",
+            "mobile_image": "shopify://shop_images/ST_645d38b4-8400-448b-ab60-315ad3ce3832.jpg",
+            "mobile_text_vertical_position": "bottom",
+            "mobile_text_horizontal_position": "center",
+            "out-background-color": "rgba(0,0,0,0)",
+            "out-text-color": "rgba(0,0,0,0)"
+          }
+        },
+        "slide_BUGNcr": {
+          "type": "slide",
+          "disabled": true,
+          "settings": {
+            "subheading": "",
+            "subheading_disable_on_mobile": false,
+            "heading": "",
+            "heading_disable_on_mobile": false,
+            "size_heading": 100,
+            "size_heading_mobile": 100,
+            "text": "",
+            "text_disable_on_mobile": false,
+            "button_select": "secondary",
+            "button_label": "Ürünleri Keşfet",
+            "button_disable_on_mobile": false,
+            "button_link": "shopify://collections/niche-parfum",
+            "second_button_select": "primary",
+            "second_button_label": "",
+            "button_disable_on_mobile_second": false,
+            "second_button_link": "",
+            "color-body-text": "#ffffff",
+            "color-overlay": "rgba(0,0,0,0)",
+            "color-overlay-opacity": 0,
+            "desktop_image": "shopify://shop_images/BANNER_1aae3807-c535-48de-b3d7-54890846ba2f.jpg",
+            "desktop_text_vertical_position": "bottom",
+            "desktop_text_horizontal_position": "center",
+            "mobile_image": "shopify://shop_images/ST_4840e049-6990-4028-a006-d301b90b73ac.jpg",
+            "mobile_text_vertical_position": "bottom",
+            "mobile_text_horizontal_position": "center",
+            "out-background-color": "rgba(0,0,0,0)",
+            "out-text-color": "rgba(0,0,0,0)"
+          }
+        },
+        "slide_jybfEW": {
+          "type": "slide",
+          "disabled": true,
+          "settings": {
+            "subheading": "",
+            "subheading_disable_on_mobile": false,
+            "heading": "",
+            "heading_disable_on_mobile": false,
+            "size_heading": 100,
+            "size_heading_mobile": 100,
+            "text": "",
+            "text_disable_on_mobile": false,
+            "button_select": "primary",
+            "button_label": "Keşfet",
+            "button_disable_on_mobile": false,
+            "button_link": "shopify://collections/tum-70-ml-niche-parfumlerde-koku-kesif-seti-hediye",
+            "second_button_select": "primary",
+            "second_button_label": "",
+            "button_disable_on_mobile_second": false,
+            "second_button_link": "shopify://collections/tum-70-ml-niche-parfumlerde-koku-kesif-seti-hediye",
+            "color-body-text": "rgba(0,0,0,0)",
+            "color-overlay": "rgba(0,0,0,0)",
+            "color-overlay-opacity": 0,
+            "desktop_image": "shopify://shop_images/Niche_Tester_Hediye_1.svg",
+            "desktop_text_vertical_position": "bottom",
+            "desktop_text_horizontal_position": "center",
+            "mobile_image": "shopify://shop_images/Tester_Kit.svg",
+            "mobile_text_vertical_position": "bottom",
+            "mobile_text_horizontal_position": "center",
+            "out-background-color": "rgba(0,0,0,0)",
+            "out-text-color": "rgba(0,0,0,0)"
+          }
+        },
+        "slide_fP33JJ": {
+          "type": "slide",
+          "disabled": true,
+          "settings": {
+            "subheading": "",
+            "subheading_disable_on_mobile": false,
+            "heading": "",
+            "heading_disable_on_mobile": false,
+            "size_heading": 100,
+            "size_heading_mobile": 100,
+            "text": "",
+            "text_disable_on_mobile": false,
+            "button_select": "secondary",
+            "button_label": "Yeni Ürünü Keşfet",
+            "button_disable_on_mobile": false,
+            "button_link": "shopify://products/altheron-by-loris-black-shine-edp-100-ml",
+            "second_button_select": "secondary",
+            "second_button_label": "",
+            "button_disable_on_mobile_second": false,
+            "second_button_link": "shopify://pages/indirimler",
+            "color-body-text": "rgba(0,0,0,0)",
+            "color-overlay": "rgba(0,0,0,0)",
+            "color-overlay-opacity": 0,
+            "desktop_image": "shopify://shop_images/1905x1071_BLACK_SHINE.jpg",
+            "desktop_text_vertical_position": "bottom",
+            "desktop_text_horizontal_position": "center",
+            "mobile_image": "shopify://shop_images/BLACK_SHINE_STORY_BOYUT.jpg",
+            "mobile_text_vertical_position": "bottom",
+            "mobile_text_horizontal_position": "center",
+            "out-background-color": "rgba(0,0,0,0)",
+            "out-text-color": "rgba(0,0,0,0)"
+          }
+        },
+        "slide_MF3gm9": {
+          "type": "slide",
+          "disabled": true,
+          "settings": {
+            "subheading": "",
+            "subheading_disable_on_mobile": false,
+            "heading": "",
+            "heading_disable_on_mobile": false,
+            "size_heading": 100,
+            "size_heading_mobile": 100,
+            "text": "",
+            "text_disable_on_mobile": false,
+            "button_select": "primary",
+            "button_label": "Keşfet",
+            "button_disable_on_mobile": false,
+            "button_link": "shopify://collections/frequence",
+            "second_button_select": "secondary",
+            "second_button_label": "",
+            "button_disable_on_mobile_second": true,
+            "second_button_link": "shopify://pages/indirimler",
+            "color-body-text": "rgba(0,0,0,0)",
+            "color-overlay": "rgba(0,0,0,0)",
+            "color-overlay-opacity": 0,
+            "desktop_image": "shopify://shop_images/Artboard-3-copy-3-100.jpg",
+            "desktop_text_vertical_position": "bottom",
+            "desktop_text_horizontal_position": "center",
+            "mobile_image": "shopify://shop_images/Artboard_3_copy_7-100_63ba3e5c-4c03-4b45-89ce-a9a1db1467a4.jpg",
+            "mobile_text_vertical_position": "bottom",
+            "mobile_text_horizontal_position": "center",
+            "out-background-color": "rgba(0,0,0,0)",
+            "out-text-color": "rgba(0,0,0,0)"
+          }
+        },
+        "slide_FEpyhy": {
+          "type": "slide",
+          "disabled": true,
+          "settings": {
+            "subheading": "",
+            "subheading_disable_on_mobile": false,
+            "heading": "",
+            "heading_disable_on_mobile": false,
+            "size_heading": 100,
+            "size_heading_mobile": 100,
+            "text": "",
+            "text_disable_on_mobile": false,
+            "button_select": "secondary",
+            "button_label": "Tüm Ürünler",
+            "button_disable_on_mobile": false,
+            "button_link": "shopify://collections/tum-urunler",
+            "second_button_select": "primary",
+            "second_button_label": "Kampanyalar",
+            "button_disable_on_mobile_second": false,
+            "second_button_link": "shopify://pages/indirimler",
+            "color-body-text": "rgba(0,0,0,0)",
+            "color-overlay": "rgba(0,0,0,0)",
+            "color-overlay-opacity": 0,
+            "desktop_image": "shopify://shop_images/Artboard_2-100.jpg",
+            "desktop_text_vertical_position": "bottom",
+            "desktop_text_horizontal_position": "center",
+            "mobile_image": "shopify://shop_images/Artboard_3_copy_6-100.jpg",
+            "mobile_text_vertical_position": "bottom",
+            "mobile_text_horizontal_position": "center",
+            "out-background-color": "rgba(0,0,0,0)",
+            "out-text-color": "rgba(0,0,0,0)"
+          }
+        }
+      },
+      "block_order": [
+        "slide_gzDJwg",
+        "slide_tDdCgk",
+        "slide_G88KU6",
+        "slide_bG9nNH",
+        "slide_BUGNcr",
+        "slide_jybfEW",
+        "slide_fP33JJ",
+        "slide_MF3gm9",
+        "slide_FEpyhy"
+      ],
+      "custom_css": [
+        ".wt-slider .hero {border-radius: 0;}",
+        " /**/.hero__overlay .hero__overlay__content {margin-bottom: 80px;}",
+        ".hero__overlay .hero__overlay__content > div {/* display: grid; */ /* flex-direction: column; */}",
+        "@media (max-width: 767px) {.hero__overlay .hero__overlay__content {margin-bottom: 60px; } .hero__overlay .hero__overlay__content .hero__button {padding-top: calc(var(--gap, 8px) * 1); padding-bottom: calc(var(--gap, 8px) * 1); }}"
+      ],
+      "name": "t:sections.slideshow.settings.presets.name",
+      "settings": {
+        "heading": "",
+        "full-width-enabled": true,
+        "auto-rotate": true,
+        "slide_height": "adapt_to_first_image",
+        "desktop_fixed_height": 760,
+        "mobile_fixed_height": 580,
+        "heading_color": "rgba(0,0,0,0)",
+        "text_color": "rgba(0,0,0,0)",
+        "background_color": "rgba(0,0,0,0)",
+        "out_hero_mobile": false,
+        "margin-top": 0,
+        "margin-bottom": 0
+      }
+    },
+    "custom_liquid_qKzW7U": {
+      "type": "custom-liquid",
+      "disabled": true,
+      "name": "t:sections.custom-liquid.presets.name",
+      "settings": {
+        "custom_liquid": "<a style=\"\n    text-align: center;\n    display: flex;\n    justify-content: center;\n    align-items: center;\n    text-decoration: none;\n    color:black\n  \" href=\"https://lorisparfum.com/pages/ugc\"><h2>Sizden Gelenler</h2></a>\n\n<div class=\"uvideos\">\n\n  <div>\n    <a href=\"#!\" data-href=\"\">\n      <span class=\"title\"> Begüm A. </span>\n      <video loop=\"\" playsinline=\"\" poster=\"https://i.vimeocdn.com/video/2023015750-538eede27833b8def03176bd76cb19ef912ff26752b3ef8721f1578e1912b065-d_450x800?&amp;r=pad&amp;region=us\">\n        <source src=\"https://player.vimeo.com/progressive_redirect/playback/1090410448/rendition/540p/file.mp4?loc=external&amp;signature=7050573afa7856832f5e5e7d4c5002c2f36976923eb463d98ffc565a655c21d9\" type=\"video/mp4\">\n      </video>\n      <span class=\"play\">\n        <span class=\"start\"><svg xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" viewBox=\"0 0 24 24\"><path d=\"M12 2c5.514 0 10 4.486 10 10s-4.486 10-10 10-10-4.486-10-10 4.486-10 10-10zm0-2c-6.627 0-12 5.373-12 12s5.373 12 12 12 12-5.373 12-12-5.373-12-12-12zm-3 18v-12l10 6-10 6z\"></path></svg></span>\n        <span class=\"paused\" style=\"display: none;\"><svg xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" viewBox=\"0 0 24 24\"><path d=\"M12 2c5.514 0 10 4.486 10 10s-4.486 10-10 10-10-4.486-10-10 4.486-10 10-10zm0-2c-6.627 0-12 5.373-12 12s5.373 12 12 12 12-5.373 12-12-5.373-12-12-12zm-1 17h-3v-10h3v10zm5-10h-3v10h3v-10z\"></path></svg></span>\n      </span>\n\n      <span class=\"view\"> Ürünü Gör </span>\n    </a>\n    <span class=\"videochecks\">\n      <label for=\"videocheck28\"><img src=\"https://cdn.myikas.com/images/11aa96e3-a7d5-41e6-9fde-76fdf665e12e/49b566c1-3585-4fb9-a307-3504ca8ea086/1080/k-122-yeni-frequence-web.webp\" loading=\"lazy\"></label>\n      <input id=\"videocheck28\" type=\"checkbox\" class=\"videcheck\">\n      <a href=\"https://lorisparfum.com/loris-k-122-frequence-kadin-parfum-50-ml\">\n        <span>Loris K-122 Frequence Kadın Parfüm 50 ML\n</span>\n        <img src=\"https://cdn.myikas.com/images/11aa96e3-a7d5-41e6-9fde-76fdf665e12e/49b566c1-3585-4fb9-a307-3504ca8ea086/1080/k-122-yeni-frequence-web.webp\" loading=\"lazy\">\n      </a>\n    </span>\n  </div>\n\n  <div>\n    <a href=\"#!\" data-href=\"\">\n      <span class=\"title\"> Tolga B. </span>\n      <video loop=\"\" playsinline=\"\" poster=\"https://i.vimeocdn.com/video/2023009881-87d48127891830236525ff87512c819586e2a208fa31f8643a485728b6ba98c9-d_450x800?&amp;r=pad&amp;region=us\">\n        <source src=\"https://player.vimeo.com/progressive_redirect/playback/1090405363/rendition/540p/file.mp4?loc=external&amp;signature=979fcf8fbed2fcb4cc6d07923c0aa0f658b20a86e07145ac2af57be84c992f31\" type=\"video/mp4\">\n      </video>\n      <span class=\"play\">\n        <span class=\"start\"><svg xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" viewBox=\"0 0 24 24\"><path d=\"M12 2c5.514 0 10 4.486 10 10s-4.486 10-10 10-10-4.486-10-10 4.486-10 10-10zm0-2c-6.627 0-12 5.373-12 12s5.373 12 12 12 12-5.373 12-12-5.373-12-12-12zm-3 18v-12l10 6-10 6z\"></path></svg></span>\n        <span class=\"paused\" style=\"display: none;\"><svg xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" viewBox=\"0 0 24 24\"><path d=\"M12 2c5.514 0 10 4.486 10 10s-4.486 10-10 10-10-4.486-10-10 4.486-10 10-10zm0-2c-6.627 0-12 5.373-12 12s5.373 12 12 12 12-5.373 12-12-5.373-12-12-12zm-1 17h-3v-10h3v10zm5-10h-3v10h3v-10z\"></path></svg></span>\n      </span>\n\n      <span class=\"view\"> Ürünü Gör </span>\n    </a>\n    <span class=\"videochecks\">\n      <label for=\"videocheck31\"><img src=\"https://cdn.myikas.com/images/11aa96e3-a7d5-41e6-9fde-76fdf665e12e/d888d466-eb3b-4f13-bb50-173aca5b2af6/1080/e-202-yeni-frequence-web.webp\" loading=\"lazy\"></label>\n      <input id=\"videocheck31\" type=\"checkbox\" class=\"videcheck\">\n      <a href=\"https://lorisparfum.com/loris-e-202-frequence-erkek-parfum-50-ml\">\n        <span>Loris E-202 Frequence Erkek Parfüm 50 ML\n</span>\n        <img src=\"https://cdn.myikas.com/images/11aa96e3-a7d5-41e6-9fde-76fdf665e12e/d888d466-eb3b-4f13-bb50-173aca5b2af6/1080/e-202-yeni-frequence-web.webp\" loading=\"lazy\">\n      </a>\n    </span>\n  </div>\n\n  <div>\n    <a href=\"#!\" data-href=\"\">\n      <span class=\"title\"> Aycan D. </span>\n      <video loop=\"\" playsinline=\"\" poster=\"https://i.vimeocdn.com/video/2029468981-27ccdbe17b48108045bb2f82f33a7ec34597ae8240cd12658943e9bc539cd029-d_450x800?&amp;r=pad&amp;region=us\">\n        <source src=\"https://player.vimeo.com/progressive_redirect/playback/1095616258/rendition/540p/file.mp4?loc=external&amp;signature=41ef32168d340f62b889e76db1a585521294829ef5241893dfc99b9f30c582ff\" type=\"video/mp4\">\n      </video>\n      <span class=\"play\">\n        <span class=\"start\"><svg xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" viewBox=\"0 0 24 24\"><path d=\"M12 2c5.514 0 10 4.486 10 10s-4.486 10-10 10-10-4.486-10-10 4.486-10 10-10zm0-2c-6.627 0-12 5.373-12 12s5.373 12 12 12 12-5.373 12-12-5.373-12-12-12zm-3 18v-12l10 6-10 6z\"></path></svg></span>\n        <span class=\"paused\" style=\"display: none;\"><svg xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" viewBox=\"0 0 24 24\"><path d=\"M12 2c5.514 0 10 4.486 10 10s-4.486 10-10 10-10-4.486-10-10 4.486-10 10-10zm0-2c-6.627 0-12 5.373-12 12s5.373 12 12 12 12-5.373 12-12-5.373-12-12-12zm-1 17h-3v-10h3v10zm5-10h-3v10h3v-10z\"></path></svg></span>\n      </span>\n\n      <span class=\"view\"> Ürünü Gör </span>\n    </a>\n    <span class=\"videochecks\">\n      <label for=\"videocheck50\"><img src=\"https://cdn.myikas.com/images/11aa96e3-a7d5-41e6-9fde-76fdf665e12e/fa52c07d-d39a-45db-a30c-cc534e5171a6/1080/k-222-yeni-frequence-web.webp\" loading=\"lazy\"></label>\n      <input id=\"videocheck50\" type=\"checkbox\" class=\"videcheck\">\n      <a href=\"https://lorisparfum.com/loris-k-222-frequence-kadin-parfumu-50-ml\">\n        <span>Loris K-222 Frequence Kadın Parfümü 50 ML\n</span>\n        <img src=\"https://cdn.myikas.com/images/11aa96e3-a7d5-41e6-9fde-76fdf665e12e/fa52c07d-d39a-45db-a30c-cc534e5171a6/1080/k-222-yeni-frequence-web.webp\" loading=\"lazy\">\n      </a>\n    </span>\n  </div>\n\n  <div>\n    <a href=\"#!\" data-href=\"\">\n      <span class=\"title\"> Çisem G. </span>\n      <video loop=\"\" playsinline=\"\" poster=\"https://i.vimeocdn.com/video/2029468914-2a422f3670e5538ca8fa2efeeb9bc7e46ed1351f04d3a0557384b0e6bf106a1a-d_450x800?&amp;r=pad&amp;region=us\">\n        <source src=\"https://player.vimeo.com/progressive_redirect/playback/1095616204/rendition/540p/file.mp4?loc=external&amp;signature=8f6f7bab4f23e78dfc452efceb1abaadb7f9448c9d762367145a066292a1f7af\" type=\"video/mp4\">\n      </video>\n      <span class=\"play\">\n        <span class=\"start\"><svg xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" viewBox=\"0 0 24 24\"><path d=\"M12 2c5.514 0 10 4.486 10 10s-4.486 10-10 10-10-4.486-10-10 4.486-10 10-10zm0-2c-6.627 0-12 5.373-12 12s5.373 12 12 12 12-5.373 12-12-5.373-12-12-12zm-3 18v-12l10 6-10 6z\"></path></svg></span>\n        <span class=\"paused\" style=\"display: none;\"><svg xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" viewBox=\"0 0 24 24\"><path d=\"M12 2c5.514 0 10 4.486 10 10s-4.486 10-10 10-10-4.486-10-10 4.486-10 10-10zm0-2c-6.627 0-12 5.373-12 12s5.373 12 12 12 12-5.373 12-12-5.373-12-12-12zm-1 17h-3v-10h3v10zm5-10h-3v10h3v-10z\"></path></svg></span>\n      </span>\n\n      <span class=\"view\"> Ürünü Gör </span>\n    </a>\n    <span class=\"videochecks\">\n      <label for=\"videocheck51\"><img src=\"https://cdn.myikas.com/images/11aa96e3-a7d5-41e6-9fde-76fdf665e12e/c0a14786-ac51-46d1-aa53-4f161295eabc/2560/k-286-yeni-frequence-web.webp\" loading=\"lazy\"></label>\n      <input id=\"videocheck51\" type=\"checkbox\" class=\"videcheck\">\n      <a href=\"https://lorisparfum.com/loris-k-286-frequence-kadin-parfum-50-ml\">\n        <span>Loris K-286 Frequence Kadın Parfüm 50 ML</span>\n        <img src=\"https://cdn.myikas.com/images/11aa96e3-a7d5-41e6-9fde-76fdf665e12e/c0a14786-ac51-46d1-aa53-4f161295eabc/2560/k-286-yeni-frequence-web.webp\" loading=\"lazy\">\n      </a>\n    </span>\n  </div>\n\n  <div>\n    <a href=\"#!\" data-href=\"\">\n      <span class=\"title\"> Elyesa Y. </span>\n      <video loop=\"\" playsinline=\"\" poster=\"https://i.vimeocdn.com/video/2029468860-2b555dc6b638dcfe817fca05ce93d75d94d29332b340792aa02dce8792bbc45f-d_450x800?&amp;r=pad&amp;region=us\">\n        <source src=\"https://player.vimeo.com/progressive_redirect/playback/1095616028/rendition/540p/file.mp4?loc=external&amp;signature=3b96e837d9c07b1b93092db950a4ebe809bf0cd30f7a893d7c92341f57f27d59\" type=\"video/mp4\">\n      </video>\n      <span class=\"play\">\n        <span class=\"start\"><svg xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" viewBox=\"0 0 24 24\"><path d=\"M12 2c5.514 0 10 4.486 10 10s-4.486 10-10 10-10-4.486-10-10 4.486-10 10-10zm0-2c-6.627 0-12 5.373-12 12s5.373 12 12 12 12-5.373 12-12-5.373-12-12-12zm-3 18v-12l10 6-10 6z\"></path></svg></span>\n        <span class=\"paused\" style=\"display: none;\"><svg xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" viewBox=\"0 0 24 24\"><path d=\"M12 2c5.514 0 10 4.486 10 10s-4.486 10-10 10-10-4.486-10-10 4.486-10 10-10zm0-2c-6.627 0-12 5.373-12 12s5.373 12 12 12 12-5.373 12-12-5.373-12-12-12zm-1 17h-3v-10h3v10zm5-10h-3v10h3v-10z\"></path></svg></span>\n      </span>\n\n      <span class=\"view\"> Ürünü Gör </span>\n    </a>\n    <span class=\"videochecks\">\n      <label for=\"videocheck52\"><img src=\"https://cdn.myikas.com/images/11aa96e3-a7d5-41e6-9fde-76fdf665e12e/eb5e226b-5f76-4688-96fd-4abec189c0c4/1080/u-009-yeni-frequence-web.webp\" loading=\"lazy\"></label>\n      <input id=\"videocheck52\" type=\"checkbox\" class=\"videcheck\">\n      <a href=\"https://lorisparfum.com/en/loris-u-009-frequence-unisex-parfum-50-ml\">\n        <span>Loris U-009 Frequence Unisex Perfume 50 ML\n</span>\n        <img src=\"https://cdn.myikas.com/images/11aa96e3-a7d5-41e6-9fde-76fdf665e12e/eb5e226b-5f76-4688-96fd-4abec189c0c4/1080/u-009-yeni-frequence-web.webp\" loading=\"lazy\">\n      </a>\n    </span>\n  </div>\n\n  <div>\n    <a href=\"#!\" data-href=\"\">\n      <span class=\"title\"> Kübra B. </span>\n      <video loop=\"\" playsinline=\"\" poster=\"https://i.vimeocdn.com/video/2029468682-908e314ae1d8a74936cc559ed5ee9028661fe6c0ed16199940facd82e3163085-d_450x800?&amp;r=pad&amp;region=us\">\n        <source src=\"https://player.vimeo.com/progressive_redirect/playback/1095615900/rendition/540p/file.mp4?loc=external&amp;signature=0c43c53b36c825fc5d15c3f17fa3025938e30242eb74d98c9aba9c0223c62930\" type=\"video/mp4\">\n      </video>\n      <span class=\"play\">\n        <span class=\"start\"><svg xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" viewBox=\"0 0 24 24\"><path d=\"M12 2c5.514 0 10 4.486 10 10s-4.486 10-10 10-10-4.486-10-10 4.486-10 10-10zm0-2c-6.627 0-12 5.373-12 12s5.373 12 12 12 12-5.373 12-12-5.373-12-12-12zm-3 18v-12l10 6-10 6z\"></path></svg></span>\n        <span class=\"paused\" style=\"display: none;\"><svg xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" viewBox=\"0 0 24 24\"><path d=\"M12 2c5.514 0 10 4.486 10 10s-4.486 10-10 10-10-4.486-10-10 4.486-10 10-10zm0-2c-6.627 0-12 5.373-12 12s5.373 12 12 12 12-5.373 12-12-5.373-12-12-12zm-1 17h-3v-10h3v10zm5-10h-3v10h3v-10z\"></path></svg></span>\n      </span>\n\n      <span class=\"view\"> Ürünü Gör </span>\n    </a>\n    <span class=\"videochecks\">\n      <label for=\"videocheck53\"><img src=\"https://cdn.myikas.com/images/11aa96e3-a7d5-41e6-9fde-76fdf665e12e/c0a14786-ac51-46d1-aa53-4f161295eabc/1080/k-286-yeni-frequence-web.webp\" loading=\"lazy\"></label>\n      <input id=\"videocheck53\" type=\"checkbox\" class=\"videcheck\">\n      <a href=\"https://lorisparfum.com/loris-k-286-frequence-kadin-parfum-50-ml\">\n        <span>Loris K-286 Frequence Kadın Parfüm 50 ML\n</span>\n        <img src=\"https://cdn.myikas.com/images/11aa96e3-a7d5-41e6-9fde-76fdf665e12e/c0a14786-ac51-46d1-aa53-4f161295eabc/1080/k-286-yeni-frequence-web.webp\" loading=\"lazy\">\n      </a>\n    </span>\n  </div>\n\n  <div>\n    <a href=\"#!\" data-href=\"\">\n      <span class=\"title\"> Melis H. </span>\n      <video loop=\"\" playsinline=\"\" poster=\"https://i.vimeocdn.com/video/2023032373-6201f3eed800174f95cf572f42311733bfecb9ff1e00d5a0046da5c4cbbb5e5e-d_450x800?&amp;r=pad&amp;region=usvvv\">\n        <source src=\"https://player.vimeo.com/progressive_redirect/playback/1090423847/rendition/540p/file.mp4?loc=external&amp;signature=240654730ba955e3412676cda3159bd2cfb3a230d7668b5b5d47c207d046c7f4\" type=\"video/mp4\">\n      </video>\n      <span class=\"play\">\n        <span class=\"start\"><svg xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" viewBox=\"0 0 24 24\"><path d=\"M12 2c5.514 0 10 4.486 10 10s-4.486 10-10 10-10-4.486-10-10 4.486-10 10-10zm0-2c-6.627 0-12 5.373-12 12s5.373 12 12 12 12-5.373 12-12-5.373-12-12-12zm-3 18v-12l10 6-10 6z\"></path></svg></span>\n        <span class=\"paused\" style=\"display: none;\"><svg xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" viewBox=\"0 0 24 24\"><path d=\"M12 2c5.514 0 10 4.486 10 10s-4.486 10-10 10-10-4.486-10-10 4.486-10 10-10zm0-2c-6.627 0-12 5.373-12 12s5.373 12 12 12 12-5.373 12-12-5.373-12-12-12zm-1 17h-3v-10h3v10zm5-10h-3v10h3v-10z\"></path></svg></span>\n      </span>\n\n      <span class=\"view\"> Ürünü Gör </span>\n    </a>\n    <span class=\"videochecks\">\n      <label for=\"videocheck37\"><img src=\"https://cdn.myikas.com/images/11aa96e3-a7d5-41e6-9fde-76fdf665e12e/729f43d7-6349-4347-8d74-d3c307b08549/1080/k-248-yeni-frequence-web.webp\" loading=\"lazy\"></label>\n      <input id=\"videocheck37\" type=\"checkbox\" class=\"videcheck\">\n      <a href=\"https://lorisparfum.com/loris-k-248-frequence-kadin-parfumu-50-ml\">\n        <span>Loris K-248 Frequence Kadın Parfümü 50 ML\n</span>\n        <img src=\"https://cdn.myikas.com/images/11aa96e3-a7d5-41e6-9fde-76fdf665e12e/729f43d7-6349-4347-8d74-d3c307b08549/1080/k-248-yeni-frequence-web.webp\" loading=\"lazy\">\n      </a>\n    </span>\n  </div>\n\n  <div>\n    <a href=\"#!\" data-href=\"\">\n      <span class=\"title\"> Enes P. </span>\n      <video loop=\"\" playsinline=\"\" poster=\"https://i.vimeocdn.com/video/2023046790-f2f32adf04b61e028005cd56a7086c5e82e43cbcf47ac90243877d9977c3bea2-d_450x800?&amp;r=pad&amp;region=us\">\n        <source src=\"https://player.vimeo.com/progressive_redirect/playback/1090435767/rendition/540p/file.mp4?loc=external&amp;signature=ac47947a7295419859fe3aaef8d40c45f20cb46ad2893dec52e68a59a2bdd9ed\" type=\"video/mp4\">\n      </video>\n      <span class=\"play\">\n        <span class=\"start\"><svg xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" viewBox=\"0 0 24 24\"><path d=\"M12 2c5.514 0 10 4.486 10 10s-4.486 10-10 10-10-4.486-10-10 4.486-10 10-10zm0-2c-6.627 0-12 5.373-12 12s5.373 12 12 12 12-5.373 12-12-5.373-12-12-12zm-3 18v-12l10 6-10 6z\"></path></svg></span>\n        <span class=\"paused\" style=\"display: none;\"><svg xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" viewBox=\"0 0 24 24\"><path d=\"M12 2c5.514 0 10 4.486 10 10s-4.486 10-10 10-10-4.486-10-10 4.486-10 10-10zm0-2c-6.627 0-12 5.373-12 12s5.373 12 12 12 12-5.373 12-12-5.373-12-12-12zm-1 17h-3v-10h3v10zm5-10h-3v10h3v-10z\"></path></svg></span>\n      </span>\n\n      <span class=\"view\"> Ürünü Gör </span>\n    </a>\n    <span class=\"videochecks\">\n      <label for=\"videocheck39\"><img src=\"https://cdn.myikas.com/images/11aa96e3-a7d5-41e6-9fde-76fdf665e12e/d888d466-eb3b-4f13-bb50-173aca5b2af6/1080/e-202-yeni-frequence-web.webp\" loading=\"lazy\"></label>\n      <input id=\"videocheck39\" type=\"checkbox\" class=\"videcheck\">\n      <a href=\"https://lorisparfum.com/loris-e-202-frequence-erkek-parfum-50-ml\">\n        <span>Loris E-202 Frequence Erkek Parfüm 50 ML\n</span>\n        <img src=\"https://cdn.myikas.com/images/11aa96e3-a7d5-41e6-9fde-76fdf665e12e/d888d466-eb3b-4f13-bb50-173aca5b2af6/1080/e-202-yeni-frequence-web.webp\" loading=\"lazy\">\n      </a>\n    </span>\n  </div>\n\n  <div>\n    <a href=\"#!\" data-href=\"\">\n      <span class=\"title\"> Cansu B. </span>\n      <video loop=\"\" playsinline=\"\" poster=\"https://i.vimeocdn.com/video/2029468511-4943df7ce3baa238ed526ddb1d42c1b6e40897c06c1351857073c59383c16070-d_450x800?&amp;r=pad&amp;region=us\">\n        <source src=\"https://player.vimeo.com/progressive_redirect/playback/1095615846/rendition/540p/file.mp4?loc=external&amp;signature=980a6697364f1d0dea7a0efe87453850c15f5169e249c112e869045bf5a81e0b\" type=\"video/mp4\">\n      </video>\n      <span class=\"play\">\n        <span class=\"start\"><svg xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" viewBox=\"0 0 24 24\"><path d=\"M12 2c5.514 0 10 4.486 10 10s-4.486 10-10 10-10-4.486-10-10 4.486-10 10-10zm0-2c-6.627 0-12 5.373-12 12s5.373 12 12 12 12-5.373 12-12-5.373-12-12-12zm-3 18v-12l10 6-10 6z\"></path></svg></span>\n        <span class=\"paused\" style=\"display: none;\"><svg xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" viewBox=\"0 0 24 24\"><path d=\"M12 2c5.514 0 10 4.486 10 10s-4.486 10-10 10-10-4.486-10-10 4.486-10 10-10zm0-2c-6.627 0-12 5.373-12 12s5.373 12 12 12 12-5.373 12-12-5.373-12-12-12zm-1 17h-3v-10h3v10zm5-10h-3v10h3v-10z\"></path></svg></span>\n      </span>\n\n      <span class=\"view\"> Ürünü Gör </span>\n    </a>\n    <span class=\"videochecks\">\n      <label for=\"videocheck54\"><img src=\"https://cdn.myikas.com/images/11aa96e3-a7d5-41e6-9fde-76fdf665e12e/fb68f0ae-a5b3-40c1-9fa3-e95c51a59e30/1080/k-201-yeni-frequence-web.webp\" loading=\"lazy\"></label>\n      <input id=\"videocheck54\" type=\"checkbox\" class=\"videcheck\">\n      <a href=\"https://lorisparfum.com/loris-k-201-frequence-kadin-parfumu-50-ml\">\n        <span>Loris K-201 Frequence Kadın Parfümü 50 ML\n</span>\n        <img src=\"https://cdn.myikas.com/images/11aa96e3-a7d5-41e6-9fde-76fdf665e12e/fb68f0ae-a5b3-40c1-9fa3-e95c51a59e30/1080/k-201-yeni-frequence-web.webp\" loading=\"lazy\">\n      </a>\n    </span>\n  </div>\n  \n  <!-- <div>\n    <a href=\"#!\" data-href=\"\">\n      <span class=\"title\"> Rümeysa G. </span>\n      <video loop=\"\" playsinline=\"\" poster=\"https://cdn.myikas.com/images/theme-images/dd3dbe4a-0fc0-492e-836b-5efb7ac1bb03/image_1080.webp\">\n        <source src=\"https://cdn.myikas.com/videos/11aa96e3-a7d5-41e6-9fde-76fdf665e12e/da2db681-b65b-4bdb-b324-4f582ce7984e/original.mp4\" type=\"video/mp4\">\n      </video>\n      <span class=\"play\">\n        <span class=\"start\"><svg xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" viewBox=\"0 0 24 24\"><path d=\"M12 2c5.514 0 10 4.486 10 10s-4.486 10-10 10-10-4.486-10-10 4.486-10 10-10zm0-2c-6.627 0-12 5.373-12 12s5.373 12 12 12 12-5.373 12-12-5.373-12-12-12zm-3 18v-12l10 6-10 6z\"></path></svg></span>\n        <span class=\"paused\" style=\"display: none;\"><svg xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" viewBox=\"0 0 24 24\"><path d=\"M12 2c5.514 0 10 4.486 10 10s-4.486 10-10 10-10-4.486-10-10 4.486-10 10-10zm0-2c-6.627 0-12 5.373-12 12s5.373 12 12 12 12-5.373 12-12-5.373-12-12-12zm-1 17h-3v-10h3v10zm5-10h-3v10h3v-10z\"></path></svg></span>\n      </span>\n    \n      <span class=\"view\"> Ürünü Gör </span>\n    </a>\n    <span class=\"videochecks\">\n      <label for=\"videocheck1\"><img src=\"https://cdn.myikas.com/images/11aa96e3-a7d5-41e6-9fde-76fdf665e12e/78a84a67-c41a-45ce-877f-e619bf4e95b0/image_2560.webp\" loading=\"lazy\"></label>\n      <input type=\"checkbox\" id=\"videocheck1\" class=\"videcheck\">\n      <a href=\"https://lorisparfum.com/loris-velvet-touch-niche-parfum-70-ml?gad_source=1&amp;gclid=CjwKCAiAt4C-BhBcEiwA8Kp0CWN8hZAUjEG0pQkgrKUsSmRvuuMHTp1IOSy9j-a55UpZNEC2aPb5wBoC9vsQAvD_BwE\">\n        <span>Loris Velvet Touch Niche Parfüm 70 ML</span>\n        <img src=\"https://cdn.myikas.com/images/11aa96e3-a7d5-41e6-9fde-76fdf665e12e/78a84a67-c41a-45ce-877f-e619bf4e95b0/image_2560.webp\" loading=\"lazy\">\n      </a>\n    </span>\n  </div>\n\n  <div>\n    <a href=\"#!\" data-href=\"\">\n      <span class=\"title\"> Hazal K. </span>\n      <video loop=\"\" playsinline=\"\" poster=\"https://cdn.myikas.com/images/theme-images/80823f54-888a-4baa-aab2-ee7cae4a4402/image_1080.webp\">\n        <source src=\"https://cdn.myikas.com/videos/11aa96e3-a7d5-41e6-9fde-76fdf665e12e/09067729-b55f-419f-aaa4-5e155b4642d0/original.mp4\" type=\"video/mp4\">\n      </video>\n      <span class=\"play\">\n        <span class=\"start\"><svg xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" viewBox=\"0 0 24 24\"><path d=\"M12 2c5.514 0 10 4.486 10 10s-4.486 10-10 10-10-4.486-10-10 4.486-10 10-10zm0-2c-6.627 0-12 5.373-12 12s5.373 12 12 12 12-5.373 12-12-5.373-12-12-12zm-3 18v-12l10 6-10 6z\"></path></svg></span>\n        <span class=\"paused\" style=\"display: none;\"><svg xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" viewBox=\"0 0 24 24\"><path d=\"M12 2c5.514 0 10 4.486 10 10s-4.486 10-10 10-10-4.486-10-10 4.486-10 10-10zm0-2c-6.627 0-12 5.373-12 12s5.373 12 12 12 12-5.373 12-12-5.373-12-12-12zm-1 17h-3v-10h3v10zm5-10h-3v10h3v-10z\"></path></svg></span>\n      </span>\n    \n      <span class=\"view\"> Ürünü Gör </span>\n    </a>\n    <span class=\"videochecks\">\n      <label for=\"videocheck2\"><img src=\"https://cdn.myikas.com/images/11aa96e3-a7d5-41e6-9fde-76fdf665e12e/355bc6e5-ba55-4a47-b803-10729f1aa6c4/image_2560.webp\" loading=\"lazy\"></label>\n      <input type=\"checkbox\" id=\"videocheck2\" class=\"videcheck\">\n      <a href=\"https://lorisparfum.com/loris-saffron-ambre-niche-parfum70-ml?gad_source=1&amp;gclid=CjwKCAiAt4C-BhBcEiwA8Kp0CVeW9fAcPUrbwP5zGIi9SHhlQ51l9VJWuE2bD0KhCWEu9jYABqO36xoCUZUQAvD_BwE\">\n        <span>Loris Saffron Ambre Niche Parfüm 70 ML</span>\n        <img src=\"https://cdn.myikas.com/images/11aa96e3-a7d5-41e6-9fde-76fdf665e12e/355bc6e5-ba55-4a47-b803-10729f1aa6c4/image_2560.webp\" loading=\"lazy\">\n      </a>\n    </span>\n  </div>\n\n  <div>\n    <a href=\"#!\" data-href=\"\">\n      <span class=\"title\"> Deniz Ç. </span>\n      <video loop=\"\" playsinline=\"\" poster=\"https://cdn.myikas.com/images/theme-images/f03a4431-1bee-48bf-aea8-4aa4d54c4072/image_1080.webp\">\n        <source src=\"https://cdn.myikas.com/videos/11aa96e3-a7d5-41e6-9fde-76fdf665e12e/778e9409-b16c-4ca2-8631-e82a89362518/original.mp4\" type=\"video/mp4\">\n      </video>\n      <span class=\"play\">\n        <span class=\"start\"><svg xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" viewBox=\"0 0 24 24\"><path d=\"M12 2c5.514 0 10 4.486 10 10s-4.486 10-10 10-10-4.486-10-10 4.486-10 10-10zm0-2c-6.627 0-12 5.373-12 12s5.373 12 12 12 12-5.373 12-12-5.373-12-12-12zm-3 18v-12l10 6-10 6z\"></path></svg></span>\n        <span class=\"paused\" style=\"display: none;\"><svg xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" viewBox=\"0 0 24 24\"><path d=\"M12 2c5.514 0 10 4.486 10 10s-4.486 10-10 10-10-4.486-10-10 4.486-10 10-10zm0-2c-6.627 0-12 5.373-12 12s5.373 12 12 12 12-5.373 12-12-5.373-12-12-12zm-1 17h-3v-10h3v10zm5-10h-3v10h3v-10z\"></path></svg></span>\n      </span>\n    \n      <span class=\"view\"> Ürünü Gör </span>\n    </a>\n    <span class=\"videochecks\">\n      <label for=\"videocheck3\"><img src=\"https://cdn.myikas.com/images/11aa96e3-a7d5-41e6-9fde-76fdf665e12e/355bc6e5-ba55-4a47-b803-10729f1aa6c4/image_2560.webp\" loading=\"lazy\"></label>\n      <input type=\"checkbox\" id=\"videocheck3\" class=\"videcheck\">\n      <a href=\"https://lorisparfum.com/loris-saffron-ambre-niche-parfum70-ml?gad_source=1&amp;gclid=CjwKCAiAt4C-BhBcEiwA8Kp0CZgpmyAmujwUlg7fUyhiEOAFhGLMyldP_5M_lb21ZeWfLlB0C9HRORoCazkQAvD_BwE\">\n        <span>Loris Saffron Ambre Niche Parfüm 70 ML</span>\n        <img src=\"https://cdn.myikas.com/images/11aa96e3-a7d5-41e6-9fde-76fdf665e12e/355bc6e5-ba55-4a47-b803-10729f1aa6c4/image_2560.webp\" loading=\"lazy\">\n      </a>\n    </span>\n  </div>\n\n  <div>\n    <a href=\"#!\" data-href=\"\">\n      <span class=\"title\"> Aleyna Ç. </span>\n      <video loop=\"\" playsinline=\"\" poster=\"https://cdn.myikas.com/images/theme-images/16cb233e-e9a0-4a6e-bb43-8ff7ad695772/image_1080.webp\">\n        <source src=\"https://cdn.myikas.com/videos/11aa96e3-a7d5-41e6-9fde-76fdf665e12e/6518a3e0-8654-4814-9f9e-51f2fd0ac403/original.mp4\" type=\"video/mp4\">\n      </video>\n      <span class=\"play\">\n        <span class=\"start\"><svg xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" viewBox=\"0 0 24 24\"><path d=\"M12 2c5.514 0 10 4.486 10 10s-4.486 10-10 10-10-4.486-10-10 4.486-10 10-10zm0-2c-6.627 0-12 5.373-12 12s5.373 12 12 12 12-5.373 12-12-5.373-12-12-12zm-3 18v-12l10 6-10 6z\"></path></svg></span>\n        <span class=\"paused\" style=\"display: none;\"><svg xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" viewBox=\"0 0 24 24\"><path d=\"M12 2c5.514 0 10 4.486 10 10s-4.486 10-10 10-10-4.486-10-10 4.486-10 10-10zm0-2c-6.627 0-12 5.373-12 12s5.373 12 12 12 12-5.373 12-12-5.373-12-12-12zm-1 17h-3v-10h3v10zm5-10h-3v10h3v-10z\"></path></svg></span>\n      </span>\n    \n      <span class=\"view\"> Ürünü Gör </span>\n    </a>\n    <span class=\"videochecks\">\n      <label for=\"videocheck4\"><img src=\"https://cdn.myikas.com/images/11aa96e3-a7d5-41e6-9fde-76fdf665e12e/fa52c07d-d39a-45db-a30c-cc534e5171a6/2560/k-222-yeni-frequence-web.webp\" loading=\"lazy\"></label>\n      <input type=\"checkbox\" id=\"videocheck4\" class=\"videcheck\">\n      <a href=\"https://lorisparfum.com/loris-k-222-frequence-kadin-parfumu-50-ml?gad_source=1&amp;gclid=CjwKCAiAt4C-BhBcEiwA8Kp0CRfQCk4tChswS7aFkXIeo6-0sTvpcZZjiaW-4Vvp1JENez_6J04y5hoCxXAQAvD_BwE\">\n        <span>Loris K-222 Frequence Kadın Parfümü 50 ML</span>\n        <img src=\"https://cdn.myikas.com/images/11aa96e3-a7d5-41e6-9fde-76fdf665e12e/fa52c07d-d39a-45db-a30c-cc534e5171a6/2560/k-222-yeni-frequence-web.webp\" loading=\"lazy\">\n      </a>\n      <label for=\"videocheck5b\"><img src=\"https://cdn.myikas.com/images/11aa96e3-a7d5-41e6-9fde-76fdf665e12e/fb68f0ae-a5b3-40c1-9fa3-e95c51a59e30/2560/k-201-yeni-frequence-web.webp\" loading=\"lazy\"></label>\n      <input type=\"checkbox\" id=\"videocheck5b\" class=\"videcheck\">\n      <a href=\"https://lorisparfum.com/loris-k-201-frequence-kadin-parfumu-50-ml?srsltid=AfmBOoo2pO45eInUCByfaocPoJhU_kIQ2nxW22bmNicT5sjd-yYSkOyW\">\n        <span>Loris K-201 Frequence Kadın Parfümü 50 ML</span>\n        <img src=\"https://cdn.myikas.com/images/11aa96e3-a7d5-41e6-9fde-76fdf665e12e/fb68f0ae-a5b3-40c1-9fa3-e95c51a59e30/2560/k-201-yeni-frequence-web.webp\" loading=\"lazy\">\n      </a>\n    </span>\n  </div>\n\n  <div>\n    <a href=\"#!\" data-href=\"\">\n      <span class=\"title\"> Aycan D. </span>\n      <video loop=\"\" playsinline=\"\" poster=\"https://cdn.myikas.com/images/theme-images/4a0f886b-8b1c-4d61-ac6c-6d050276a330/image_1080.webp\">\n        <source src=\"https://cdn.myikas.com/videos/11aa96e3-a7d5-41e6-9fde-76fdf665e12e/29bc1b1a-57d9-490d-b649-8bd377923cca/original.mp4\" type=\"video/mp4\">\n      </video>\n      <span class=\"play\">\n        <span class=\"start\"><svg xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" viewBox=\"0 0 24 24\"><path d=\"M12 2c5.514 0 10 4.486 10 10s-4.486 10-10 10-10-4.486-10-10 4.486-10 10-10zm0-2c-6.627 0-12 5.373-12 12s5.373 12 12 12 12-5.373 12-12-5.373-12-12-12zm-3 18v-12l10 6-10 6z\"></path></svg></span>\n        <span class=\"paused\" style=\"display: none;\"><svg xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" viewBox=\"0 0 24 24\"><path d=\"M12 2c5.514 0 10 4.486 10 10s-4.486 10-10 10-10-4.486-10-10 4.486-10 10-10zm0-2c-6.627 0-12 5.373-12 12s5.373 12 12 12 12-5.373 12-12-5.373-12-12-12zm-1 17h-3v-10h3v10zm5-10h-3v10h3v-10z\"></path></svg></span>\n      </span>\n    \n      <span class=\"view\"> Ürünü Gör </span>\n    </a>\n    <span class=\"videochecks\">\n      <label for=\"videocheck6\"><img src=\"https://cdn.myikas.com/images/11aa96e3-a7d5-41e6-9fde-76fdf665e12e/fa52c07d-d39a-45db-a30c-cc534e5171a6/2560/k-222-yeni-frequence-web.webp\" loading=\"lazy\"></label>\n      <input type=\"checkbox\" id=\"videocheck6\" class=\"videcheck\">\n      <a href=\"https://lorisparfum.com/loris-k-222-frequence-kadin-parfumu-50-ml\">\n        <span>Loris K-222 Frequence Kadın Parfümü 50 ML</span>\n        <img src=\"https://cdn.myikas.com/images/11aa96e3-a7d5-41e6-9fde-76fdf665e12e/fa52c07d-d39a-45db-a30c-cc534e5171a6/2560/k-222-yeni-frequence-web.webp\" loading=\"lazy\">\n      </a>\n      <label for=\"videocheck7b\"><img src=\"https://cdn.myikas.com/images/11aa96e3-a7d5-41e6-9fde-76fdf665e12e/fcadd17f-8099-40e8-ab87-cd525e3b1d07/2560/k-275-yeni-frequence-web.webp\" loading=\"lazy\"></label>\n      <input type=\"checkbox\" id=\"videocheck7b\" class=\"videcheck\">\n      <a href=\"https://lorisparfum.com/loris-k-275-frequence-kadin-parfumu-50-ml\">\n        <span>Loris K-275 Frequence Kadın Parfümü 50 ML</span>\n        <img src=\"https://cdn.myikas.com/images/11aa96e3-a7d5-41e6-9fde-76fdf665e12e/fcadd17f-8099-40e8-ab87-cd525e3b1d07/2560/k-275-yeni-frequence-web.webp\" loading=\"lazy\">\n      </a>\n    </span>\n  </div>\n\n  <div>\n    <a href=\"#!\" data-href=\"\">\n      <span class=\"title\"> Busenur H. </span>\n      <video loop=\"\" playsinline=\"\" poster=\"https://cdn.myikas.com/images/theme-images/73df5a6d-eac2-4926-9ab7-564f33d2a4be/image_1080.webp\">\n        <source src=\"https://cdn.myikas.com/videos/11aa96e3-a7d5-41e6-9fde-76fdf665e12e/a7087f8d-9890-43e7-b761-440a31983210/original.mp4\" type=\"video/mp4\">\n      </video>\n      <span class=\"play\">\n        <span class=\"start\"><svg xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" viewBox=\"0 0 24 24\"><path d=\"M12 2c5.514 0 10 4.486 10 10s-4.486 10-10 10-10-4.486-10-10 4.486-10 10-10zm0-2c-6.627 0-12 5.373-12 12s5.373 12 12 12 12-5.373 12-12-5.373-12-12-12zm-3 18v-12l10 6-10 6z\"></path></svg></span>\n        <span class=\"paused\" style=\"display: none;\"><svg xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" viewBox=\"0 0 24 24\"><path d=\"M12 2c5.514 0 10 4.486 10 10s-4.486 10-10 10-10-4.486-10-10 4.486-10 10-10zm0-2c-6.627 0-12 5.373-12 12s5.373 12 12 12 12-5.373 12-12-5.373-12-12-12zm-1 17h-3v-10h3v10zm5-10h-3v10h3v-10z\"></path></svg></span>\n      </span>\n    \n      <span class=\"view\"> Ürünü Gör </span>\n    </a>\n    <span class=\"videochecks\">\n      <label for=\"videocheck8\"><img src=\"https://cdn.myikas.com/images/11aa96e3-a7d5-41e6-9fde-76fdf665e12e/98b6fd94-5ed4-4fd9-b434-85b0f98d5fac/2560/k-270-yeni-frequence-web.webp\" loading=\"lazy\"></label>\n      <input type=\"checkbox\" id=\"videocheck8\" class=\"videcheck\">\n      <a href=\"https://lorisparfum.com/loris-k-270-frequence-kadin-parfumu-50-ml\">\n        <span>Loris K-270 Frequence Kadın Parfümü 50 ML</span>\n        <img src=\"https://cdn.myikas.com/images/11aa96e3-a7d5-41e6-9fde-76fdf665e12e/98b6fd94-5ed4-4fd9-b434-85b0f98d5fac/2560/k-270-yeni-frequence-web.webp\" loading=\"lazy\">\n      </a>\n      <label for=\"videocheck9b\"><img src=\"https://cdn.myikas.com/images/11aa96e3-a7d5-41e6-9fde-76fdf665e12e/8b020c05-b04f-484a-9465-aabad1eac56d/2560/k-284-yeni-frequence-web.webp\" loading=\"lazy\"></label>\n      <input type=\"checkbox\" id=\"videocheck9b\" class=\"videcheck\">\n      <a href=\"https://lorisparfum.com/loris-k-284-frequence-kadin-parfum-50-ml\">\n        <span>Loris K-284 Frequence Kadın Parfüm 50 ML</span>\n        <img src=\"https://cdn.myikas.com/images/11aa96e3-a7d5-41e6-9fde-76fdf665e12e/8b020c05-b04f-484a-9465-aabad1eac56d/2560/k-284-yeni-frequence-web.webp\" loading=\"lazy\">\n      </a>\n    </span>\n  </div> -->\n\n</div>\n\n<a href=\"/pages/ugc\" style=\"border: 2px solid #000;padding: 15px;margin: 0 auto;display: block;width: fit-content;\">\n  Daha Fazla Gör\n</a>\n\n\n<style>\n  .videochecks {\n    position: absolute;\n    right: 0; /* 10% */\n    bottom: 25%;\n    display: grid;\n    width: 100%;\n    padding-right: 5%;\n    display: grid;\n    justify-items: flex-end;\n  }\n  .videochecks label {\n    width: 17.5%;\n    cursor: pointer;\n    border-radius: 50%;\n    overflow: hidden;\n    border: 4px solid #CEFF36;\n\n    aspect-ratio: 1;\n  }\n  .videochecks label:not(:last-of-type) {\n    margin-bottom: 15px;\n  }\n  .videochecks label img {\n    width: 100%;\n  }\n  .videochecks input {\n    display: none;\n  }\n  .videcheck + a {\n    position: absolute;\n    margin-top: -10%;\n    width: 50%;\n    right: 0;\n    margin-right: 25%;\n    border-radius: 8%;\n    overflow: hidden;\n    z-index: 10;\n    display: none;\n  }\n  .videcheck:checked + a {\n    display: block;\n  }\n  .videochecks a span {\n    display: inline-block;\n    width: 100%;\n    padding: 5px 0;\n    font-size: 20px;\n    background-color: #E5996D;\n    color: #fff;\n  }\n  .videochecks a img {\n    width: 100%;\n  }\n  .videcheck:nth-of-type(2):checked + a span {\n    background-color: #E281A6;\n  }\n</style>\n<style>\n  .uvideos {\n    display: flex;\n    flex-wrap: wrap;\n    gap: 30px;\n  }\n  .uvideos > div {\n    position: relative;\n    display: grid;\n    width: calc(33.33% - 20px);\n    margin-bottom: 15px;\n    text-align: center;\n  }\n  .uvideos > div > a {\n    /* pointer-events: none; */\n  }\n  .uvideos .title {\n    display: inline-block;\n    width: 100%;\n    padding: 10px 0;\n    font-size: 22px;\n    background-color: #F1F1F1;\n  }\n  .uvideos video {\n    width: 100%;\n    aspect-ratio: 1/1.8;\n  }\n  .uvideos .play {\n    position: absolute;\n    top: 50%;\n    left: 50%;\n    transform: translateX(-50%);\n    width: 20%;\n    z-index: 10;\n    padding: 10px;\n    cursor: pointer;\n  }\n  .uvideos .play svg {\n    width: 100%;\n    height: auto;\n    fill: #fff;\n  }\n  .uvideos .play svg.paused {\n    display: none;\n\n  }\n  .uvideos .view {\n    display: inline-block;\n    width: 45%;\n    /* margin: 20px auto 0; */\n    padding: 5px 0;\n    font-size: 22px;\n    background-color: #CEFF36;\n    cursor: default;\n    opacity: 0;\n  }\n  @media (max-width: 767px) {\n    .uvideos {\n      padding: 0 30px;\n    }\n    .uvideos > div {\n      width: 100%;\n    }\n    .uvideos .play {\n      width: 22%;\n    }\n  }\n</style>\n\n<script>\n// window.addEventListener('locationchange', function () {\n// setTimeout(() => {\n\nfunction qS(n,c){\n  return n.querySelector(c);\n}\n\ndocument.querySelectorAll(\".uvideos .videochecks label\").forEach(node => {\nnode.parentElement.previousElementSibling.style.cursor = \"default\";\n\nnode.addEventListener(\"click\", event => {\ndocument.querySelectorAll(\".uvideos .videcheck\").forEach(node => {\nif(event.currentTarget != node.previousElementSibling){\nnode.checked = false;\n}\n});\n\nvar nodeP = node.parentElement.previousElementSibling;\nqS(nodeP,\".view\").style.cursor = \"pointer\";\nqS(nodeP,\".view\").style.opacity = 1;\nnodeP.href = node.nextElementSibling.nextElementSibling.href;\n})\n});\n\ndocument.querySelectorAll(\".uvideos > div > a\").forEach(node => {\nif(!node.dataset.foreach){\nnode.dataset.foreach = 1;\nnode.addEventListener(\"click\", event => {\nif(event.target.closest(\".play\") == qS(node,\".play\")){\nevent.preventDefault();\n\nif(\n  !qS(node,\".play\").classList.contains(\"playing\")\n){\n  qS(node,\"video\").play();\n  qS(node,\".play\").classList.add(\"playing\");\n  qS(node,\".play .start\").style.display = \"none\";\n  qS(node,\".play .paused\").style.display = \"block\";\n  qS(node,\".play\").style.opacity = 0.2;\n}else{\n  qS(node,\"video\").pause();\n  qS(node,\".play\").classList.remove(\"playing\");\n  qS(node,\".play .start\").style.display = \"block\";\n  qS(node,\".play .paused\").style.display = \"none\";\n  qS(node,\".play\").style.opacity = 1;\n}\n}\n});\n}\n});\n\n// }, 1);\n// });\n</script>"
+      }
+    },
+    "featured_collections_tabs_QrN3jy": {
+      "type": "featured-collections-tabs",
+      "blocks": {
+        "collection_tab_7LKrWM": {
+          "type": "collection_tab",
+          "settings": {
+            "collection": "loris-en-cok-tercih-edilenler",
+            "products": [],
+            "products_to_show": 8,
+            "tab_label": "Popüler Ürünler"
+          }
+        },
+        "collection_tab_YqUhNy": {
+          "type": "collection_tab",
+          "settings": {
+            "collection": "yeni",
+            "products": [],
+            "products_to_show": 8,
+            "tab_label": "Yeni Ürünler"
+          }
+        },
+        "collection_tab_VyNhrc": {
+          "type": "collection_tab",
+          "settings": {
+            "collection": "tum-urunler",
+            "products": [],
+            "products_to_show": 8,
+            "tab_label": "Tüm Ürünler"
+          }
+        }
+      },
+      "block_order": [
+        "collection_tab_7LKrWM",
+        "collection_tab_YqUhNy",
+        "collection_tab_VyNhrc"
+      ],
+      "name": "t:sections.featured-collections-tab.presets.name",
+      "settings": {
+        "advanced_heading": false,
+        "title": "Popüler Ürünleri Keşfet",
+        "heading_richtext": "<h2>Featured Collections: Tabs</h2>",
+        "disable_on_mobile": false,
+        "enable_stack_products": false,
+        "show_view_all": true,
+        "button_select": "primary",
+        "number_of_column_desktop": 4,
+        "spacing_desktop": "16",
+        "make_products_full_width": false,
+        "number_of_column_mobile": 2.1,
+        "spacing_mobile": "16",
+        "text_alignment": "left",
+        "image_ratio": "square",
+        "show_video": false,
+        "show_secondary_image": true,
+        "show_vendor": true,
+        "enable_vendor_link": false,
+        "show_product_rating": true,
+        "enable_quick_add_button": false,
+        "quick_add_mode": "hover_desktop",
+        "color-body-text": "rgba(0,0,0,0)",
+        "background_color": "rgba(0,0,0,0)",
+        "margin-top": 20,
+        "margin-bottom": 20
+      }
+    },
+    "rich_text_Xq4z4r": {
+      "type": "rich-text",
+      "blocks": {
+        "text_8hFzF4": {
+          "type": "text",
+          "settings": {
+            "text": "<h1>Parfüm</h1>",
+            "disable_on_mobile": false
+          }
+        }
+      },
+      "block_order": [
+        "text_8hFzF4"
+      ],
+      "custom_css": [
+        ".rich-text .hero__overlay {padding: 0;}",
+        ".rich-text .hero__text {margin: 0;}",
+        ".rich-text .hero__text h1 {font-size: 1px; color: #0001; line-height: 0;}"
+      ],
+      "name": "t:sections.rich-text.presets.name",
+      "settings": {
+        "section_width": "regular",
+        "desktop_text_horizontal_position": "center",
+        "color-body-text": "rgba(0,0,0,0)",
+        "background_color": "rgba(0,0,0,0)",
+        "margin-top": 0,
+        "margin-bottom": 0
+      }
+    },
+    "grid_view_PEBP9T": {
+      "type": "grid-view",
+      "blocks": {
+        "image_dkHG7f": {
+          "type": "image",
+          "settings": {
+            "heading": "",
+            "heading_disable_on_mobile": false,
+            "size_heading": 100,
+            "size_heading_mobile": 100,
+            "text": "",
+            "text_disable_on_mobile": false,
+            "button_select": "primary",
+            "button_label": "Keşfet",
+            "button_disable_on_mobile": false,
+            "button_link": "shopify://collections/kadin-parfum",
+            "button_link_in_new_window": false,
+            "color-body-text": "#000000",
+            "color-overlay": "rgba(0,0,0,0)",
+            "color-overlay-opacity": 0,
+            "desktop_image": "shopify://shop_images/kadin_tr.jpg",
+            "desktop_text_vertical_position": "bottom",
+            "desktop_text_horizontal_position": "center",
+            "mobile_text_vertical_position": "bottom",
+            "mobile_text_horizontal_position": "center"
+          }
+        },
+        "image_zAqt6N": {
+          "type": "image",
+          "settings": {
+            "heading": "",
+            "heading_disable_on_mobile": false,
+            "size_heading": 100,
+            "size_heading_mobile": 100,
+            "text": "",
+            "text_disable_on_mobile": false,
+            "button_select": "primary",
+            "button_label": "Keşfet",
+            "button_disable_on_mobile": false,
+            "button_link": "shopify://collections/unisex-parfum",
+            "button_link_in_new_window": false,
+            "color-body-text": "#000000",
+            "color-overlay": "rgba(0,0,0,0)",
+            "color-overlay-opacity": 0,
+            "desktop_image": "shopify://shop_images/Unisex1.jpg",
+            "desktop_text_vertical_position": "bottom",
+            "desktop_text_horizontal_position": "center",
+            "mobile_text_vertical_position": "bottom",
+            "mobile_text_horizontal_position": "center"
+          }
+        },
+        "image_zgNbTH": {
+          "type": "image",
+          "settings": {
+            "heading": "",
+            "heading_disable_on_mobile": false,
+            "size_heading": 100,
+            "size_heading_mobile": 100,
+            "text": "",
+            "text_disable_on_mobile": false,
+            "button_select": "primary",
+            "button_label": "Keşfet",
+            "button_disable_on_mobile": false,
+            "button_link": "shopify://collections/erkek-parfum",
+            "button_link_in_new_window": false,
+            "color-body-text": "#000000",
+            "color-overlay": "#ffffff",
+            "color-overlay-opacity": 0,
+            "desktop_image": "shopify://shop_images/erkek_tr.jpg",
+            "desktop_text_vertical_position": "bottom",
+            "desktop_text_horizontal_position": "center",
+            "mobile_text_vertical_position": "bottom",
+            "mobile_text_horizontal_position": "center"
+          }
+        }
+      },
+      "block_order": [
+        "image_dkHG7f",
+        "image_zAqt6N",
+        "image_zgNbTH"
+      ],
+      "custom_css": [
+        "@media (min-width: 1200px) {.wt-grid-box {/* padding-top: 0; */ }}"
+      ],
+      "settings": {
+        "title": "",
+        "swipe_on_mobile": true,
+        "full-width-enabled": true,
+        "image_ratio": "adapt",
+        "color-body-text": "rgba(0,0,0,0)",
+        "background_color": "rgba(0,0,0,0)",
+        "margin-top": 40,
+        "margin-bottom": 20
+      }
+    },
+    "parallax_9pNgNx": {
+      "type": "parallax",
+      "blocks": {
+        "heading_QUKcCw": {
+          "type": "heading",
+          "settings": {
+            "heading": "Yaz Esintisine Niche Dokunuş: Okyanus ve Narenciyenin Eşsiz Uyumu",
+            "disable_on_mobile": false,
+            "size_heading": 300,
+            "size_heading_mobile": 200
+          }
+        },
+        "text_mWnmEE": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Loris'in Niche koleksiyonu, sıcak günlerin enerjisini ve yaz mevsiminin canlı ruhunu koku diline çeviriyor. Taze narenciye ve okyanus notaları ilk dokunuşta ferahlık sunarken; tropikal meyve nüansları, hafif çiçek akorları ve güneşten ilham alan sıcak dokunuşlar kompozisyona eşsiz bir karakter katıyor. Özenle seçilmiş doğal esanslarla hazırlanan bu seri, yazın özgürlüğünü hissetmek isteyenlere hitap ederken kişiliğinizi sıcak ve etkileyici bir şekilde yansıtmanızı sağlar.</p>",
+            "disable_on_mobile": false
+          }
+        },
+        "button_7cDcAq": {
+          "type": "button",
+          "settings": {
+            "button_select": "primary",
+            "button_label": "KEŞFET",
+            "button_link": "shopify://collections/niche",
+            "disable_on_mobile": false
+          }
+        }
+      },
+      "block_order": [
+        "heading_QUKcCw",
+        "text_mWnmEE",
+        "button_7cDcAq"
+      ],
+      "settings": {
+        "desktop_text_horizontal_position": "center",
+        "rotation": 15,
+        "image_1": "shopify://shop_images/LOVE-BLOSSOM.jpg",
+        "button_link1": "shopify://products/niche-love-blossom-exclusive-parfum-70-ml",
+        "image_2": "shopify://shop_images/PETALIA.jpg",
+        "button_link2": "shopify://products/loris-petalia-niche-parfum-70-ml",
+        "color-body-text": "rgba(0,0,0,0)",
+        "background_color": "#f4efe6",
+        "margin-top": 20,
+        "margin-bottom": 20
+      }
+    },
+    "multicolumn_EKyzBi": {
+      "type": "multicolumn",
+      "blocks": {
+        "column_CgXMFi": {
+          "type": "column",
+          "settings": {
+            "heading": "",
+            "heading_disable_on_mobile": false,
+            "text": "",
+            "text_disable_on_mobile": false,
+            "button_select": "primary",
+            "button_label": "",
+            "button_disable_on_mobile": false,
+            "button_link": "shopify://products/vanilya-kasmir-cubuklu-oda-kokusu-120-ml",
+            "button_link_in_new_window": false,
+            "desktop_image": "shopify://shop_images/vanilyacashmare120ml.gif"
+          }
+        },
+        "column_d9ecLj": {
+          "type": "column",
+          "settings": {
+            "heading": "",
+            "heading_disable_on_mobile": false,
+            "text": "",
+            "text_disable_on_mobile": false,
+            "button_select": "primary",
+            "button_label": "",
+            "button_disable_on_mobile": false,
+            "button_link": "shopify://products/loris-sandal-agaci-oda-kokusu-120ml",
+            "button_link_in_new_window": false,
+            "desktop_image": "shopify://shop_images/sandalagaci120ml.gif"
+          }
+        },
+        "column_VyYPiW": {
+          "type": "column",
+          "settings": {
+            "heading": "",
+            "heading_disable_on_mobile": false,
+            "text": "",
+            "text_disable_on_mobile": false,
+            "button_select": "primary",
+            "button_label": "",
+            "button_disable_on_mobile": false,
+            "button_link": "shopify://products/loris-mango-dunyasi-oda-kokusu-120-ml",
+            "button_link_in_new_window": false,
+            "desktop_image": "shopify://shop_images/mangodunyasi120ml.gif"
+          }
+        }
+      },
+      "block_order": [
+        "column_CgXMFi",
+        "column_d9ecLj",
+        "column_VyYPiW"
+      ],
+      "name": "t:sections.multicolumn.presets.name",
+      "settings": {
+        "heading": "",
+        "swipe_on_mobile": false,
+        "full-width-enabled": false,
+        "image_ratio": "adapt",
+        "column_alignment": "left",
+        "size_heading": 100,
+        "size_heading_mobile": 100,
+        "color-body-text": "rgba(0,0,0,0)",
+        "background_color": "rgba(0,0,0,0)",
+        "margin-top": 20,
+        "margin-bottom": 20
+      }
+    },
+    "shoppable_video_cjY6Eq": {
+      "type": "shoppable-video",
+      "blocks": {
+        "product_M6ciwq": {
+          "type": "product",
+          "settings": {
+            "start_second": 1,
+            "featured_product": "k-299-frequence-kadin-parfumu-edp-50ml"
+          }
+        },
+        "product_BkUyHM": {
+          "type": "product",
+          "settings": {
+            "start_second": 2,
+            "featured_product": "e-82-frequence-perfumes-50-ml"
+          }
+        },
+        "product_g8rTJm": {
+          "type": "product",
+          "settings": {
+            "start_second": 3,
+            "featured_product": "e-300-frequence-perfumes-50-ml"
+          }
+        },
+        "product_CURnnD": {
+          "type": "product",
+          "settings": {
+            "start_second": 4,
+            "featured_product": "k-286-frequence-kadin-parfum-edp-50ml"
+          }
+        },
+        "product_UyRkhN": {
+          "type": "product",
+          "settings": {
+            "start_second": 5,
+            "featured_product": "k-222-frequence-kadin-parfum-edp-50ml"
+          }
+        },
+        "product_FykP6H": {
+          "type": "product",
+          "settings": {
+            "start_second": 6,
+            "featured_product": ""
+          }
+        }
+      },
+      "block_order": [
+        "product_M6ciwq",
+        "product_BkUyHM",
+        "product_g8rTJm",
+        "product_CURnnD",
+        "product_UyRkhN",
+        "product_FykP6H"
+      ],
+      "custom_css": [
+        ".shoppable-video__products .shoppable-product-card:has(a[href=\"#\"]) {opacity: 0;}",
+        "@media (max-width: 767px) {.hero--video-background .wt-video__item video {object-fit: contain !important; }}",
+        " /**/.shoppable-video__products .shoppable-video__empty-product {width: 0 !important; max-width: 0;}",
+        ".shoppable-video__products .shoppable-product-card {/**/ min-width: 220px; width: 14.5%; padding: calc(var(--gap, 8px) * 0.5);}",
+        ".shoppable-product-card .wt-dot__link {/**/ gap: 0;}",
+        ".shoppable-product-card:has(a[href=\"#\"]) {/* display: none; */}"
+      ],
+      "name": "t:sections.shoppable-video.name",
+      "settings": {
+        "heading": "Frequence",
+        "full-width-enabled": false,
+        "quick-add-enabled": false,
+        "rewind-enabled": false,
+        "hide-brand-name": false,
+        "video_hosted": "shopify://files/videos/frequence_web_20.08_04 (1080p).mp4",
+        "video_hosted_mobile": "shopify://files/videos/(loris)_frequence_web_1000x1488 (720p).mp4",
+        "desktop_fixed_height": 600,
+        "mobile_fixed_height": 480,
+        "enable_full_screen_mode": false,
+        "color-body-heading": "rgba(0,0,0,0)",
+        "color-overlay": "rgba(0,0,0,0)",
+        "color-overlay-opacity": 100,
+        "color-body-text": "rgba(0,0,0,0)",
+        "margin-top": 20,
+        "margin-bottom": 20
+      }
+    },
+    "custom_liquid_Akcbmk": {
+      "type": "custom-liquid",
+      "disabled": true,
+      "name": "t:sections.custom-liquid.presets.name",
+      "settings": {
+        "custom_liquid": "<script>\nvar heroVideo = document.querySelector(\".hero .wt-video__movie video:last-of-type\");\n\n// heroVideo.onloadeddata = (event) => {\n// heroVideo.onplay = (event) => {\nheroVideo.addEventListener(/* loadeddata */\"play\", (event) => {\ndocument.head.insertAdjacentHTML(\n\"beforeend\",\n`<style>\n@media (min-width: 1200px) {\n#shopify-section-template--19486770069718__shoppable_video_cjY6Eq .shoppable-video__container {\n  overflow: hidden;\n}\n#shopify-section-template--19486770069718__shoppable_video_cjY6Eq .shoppable-video__container .shoppable-video__control-button {\n  display: none;\n}\n#shopify-section-template--19486770069718__shoppable_video_cjY6Eq .shoppable-video__products {\n  justify-content: flex-end;\n  overflow: visible !important;\n  animation: productSlide 12s linear infinite; /* 2s infinite alternate */\n}\n#shopify-section-template--19486770069718__shoppable_video_cjY6Eq .shoppable-video__products .shoppable-product-card:last-of-type {\n  display: none;\n}\n\n@keyframes productSlide {\n  0%{\n    right: -86%;\n  }\n  25%{\n    right: -86%;\n  }\n  27.5%{\n    right: -64.5%;\n  }\n  32.5%{\n    right: -64.5%;\n  }\n  35%{\n    right: -43%;\n  }\n  42.5%{\n    right: -43%;\n  }\n  45%{\n    right: -21.5%;\n  }\n  52.5%{\n    right: -21.5%;\n  }\n  55%{\n    right: 0%;\n  }\n  62.5%{\n    right: 0%;\n  }\n  95%{\n    right: 0%;\n  }\n  100%{\n    right: -86%;\n  }\n}\n}\n</style>`\n);\n});\n</script>"
+      }
+    },
+    "button_3zPJz6": {
+      "type": "button",
+      "name": "t:sections.button.presets.name",
+      "settings": {
+        "button_select": "link",
+        "button_horizontal_position": "center",
+        "button_label": "Tüm Ürünleri Gör",
+        "button_link": "shopify://collections/frequence",
+        "margin-top": 20,
+        "margin-bottom": 20,
+        "background_color": "rgba(0,0,0,0)"
+      }
+    },
+    "shoppable_video_PWWPiV": {
+      "type": "shoppable-video",
+      "blocks": {
+        "product_4F9efb": {
+          "type": "product",
+          "settings": {
+            "start_second": 1,
+            "featured_product": "japanese-cherry-tup-losyon-236-ml"
+          }
+        },
+        "product_9WHJPz": {
+          "type": "product",
+          "settings": {
+            "start_second": 2,
+            "featured_product": "saffron-ambre-dus-jeli-295-ml"
+          }
+        },
+        "product_tkHdPX": {
+          "type": "product",
+          "settings": {
+            "start_second": 2,
+            "featured_product": "angels-dream-body-spray-250-ml"
+          }
+        }
+      },
+      "block_order": [
+        "product_4F9efb",
+        "product_9WHJPz",
+        "product_tkHdPX"
+      ],
+      "disabled": true,
+      "custom_css": [
+        ".shoppable-video__control-button {display: none;}",
+        ".headline {padding-left: 0; padding-right: 0; margin-bottom: 20px;}",
+        ".headline .headline__title {background-color: #fff5f3; padding-top: calc(var(--gap, 8px) * 6); padding-bottom: calc(var(--gap, 8px) * 2);}",
+        ".shoppable-video__products .shoppable-product-card:has(a[href=\"#\"]) {/* opacity: 0; */}",
+        ".shoppable-video__products .shoppable-video__empty-product {width: 0 !important;}",
+        ".shoppable-video__products .shoppable-product-card {min-width: fit-content; /* 230px */ width: 20%;}"
+      ],
+      "settings": {
+        "heading": "",
+        "full-width-enabled": false,
+        "quick-add-enabled": false,
+        "rewind-enabled": false,
+        "hide-brand-name": true,
+        "video_hosted": "shopify://files/videos/WhatsApp Video 2026-01-26 at 09.33.34.mp4",
+        "video_hosted_mobile": "shopify://files/videos/WhatsApp Video 2026-01-26 at 09.33.23.mp4",
+        "desktop_fixed_height": 780,
+        "mobile_fixed_height": 560,
+        "enable_full_screen_mode": false,
+        "color-body-heading": "#f4efe6",
+        "color-overlay": "#f4efe6",
+        "color-overlay-opacity": 100,
+        "color-body-text": "#000000",
+        "margin-top": 20,
+        "margin-bottom": 20
+      }
+    },
+    "button_DwxQ97": {
+      "type": "button",
+      "disabled": true,
+      "name": "t:sections.button.presets.name",
+      "settings": {
+        "button_select": "link",
+        "button_horizontal_position": "center",
+        "button_label": "Vücut Serilerini Gör",
+        "button_link": "shopify://collections/vucut-serisi",
+        "margin-top": 20,
+        "margin-bottom": 20,
+        "background_color": "#f4efe6"
+      }
+    },
+    "image_banner_Ljezm6": {
+      "type": "image-banner",
+      "blocks": {
+        "subheading_4ULNzi": {
+          "type": "subheading",
+          "disabled": true,
+          "settings": {
+            "subheading": "Tell you story",
+            "subheading_disable_on_mobile": false
+          }
+        },
+        "heading_38VLVn": {
+          "type": "heading",
+          "disabled": true,
+          "settings": {
+            "heading": "Image banner",
+            "disable_on_mobile": false,
+            "size_heading": 100,
+            "size_heading_mobile": 100
+          }
+        },
+        "text_HBwMUh": {
+          "type": "text",
+          "disabled": true,
+          "settings": {
+            "text": "<p>Give customers details about the banner image(s) or content on the template.</p>",
+            "disable_on_mobile": false
+          }
+        },
+        "button_bWmWFW": {
+          "type": "button",
+          "settings": {
+            "button_select": "primary",
+            "button_label": "Keşfet",
+            "disable_on_mobile": false,
+            "button_link": "shopify://collections/oda-kokulari",
+            "second_button_select": "primary",
+            "second_button_label": "Button label",
+            "second_disable_on_mobile": false,
+            "second_button_link": ""
+          }
+        }
+      },
+      "block_order": [
+        "subheading_4ULNzi",
+        "heading_38VLVn",
+        "text_HBwMUh",
+        "button_bWmWFW"
+      ],
+      "custom_css": [],
+      "name": "t:sections.image-banner.presets.name",
+      "settings": {
+        "heading": "",
+        "full-width-enabled": false,
+        "slide_height": "adapt_to_first_image",
+        "desktop_fixed_height": 200,
+        "mobile_fixed_height": 200,
+        "desktop_image": "shopify://shop_images/ODA-KOKUSU-BANNER_jpg.jpg",
+        "desktop_text_vertical_position": "bottom",
+        "desktop_text_horizontal_position": "center",
+        "mobile_image": "shopify://shop_images/ODA-KOKUSU-BANNER-MOBIL.jpg",
+        "mobile_text_vertical_position": "top",
+        "mobile_text_horizontal_position": "right",
+        "color-heading": "rgba(0,0,0,0)",
+        "section-color-overlay": "rgba(0,0,0,0)",
+        "section-color-overlay-opacity": 100,
+        "color-body-text": "rgba(0,0,0,0)",
+        "text-container-color": "rgba(0,0,0,0)",
+        "color-overlay-opacity": 100,
+        "margin-top": 20,
+        "margin-bottom": 20
+      }
+    },
+    "video_reels_kb4KdA": {
+      "type": "video-reels-section",
+      "blocks": {
+        "product_hxB4Cf": {
+          "type": "product",
+          "settings": {
+            "video_hosted": "shopify://files/videos/BERFU_TIKTOK_BLACK_SHINE_3af92300-7079-468d-99f4-da1ea82e38e6.mp4",
+            "featured_product": "altheron-by-loris-black-shine-edp-100-ml"
+          }
+        },
+        "product_wrYgbH": {
+          "type": "product",
+          "settings": {
+            "video_hosted": "shopify://files/videos/b91003e3adc140958ec68d3f0287ab8d.HD-1080p-7.2Mbps-56782434 (1).mp4",
+            "featured_product": "loris-javou-midnight-kadin-parfum-edp-100ml"
+          }
+        },
+        "product_4zdjEq": {
+          "type": "product",
+          "settings": {
+            "video_hosted": "shopify://files/videos/Funda Sevim - Loris - Ocak (normal anlatımlı).mp4",
+            "featured_product": "k-456-frequence-kadin-parfum-edp-50-ml"
+          }
+        },
+        "product_nziX76": {
+          "type": "product",
+          "settings": {
+            "video_hosted": "shopify://files/videos/Melis Abanoz.MOV",
+            "featured_product": "k-286-frequence-kadin-parfum-edp-50ml"
+          }
+        },
+        "product_RTirm6": {
+          "type": "product",
+          "settings": {
+            "video_hosted": "shopify://files/videos/Utku Can Sürer - Loris Parfüm.mp4",
+            "featured_product": "e-259-frequence-erkek-edp-parfum-50-ml"
+          }
+        },
+        "product_HTgnCB": {
+          "type": "product",
+          "settings": {
+            "video_hosted": "shopify://files/videos/Nisa Deniz - Loris - Ocak.mp4",
+            "featured_product": "k-299-frequence-kadin-parfumu-edp-50ml"
+          }
+        },
+        "product_gPVxee": {
+          "type": "product",
+          "settings": {
+            "video_hosted": "shopify://files/videos/Selen Kaba - Loris - Ocak (anlatımlı içerik).mp4",
+            "featured_product": "k-286-frequence-kadin-parfum-edp-50ml"
+          }
+        },
+        "product_8AwwgL": {
+          "type": "product",
+          "settings": {
+            "video_hosted": "shopify://files/videos/copy_53150238-A4BA-46A9-A3D2-E77DC63B4861.MOV",
+            "featured_product": "e-256-frequence-edp-erkek-parfum-50-ml"
+          }
+        }
+      },
+      "block_order": [
+        "product_hxB4Cf",
+        "product_wrYgbH",
+        "product_4zdjEq",
+        "product_nziX76",
+        "product_RTirm6",
+        "product_HTgnCB",
+        "product_gPVxee",
+        "product_8AwwgL"
+      ],
+      "custom_css": [
+        ".shoppable-video__control-button .shoppable-video__icon-play {display: block;}",
+        ".shoppable-video__control-button .shoppable-video__icon-pause {display: none;}"
+      ],
+      "settings": {
+        "heading": "Fenomenlerin Tercihi",
+        "quick-add-enabled": false,
+        "hide-brand-name": false,
+        "video_button": true,
+        "color-body-text": "rgba(0,0,0,0)",
+        "background_color": "rgba(0,0,0,0)",
+        "margin-top": 40,
+        "margin-bottom": 40
+      }
+    },
+    "custom_liquid_YBeAwd": {
+      "type": "custom-liquid",
+      "custom_css": [],
+      "name": "t:sections.custom-liquid.presets.name",
+      "settings": {
+        "custom_liquid": "<style>\n.background-video-section .hero--video-background .hero__pic {\n  /* content: url(\"https://cdn.shopify.com/s/files/1/0761/3290/9270/files/b6-poster.jpg\"); */\n}\n.background-video-section .hero--video-background .hero__pic svg {\n  display: none;\n}\n.background-video-section .hero--video-background .hero__pic::before {\n  content: \"\";\n  background: url(\"https://cdn.shopify.com/s/files/1/0761/3290/9270/files/b6-poster.jpg\") no-repeat center / cover;\n  height: 40vw;\n  min-height: 50vh;\n  display: block;\n}\n</style>"
+      }
+    },
+    "video_section_47iEjq": {
+      "type": "video-section",
+      "blocks": {
+        "heading_YMKrwd": {
+          "type": "heading",
+          "settings": {
+            "heading": "",
+            "disable_on_mobile": false,
+            "size_heading": 260,
+            "size_heading_mobile": 100
+          }
+        },
+        "text_KkEcWK": {
+          "type": "text",
+          "settings": {
+            "text": "<h2><strong>Enerjini Kokuya Dönüştür: Love Blossom</strong></h2><p>Çarkıfelek, çilek ve greyfurtun neşeli ferahlığı, şakayık ve vanilya orkidenin zarafetiyle buluşuyor. Misk ve odunsu dokunuşlarla gün boyu süren, modern ve akılda kalıcı imzanızı teninizde taşıyın.</p>",
+            "disable_on_mobile": true
+          }
+        },
+        "button_Xt8R8f": {
+          "type": "button",
+          "settings": {
+            "button_select": "primary",
+            "button_label": "Keşfet",
+            "button_link": "shopify://products/earth-parfum-edp-100-ml",
+            "button_link_in_new_window": false,
+            "disable_on_mobile": false
+          }
+        }
+      },
+      "block_order": [
+        "heading_YMKrwd",
+        "text_KkEcWK",
+        "button_Xt8R8f"
+      ],
+      "name": "t:sections.video.settings.presets.name",
+      "settings": {
+        "heading": "Işıltılı Bir Anın En Canlı Hali",
+        "full-width-enabled": false,
+        "content_position": "over_image",
+        "slide_height": "adapt_to_first_image",
+        "desktop_fixed_height": 560,
+        "mobile_fixed_height": 320,
+        "video_hosted": "shopify://files/videos/loris (1).mp4",
+        "video_hosted_mobile": "shopify://files/videos/loris (1).mp4",
+        "video_url": "",
+        "layout_mobile": "video",
+        "layout": "hero_first",
+        "color-heading-text": "rgba(0,0,0,0)",
+        "section-color-overlay": "rgba(0,0,0,0)",
+        "section-color-overlay-opacity": 0,
+        "color-body-text": "#000000",
+        "color-overlay": "rgba(0,0,0,0)",
+        "color-overlay-opacity": 100,
+        "desktop_image": "shopify://shop_images/loveblossom.jpg",
+        "desktop_text_vertical_position": "top",
+        "desktop_text_horizontal_position": "center",
+        "mobile_image": "shopify://shop_images/loveblossom.jpg",
+        "mobile_text_vertical_position": "bottom",
+        "mobile_text_horizontal_position": "center",
+        "margin-top": 16,
+        "margin-bottom": 16
+      }
+    },
+    "collection_feature_gjXgRQ": {
+      "type": "collection-feature",
+      "blocks": {
+        "column_yL9FTC": {
+          "type": "column",
+          "settings": {
+            "collection": "parfumler",
+            "image_collection": "shopify://shop_images/1.png",
+            "heading": "Parfümler",
+            "color-body-text": "#000000",
+            "background_color": "#faf7f0"
+          }
+        },
+        "column_p6Nadm": {
+          "type": "column",
+          "settings": {
+            "collection": "kisisel-bakim",
+            "image_collection": "shopify://shop_images/2.png",
+            "heading": "Kişisel Bakım",
+            "color-body-text": "rgba(0,0,0,0)",
+            "background_color": "#f4efe6"
+          }
+        },
+        "column_NRWVw9": {
+          "type": "column",
+          "settings": {
+            "collection": "oda-kokulari",
+            "image_collection": "shopify://shop_images/3.png",
+            "heading": "Oda Kokuları",
+            "color-body-text": "rgba(0,0,0,0)",
+            "background_color": "#faf7f0"
+          }
+        },
+        "column_6hC6Gn": {
+          "type": "column",
+          "settings": {
+            "collection": "setlerimiz",
+            "image_collection": "shopify://shop_images/4.png",
+            "heading": "Setlerimiz",
+            "color-body-text": "rgba(0,0,0,0)",
+            "background_color": "#f4efe6"
+          }
+        }
+      },
+      "block_order": [
+        "column_yL9FTC",
+        "column_p6Nadm",
+        "column_NRWVw9",
+        "column_6hC6Gn"
+      ],
+      "custom_css": [
+        ".collection-feature__img-container {/* display: none; */}"
+      ],
+      "settings": {
+        "heading": "Popüler Kategoriler",
+        "size_heading": 250,
+        "line_height": 1.5,
+        "size_heading_mobile": 180,
+        "line_height_mobile": 1.2,
+        "color-body-text": "rgba(0,0,0,0)",
+        "background_color": "rgba(0,0,0,0)",
+        "margin-top": 40,
+        "margin-bottom": 40
+      }
+    },
+    "shoppable_image_6eRywP": {
+      "type": "shoppable-image",
+      "blocks": {
+        "dots_6HraEW": {
+          "type": "dots",
+          "settings": {
+            "coordinate_width": 56,
+            "coordinate_height": 35,
+            "coordinate_width_mobile": 53,
+            "coordinate_height_mobile": 18,
+            "featured_product": "k-120-frequence-kadin-parfum-edp-50ml"
+          }
+        },
+        "dots_6mXQEc": {
+          "type": "dots",
+          "settings": {
+            "coordinate_width": 36,
+            "coordinate_height": 35,
+            "coordinate_width_mobile": 36,
+            "coordinate_height_mobile": 35,
+            "featured_product": "e-202-frequence-erkek-edp-parfum-50ml"
+          }
+        },
+        "dots_tqtnCW": {
+          "type": "dots",
+          "settings": {
+            "coordinate_width": 57,
+            "coordinate_height": 71,
+            "coordinate_width_mobile": 52,
+            "coordinate_height_mobile": 61,
+            "featured_product": "k-222-frequence-kadin-parfum-edp-50ml"
+          }
+        }
+      },
+      "block_order": [
+        "dots_6HraEW",
+        "dots_6mXQEc",
+        "dots_tqtnCW"
+      ],
+      "name": "t:sections.shoppable-image.settings.presets.name",
+      "settings": {
+        "heading": "Loris'in Çarpıcı Frequence Kokuları",
+        "desktop_image": "shopify://shop_images/b12.jpg",
+        "full-width-enabled": false,
+        "show_vendor": true,
+        "color-body-text": "rgba(0,0,0,0)",
+        "color-overlay": "rgba(0,0,0,0)",
+        "color-overlay-opacity": 100,
+        "margin-top": 20,
+        "margin-bottom": 20
+      }
+    },
+    "button_jxfrP6": {
+      "type": "button",
+      "name": "t:sections.button.presets.name",
+      "settings": {
+        "button_select": "link",
+        "button_horizontal_position": "center",
+        "button_label": "Tüm Ürünleri Gör",
+        "button_link": "shopify://collections/tum-urunler",
+        "margin-top": 20,
+        "margin-bottom": 20,
+        "background_color": "rgba(0,0,0,0)"
+      }
+    },
+    "multicolumn_hyPJ6j": {
+      "type": "multicolumn",
+      "blocks": {
+        "column_zpWjUE": {
+          "type": "column",
+          "settings": {
+            "heading": "Amour",
+            "heading_disable_on_mobile": false,
+            "text": "<p>Enerjisiyle dikkat çeken, sıcaklığıyla akılda kalan ve duygularını kokusuyla ifade etmeyi sevenler için modern bir imza.</p>",
+            "text_disable_on_mobile": false,
+            "button_select": "primary",
+            "button_label": "",
+            "button_disable_on_mobile": false,
+            "button_link": "shopify://products/influence-amour-edp-parfum-100-ml",
+            "button_link_in_new_window": false,
+            "desktop_image": "shopify://shop_images/LORIS_-_Influenceamaour.jpg"
+          }
+        },
+        "column_JdzEFn": {
+          "type": "column",
+          "settings": {
+            "heading": "Midnight",
+            "heading_disable_on_mobile": false,
+            "text": "<p>Derinliğ ve çarpıcı uyumuyla gecenin enerjisini üzerinde taşımayı sevenler için etkileyici bir yorum.</p>",
+            "text_disable_on_mobile": false,
+            "button_select": "primary",
+            "button_label": "",
+            "button_disable_on_mobile": false,
+            "button_link": "shopify://products/influence-midnight-edp-parfum-100-ml",
+            "button_link_in_new_window": false,
+            "desktop_image": "shopify://shop_images/LORIS_-_Influencemidnight.jpg"
+          }
+        },
+        "column_xcRNCd": {
+          "type": "column",
+          "settings": {
+            "heading": "Glow",
+            "heading_disable_on_mobile": false,
+            "text": "<p>Tenle bütünleşen bu yumuşak yapı, gün boyunca taze ve ışıldayan bir etki bırakıyor.</p>",
+            "text_disable_on_mobile": false,
+            "button_select": "primary",
+            "button_label": "",
+            "button_disable_on_mobile": false,
+            "button_link": "shopify://products/i̇stanbul-night-parfum-edp-100-ml",
+            "button_link_in_new_window": false,
+            "desktop_image": "shopify://shop_images/LORIS_-_Influenceglov3.jpg"
+          }
+        }
+      },
+      "block_order": [
+        "column_zpWjUE",
+        "column_JdzEFn",
+        "column_xcRNCd"
+      ],
+      "settings": {
+        "heading": "Influence Serisi",
+        "swipe_on_mobile": true,
+        "full-width-enabled": false,
+        "image_ratio": "adapt",
+        "column_alignment": "center",
+        "size_heading": 100,
+        "size_heading_mobile": 100,
+        "color-body-text": "rgba(0,0,0,0)",
+        "background_color": "rgba(0,0,0,0)",
+        "margin-top": 20,
+        "margin-bottom": 20
+      }
+    },
+    "newsletter_i8q83Y": {
+      "type": "newsletter",
+      "blocks": {
+        "heading_jANmtK": {
+          "type": "heading",
+          "disabled": true,
+          "settings": {
+            "heading": "E-postalarımıza abone olun",
+            "heading_disable_on_mobile": false,
+            "size_heading": 100,
+            "size_heading_mobile": 100
+          }
+        },
+        "paragraph_MzEAAr": {
+          "type": "paragraph",
+          "settings": {
+            "paragraph": "<h3>E-posta adresini bırak, yeni parfümler, özel kampanyalar ve Loris dünyasından ilham veren içerikleri ilk sen keşfet.</h3>",
+            "text_disable_on_mobile": false
+          }
+        },
+        "email_form_RWKtAi": {
+          "type": "email_form",
+          "settings": {
+            "button_select": "primary"
+          }
+        }
+      },
+      "block_order": [
+        "heading_jANmtK",
+        "paragraph_MzEAAr",
+        "email_form_RWKtAi"
+      ],
+      "settings": {
+        "color-body-text": "rgba(0,0,0,0)",
+        "background_color": "#ecf5f4",
+        "margin-top": 60,
+        "margin-bottom": 60
+      }
+    },
+    "testimonials_mB6iUg": {
+      "type": "testimonials",
+      "blocks": {
+        "image_dNXyHf": {
+          "type": "image",
+          "settings": {
+            "icon_select": "100",
+            "text": "<p>Çok beğendim hızlı kargo ve sağlam ürün paketlemesiyle çok teşekkür ederimm</p><p>- Javou</p>",
+            "desktop_image": "shopify://shop_images/blank.png",
+            "large_screen_logo_width": 100,
+            "mobile_screen_logo_width": 100,
+            "author": "Semra T."
+          }
+        },
+        "image_ebm39F": {
+          "type": "image",
+          "settings": {
+            "icon_select": "100",
+            "text": "<p>Kokusu ve kalıcılığı süper çok beğendim teşekkürler</p><p>- Aura</p>",
+            "desktop_image": "shopify://shop_images/blank.png",
+            "large_screen_logo_width": 100,
+            "mobile_screen_logo_width": 100,
+            "author": "Sevgi A."
+          }
+        },
+        "image_MpA4ch": {
+          "type": "image",
+          "settings": {
+            "icon_select": "100",
+            "text": "<p>Yıllardır kullandığım koku çok güzel</p><p>- Javou</p>",
+            "desktop_image": "shopify://shop_images/blank.png",
+            "large_screen_logo_width": 100,
+            "mobile_screen_logo_width": 100,
+            "author": "Simay B."
+          }
+        },
+        "image_J6UiQa": {
+          "type": "image",
+          "settings": {
+            "icon_select": "100",
+            "text": "<p>Çok güzel bir ürün çok teşekkürler kargoda çok çabuk geldi.</p><p>- K-201</p>",
+            "desktop_image": "shopify://shop_images/blank.png",
+            "large_screen_logo_width": 100,
+            "mobile_screen_logo_width": 100,
+            "author": ""
+          }
+        },
+        "image_p6ytm4": {
+          "type": "image",
+          "settings": {
+            "icon_select": "100",
+            "text": "<p>Kokusunu bilmeden aldim ve ona <br/>ragmen hiç tereddüt etmeden aldim iyikide almisim gerçekten kokusu çok <br/>güzel dün bilegime siktim ve üzerinden bir gün geçmesine ragmen bilegimi<br/> koklarken o kokusunu alabiliyorum kargosu paketlenmesi de asiri güzeldi<br/> herseyiyle ben çok begendim ilk kez loristen parfüm aldim ve bundan <br/>sonra da o ilkle kalacagini düsünmüyorum</p><p>- K-201</p>",
+            "desktop_image": "shopify://shop_images/blank.png",
+            "large_screen_logo_width": 100,
+            "mobile_screen_logo_width": 100,
+            "author": "Rumeysa D."
+          }
+        },
+        "image_BPpnXc": {
+          "type": "image",
+          "settings": {
+            "icon_select": "100",
+            "text": "<p>Normalde ben sürekli degisik <br/>parfümler kullanirim yani bir aldigimi bir daha almam ilk defa bir <br/>kokuya asik oldum bunu 2. Kez aldim ve imza kokum yaptim mükemmel €</p><p>- K-222</p>",
+            "desktop_image": "shopify://shop_images/blank.png",
+            "large_screen_logo_width": 100,
+            "mobile_screen_logo_width": 100,
+            "author": ""
+          }
+        },
+        "image_384PJG": {
+          "type": "image",
+          "settings": {
+            "icon_select": "100",
+            "text": "<p>Harika bir koku 2 gün rahat kaliyo üzerinizde. Çiçeksi koku sevenler hemen alsin imdirimdeyken kagirmayin 2.s yüzde elli indirim</p><p>- K-248</p>",
+            "desktop_image": "shopify://shop_images/blank.png",
+            "large_screen_logo_width": 100,
+            "mobile_screen_logo_width": 100,
+            "author": ""
+          }
+        },
+        "image_dQghNk": {
+          "type": "image",
+          "settings": {
+            "icon_select": "100",
+            "text": "<p>3 yildir bu parfümü kullaniyorum <br/>tanimadigim insanlardan bile hangi parfümü kullaniyorsun sorulariyla <br/>karsi karsiya kaliyorum kalici ve çok kadinsi bir parfüm tavsiye ederim</p><p>- K-248</p>",
+            "desktop_image": "shopify://shop_images/blank.png",
+            "large_screen_logo_width": 100,
+            "mobile_screen_logo_width": 100,
+            "author": "Merve Ç."
+          }
+        },
+        "image_a7wgxR": {
+          "type": "image",
+          "settings": {
+            "icon_select": "100",
+            "text": "<p>Satin Alinmis Paketlem <br/>sorunsuz siparisler elime ulasti.siparis vermek isteyrnler guvenle <br/>verebilir tesekkurler.urunler daha once kullandigim icin tekrar aldim</p><p>- E-202</p>",
+            "desktop_image": "shopify://shop_images/blank.png",
+            "large_screen_logo_width": 100,
+            "mobile_screen_logo_width": 100,
+            "author": "Özlem K."
+          }
+        }
+      },
+      "block_order": [
+        "image_dNXyHf",
+        "image_ebm39F",
+        "image_MpA4ch",
+        "image_J6UiQa",
+        "image_p6ytm4",
+        "image_BPpnXc",
+        "image_384PJG",
+        "image_dQghNk",
+        "image_a7wgxR"
+      ],
+      "disabled": true,
+      "settings": {
+        "heading": "",
+        "image_shape": "natural",
+        "testimonial_text_size_desktop": 100,
+        "testimonial_text_size": 100,
+        "text_color": "rgba(0,0,0,0)",
+        "background_color": "#f7f3ef",
+        "margin-top": 40,
+        "margin-bottom": 40
+      }
+    }
+  },
+  "order": [
+    "1756739283be35f791",
+    "rich_text_with_image_d9iPb9",
+    "image_banner_y6zBRz",
+    "slideshow_9TWGab",
+    "custom_liquid_qKzW7U",
+    "featured_collections_tabs_QrN3jy",
+    "rich_text_Xq4z4r",
+    "grid_view_PEBP9T",
+    "parallax_9pNgNx",
+    "multicolumn_EKyzBi",
+    "shoppable_video_cjY6Eq",
+    "custom_liquid_Akcbmk",
+    "button_3zPJz6",
+    "shoppable_video_PWWPiV",
+    "button_DwxQ97",
+    "image_banner_Ljezm6",
+    "video_reels_kb4KdA",
+    "custom_liquid_YBeAwd",
+    "video_section_47iEjq",
+    "collection_feature_gjXgRQ",
+    "shoppable_image_6eRywP",
+    "button_jxfrP6",
+    "multicolumn_hyPJ6j",
+    "newsletter_i8q83Y",
+    "testimonials_mB6iUg"
+  ]
+}

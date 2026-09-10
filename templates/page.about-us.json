@@ -1,0 +1,848 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "main-page",
+      "disabled": true,
+      "settings": {
+        "compact-size-enabled": true,
+        "size_heading": 140,
+        "size_heading_mobile": 100,
+        "color-body-text": "rgba(0,0,0,0)",
+        "color-bg-overlay": "rgba(0,0,0,0)",
+        "color-overlay-opacity": 100,
+        "margin-top": 40,
+        "margin-bottom": 0
+      }
+    },
+    "b0118af0-7eaf-42de-8ebe-2bacbdcdac45": {
+      "type": "background-video",
+      "blocks": {
+        "template--16408320606408__b0118af0-7eaf-42de-8ebe-2bacbdcdac45-subheading-1": {
+          "type": "subheading",
+          "disabled": true,
+          "settings": {
+            "subheading": "Tell your story",
+            "subheading_disable_on_mobile": false
+          }
+        },
+        "template--16408320606408__b0118af0-7eaf-42de-8ebe-2bacbdcdac45-heading-1": {
+          "type": "heading",
+          "settings": {
+            "heading": "",
+            "disable_on_mobile": false,
+            "size_heading": 160,
+            "size_heading_mobile": 160
+          }
+        },
+        "template--16408320606408__b0118af0-7eaf-42de-8ebe-2bacbdcdac45-text-1": {
+          "type": "text",
+          "disabled": true,
+          "settings": {
+            "text": "<p>Discover Our Story</p>",
+            "disable_on_mobile": false
+          }
+        },
+        "template--16408320606408__b0118af0-7eaf-42de-8ebe-2bacbdcdac45-button-1": {
+          "type": "button",
+          "settings": {
+            "button_select": "primary",
+            "button_label": "Button label",
+            "disable_on_mobile": false,
+            "button_link": "",
+            "second_button_select": "primary",
+            "second_button_label": "Button label",
+            "second_disable_on_mobile": false,
+            "second_button_link": ""
+          }
+        }
+      },
+      "block_order": [
+        "template--16408320606408__b0118af0-7eaf-42de-8ebe-2bacbdcdac45-subheading-1",
+        "template--16408320606408__b0118af0-7eaf-42de-8ebe-2bacbdcdac45-heading-1",
+        "template--16408320606408__b0118af0-7eaf-42de-8ebe-2bacbdcdac45-text-1",
+        "template--16408320606408__b0118af0-7eaf-42de-8ebe-2bacbdcdac45-button-1"
+      ],
+      "settings": {
+        "heading": "HİKAYEMİZ",
+        "full-width-enabled": true,
+        "video_hosted": "shopify://files/videos/3_Dakika_1_parfum (1).mp4",
+        "autoplay": true,
+        "video_controls": false,
+        "video_url": "",
+        "original_ratio": "fixed_height",
+        "desktop_fixed_height": 500,
+        "mobile_fixed_height": 380,
+        "color-body-heading": "#151515",
+        "color-overlay": "rgba(0,0,0,0)",
+        "color-overlay-opacity": 90,
+        "color-body-text": "#151515",
+        "desktop_text_horizontal_position": "center",
+        "mobile_text_horizontal_position": "center",
+        "margin-top": 16,
+        "margin-bottom": 24
+      }
+    },
+    "1778038b-a0c4-48d6-9085-3312ff830b43": {
+      "type": "rich-text",
+      "blocks": {
+        "template--16408320606408__1778038b-a0c4-48d6-9085-3312ff830b43-heading-1": {
+          "type": "heading",
+          "settings": {
+            "heading": "Parfüm Loris’tir",
+            "disable_on_mobile": false,
+            "size_heading": 100,
+            "size_heading_mobile": 100
+          }
+        },
+        "template--16408320606408__1778038b-a0c4-48d6-9085-3312ff830b43-text-1": {
+          "type": "text",
+          "settings": {
+            "text": "<p>2006 yılında bir hayalin peşinden yola çıktık: Kokuları yalnızca bir aksesuar olmaktan çıkarıp, insanların kendilerini ifade etme biçimine dönüştürmek. O gün attığımız küçük bir adım, bugün dünyanın dört bir yanında karşılık bulan global bir markaya dönüştü.</p><p>Bugün Loris, 500’den fazla mağazasıyla farklı kültürleri, dilleri ve yaşamları aynı ortak noktada buluşturuyor: koku aracılığıyla hikâye anlatmak. Her şişe, yaratıcılığın ve hayal gücünün bir yansıması; aynı zamanda çeşitliliğin, samimiyetin ve sürdürülebilirlik anlayışının bir ifadesidir.</p><p>Bizim için parfüm, sadece güzel kokmakla sınırlı değildir. Parfüm, anıları ölümsüzleştiren, duyguları ifade eden ve insanlara kendi kimliğini dünyayla paylaşma fırsatı veren bir dildir. İşte bu yüzden Loris, yalnızca bir marka değil, hayatlara dokunan evrensel bir topluluktur.</p>",
+            "disable_on_mobile": false
+          }
+        },
+        "template--16408320606408__1778038b-a0c4-48d6-9085-3312ff830b43-button-1": {
+          "type": "button",
+          "disabled": true,
+          "settings": {
+            "button_select": "primary",
+            "button_label": "Button label",
+            "button_link": "/",
+            "disable_on_mobile": false
+          }
+        }
+      },
+      "block_order": [
+        "template--16408320606408__1778038b-a0c4-48d6-9085-3312ff830b43-heading-1",
+        "template--16408320606408__1778038b-a0c4-48d6-9085-3312ff830b43-text-1",
+        "template--16408320606408__1778038b-a0c4-48d6-9085-3312ff830b43-button-1"
+      ],
+      "settings": {
+        "section_width": "regular",
+        "desktop_text_horizontal_position": "center",
+        "color-body-text": "rgba(0,0,0,0)",
+        "background_color": "rgba(0,0,0,0)",
+        "margin-top": 0,
+        "margin-bottom": 4
+      }
+    },
+    "image_with_text_N9mqmk": {
+      "type": "image-with-text",
+      "blocks": {
+        "subheading_C7AxgA": {
+          "type": "subheading",
+          "disabled": true,
+          "settings": {
+            "subheading": "Kurucu | Yönetim Kurulu Başkanı",
+            "subheading_disable_on_mobile": false
+          }
+        },
+        "heading_6r9NM8": {
+          "type": "heading",
+          "disabled": true,
+          "settings": {
+            "heading": "Fehmi Okuyucu",
+            "disable_on_mobile": false,
+            "size_heading": 100,
+            "size_heading_mobile": 100
+          }
+        },
+        "text_CTfj4f": {
+          "type": "text",
+          "disabled": true,
+          "settings": {
+            "text": "<p>Pair text with an image to focus on your chosen product, collection, or blog post. Add details on availability, style, or even provide a review.</p>",
+            "text_style": "body",
+            "disable_on_mobile": false
+          }
+        }
+      },
+      "block_order": [
+        "subheading_C7AxgA",
+        "heading_6r9NM8",
+        "text_CTfj4f"
+      ],
+      "disabled": true,
+      "name": "t:sections.image-with-text.presets.name",
+      "settings": {
+        "title": "",
+        "layout": "image_first",
+        "desktop-percentage-image-width": 50,
+        "full-width-enabled": false,
+        "slide_height": "fixed_height",
+        "desktop_fixed_height": 560,
+        "mobile_fixed_height": 460,
+        "section-color-body-text": "rgba(0,0,0,0)",
+        "section-color-overlay": "rgba(0,0,0,0)",
+        "section-color-overlay-opacity": 100,
+        "color-body-text": "rgba(0,0,0,0)",
+        "color-overlay": "rgba(0,0,0,0)",
+        "color-overlay-opacity": 100,
+        "desktop_image": "shopify://shop_images/Adsiz_tasarim_15.png",
+        "desktop_text_vertical_position": "center",
+        "desktop_text_horizontal_position": "center",
+        "mobile_text_horizontal_position": "center",
+        "margin-top": 0,
+        "margin-bottom": 0
+      }
+    },
+    "43cbdafd-d48f-4d66-9ab5-c471be313d5b": {
+      "type": "image-with-text",
+      "blocks": {
+        "596defd1-ab18-43c7-aa4e-97c7e317dd71": {
+          "type": "heading",
+          "settings": {
+            "heading": "Her Koku Bir Hikâye, Her Hikâye Loris",
+            "disable_on_mobile": false,
+            "size_heading": 100,
+            "size_heading_mobile": 90
+          }
+        },
+        "3f541413-67b8-4c65-8d71-a84071ae664f": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Parfüm ve yan ürün gruplarıyla her yıl milyonlarca insanın ruhuna dokunan Loris, Kocaeli Gebze’deki modern üretim tesisinde dünya standartlarında milyonlarca şişe parfüm üretiyor. Burada üretilen her koku, sadece bir esans değil; aynı zamanda duygulara, anılara ve kişisel ifadelere açılan bir kapı.</p><p>Orta Doğu’dan Avrupa’ya uzanan geniş bir coğrafyada yer alan mağazalarımız, “parfümün evrenselliği” anlayışını taşıyor. Farklı kültürlerin, farklı zevklerin ve farklı hayatların buluşma noktası olan Loris, yaratıcı yaklaşımı ve araştırmacı kimliğiyle her gün daha fazla insana ulaşıyor.</p>",
+            "text_style": "body",
+            "disable_on_mobile": false
+          }
+        }
+      },
+      "block_order": [
+        "596defd1-ab18-43c7-aa4e-97c7e317dd71",
+        "3f541413-67b8-4c65-8d71-a84071ae664f"
+      ],
+      "settings": {
+        "title": "",
+        "layout": "text_first",
+        "desktop-percentage-image-width": 50,
+        "full-width-enabled": true,
+        "slide_height": "adapt_to_first_image",
+        "desktop_fixed_height": 320,
+        "mobile_fixed_height": 460,
+        "section-color-body-text": "#000000",
+        "section-color-overlay": "rgba(0,0,0,0)",
+        "section-color-overlay-opacity": 100,
+        "color-body-text": "rgba(0,0,0,0)",
+        "color-overlay": "#daefda",
+        "color-overlay-opacity": 100,
+        "desktop_image": "shopify://shop_images/Adsiz_611_x_481_piksel.png",
+        "desktop_text_vertical_position": "center",
+        "desktop_text_horizontal_position": "left",
+        "mobile_text_horizontal_position": "center",
+        "margin-top": 0,
+        "margin-bottom": 0
+      }
+    },
+    "d4180441-144f-448c-a157-500e0a202d36": {
+      "type": "image-with-text",
+      "blocks": {
+        "8d31b27b-83be-4c20-b72f-904a9c543da3": {
+          "type": "heading",
+          "settings": {
+            "heading": "Kokunun Okulu: Loris Akademi",
+            "disable_on_mobile": false,
+            "size_heading": 100,
+            "size_heading_mobile": 90
+          }
+        },
+        "210693db-9734-4e2b-b162-2d4089b64b48": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Loris Parfüm'ün kurduğu <strong>Loris Akademi</strong> ile yalnızca kendi kurum içi ihtiyaçlarına değil, aynı zamanda sektörün nitelikli eleman ihtiyacına da çözüm üreten Loris, bugüne kadar yüzlerce genci parfümolog olarak yetiştirdi. Akademi, mağaza çalışanları için özel olarak geliştirilen “Parfümoloji” müfredatıyla kişisel gelişimden mesleki bilgiye, satış yetkinliklerinden liderlik becerilerine kadar geniş bir eğitim yelpazesi sunuyor. Deneyimli eğitmenler eşliğinde yürütülen bu program, katılımcılara yalnızca ürün ve marka bilgisini değil, aynı zamanda profesyonel yaşamlarında onlara değer katacak kalıcı bir donanım sağlıyor.<br/><br/></p>",
+            "text_style": "body",
+            "disable_on_mobile": false
+          }
+        }
+      },
+      "block_order": [
+        "8d31b27b-83be-4c20-b72f-904a9c543da3",
+        "210693db-9734-4e2b-b162-2d4089b64b48"
+      ],
+      "settings": {
+        "title": "",
+        "layout": "image_first",
+        "desktop-percentage-image-width": 50,
+        "full-width-enabled": true,
+        "slide_height": "fixed_height",
+        "desktop_fixed_height": 600,
+        "mobile_fixed_height": 460,
+        "section-color-body-text": "#000000",
+        "section-color-overlay": "#f9ebe0",
+        "section-color-overlay-opacity": 100,
+        "color-body-text": "rgba(0,0,0,0)",
+        "color-overlay": "rgba(0,0,0,0)",
+        "color-overlay-opacity": 100,
+        "desktop_image": "shopify://shop_images/parfumlog.png",
+        "desktop_text_vertical_position": "center",
+        "desktop_text_horizontal_position": "left",
+        "mobile_text_horizontal_position": "center",
+        "margin-top": 0,
+        "margin-bottom": 0
+      }
+    },
+    "button_LexB9a": {
+      "type": "button",
+      "name": "t:sections.button.presets.name",
+      "settings": {
+        "button_select": "primary",
+        "button_horizontal_position": "center",
+        "button_label": "Akademiyi Ziyeret Et",
+        "button_link": "https://lorisakademi.com/",
+        "margin-top": 20,
+        "margin-bottom": 20,
+        "background_color": "rgba(0,0,0,0)"
+      }
+    },
+    "brands_8wUk6f": {
+      "type": "brands",
+      "blocks": {
+        "image_TTtVfe": {
+          "type": "image",
+          "settings": {
+            "desktop_image": "shopify://shop_images/logo-light.png",
+            "link": ""
+          }
+        },
+        "image_GUDAYp": {
+          "type": "image",
+          "settings": {
+            "link": ""
+          }
+        },
+        "image_LDtVPB": {
+          "type": "image",
+          "settings": {
+            "link": ""
+          }
+        },
+        "image_qPa666": {
+          "type": "image",
+          "settings": {
+            "link": ""
+          }
+        }
+      },
+      "block_order": [
+        "image_TTtVfe",
+        "image_GUDAYp",
+        "image_LDtVPB",
+        "image_qPa666"
+      ],
+      "disabled": true,
+      "name": "t:sections.brands.settings.presets.name",
+      "settings": {
+        "heading": "Brands",
+        "animation": "swipe",
+        "animation_speed": "100",
+        "color-body-text": "rgba(0,0,0,0)",
+        "background_color": "rgba(0,0,0,0)",
+        "margin-top": 20,
+        "margin-bottom": 20
+      }
+    },
+    "85b9cb93-1be6-474a-a740-29ece523f118": {
+      "type": "image-with-text",
+      "blocks": {
+        "4f3d2481-cce6-4e8f-b40f-8ce5beba1fd8": {
+          "type": "heading",
+          "settings": {
+            "heading": "Kokunun Geleceğini Tasarlıyoruz",
+            "disable_on_mobile": false,
+            "size_heading": 100,
+            "size_heading_mobile": 90
+          }
+        },
+        "b36f9bca-3524-473d-b88f-21d201462254": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Dünyanın en özel kokularını en yüksek kaliteyle üretmek ve insanlara ulaşılabilir fiyatlarla sunmak Loris’in en hassasiyetle koruduğu değerlerden biridir. Bu anlayışı sürdürülebilir kılmak için çıtayı sürekli yukarı taşıyan marka, ileri teknoloji ve yenilikçi bakış açısını üretim süreçlerine entegre etti.</p><p>Kurduğu <strong>InoLab – Innovative Fragrance Laboratory</strong>, GCMS teknolojisi ile donatılmış Ar-Ge merkezinde koku uzmanları ve kimyagerler, dünya standartlarını belirleyen çalışmalar yürütüyor. Burada geliştirilen her formül, yalnızca bir parfüm değil; aynı zamanda bilimin ve sanatın kesiştiği bir yaratım sürecinin sonucu.</p>",
+            "text_style": "body",
+            "disable_on_mobile": false
+          }
+        }
+      },
+      "block_order": [
+        "4f3d2481-cce6-4e8f-b40f-8ce5beba1fd8",
+        "b36f9bca-3524-473d-b88f-21d201462254"
+      ],
+      "settings": {
+        "title": "",
+        "layout": "text_first",
+        "desktop-percentage-image-width": 50,
+        "full-width-enabled": true,
+        "slide_height": "fixed_height",
+        "desktop_fixed_height": 600,
+        "mobile_fixed_height": 460,
+        "section-color-body-text": "#000000",
+        "section-color-overlay": "#fcebee",
+        "section-color-overlay-opacity": 100,
+        "color-body-text": "rgba(0,0,0,0)",
+        "color-overlay": "rgba(0,0,0,0)",
+        "color-overlay-opacity": 100,
+        "desktop_image": "shopify://shop_images/Gemini_Generated_Image_ks62lyks62lyks62.png",
+        "desktop_text_vertical_position": "center",
+        "desktop_text_horizontal_position": "center",
+        "mobile_text_horizontal_position": "center",
+        "margin-top": 0,
+        "margin-bottom": 0
+      }
+    },
+    "0fb78468-9ddb-4ab4-b0f2-17627de7d650": {
+      "type": "features-banner",
+      "blocks": {
+        "template--15329436369096__0fb78468-9ddb-4ab4-b0f2-17627de7d650-image-1": {
+          "type": "image",
+          "settings": {
+            "desktop_image": "shopify://shop_images/vegan_formul.avif",
+            "select_icon": "user",
+            "heading": "Vegan Formül",
+            "text": "<p>Hayvansal içerik kullanılmadan, vegan formüllerle üretilir.</p>",
+            "link": ""
+          }
+        },
+        "template--15329436369096__0fb78468-9ddb-4ab4-b0f2-17627de7d650-image-2": {
+          "type": "image",
+          "settings": {
+            "desktop_image": "shopify://shop_images/natur_750x_fc1dfda5-9070-4a1e-88b4-6ca01aa87c15.avif",
+            "select_icon": "bag",
+            "heading": "Doğadan İlham",
+            "text": "<p>En saf bitkisel özlerle, doğallığı her notada hissettirir.</p>",
+            "link": ""
+          }
+        },
+        "template--15329436369096__0fb78468-9ddb-4ab4-b0f2-17627de7d650-image-3": {
+          "type": "image",
+          "settings": {
+            "desktop_image": "shopify://shop_images/Group_1567.avif",
+            "select_icon": "bag",
+            "heading": "Hızlı Kargo",
+            "text": "<p>Siparişiniz hızla kapınıza güvenle teslim edilir.</p>",
+            "link": ""
+          }
+        },
+        "template--15329436369096__0fb78468-9ddb-4ab4-b0f2-17627de7d650-image-4": {
+          "type": "image",
+          "settings": {
+            "desktop_image": "shopify://shop_images/laboratory.png",
+            "select_icon": "bag",
+            "heading": "Güvenilir Formüller",
+            "text": "<p>Ar-Ge güvencesiyle yüksek standartlı formüller.</p>",
+            "link": ""
+          }
+        }
+      },
+      "block_order": [
+        "template--15329436369096__0fb78468-9ddb-4ab4-b0f2-17627de7d650-image-1",
+        "template--15329436369096__0fb78468-9ddb-4ab4-b0f2-17627de7d650-image-2",
+        "template--15329436369096__0fb78468-9ddb-4ab4-b0f2-17627de7d650-image-3",
+        "template--15329436369096__0fb78468-9ddb-4ab4-b0f2-17627de7d650-image-4"
+      ],
+      "settings": {
+        "heading": "",
+        "size_heading_mobile": 70,
+        "size_heading": 60,
+        "icon_width_mobile": 52,
+        "icon_width_desktop": 72,
+        "icon_layout": "center",
+        "columns_desktop": "4",
+        "icon_layout_mobile": "grid",
+        "color_body_icon": "rgba(0,0,0,0)",
+        "color_background_icon": "rgba(0,0,0,0)",
+        "color_body_text": "rgba(0,0,0,0)",
+        "background_color": "rgba(0,0,0,0)",
+        "margin-top": 40,
+        "margin-bottom": 52
+      }
+    },
+    "background_video_7gMAJK": {
+      "type": "background-video",
+      "blocks": {
+        "subheading_h9HU3e": {
+          "type": "subheading",
+          "disabled": true,
+          "settings": {
+            "subheading": "Tell your story",
+            "subheading_disable_on_mobile": false
+          }
+        },
+        "heading_KmaKWW": {
+          "type": "heading",
+          "disabled": true,
+          "settings": {
+            "heading": "Video scene",
+            "disable_on_mobile": false,
+            "size_heading": 100,
+            "size_heading_mobile": 100
+          }
+        },
+        "text_wac8YG": {
+          "type": "text",
+          "disabled": true,
+          "settings": {
+            "text": "",
+            "disable_on_mobile": false
+          }
+        },
+        "button_JWKJeV": {
+          "type": "button",
+          "disabled": true,
+          "settings": {
+            "button_select": "primary",
+            "button_label": "Button label",
+            "disable_on_mobile": false,
+            "button_link": "",
+            "second_button_select": "primary",
+            "second_button_label": "Button label",
+            "second_disable_on_mobile": false,
+            "second_button_link": ""
+          }
+        }
+      },
+      "block_order": [
+        "subheading_h9HU3e",
+        "heading_KmaKWW",
+        "text_wac8YG",
+        "button_JWKJeV"
+      ],
+      "name": "t:sections.background-video.presets.name",
+      "settings": {
+        "heading": "İlhamdan Başarıya: Loris Parfüm'ün Dokunduğu Her Yer",
+        "full-width-enabled": false,
+        "video_hosted": "shopify://files/videos/Adsız tasarım (6).mp4",
+        "mobile_video_hosted": "shopify://files/videos/loris_internet_medyası_ödülleri_instagram.mp4",
+        "autoplay": true,
+        "video_controls": true,
+        "video_url": "",
+        "original_ratio": "fixed_height",
+        "desktop_fixed_height": 640,
+        "mobile_fixed_height": 460,
+        "color-body-heading": "rgba(0,0,0,0)",
+        "color-overlay": "rgba(0,0,0,0)",
+        "color-overlay-opacity": 100,
+        "color-body-text": "rgba(0,0,0,0)",
+        "desktop_text_horizontal_position": "center",
+        "mobile_text_horizontal_position": "center",
+        "margin-top": 20,
+        "margin-bottom": 0
+      }
+    },
+    "rich_text_ymbLna": {
+      "type": "rich-text",
+      "blocks": {
+        "heading_3RgFYb": {
+          "type": "heading",
+          "disabled": true,
+          "settings": {
+            "heading": "Talk about your brand",
+            "disable_on_mobile": false,
+            "size_heading": 100,
+            "size_heading_mobile": 100
+          }
+        },
+        "text_bJ8yYf": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Loris Parfüm olarak, \"İnternet Medyası Yılın En İyileri\" gibi prestijli bir etkinliğe ana sponsor olmakla kalmayıp, <strong>\"Let’s Talk Stars\"</strong> mottomuzla sektörün her köşesine dokunduk. Parfümün bir koku olmaktan öte, bir hikaye anlattığına inanıyoruz. Bu inançla, medya dünyasının en parlak yıldızlarının başarılarını ve ilham veren öykülerini taçlandırdık.</p><p>Bu özel gecede, hem etkinliğin ruhuna hem de ödül alanların kariyer yolculuklarına eşlik ettik. Loris Parfüm, güzellik ve estetikle yoğrulmuş hikayeleri destekleyerek, sadece bir marka olmaktan çıkıp, dokunduğu her alanda ilham ve değer yaratan bir yol arkadaşı haline geldi. Gelecekte de yeni başarı hikayelerinde buluşmak dileğiyle!</p>",
+            "disable_on_mobile": false
+          }
+        },
+        "button_rrCrmE": {
+          "type": "button",
+          "disabled": true,
+          "settings": {
+            "button_select": "primary",
+            "button_label": "Button label",
+            "button_link": "/",
+            "disable_on_mobile": false
+          }
+        }
+      },
+      "block_order": [
+        "heading_3RgFYb",
+        "text_bJ8yYf",
+        "button_rrCrmE"
+      ],
+      "name": "t:sections.rich-text.presets.name",
+      "settings": {
+        "section_width": "regular",
+        "desktop_text_horizontal_position": "center",
+        "color-body-text": "rgba(0,0,0,0)",
+        "background_color": "rgba(0,0,0,0)",
+        "margin-top": 0,
+        "margin-bottom": 28
+      }
+    },
+    "image_with_text_4TUUtF": {
+      "type": "image-with-text",
+      "blocks": {
+        "subheading_ypjJXJ": {
+          "type": "subheading",
+          "disabled": true,
+          "settings": {
+            "subheading": "Tell you story",
+            "subheading_disable_on_mobile": false
+          }
+        },
+        "heading_9Exkfk": {
+          "type": "heading",
+          "settings": {
+            "heading": "Emin Adımlarla",
+            "disable_on_mobile": false,
+            "size_heading": 100,
+            "size_heading_mobile": 100
+          }
+        },
+        "text_hbTG9G": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Loris, yenilikçi kreasyonları ve güçlü ürün gamıyla global bir kozmetik markası olma yolunda emin adımlarla ilerliyor. Avrupa’dan Amerika’ya, birçok kıtada büyüyen tedarik zinciriyle her geçen gün daha fazla insana ulaşıyor.<br/><br/>Üretim süreçlerinde hijyen ve kaliteyi en öncelikli değer olarak benimseyen Loris, ISO 22716 GMP standartlarına uygun, IFRA onaylı içeriklerle çalışıyor. Tam donanımlı laboratuvarlarında yapılan detaylı testler, her ürünün dünya standartlarında güvenle sunulmasını sağlıyor.<br/><br/></p>",
+            "text_style": "body",
+            "disable_on_mobile": false
+          }
+        },
+        "button_PUiEXy": {
+          "type": "button",
+          "disabled": true,
+          "settings": {
+            "button_select": "primary",
+            "button_label": "Button label",
+            "button_link": "/",
+            "disable_on_mobile": false
+          }
+        }
+      },
+      "block_order": [
+        "subheading_ypjJXJ",
+        "heading_9Exkfk",
+        "text_hbTG9G",
+        "button_PUiEXy"
+      ],
+      "name": "t:sections.image-with-text.presets.name",
+      "settings": {
+        "title": "",
+        "layout": "image_first",
+        "desktop-percentage-image-width": 50,
+        "full-width-enabled": false,
+        "slide_height": "adapt_to_first_image",
+        "desktop_fixed_height": 320,
+        "mobile_fixed_height": 460,
+        "section-color-body-text": "rgba(0,0,0,0)",
+        "section-color-overlay": "rgba(0,0,0,0)",
+        "section-color-overlay-opacity": 100,
+        "color-body-text": "rgba(0,0,0,0)",
+        "color-overlay": "rgba(0,0,0,0)",
+        "color-overlay-opacity": 100,
+        "desktop_image": "shopify://shop_images/Kare_mavi_modern_kurumsal_dunya_haritasi_lojistik_tasimacilik_kargo_ithalat_ihracat_Instagram_Gonderisi_611_x_481_piksel.gif",
+        "desktop_text_vertical_position": "center",
+        "desktop_text_horizontal_position": "center",
+        "mobile_text_horizontal_position": "center",
+        "margin-top": 20,
+        "margin-bottom": 20
+      }
+    },
+    "image_with_text_bcncKx": {
+      "type": "image-with-text",
+      "blocks": {
+        "subheading_Xnxgnb": {
+          "type": "subheading",
+          "settings": {
+            "subheading": "Herkes İçin Varız",
+            "subheading_disable_on_mobile": false
+          }
+        },
+        "heading_yWG8hE": {
+          "type": "heading",
+          "settings": {
+            "heading": "Franchise Modeli",
+            "disable_on_mobile": false,
+            "size_heading": 100,
+            "size_heading_mobile": 100
+          }
+        },
+        "text_fLnjLF": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Kalite anlayışını müşteri memnuniyetiyle birlikte konumlandıran marka, aldığı “Üstün Kalite Rozeti” ile bu yaklaşımını taçlandırıyor. Ar-Ge ve tasarıma dayalı vizyonuyla ise sektöre sürekli yeni koku trendleri kazandırıyor.<br/><br/>Franchise modeliyle girişimcilere anahtar teslim mağaza imkânı sunan Loris, güçlü iş modeli ve sürdürülebilir büyümesiyle Türkiye’nin yanı sıra Avrupa, ABD ve Avustralya gibi büyük pazarlarda daha da güçlü bir varlık göstermeyi hedefliyor.</p>",
+            "text_style": "body",
+            "disable_on_mobile": false
+          }
+        },
+        "button_Xwy8zB": {
+          "type": "button",
+          "settings": {
+            "button_select": "primary",
+            "button_label": "Başvuru İçin Tıklayın",
+            "button_link": "shopify://pages/bayilik",
+            "disable_on_mobile": false
+          }
+        }
+      },
+      "block_order": [
+        "subheading_Xnxgnb",
+        "heading_yWG8hE",
+        "text_fLnjLF",
+        "button_Xwy8zB"
+      ],
+      "name": "t:sections.image-with-text.presets.name",
+      "settings": {
+        "title": "",
+        "layout": "text_first",
+        "desktop-percentage-image-width": 50,
+        "full-width-enabled": false,
+        "slide_height": "adapt_to_first_image",
+        "desktop_fixed_height": 320,
+        "mobile_fixed_height": 460,
+        "section-color-body-text": "rgba(0,0,0,0)",
+        "section-color-overlay": "rgba(0,0,0,0)",
+        "section-color-overlay-opacity": 100,
+        "color-body-text": "rgba(0,0,0,0)",
+        "color-overlay": "rgba(0,0,0,0)",
+        "color-overlay-opacity": 100,
+        "desktop_image": "shopify://shop_images/Adsiz_611_x_481_piksel_3.png",
+        "desktop_text_vertical_position": "center",
+        "desktop_text_horizontal_position": "center",
+        "mobile_text_horizontal_position": "center",
+        "margin-top": 20,
+        "margin-bottom": 20
+      }
+    },
+    "multicolumn_mq9HUm": {
+      "type": "multicolumn",
+      "blocks": {
+        "column_j9hgcz": {
+          "type": "column",
+          "settings": {
+            "heading": "Gökhan Akdağ",
+            "heading_disable_on_mobile": false,
+            "text": "<p><strong>Marka Direktörü</strong></p><p>My main ambition is to build and deploy digital performance strategies, follow client's goals; lead client relations and manage ...</p>",
+            "text_disable_on_mobile": false,
+            "button_select": "link",
+            "button_label": "",
+            "button_disable_on_mobile": false,
+            "button_link": "",
+            "button_link_in_new_window": false,
+            "desktop_image": "shopify://shop_images/Adsiz_tasarim_16.png"
+          }
+        },
+        "column_zNqbCW": {
+          "type": "column",
+          "settings": {
+            "heading": "Suat Vayni",
+            "heading_disable_on_mobile": false,
+            "text": "<p><strong>Operasyon Direktörü</strong></p><p>Pair text with an image to focus on your chosen product, collection, or blog post. Add details on availability, style, or even provide a review.</p>",
+            "text_disable_on_mobile": false,
+            "button_select": "primary",
+            "button_label": "",
+            "button_disable_on_mobile": false,
+            "button_link": "",
+            "button_link_in_new_window": false,
+            "desktop_image": "shopify://shop_images/Adsiz_tasarim_17.png"
+          }
+        }
+      },
+      "block_order": [
+        "column_j9hgcz",
+        "column_zNqbCW"
+      ],
+      "disabled": true,
+      "name": "t:sections.multicolumn.presets.name",
+      "settings": {
+        "heading": "Birim Yöneticileri",
+        "swipe_on_mobile": false,
+        "full-width-enabled": false,
+        "image_ratio": "adapt",
+        "column_alignment": "left",
+        "size_heading": 100,
+        "size_heading_mobile": 100,
+        "color-body-text": "rgba(0,0,0,0)",
+        "background_color": "rgba(0,0,0,0)",
+        "margin-top": 20,
+        "margin-bottom": 20
+      }
+    },
+    "map_address_CgFhaF": {
+      "type": "map-address",
+      "blocks": {
+        "address_header_kBNy3U": {
+          "type": "address_header",
+          "settings": {
+            "address_title": "Kampüs Adresimiz",
+            "disable_on_mobile": false,
+            "size_heading": 100,
+            "size_heading_mobile": 100
+          }
+        },
+        "map_address_ynyAMX": {
+          "type": "map_address",
+          "settings": {
+            "address_to_display": "<p>Dilovası OSB Mahallesi D-4004 Sokak 137 Ada No:3 </p><p>Posta Kodu: <strong>41455</strong><br/><strong>Gebze/Kocaeli</strong></p>"
+          }
+        },
+        "button_jtWi7h": {
+          "type": "button",
+          "settings": {
+            "button_style": "primary",
+            "button_label": "Konuma Git",
+            "button_link": "https://maps.app.goo.gl/bbVdG43YCVteLVxp8"
+          }
+        }
+      },
+      "block_order": [
+        "address_header_kBNy3U",
+        "map_address_ynyAMX",
+        "button_jtWi7h"
+      ],
+      "settings": {
+        "heading": "",
+        "address": "Dilovası Organize Sanayi Bölgesi Mahallesi 4.Kısım D-4004 Sokak 137 Ada parsel No:3",
+        "api_key": "",
+        "initial_map_zoom": 13,
+        "map_style": "default",
+        "image": "shopify://shop_images/8069818a-b371-4eab-88dc-2978ad8be311.jpg",
+        "full-width-enabled": false,
+        "slide_height": "fixed_height",
+        "desktop_fixed_height": 600,
+        "mobile_fixed_height": 460,
+        "content_alignment": "left",
+        "content_alignment_desktop": "left",
+        "content_position": "top_left",
+        "section-color-body-text": "rgba(0,0,0,0)",
+        "section-color-overlay": "rgba(0,0,0,0)",
+        "section-color-overlay-opacity": 100,
+        "color-body-text": "rgba(0,0,0,0)",
+        "background_color": "#ffffff",
+        "background_color_opacity": 85,
+        "background_blur": 0,
+        "margin-top": 0,
+        "margin-bottom": 40
+      }
+    }
+  },
+  "order": [
+    "main",
+    "b0118af0-7eaf-42de-8ebe-2bacbdcdac45",
+    "1778038b-a0c4-48d6-9085-3312ff830b43",
+    "image_with_text_N9mqmk",
+    "43cbdafd-d48f-4d66-9ab5-c471be313d5b",
+    "d4180441-144f-448c-a157-500e0a202d36",
+    "button_LexB9a",
+    "brands_8wUk6f",
+    "85b9cb93-1be6-474a-a740-29ece523f118",
+    "0fb78468-9ddb-4ab4-b0f2-17627de7d650",
+    "background_video_7gMAJK",
+    "rich_text_ymbLna",
+    "image_with_text_4TUUtF",
+    "image_with_text_bcncKx",
+    "multicolumn_mq9HUm",
+    "map_address_CgFhaF"
+  ]
+}

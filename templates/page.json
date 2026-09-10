@@ -1,0 +1,353 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "custom_liquid_9PNgRC": {
+      "type": "custom-liquid",
+      "name": "t:sections.custom-liquid.presets.name",
+      "settings": {
+        "custom_liquid": "<script>\nfunction storeList () {\n  return `{{ page.metafields.custom.magaza_liste }}`;\n}\n</script>"
+      }
+    },
+    "main": {
+      "type": "main-page",
+      "custom_css": [],
+      "settings": {
+        "compact-size-enabled": true,
+        "size_heading": 140,
+        "size_heading_mobile": 100,
+        "color-body-text": "rgba(0,0,0,0)",
+        "color-bg-overlay": "rgba(0,0,0,0)",
+        "color-overlay-opacity": 100,
+        "margin-top": 40,
+        "margin-bottom": 0
+      }
+    },
+    "background_video_RqFLLY": {
+      "type": "background-video",
+      "blocks": {
+        "subheading_D9nmqR": {
+          "type": "subheading",
+          "disabled": true,
+          "settings": {
+            "subheading": "",
+            "subheading_disable_on_mobile": false
+          }
+        },
+        "heading_KYm77N": {
+          "type": "heading",
+          "disabled": true,
+          "settings": {
+            "heading": "Video scene",
+            "disable_on_mobile": false,
+            "size_heading": 100,
+            "size_heading_mobile": 100
+          }
+        },
+        "text_X38qAy": {
+          "type": "text",
+          "disabled": true,
+          "settings": {
+            "text": "<p>Explore in motion</p>",
+            "disable_on_mobile": false
+          }
+        },
+        "button_HKKfRt": {
+          "type": "button",
+          "disabled": true,
+          "settings": {
+            "button_select": "primary",
+            "button_label": "Button label",
+            "disable_on_mobile": false,
+            "button_link": "",
+            "second_button_select": "primary",
+            "second_button_label": "Button label",
+            "second_disable_on_mobile": false,
+            "second_button_link": ""
+          }
+        }
+      },
+      "block_order": [
+        "subheading_D9nmqR",
+        "heading_KYm77N",
+        "text_X38qAy",
+        "button_HKKfRt"
+      ],
+      "name": "t:sections.background-video.presets.name",
+      "settings": {
+        "heading": "",
+        "full-width-enabled": true,
+        "video_hosted": "shopify://files/videos/medya-giris-banner-video.mp4",
+        "autoplay": true,
+        "video_controls": false,
+        "video_url": "",
+        "original_ratio": "fixed_height",
+        "desktop_fixed_height": 840,
+        "mobile_fixed_height": 200,
+        "color-body-heading": "rgba(0,0,0,0)",
+        "color-overlay": "rgba(0,0,0,0)",
+        "color-overlay-opacity": 100,
+        "color-body-text": "rgba(0,0,0,0)",
+        "desktop_text_horizontal_position": "center",
+        "mobile_text_horizontal_position": "center",
+        "margin-top": 20,
+        "margin-bottom": 20
+      }
+    },
+    "parallax_Ec9Mm3": {
+      "type": "parallax",
+      "blocks": {
+        "heading_CBFX4i": {
+          "type": "heading",
+          "settings": {
+            "heading": "Parfümün Ötesinde: Loris’in Medya Yolculuğu",
+            "disable_on_mobile": false,
+            "size_heading": 100,
+            "size_heading_mobile": 100
+          }
+        },
+        "text_4Cwbdy": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Bir markanın hikâyesi, yalnızca raflardaki ürünlerle değil; o hikâyeyi geniş kitlelere ulaştıran medya yansımalarıyla büyür. Loris Parfüm, 2006’dan bu yana parfüm dünyasında olduğu kadar medya sahnesinde de ilham veren bir serüven yazıyor.</p><p>Televizyon programlarından ulusal ve uluslararası dergilere, gazetelerdeki haberlerden özel röportajlara uzanan güçlü bir görünürlüğe sahibiz. Her platformda; kokularımızın ardındaki yaratıcı dünyayı, markamızın değerlerini ve ilham veren yolculuğumuzu paylaşıyoruz.</p><p>Medya’da yer alan her yansımamız, yalnızca ürünlerimizi tanıtmakla kalmıyor; Loris kültürünü, ekiplerimizin enerjisini ve markamızın geleceğe uzanan vizyonunu da ortaya koyuyor.</p>",
+            "disable_on_mobile": false
+          }
+        },
+        "button_WkhwNr": {
+          "type": "button",
+          "disabled": true,
+          "settings": {
+            "button_select": "primary",
+            "button_label": "Button label",
+            "button_link": "/",
+            "disable_on_mobile": false
+          }
+        }
+      },
+      "block_order": [
+        "heading_CBFX4i",
+        "text_4Cwbdy",
+        "button_WkhwNr"
+      ],
+      "name": "t:sections.parallax-section.settings.presets.name",
+      "settings": {
+        "desktop_text_horizontal_position": "center",
+        "rotation": 15,
+        "image_1": "shopify://shop_images/1_a65ea3e4-b80d-417e-bc8b-c911bda93caa.jpg",
+        "button_link1": "",
+        "image_2": "shopify://shop_images/Para_Dergisi_Post.jpg",
+        "button_link2": "",
+        "color-body-text": "rgba(0,0,0,0)",
+        "background_color": "rgba(0,0,0,0)",
+        "margin-top": 0,
+        "margin-bottom": 0
+      }
+    },
+    "multicolumn_8HnEpW": {
+      "type": "multicolumn",
+      "blocks": {
+        "column_YmXygb": {
+          "type": "column",
+          "settings": {
+            "heading": "CEO’muzun Vizyonu Medyada",
+            "heading_disable_on_mobile": false,
+            "text": "<p><br/>CEO’muz Fehmi Okuyucu, Para Dergisi’nde girişimcilik vizyonunu, markamızın başarıya giden stratejilerini ve Loris’in global yolculuk hedeflerini anlattı. İş dünyasına ilham veren bu röportaj, markamızın kararlılığını ve yenilikçi bakış açısını gözler önüne serdi.</p>",
+            "text_disable_on_mobile": false,
+            "button_select": "primary",
+            "button_label": "",
+            "button_disable_on_mobile": false,
+            "button_link": "",
+            "button_link_in_new_window": false,
+            "desktop_image": "shopify://shop_images/Adsiz_tasarim_33.png"
+          }
+        },
+        "column_wXwbxT": {
+          "type": "column",
+          "settings": {
+            "heading": "Loris Kokuları Harper’s Bazaar’da",
+            "heading_disable_on_mobile": false,
+            "text": "<p><br/>Dünyanın en prestijli moda dergilerinden Harper’s Bazaar, Loris’in Niche koleksiyonuna sayfalarında yer verdi. İlhamını zarafetten alan kokularımız, derginin seçkin okurlarıyla buluşarak markamızın uluslararası prestijini bir kez daha güçlendirdi.</p>",
+            "text_disable_on_mobile": false,
+            "button_select": "primary",
+            "button_label": "",
+            "button_disable_on_mobile": false,
+            "button_link": "",
+            "button_link_in_new_window": false,
+            "desktop_image": "shopify://shop_images/WhatsApp_Gorsel_2025-02-05_saat_17.59.03_4941a4df.jpg"
+          }
+        },
+        "column_aGGfGz": {
+          "type": "column",
+          "settings": {
+            "heading": "Vogue’da Loris İmzası",
+            "heading_disable_on_mobile": false,
+            "text": "<p><br/>Moda dünyasının öncüsü Vogue, Loris Parfüm’ün yaratıcılık ve estetiği bir araya getiren özel koleksiyonuna geniş yer ayırdı. Zarif tasarımlarımız ve eşsiz kokularımız, Vogue’un sayfalarında global bir vizyonla yeniden hayat buldu.</p>",
+            "text_disable_on_mobile": false,
+            "button_select": "primary",
+            "button_label": "",
+            "button_disable_on_mobile": false,
+            "button_link": "",
+            "button_link_in_new_window": false,
+            "desktop_image": "shopify://shop_images/WhatsApp_Gorsel_2025-01-28_saat_17.25.52_34c328a4.jpg"
+          }
+        },
+        "column_fdBDGK": {
+          "type": "column",
+          "settings": {
+            "heading": "Vizyonumuz Beauty & Cosmetics'te",
+            "heading_disable_on_mobile": false,
+            "text": "<p><br/>Güzellik ve kozmetik dünyasının dergilerinden Beauty & Cosmetics Türkiye, Loris Parfüm’ün koleksiyonuna sayfalarında yer verdi. Yenilikten ilham alan kokularımız, derginin seçkin okurlarıyla buluşarak markamızın prestijini bir kez güçlendirdi.</p>",
+            "text_disable_on_mobile": false,
+            "button_select": "primary",
+            "button_label": "",
+            "button_disable_on_mobile": false,
+            "button_link": "",
+            "button_link_in_new_window": false,
+            "desktop_image": "shopify://shop_images/beatuty-cosmotic.png"
+          }
+        }
+      },
+      "block_order": [
+        "column_YmXygb",
+        "column_wXwbxT",
+        "column_aGGfGz",
+        "column_fdBDGK"
+      ],
+      "name": "t:sections.multicolumn.presets.name",
+      "settings": {
+        "heading": "Dünyaca Ünlü Yayınlarda Loris",
+        "swipe_on_mobile": true,
+        "full-width-enabled": false,
+        "image_ratio": "adapt",
+        "column_alignment": "left",
+        "size_heading": 90,
+        "size_heading_mobile": 90,
+        "color-body-text": "rgba(0,0,0,0)",
+        "background_color": "rgba(0,0,0,0)",
+        "margin-top": 0,
+        "margin-bottom": 0
+      }
+    },
+    "background_video_ngHHfC": {
+      "type": "background-video",
+      "blocks": {
+        "subheading_bVMadK": {
+          "type": "subheading",
+          "disabled": true,
+          "settings": {
+            "subheading": "Tell your story",
+            "subheading_disable_on_mobile": false
+          }
+        },
+        "heading_hiynKx": {
+          "type": "heading",
+          "disabled": true,
+          "settings": {
+            "heading": "Video scene",
+            "disable_on_mobile": false,
+            "size_heading": 100,
+            "size_heading_mobile": 100
+          }
+        },
+        "text_9EDzzB": {
+          "type": "text",
+          "disabled": true,
+          "settings": {
+            "text": "<p>Explore in motion</p>",
+            "disable_on_mobile": false
+          }
+        },
+        "button_NpJB9i": {
+          "type": "button",
+          "disabled": true,
+          "settings": {
+            "button_select": "primary",
+            "button_label": "Button label",
+            "disable_on_mobile": false,
+            "button_link": "",
+            "second_button_select": "primary",
+            "second_button_label": "Button label",
+            "second_disable_on_mobile": false,
+            "second_button_link": ""
+          }
+        }
+      },
+      "block_order": [
+        "subheading_bVMadK",
+        "heading_hiynKx",
+        "text_9EDzzB",
+        "button_NpJB9i"
+      ],
+      "name": "t:sections.background-video.presets.name",
+      "settings": {
+        "heading": "Gökhan Akdağ / Perakende Günleri 2025",
+        "full-width-enabled": false,
+        "video_hosted": "shopify://files/videos/Adsız tasarım (9).mp4",
+        "autoplay": true,
+        "video_controls": true,
+        "video_url": "",
+        "original_ratio": "original_ratio",
+        "desktop_fixed_height": 320,
+        "mobile_fixed_height": 460,
+        "color-body-heading": "rgba(0,0,0,0)",
+        "color-overlay": "rgba(0,0,0,0)",
+        "color-overlay-opacity": 100,
+        "color-body-text": "rgba(0,0,0,0)",
+        "desktop_text_horizontal_position": "center",
+        "mobile_text_horizontal_position": "center",
+        "margin-top": 20,
+        "margin-bottom": 0
+      }
+    },
+    "rich_text_M377hp": {
+      "type": "rich-text",
+      "blocks": {
+        "heading_mFYyE3": {
+          "type": "heading",
+          "settings": {
+            "heading": "Gökhan Akdağ ile Loris’in Perakende Yolculuğu",
+            "disable_on_mobile": false,
+            "size_heading": 100,
+            "size_heading_mobile": 100
+          }
+        },
+        "text_QfpDbe": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Loris Parfüm Satış ve Pazarlamadan Sorumlu Genel Müdür Yardımcısı <strong>Gökhan Akdağ</strong>, Perakende Günleri 2025 kapsamında markamızı tanıttı. Etkinliğin sektörel iş birliklerine sunduğu katkılara değinen Akdağ, bu yılki gündem ve katılım profiline dair görüşlerini de paylaştı. Konuşmasında <strong>“Parfüm Loris’tir”</strong> sloganımızı vurgulayarak, bu ifadenin markanın kimliğini ve geleceğe uzanan vizyonunu nasıl yansıttığını anlattı.</p>",
+            "disable_on_mobile": false
+          }
+        }
+      },
+      "block_order": [
+        "heading_mFYyE3",
+        "text_QfpDbe"
+      ],
+      "name": "t:sections.rich-text.presets.name",
+      "settings": {
+        "section_width": "regular",
+        "desktop_text_horizontal_position": "center",
+        "color-body-text": "rgba(0,0,0,0)",
+        "background_color": "rgba(0,0,0,0)",
+        "margin-top": 0,
+        "margin-bottom": 20
+      }
+    }
+  },
+  "order": [
+    "custom_liquid_9PNgRC",
+    "main",
+    "background_video_RqFLLY",
+    "parallax_Ec9Mm3",
+    "multicolumn_8HnEpW",
+    "background_video_ngHHfC",
+    "rich_text_M377hp"
+  ]
+}

@@ -1,0 +1,687 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "custom_liquid_rYraar": {
+      "type": "custom-liquid",
+      "name": "t:sections.custom-liquid.presets.name",
+      "settings": {
+        "custom_liquid": "<style>\n.wt-page .wt-page__title {\n  display: none;\n}\n</style>"
+      }
+    },
+    "main": {
+      "type": "main-page",
+      "disabled": true,
+      "custom_css": [],
+      "settings": {
+        "compact-size-enabled": false,
+        "size_heading": 140,
+        "size_heading_mobile": 100,
+        "color-body-text": "rgba(0,0,0,0)",
+        "color-bg-overlay": "rgba(0,0,0,0)",
+        "color-overlay-opacity": 100,
+        "margin-top": 40,
+        "margin-bottom": 0
+      }
+    },
+    "image_banner_9WaKqg": {
+      "type": "image-banner",
+      "blocks": {
+        "subheading_8C6VeL": {
+          "type": "subheading",
+          "disabled": true,
+          "settings": {
+            "subheading": "Tell you story",
+            "subheading_disable_on_mobile": false
+          }
+        },
+        "heading_MxiAVk": {
+          "type": "heading",
+          "disabled": true,
+          "settings": {
+            "heading": "Image banner",
+            "disable_on_mobile": false,
+            "size_heading": 100,
+            "size_heading_mobile": 100
+          }
+        },
+        "text_K4E3zM": {
+          "type": "text",
+          "disabled": true,
+          "settings": {
+            "text": "<p>Give customers details about the banner image(s) or content on the template.</p>",
+            "disable_on_mobile": false
+          }
+        },
+        "button_HTJCFY": {
+          "type": "button",
+          "disabled": true,
+          "settings": {
+            "button_select": "primary",
+            "button_label": "Button label",
+            "disable_on_mobile": false,
+            "button_link": "/",
+            "second_button_select": "primary",
+            "second_button_label": "Button label",
+            "second_disable_on_mobile": false,
+            "second_button_link": ""
+          }
+        }
+      },
+      "block_order": [
+        "subheading_8C6VeL",
+        "heading_MxiAVk",
+        "text_K4E3zM",
+        "button_HTJCFY"
+      ],
+      "name": "t:sections.image-banner.presets.name",
+      "settings": {
+        "heading": "Loris'te Sürdürebilirlik",
+        "full-width-enabled": false,
+        "slide_height": "adapt_to_first_image",
+        "desktop_fixed_height": 320,
+        "mobile_fixed_height": 460,
+        "desktop_image": "shopify://shop_images/surdurulebilirlik-create_by-okan-krkc.png",
+        "desktop_text_vertical_position": "center",
+        "desktop_text_horizontal_position": "center",
+        "mobile_text_vertical_position": "center",
+        "mobile_text_horizontal_position": "center",
+        "color-heading": "rgba(0,0,0,0)",
+        "section-color-overlay": "rgba(0,0,0,0)",
+        "section-color-overlay-opacity": 100,
+        "color-body-text": "rgba(0,0,0,0)",
+        "text-container-color": "rgba(0,0,0,0)",
+        "color-overlay-opacity": 100,
+        "margin-top": 20,
+        "margin-bottom": 20
+      }
+    },
+    "rich_text_EjrV68": {
+      "type": "rich-text",
+      "blocks": {
+        "heading_TFRKp8": {
+          "type": "heading",
+          "settings": {
+            "heading": "Sürdürülebilirlik Vizyonumuz: Geleceğe Kokuyla Yön Veriyoruz",
+            "disable_on_mobile": false,
+            "size_heading": 100,
+            "size_heading_mobile": 100
+          }
+        },
+        "text_gheF8e": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Loris Parfüm olarak, doğanın bize sunduğu zenginlikten ilham alıyor ve bu ilhamı, gezegenimize ve insanlığa olan sorumluluğumuzu her aşamada yansıtan bir üretim felsefesiyle birleştiriyoruz. Sürdürülebilirlik, işimizin temel taşıdır; sadece bir trend değil, daha iyi bir dünya için attığımız kararlı bir adımdır. Amacımız, en kaliteli kokuları yaratırken, çevresel etkimizi en aza indirmek ve tüm paydaşlarımız için değer yaratmaktır.</p>",
+            "disable_on_mobile": false
+          }
+        },
+        "button_PK6Pzh": {
+          "type": "button",
+          "disabled": true,
+          "settings": {
+            "button_select": "primary",
+            "button_label": "Başvuru Formu",
+            "button_link": "#basvuru-form",
+            "disable_on_mobile": false
+          }
+        }
+      },
+      "block_order": [
+        "heading_TFRKp8",
+        "text_gheF8e",
+        "button_PK6Pzh"
+      ],
+      "custom_css": [
+        ".hero__title {font-size: 20px;}"
+      ],
+      "name": "t:sections.rich-text.presets.name",
+      "settings": {
+        "section_width": "short",
+        "desktop_text_horizontal_position": "center",
+        "color-body-text": "rgba(0,0,0,0)",
+        "background_color": "rgba(0,0,0,0)",
+        "margin-top": 0,
+        "margin-bottom": 0
+      }
+    },
+    "features_banner_xNAfAU": {
+      "type": "features-banner",
+      "blocks": {
+        "image_q8C9E3": {
+          "type": "image",
+          "settings": {
+            "desktop_image": "shopify://shop_images/no-test.png",
+            "select_icon": "user",
+            "heading": "Vegan Formüller",
+            "text": "<p>Hayvan testi yapılmaz; vegan dostu formüller.</p>",
+            "link": "#"
+          }
+        },
+        "image_dMHEhE": {
+          "type": "image",
+          "settings": {
+            "desktop_image": "shopify://shop_images/planet-earth-create_by-okan-krkc.png",
+            "select_icon": "bag",
+            "heading": "Doğa Dostu Üretim",
+            "text": "<p>Çevreye duyarlı ve sürdürülebilir üretim.</p>",
+            "link": "#"
+          }
+        },
+        "image_jnMmMJ": {
+          "type": "image",
+          "settings": {
+            "desktop_image": "shopify://shop_images/geri-donusum-ikon-create_by-okan-krkc.png",
+            "select_icon": "bag",
+            "heading": "Geri Dönüşüm",
+            "text": "<p>Çevre dostu, geri dönüştürülebilir şişeler ve ambalajlar.</p>",
+            "link": ""
+          }
+        },
+        "image_ADz8dH": {
+          "type": "image",
+          "settings": {
+            "desktop_image": "shopify://shop_images/recycling-water_ikon-create_by-okan-krkc.png",
+            "select_icon": "bag",
+            "heading": "Su Yönetimi",
+            "text": "<p>Üretim süreçlerinde su tüketimini azaltıyor ve kaynakları koruyoruz.</p>",
+            "link": ""
+          }
+        }
+      },
+      "block_order": [
+        "image_q8C9E3",
+        "image_dMHEhE",
+        "image_jnMmMJ",
+        "image_ADz8dH"
+      ],
+      "name": "Icon with links",
+      "settings": {
+        "heading": "",
+        "size_heading_mobile": 80,
+        "size_heading": 80,
+        "icon_width_mobile": 36,
+        "icon_width_desktop": 48,
+        "icon_layout": "center",
+        "columns_desktop": "4",
+        "icon_layout_mobile": "grid",
+        "color_body_icon": "rgba(0,0,0,0)",
+        "color_background_icon": "rgba(0,0,0,0)",
+        "color_body_text": "rgba(0,0,0,0)",
+        "background_color": "rgba(0,0,0,0)",
+        "margin-top": 80,
+        "margin-bottom": 80
+      }
+    },
+    "rich_text_pfVzhg": {
+      "type": "rich-text",
+      "blocks": {
+        "heading_BzVUdc": {
+          "type": "heading",
+          "settings": {
+            "heading": "Sorumlu Kaynak Kullanımı ve Formülasyon",
+            "disable_on_mobile": false,
+            "size_heading": 100,
+            "size_heading_mobile": 100
+          }
+        },
+        "text_KQxxXx": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Ürünlerimizin özü, titizlikle seçilmiş hammaddelerimizden gelir. Bu hammaddeleri tedarik ederken, biyoçeşitliliği koruyan ve ekolojik dengeye saygı duyan prensipleri esas alıyoruz.</p>",
+            "disable_on_mobile": false
+          }
+        }
+      },
+      "block_order": [
+        "heading_BzVUdc",
+        "text_KQxxXx"
+      ],
+      "name": "t:sections.rich-text.presets.name",
+      "settings": {
+        "section_width": "regular",
+        "desktop_text_horizontal_position": "center",
+        "color-body-text": "rgba(0,0,0,0)",
+        "background_color": "rgba(0,0,0,0)",
+        "margin-top": 0,
+        "margin-bottom": 0
+      }
+    },
+    "image_with_text_9Fmc69": {
+      "type": "image-with-text",
+      "blocks": {
+        "subheading_bBBEwG": {
+          "type": "subheading",
+          "disabled": true,
+          "settings": {
+            "subheading": "Tell you story",
+            "subheading_disable_on_mobile": false
+          }
+        },
+        "heading_3GF3Gp": {
+          "type": "heading",
+          "settings": {
+            "heading": "Doğal özleri ve esansiyel yağları,",
+            "disable_on_mobile": false,
+            "size_heading": 100,
+            "size_heading_mobile": 100
+          }
+        },
+        "text_pz7CAL": {
+          "type": "text",
+          "settings": {
+            "text": "<p><br/> yerel toplulukları destekleyen, adil ticaret ilkelerine bağlı ve sürdürülebilir tarım uygulamalarını benimseyen iş ortaklarından temin ediyoruz. Bu yaklaşım, sadece hammaddelerin kalitesini güvence altına almakla kalmaz, aynı zamanda yerel ekonomilere de katkı sağlar.<br/><br/></p>",
+            "text_style": "body",
+            "disable_on_mobile": false
+          }
+        },
+        "button_pBJr4z": {
+          "type": "button",
+          "disabled": true,
+          "settings": {
+            "button_select": "primary",
+            "button_label": "Button label",
+            "button_link": "/",
+            "disable_on_mobile": false
+          }
+        }
+      },
+      "block_order": [
+        "subheading_bBBEwG",
+        "heading_3GF3Gp",
+        "text_pz7CAL",
+        "button_pBJr4z"
+      ],
+      "name": "t:sections.image-with-text.presets.name",
+      "settings": {
+        "title": "Etik ve Sürdürülebilir Tedarik Zinciri",
+        "layout": "image_first",
+        "desktop-percentage-image-width": 50,
+        "full-width-enabled": false,
+        "slide_height": "fixed_height",
+        "desktop_fixed_height": 620,
+        "mobile_fixed_height": 280,
+        "section-color-body-text": "rgba(0,0,0,0)",
+        "section-color-overlay": "rgba(0,0,0,0)",
+        "section-color-overlay-opacity": 100,
+        "color-body-text": "rgba(0,0,0,0)",
+        "color-overlay": "rgba(0,0,0,0)",
+        "color-overlay-opacity": 100,
+        "desktop_image": "shopify://shop_images/Green_and_White_Minimalist_Maintain_Environmental_Health_Presentation_1000_x_1000_piksel.png",
+        "desktop_text_vertical_position": "center",
+        "desktop_text_horizontal_position": "left",
+        "mobile_text_horizontal_position": "center",
+        "margin-top": 28,
+        "margin-bottom": 20
+      }
+    },
+    "button_HBCJPg": {
+      "type": "button",
+      "disabled": true,
+      "name": "t:sections.button.presets.name",
+      "settings": {
+        "button_select": "primary",
+        "button_horizontal_position": "center",
+        "button_label": "Kataloğu İncele",
+        "button_link": "",
+        "margin-top": 20,
+        "margin-bottom": 20,
+        "background_color": "rgba(0,0,0,0)"
+      }
+    },
+    "image_banner_KCeeHT": {
+      "type": "image-banner",
+      "blocks": {
+        "subheading_AwBVkC": {
+          "type": "subheading",
+          "disabled": true,
+          "settings": {
+            "subheading": "Tell you story",
+            "subheading_disable_on_mobile": false
+          }
+        },
+        "heading_JHtmJ7": {
+          "type": "heading",
+          "disabled": true,
+          "settings": {
+            "heading": "Image banner",
+            "disable_on_mobile": false,
+            "size_heading": 100,
+            "size_heading_mobile": 100
+          }
+        },
+        "text_MqTdNR": {
+          "type": "text",
+          "disabled": true,
+          "settings": {
+            "text": "<p>Give customers details about the banner image(s) or content on the template.</p>",
+            "disable_on_mobile": false
+          }
+        },
+        "button_CeTJVz": {
+          "type": "button",
+          "disabled": true,
+          "settings": {
+            "button_select": "primary",
+            "button_label": "Button label",
+            "disable_on_mobile": false,
+            "button_link": "/",
+            "second_button_select": "primary",
+            "second_button_label": "Button label",
+            "second_disable_on_mobile": false,
+            "second_button_link": ""
+          }
+        }
+      },
+      "block_order": [
+        "subheading_AwBVkC",
+        "heading_JHtmJ7",
+        "text_MqTdNR",
+        "button_CeTJVz"
+      ],
+      "name": "t:sections.image-banner.presets.name",
+      "settings": {
+        "heading": "",
+        "full-width-enabled": false,
+        "slide_height": "adapt_to_first_image",
+        "desktop_fixed_height": 560,
+        "mobile_fixed_height": 380,
+        "desktop_image": "shopify://shop_images/Green_and_White_Minimalist_Maintain_Environmental_Health_Presentation_create_by-okan-krkc.png",
+        "desktop_text_vertical_position": "center",
+        "desktop_text_horizontal_position": "center",
+        "mobile_image": "shopify://shop_images/Green_and_White_Minimalist_Maintain_Environmental_Health_Presentation_1000_x_1000_create_by-okan-krkc.png",
+        "mobile_text_vertical_position": "center",
+        "mobile_text_horizontal_position": "center",
+        "color-heading": "rgba(0,0,0,0)",
+        "section-color-overlay": "rgba(0,0,0,0)",
+        "section-color-overlay-opacity": 100,
+        "color-body-text": "rgba(0,0,0,0)",
+        "text-container-color": "rgba(0,0,0,0)",
+        "color-overlay-opacity": 100,
+        "margin-top": 4,
+        "margin-bottom": 0
+      }
+    },
+    "image_with_text_cR3h9V": {
+      "type": "image-with-text",
+      "blocks": {
+        "subheading_Hxd3JU": {
+          "type": "subheading",
+          "disabled": true,
+          "settings": {
+            "subheading": "Tell you story",
+            "subheading_disable_on_mobile": false
+          }
+        },
+        "heading_Az7eYf": {
+          "type": "heading",
+          "settings": {
+            "heading": "Döngüsel Ekonomi ve Çevre Dostu Ambalajlar",
+            "disable_on_mobile": false,
+            "size_heading": 100,
+            "size_heading_mobile": 100
+          }
+        },
+        "text_yiWeEQ": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Ambalajlarımız, yalnızca bir parfümün sunumunu değil; aynı zamanda çevreye ve geleceğe olan sorumluluğumuzu da yansıtır. Ürünlerimizi, yaşam döngüsünü uzatmayı hedefleyen <strong>“Döngüsel Ekonomi”</strong> yaklaşımıyla tasarlıyoruz.</p>",
+            "text_style": "body",
+            "disable_on_mobile": false
+          }
+        },
+        "button_dnrqbW": {
+          "type": "button",
+          "disabled": true,
+          "settings": {
+            "button_select": "primary",
+            "button_label": "Button label",
+            "button_link": "/",
+            "disable_on_mobile": false
+          }
+        }
+      },
+      "block_order": [
+        "subheading_Hxd3JU",
+        "heading_Az7eYf",
+        "text_yiWeEQ",
+        "button_dnrqbW"
+      ],
+      "name": "t:sections.image-with-text.presets.name",
+      "settings": {
+        "title": "",
+        "layout": "text_first",
+        "desktop-percentage-image-width": 50,
+        "full-width-enabled": false,
+        "slide_height": "fixed_height",
+        "desktop_fixed_height": 640,
+        "mobile_fixed_height": 360,
+        "section-color-body-text": "rgba(0,0,0,0)",
+        "section-color-overlay": "#ffffff",
+        "section-color-overlay-opacity": 100,
+        "color-body-text": "rgba(0,0,0,0)",
+        "color-overlay": "rgba(0,0,0,0)",
+        "color-overlay-opacity": 100,
+        "desktop_image": "shopify://shop_images/Green_and_White_Minimalist_Maintain_Environmental_Health_Presentation_1000_x_1000_piksel.png",
+        "desktop_text_vertical_position": "center",
+        "desktop_text_horizontal_position": "left",
+        "mobile_text_horizontal_position": "center",
+        "margin-top": 20,
+        "margin-bottom": 20
+      }
+    },
+    "multicolumn_qzWQVj": {
+      "type": "multicolumn",
+      "blocks": {
+        "column_TjAGYE": {
+          "type": "column",
+          "settings": {
+            "heading": "Şişeler",
+            "heading_disable_on_mobile": false,
+            "text": "<p>%100 geri dönüştürülebilir camdan üretilen parfüm şişelerimiz, yeni ürünler için yeniden kullanılabilir veya kolayca geri dönüştürülebilir.</p>",
+            "text_disable_on_mobile": false,
+            "button_select": "primary",
+            "button_label": "",
+            "button_disable_on_mobile": false,
+            "button_link": "",
+            "button_link_in_new_window": false,
+            "desktop_image": "shopify://shop_images/loris-ile-create_by-okan-krkc.png"
+          }
+        },
+        "column_XiVGND": {
+          "type": "column",
+          "settings": {
+            "heading": "Kapaklar",
+            "heading_disable_on_mobile": false,
+            "text": "<p>Kapak üretiminde, hafif ve dayanıklı <strong>geri dönüştürülmüş plastik (PCR)</strong> veya çevre dostu <strong>ahşap</strong> malzemeler tercih edilir.</p>",
+            "text_disable_on_mobile": false,
+            "button_select": "primary",
+            "button_label": "",
+            "button_disable_on_mobile": false,
+            "button_link": "",
+            "button_link_in_new_window": false,
+            "desktop_image": "shopify://shop_images/gelecek-create_by-okan-krkc.png"
+          }
+        },
+        "column_pq8RNP": {
+          "type": "column",
+          "settings": {
+            "heading": "Karton Ambalajlar",
+            "heading_disable_on_mobile": false,
+            "text": "<p>Dış kutularımız, sürdürülebilir kaynaklardan elde edilen ya da %100 geri dönüştürülmüş kâğıtlarla üretilir. Baskılar ise <strong>çevre dostu, düşük kimyasal içerikli mürekkeplerle</strong> yapılır.</p>",
+            "text_disable_on_mobile": false,
+            "button_select": "primary",
+            "button_label": "",
+            "button_disable_on_mobile": false,
+            "button_link": "",
+            "button_link_in_new_window": false,
+            "desktop_image": "shopify://shop_images/guvende_design-create_by-okan-krkc.png"
+          }
+        }
+      },
+      "block_order": [
+        "column_TjAGYE",
+        "column_XiVGND",
+        "column_pq8RNP"
+      ],
+      "name": "t:sections.multicolumn.presets.name",
+      "settings": {
+        "heading": "Minimum Atık, Maksimum Geri Dönüşüm:",
+        "swipe_on_mobile": false,
+        "full-width-enabled": false,
+        "image_ratio": "adapt",
+        "column_alignment": "left",
+        "size_heading": 100,
+        "size_heading_mobile": 100,
+        "color-body-text": "rgba(0,0,0,0)",
+        "background_color": "rgba(0,0,0,0)",
+        "margin-top": 20,
+        "margin-bottom": 20
+      }
+    },
+    "image_banner_T6cy7N": {
+      "type": "image-banner",
+      "blocks": {
+        "subheading_qqAbJ3": {
+          "type": "subheading",
+          "disabled": true,
+          "settings": {
+            "subheading": "Tell you story",
+            "subheading_disable_on_mobile": false
+          }
+        },
+        "heading_f6RTxw": {
+          "type": "heading",
+          "disabled": true,
+          "settings": {
+            "heading": "Image banner",
+            "disable_on_mobile": false,
+            "size_heading": 100,
+            "size_heading_mobile": 100
+          }
+        },
+        "text_KVmtbp": {
+          "type": "text",
+          "disabled": true,
+          "settings": {
+            "text": "<p>Give customers details about the banner image(s) or content on the template.</p>",
+            "disable_on_mobile": false
+          }
+        },
+        "button_emeb3j": {
+          "type": "button",
+          "disabled": true,
+          "settings": {
+            "button_select": "primary",
+            "button_label": "Button label",
+            "disable_on_mobile": false,
+            "button_link": "/",
+            "second_button_select": "primary",
+            "second_button_label": "Button label",
+            "second_disable_on_mobile": false,
+            "second_button_link": ""
+          }
+        }
+      },
+      "block_order": [
+        "subheading_qqAbJ3",
+        "heading_f6RTxw",
+        "text_KVmtbp",
+        "button_emeb3j"
+      ],
+      "name": "t:sections.image-banner.presets.name",
+      "settings": {
+        "heading": "",
+        "full-width-enabled": false,
+        "slide_height": "adapt_to_first_image",
+        "desktop_fixed_height": 580,
+        "mobile_fixed_height": 460,
+        "desktop_image": "shopify://shop_images/Green_and_White_Modern_Corporate_Sustainability_Business_Marketing_Plan_Presentation_Banner_Yatay_create_by-okan-krkc.png",
+        "desktop_text_vertical_position": "center",
+        "desktop_text_horizontal_position": "center",
+        "mobile_text_vertical_position": "center",
+        "mobile_text_horizontal_position": "center",
+        "color-heading": "rgba(0,0,0,0)",
+        "section-color-overlay": "rgba(0,0,0,0)",
+        "section-color-overlay-opacity": 100,
+        "color-body-text": "rgba(0,0,0,0)",
+        "text-container-color": "rgba(0,0,0,0)",
+        "color-overlay-opacity": 100,
+        "margin-top": 20,
+        "margin-bottom": 20
+      }
+    },
+    "rich_text_with_image_GYBib8": {
+      "type": "rich-text-with-image",
+      "blocks": {
+        "heading_F8hkjf": {
+          "type": "heading",
+          "settings": {
+            "subheading": "<p><strong>Etik Üretim ve Operasyonel Mükemmellik</strong></p>",
+            "font_uppercase": "uppercase",
+            "disable_on_mobile": false
+          }
+        },
+        "text_AAGLXK": {
+          "type": "text",
+          "settings": {
+            "text": "Doğaya saygılı üretim yaklaşımımızı, modern ve yeşil teknolojilerle birleştiriyoruz. PICTURE1 Fabrikalarımız ve süreçlerimiz, çevresel etkileri en aza indirmek ve çalışanlarımızın refahını korumak için sürekli optimize edilmektedir. Yenilenebilir enerji kullanımı, suyun geri kazanımı ve kapalı devre sistemlerle doğal kaynakları verimli yönetiyoruz. PICTURE2 “Sıfır atık” hedefiyle tüm atıklarımızı geri dönüştürüyor, kaynaklarımızı yeniden hayata kazandırıyoruz. PICTURE3",
+            "font_uppercase": "none",
+            "disable_on_mobile": false,
+            "size_heading": 100,
+            "size_heading_mobile": 100,
+            "line_height": 1.5,
+            "picture1": "shopify://shop_images/geri-donusum-ikon-create_by-okan-krkc.png",
+            "button_link1": "",
+            "picture2": "shopify://shop_images/geri-donusum-ikon-create_by-okan-krkc.png",
+            "button_link2": "",
+            "picture3": "shopify://shop_images/self-care.png",
+            "button_link3": ""
+          }
+        }
+      },
+      "block_order": [
+        "heading_F8hkjf",
+        "text_AAGLXK"
+      ],
+      "name": "t:sections.rich-text-with-image.presets.name",
+      "settings": {
+        "desktop_text_horizontal_position": "center",
+        "color-body-text": "rgba(0,0,0,0)",
+        "background_color": "rgba(0,0,0,0)",
+        "margin-top": 0,
+        "margin-bottom": 0
+      }
+    },
+    "custom_liquid_3i7yJN": {
+      "type": "custom-liquid",
+      "disabled": true,
+      "name": "t:sections.custom-liquid.presets.name",
+      "settings": {
+        "custom_liquid": "<iframe id=\"basvuru-form\" src=\"https://www.lorisbayilikbasvurusu.com/\" style=\"border:0px #ffffff none;width: 100%;height: 750px;/* 700px */max-width: 410px;margin: 0 auto;display: block;\" name=\"myiFrame\" scrolling=\"no\" frameborder=\"1\" marginheight=\"0px\" marginwidth=\"0px\" height=\"400px\" width=\"600px\" allowfullscreen></iframe>"
+      }
+    }
+  },
+  "order": [
+    "custom_liquid_rYraar",
+    "main",
+    "image_banner_9WaKqg",
+    "rich_text_EjrV68",
+    "features_banner_xNAfAU",
+    "rich_text_pfVzhg",
+    "image_with_text_9Fmc69",
+    "button_HBCJPg",
+    "image_banner_KCeeHT",
+    "image_with_text_cR3h9V",
+    "multicolumn_qzWQVj",
+    "image_banner_T6cy7N",
+    "rich_text_with_image_GYBib8",
+    "custom_liquid_3i7yJN"
+  ]
+}

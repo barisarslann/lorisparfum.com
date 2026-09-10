@@ -1,0 +1,464 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "main-page",
+      "disabled": true,
+      "custom_css": [],
+      "settings": {
+        "compact-size-enabled": true,
+        "size_heading": 140,
+        "size_heading_mobile": 100,
+        "color-body-text": "rgba(0,0,0,0)",
+        "color-bg-overlay": "rgba(0,0,0,0)",
+        "color-overlay-opacity": 100,
+        "margin-top": 40,
+        "margin-bottom": 0
+      }
+    },
+    "image_banner_yWyQxr": {
+      "type": "image-banner",
+      "blocks": {
+        "subheading_WwLPa6": {
+          "type": "subheading",
+          "settings": {
+            "subheading": "Loris'in Değerli Bir Üyesi Olmak İster misin?",
+            "subheading_disable_on_mobile": true
+          }
+        },
+        "heading_ikxj94": {
+          "type": "heading",
+          "settings": {
+            "heading": "Mis Kokulu Bir Kariyer İçin Doğru Adres",
+            "disable_on_mobile": true,
+            "size_heading": 130,
+            "size_heading_mobile": 80
+          }
+        },
+        "text_B6ihxA": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Güçlü bir ekibin temellerini birlikte atalım. Yeteneklerinizi keşfedin, kariyerinizi geliştirin ve ilham veren bir çalışma ortamının parçası olun.</p>",
+            "disable_on_mobile": true
+          }
+        },
+        "button_PmwymY": {
+          "type": "button",
+          "settings": {
+            "button_select": "primary",
+            "button_label": "Kariyer.Net",
+            "disable_on_mobile": false,
+            "button_link": "https://www.kariyer.net/firma-profil/loris-parfum-146216-70503",
+            "second_button_select": "primary",
+            "second_button_label": "Linkendin",
+            "second_disable_on_mobile": false,
+            "second_button_link": "https://tr.linkedin.com/company/lorisparfum"
+          }
+        }
+      },
+      "block_order": [
+        "subheading_WwLPa6",
+        "heading_ikxj94",
+        "text_B6ihxA",
+        "button_PmwymY"
+      ],
+      "name": "t:sections.image-banner.presets.name",
+      "settings": {
+        "heading": "",
+        "full-width-enabled": false,
+        "slide_height": "fixed_height",
+        "desktop_fixed_height": 500,
+        "mobile_fixed_height": 700,
+        "desktop_image": "shopify://shop_images/Gemini_Generated_Image_wniafawniafawnia_1.png",
+        "desktop_text_vertical_position": "center",
+        "desktop_text_horizontal_position": "left",
+        "mobile_image": "shopify://shop_images/Bir_baslik_ekleyin_Banner_Dikey_4.png",
+        "mobile_text_vertical_position": "bottom",
+        "mobile_text_horizontal_position": "center",
+        "color-heading": "rgba(0,0,0,0)",
+        "section-color-overlay": "rgba(0,0,0,0)",
+        "section-color-overlay-opacity": 83,
+        "color-body-text": "rgba(0,0,0,0)",
+        "text-container-color": "rgba(0,0,0,0)",
+        "color-overlay-opacity": 100,
+        "margin-top": 20,
+        "margin-bottom": 20
+      }
+    },
+    "image_with_text_39MzkA": {
+      "type": "image-with-text",
+      "blocks": {
+        "subheading_3JgRrG": {
+          "type": "subheading",
+          "disabled": true,
+          "settings": {
+            "subheading": "Loris’te Sadece Parfüm Değil, Bir Kariyer Tasarlayın!",
+            "subheading_disable_on_mobile": false
+          }
+        },
+        "heading_CkPejf": {
+          "type": "heading",
+          "settings": {
+            "heading": "Loris’te Sadece Parfüm Değil, Bir Kariyer Tasarlayın!",
+            "disable_on_mobile": false,
+            "size_heading": 100,
+            "size_heading_mobile": 100
+          }
+        },
+        "text_aNFrkR": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Parfüm sektörünün öncüsü <strong>Loris</strong>, kokunun bir hikâye anlattığına inanır. Bizimle birlikte bu hikâyeyi yazacak, işine tutkuyla bağlı, gelişim odaklı ve vizyon sahibi yeni ekip arkadaşları arıyoruz.Türkiye’de başlayan yolculuğumuz, bugün <strong>500’den fazla mağaza</strong> ile dünyanın dört bir yanına uzanan bir başarı hikâyesine dönüştü. <strong>AR-GE, üretim ve perakendeyi tek çatı altında</strong> birleştiren Loris, büyümeye devam eden bu büyük ailenin yeni üyelerini bekliyor.Bizim için kariyer, sadece bir iş değildir. <strong>Kişisel gelişiminizi destekleyen, size ilham veren ve sektörün geleceğine yön verme fırsatı sunan bir yolculuktur.</strong> Loris’te her çalışanın değeri bilinir, gelişimine yatırım yapılır.</p>",
+            "text_style": "body",
+            "disable_on_mobile": false
+          }
+        },
+        "button_nfnytM": {
+          "type": "button",
+          "disabled": true,
+          "settings": {
+            "button_select": "primary",
+            "button_label": "Button label",
+            "button_link": "/",
+            "disable_on_mobile": false
+          }
+        }
+      },
+      "block_order": [
+        "subheading_3JgRrG",
+        "heading_CkPejf",
+        "text_aNFrkR",
+        "button_nfnytM"
+      ],
+      "name": "t:sections.image-with-text.presets.name",
+      "settings": {
+        "title": "Mis Kokulu Bir Kariyer İçin Doğru Adres",
+        "layout": "image_first",
+        "desktop-percentage-image-width": 50,
+        "full-width-enabled": false,
+        "slide_height": "adapt_to_first_image",
+        "desktop_fixed_height": 320,
+        "mobile_fixed_height": 460,
+        "section-color-body-text": "rgba(0,0,0,0)",
+        "section-color-overlay": "rgba(0,0,0,0)",
+        "section-color-overlay-opacity": 100,
+        "color-body-text": "rgba(0,0,0,0)",
+        "color-overlay": "rgba(0,0,0,0)",
+        "color-overlay-opacity": 100,
+        "desktop_image": "shopify://shop_images/Mor_Siyah_Dikkat_Cekici_Oda_Parfumu_Instagram_Gonderisi_2.png",
+        "desktop_text_vertical_position": "center",
+        "desktop_text_horizontal_position": "center",
+        "mobile_text_horizontal_position": "center",
+        "margin-top": 20,
+        "margin-bottom": 20
+      }
+    },
+    "image_with_text_Y8LNBb": {
+      "type": "image-with-text",
+      "blocks": {
+        "subheading_dT4wnp": {
+          "type": "subheading",
+          "disabled": true,
+          "settings": {
+            "subheading": "Tell you story",
+            "subheading_disable_on_mobile": false
+          }
+        },
+        "heading_tjBFBB": {
+          "type": "heading",
+          "settings": {
+            "heading": "Bir Parfümeriden Daha Fazlası Olmak",
+            "disable_on_mobile": false,
+            "size_heading": 100,
+            "size_heading_mobile": 100
+          }
+        },
+        "text_KY4xtj": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Loris’te çalışmak, sadece bir işe sahip olmak değil; <strong>bir tutkunun parçası</strong> olmaktır. Her gün, koku dünyasına dair yeni keşifler yapıyor, misafirlerimize unutulmaz deneyimler sunuyoruz.</p><p>Mağazalarımızda, üretim tesislerimizde, ofislerimizde ve her bir departmanımızda; <strong>bir parfüm şişesinin içindeki sihirli dokunuşu</strong> dünyaya ulaştırmak için birlikte çalışıyoruz.</p><p>Loris’te her çalışan, yalnızca bir ekip üyesi değil; <strong>kokunun geleceğini tasarlayan bir vizyonerin</strong> parçasıdır.<br/><br/>Gelin, hikâyemize katılın ve kariyerinize benzersiz bir koku katın.</p>",
+            "text_style": "body",
+            "disable_on_mobile": false
+          }
+        },
+        "button_pNeWzF": {
+          "type": "button",
+          "disabled": true,
+          "settings": {
+            "button_select": "primary",
+            "button_label": "Button label",
+            "button_link": "/",
+            "disable_on_mobile": false
+          }
+        }
+      },
+      "block_order": [
+        "subheading_dT4wnp",
+        "heading_tjBFBB",
+        "text_KY4xtj",
+        "button_pNeWzF"
+      ],
+      "name": "t:sections.image-with-text.presets.name",
+      "settings": {
+        "title": "Loris’te Çalışmak",
+        "layout": "text_first",
+        "desktop-percentage-image-width": 50,
+        "full-width-enabled": false,
+        "slide_height": "fixed_height",
+        "desktop_fixed_height": 440,
+        "mobile_fixed_height": 200,
+        "section-color-body-text": "rgba(0,0,0,0)",
+        "section-color-overlay": "rgba(0,0,0,0)",
+        "section-color-overlay-opacity": 100,
+        "color-body-text": "rgba(0,0,0,0)",
+        "color-overlay": "rgba(0,0,0,0)",
+        "color-overlay-opacity": 100,
+        "desktop_image": "shopify://shop_images/loris_perfume_cinematic_updated.png",
+        "desktop_text_vertical_position": "center",
+        "desktop_text_horizontal_position": "center",
+        "mobile_text_horizontal_position": "center",
+        "margin-top": 20,
+        "margin-bottom": 20
+      }
+    },
+    "features_banner_Q6tUdE": {
+      "type": "features-banner",
+      "blocks": {
+        "image_iBaRQU": {
+          "type": "image",
+          "settings": {
+            "desktop_image": "shopify://shop_images/magnifying-glass.png",
+            "select_icon": "bag",
+            "heading": "Keşfet ve Başvur",
+            "text": "<p>Sana uygun pozisyonu bul, CV’nle ilk adımı at.</p>",
+            "link": ""
+          }
+        },
+        "image_xWdLpW": {
+          "type": "image",
+          "settings": {
+            "desktop_image": "shopify://shop_images/introduction.png",
+            "select_icon": "bag",
+            "heading": "Değerlendirme",
+            "text": "<p>İK ekibimizle tanış, yeteneklerini bize göster.</p>",
+            "link": ""
+          }
+        },
+        "image_hBPi6F": {
+          "type": "image",
+          "settings": {
+            "desktop_image": "shopify://shop_images/learning-support.png",
+            "select_icon": "bag",
+            "heading": "Geliş ve Öğren",
+            "text": "<p>Loris Akademi ile kendini sürekli geliştir.</p>",
+            "link": ""
+          }
+        },
+        "image_zcEaen": {
+          "type": "image",
+          "settings": {
+            "desktop_image": "shopify://shop_images/work.png",
+            "select_icon": "bag",
+            "heading": "Katıl ve Yüksel",
+            "text": "<p>Loris ailesinde geleceğini inşa et.</p>",
+            "link": ""
+          }
+        }
+      },
+      "block_order": [
+        "image_iBaRQU",
+        "image_xWdLpW",
+        "image_hBPi6F",
+        "image_zcEaen"
+      ],
+      "name": "t:sections.features-banner.settings.presets.name",
+      "settings": {
+        "heading": "Kariyer süreci",
+        "size_heading_mobile": 80,
+        "size_heading": 80,
+        "icon_width_mobile": 36,
+        "icon_width_desktop": 48,
+        "icon_layout": "center",
+        "columns_desktop": "4",
+        "icon_layout_mobile": "grid",
+        "color_body_icon": "rgba(0,0,0,0)",
+        "color_background_icon": "rgba(0,0,0,0)",
+        "color_body_text": "rgba(0,0,0,0)",
+        "background_color": "rgba(0,0,0,0)",
+        "margin-top": 20,
+        "margin-bottom": 20
+      }
+    },
+    "image_with_text_zzCybA": {
+      "type": "image-with-text",
+      "blocks": {
+        "subheading_H4aybt": {
+          "type": "subheading",
+          "disabled": true,
+          "settings": {
+            "subheading": "Tell you story",
+            "subheading_disable_on_mobile": false
+          }
+        },
+        "heading_inPxGD": {
+          "type": "heading",
+          "disabled": true,
+          "settings": {
+            "heading": "Image with text",
+            "disable_on_mobile": false,
+            "size_heading": 100,
+            "size_heading_mobile": 100
+          }
+        },
+        "text_RqffqK": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Loris ailesi; farklı yeteneklere, uzmanlıklara ve hayallere sahip profesyonellerin buluştuğu dinamik bir yapıya sahiptir. Kendinize uygun kariyer fırsatını burada bulabilirsiniz:</p><p><strong>Üretim</strong>: Kocaeli Gebze’deki modern tesislerimizde milyonlarca şişe parfümün doğuşuna tanıklık edin.<br/><strong>E-Ticaret</strong>: Dijital dünyanın nabzını tutarak Loris’in hikâyesini online platformlarda milyonlara ulaştırın.<br/><strong>Marka</strong>: Güçlü marka kimliğimizi ileriye taşıyacak yaratıcı projelerde yer alın.<br/><strong>Operasyon</strong>: Mağazalarımızdan depolarımıza tüm süreçlerin kusursuz işlemesini sağlayın.<br/><strong>AR-GE</strong>: InoLab’da yeni kokular ve yenilikçi formüller geliştirerek geleceğin kokularını yaratın.<br/><strong>Eğitim</strong>: Loris Akademi’de kişisel gelişimden liderliğe uzanan eğitimlerle hem kendinizi hem de ekibimizi geliştirin.<br/><strong>Pazarlama</strong>: Yaratıcı kampanyalarla markamızı daha geniş kitlelere ulaştırın.<br/><strong>Şubeler ve Bayiler</strong>: Türkiye ve dünyadaki şube ağımızın büyümesine katkı sağlayın.<br/><strong>Finans & Muhasebe</strong>: Bütçe ve mali süreçleri yöneten ekibimize katılın.<br/><strong>Ve daha fazlası...</strong></p>",
+            "text_style": "body",
+            "disable_on_mobile": false
+          }
+        },
+        "button_mKFkGt": {
+          "type": "button",
+          "disabled": true,
+          "settings": {
+            "button_select": "primary",
+            "button_label": "Button label",
+            "button_link": "/",
+            "disable_on_mobile": false
+          }
+        }
+      },
+      "block_order": [
+        "subheading_H4aybt",
+        "heading_inPxGD",
+        "text_RqffqK",
+        "button_mKFkGt"
+      ],
+      "name": "t:sections.image-with-text.presets.name",
+      "settings": {
+        "title": "Kariyer Alanları",
+        "layout": "image_first",
+        "desktop-percentage-image-width": 50,
+        "full-width-enabled": false,
+        "slide_height": "adapt_to_first_image",
+        "desktop_fixed_height": 320,
+        "mobile_fixed_height": 460,
+        "section-color-body-text": "rgba(0,0,0,0)",
+        "section-color-overlay": "rgba(0,0,0,0)",
+        "section-color-overlay-opacity": 100,
+        "color-body-text": "rgba(0,0,0,0)",
+        "color-overlay": "rgba(0,0,0,0)",
+        "color-overlay-opacity": 100,
+        "desktop_image": "shopify://shop_images/loris_perfume_careers.png",
+        "desktop_text_vertical_position": "top",
+        "desktop_text_horizontal_position": "left",
+        "mobile_text_horizontal_position": "left",
+        "margin-top": 20,
+        "margin-bottom": 20
+      }
+    },
+    "17768654871b538f06": {
+      "type": "apps",
+      "blocks": {
+        "hulk_form_builder_form_block_NjebEB": {
+          "type": "shopify://apps/hulk-form-builder/blocks/form-block/b6b8dd14-356b-4725-a4ed-77232212b3c3",
+          "settings": {
+            "form_uuid": "0QRnIxntSwtEiW58xKc6Qw",
+            "form_settings": false,
+            "font_color": "#000000",
+            "size": 14,
+            "input_background_color": "#FFF",
+            "input_background_color_focus": "#F4DADA",
+            "input_border_radius": 1,
+            "input_border_color": "#ebe9e9",
+            "input_border_color_focus": "#2D2727",
+            "input_font_color": "#3D3131",
+            "input_size": 14,
+            "border_color": "#121212",
+            "border_radius": 2,
+            "border": 1,
+            "fill_color": "#EBE9E9",
+            "padding": 35,
+            "form_width": 600,
+            "btn_text": "Submit",
+            "sub_btn_txt_color": "#F3F3F3",
+            "sub_btn_bg_color": "#3F3333",
+            "sub_btn_font_size": 14,
+            "sub_btn_bdr_color": "#FFFFFF",
+            "sub_btn_bdr_rad": 3,
+            "sub_btn_bdr_width": 1,
+            "fonts": "Times New Roman"
+          }
+        }
+      },
+      "block_order": [
+        "hulk_form_builder_form_block_NjebEB"
+      ],
+      "settings": {
+        "include_margins": true
+      }
+    },
+    "contact_form_prgNBr": {
+      "type": "contact-form",
+      "blocks": {
+        "heading_3F4ti7": {
+          "type": "heading",
+          "settings": {
+            "heading": "Bize Ulaşın",
+            "heading_disable_on_mobile": false,
+            "size_heading": 100,
+            "size_heading_mobile": 100
+          }
+        },
+        "paragraph_Mh8Xkt": {
+          "type": "paragraph",
+          "settings": {
+            "paragraph": "<p>Sen de bu <strong>kokulu yolculuğun</strong> bir parçası olmak ister misin?<br/>CV’nizi bize iletin, birlikte geleceğinizi tasarlayalım.</p><p>E-posta ile ön yazını yaz ve CV'ni yolla: <a><strong>destek@lorisparfum.com </strong></a><br/>Kariyer.net İlanları için <a href=\"https://www.kariyer.net/firma-profil/loris-parfum-146216-70503\" title=\"https://www.kariyer.net/firma-profil/loris-parfum-146216-70503\">tıklayın</a><br/>Linkedin ilanları için <a href=\"https://tr.linkedin.com/company/lorisparfum\" target=\"_blank\" title=\"https://tr.linkedin.com/company/lorisparfum\">tıklayın</a></p><p><em>Soru ve görüşleriniz için aşağıdaki form üzerinden bize ulaşabilirsiniz.</em></p>",
+            "text_disable_on_mobile": false
+          }
+        },
+        "email_form_9JY9dF": {
+          "type": "email_form",
+          "settings": {
+            "button_select": "primary"
+          }
+        }
+      },
+      "block_order": [
+        "heading_3F4ti7",
+        "paragraph_Mh8Xkt",
+        "email_form_9JY9dF"
+      ],
+      "custom_css": [
+        ".wt-contact__form {padding: 0 0 56px;}",
+        ".wt-contact__form .hero__text {max-width: 50%;}"
+      ],
+      "name": "t:sections.contact-form.presets.name",
+      "settings": {
+        "color-body-text": "rgba(0,0,0,0)",
+        "background_color": "rgba(0,0,0,0)",
+        "margin-top": 20,
+        "margin-bottom": 20
+      }
+    }
+  },
+  "order": [
+    "main",
+    "image_banner_yWyQxr",
+    "image_with_text_39MzkA",
+    "image_with_text_Y8LNBb",
+    "features_banner_Q6tUdE",
+    "image_with_text_zzCybA",
+    "17768654871b538f06",
+    "contact_form_prgNBr"
+  ]
+}

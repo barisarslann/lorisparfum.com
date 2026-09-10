@@ -1,0 +1,263 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "breadcrumbs": {
+      "type": "main-breadcrumbs",
+      "settings": {
+        "full-width-enabled": false,
+        "text_color": "rgba(0,0,0,0)",
+        "background_color": "rgba(0,0,0,0)",
+        "margin-top": 16,
+        "margin-bottom": 0
+      }
+    },
+    "banner": {
+      "type": "main-collection-banner",
+      "custom_css": [
+        ".hero__wrapper--full .hero__title {font-size: calc(var(--font-base-size) * var(--custom-text-scale, 2.5));}",
+        ".hero__wrapper--full .hero__pic svg.hero__img {display: none;}",
+        ".hero__wrapper--full .hero__text {width: 100%;}",
+        ".hero__wrapper--full .hero {flex-wrap: wrap;}",
+        ".hero .hero__pic-container {order: 1;}"
+      ],
+      "settings": {
+        "show_collection_description": true,
+        "layout": "text_first",
+        "desktop-percentage-image-width": 30,
+        "slide_height": "adapt_to_first_image",
+        "desktop_fixed_height": 460,
+        "mobile_fixed_height": 200,
+        "full-width-enabled": true,
+        "size_heading": 50,
+        "size_heading_mobile": 80,
+        "desktop_text_vertical_position": "top",
+        "desktop_text_horizontal_position": "left",
+        "mobile_text_horizontal_position": "center",
+        "color-body-text": "rgba(0,0,0,0)",
+        "color-overlay": "rgba(0,0,0,0)",
+        "color-overlay-opacity": 49,
+        "margin-top": 0,
+        "margin-bottom": 0
+      }
+    },
+    "title": {
+      "type": "main-collection-title",
+      "disabled": true,
+      "settings": {
+        "full-width-enabled": false,
+        "show_collection_description": true,
+        "desktop_text_horizontal_position": "center",
+        "size_heading": 200,
+        "size_heading_mobile": 140,
+        "color-body-text": "rgba(0,0,0,0)",
+        "background_color": "rgba(0,0,0,0)",
+        "margin-top": 0,
+        "margin-bottom": 0
+      }
+    },
+    "product-grid": {
+      "type": "main-collection-product-grid",
+      "settings": {
+        "products_per_page": 120,
+        "columns_mobile": "2",
+        "columns_desktop": "4",
+        "spacing_desktop": "16",
+        "full-width-enabled": false,
+        "spacing_mobile": "16",
+        "image_ratio": "square",
+        "show_video": false,
+        "show_secondary_image": true,
+        "show_vendor": true,
+        "show_product_rating": false,
+        "enable_quick_add_button": true,
+        "text_alignment": "left",
+        "toolbar_style": "minimal",
+        "enable_sorting": true,
+        "enable_filtering": true,
+        "filter_position": "drawer",
+        "margin-top": 0,
+        "margin-bottom": 28
+      }
+    },
+    "collection_feature_GAmGBC": {
+      "type": "collection-feature",
+      "blocks": {
+        "column_Tdh6Cc": {
+          "type": "column",
+          "settings": {
+            "collection": "",
+            "heading": "",
+            "color-body-text": "rgba(0,0,0,0)",
+            "background_color": "rgba(0,0,0,0)"
+          }
+        },
+        "column_jeNKhU": {
+          "type": "column",
+          "settings": {
+            "collection": "",
+            "heading": "",
+            "color-body-text": "rgba(0,0,0,0)",
+            "background_color": "rgba(0,0,0,0)"
+          }
+        },
+        "column_ce8CBW": {
+          "type": "column",
+          "settings": {
+            "collection": "",
+            "heading": "",
+            "color-body-text": "rgba(0,0,0,0)",
+            "background_color": "rgba(0,0,0,0)"
+          }
+        }
+      },
+      "block_order": [
+        "column_Tdh6Cc",
+        "column_jeNKhU",
+        "column_ce8CBW"
+      ],
+      "disabled": true,
+      "settings": {
+        "heading": "",
+        "size_heading": 250,
+        "line_height": 1.5,
+        "size_heading_mobile": 200,
+        "line_height_mobile": 1.5,
+        "color-body-text": "rgba(0,0,0,0)",
+        "background_color": "rgba(0,0,0,0)",
+        "margin-top": 20,
+        "margin-bottom": 20
+      }
+    },
+    "features_banner_hADmFT": {
+      "type": "features-banner",
+      "blocks": {
+        "image_bf9aR9": {
+          "type": "image",
+          "settings": {
+            "desktop_image": "shopify://shop_images/vegan_formul.avif",
+            "select_icon": "user",
+            "heading": "Vegan Formül",
+            "text": "<p>Hayvansal içerik kullanılmadan, vegan formüllerle üretilir.</p>",
+            "link": ""
+          }
+        },
+        "image_gcNmVy": {
+          "type": "image",
+          "settings": {
+            "desktop_image": "shopify://shop_images/natur_750x_fc1dfda5-9070-4a1e-88b4-6ca01aa87c15.avif",
+            "select_icon": "bag",
+            "heading": "Doğadan İlham",
+            "text": "<p>En saf bitkisel özlerle, doğallığı her notada hissettirir.</p>",
+            "link": ""
+          }
+        },
+        "image_yX8NnD": {
+          "type": "image",
+          "settings": {
+            "desktop_image": "shopify://shop_images/Group_1567.avif",
+            "select_icon": "star",
+            "heading": "Hızlı Kargo",
+            "text": "<p>Siparişiniz hızla kapınıza güvenle teslim edilir.</p>",
+            "link": ""
+          }
+        },
+        "image_qgFzka": {
+          "type": "image",
+          "settings": {
+            "desktop_image": "shopify://shop_images/laboratory.png",
+            "select_icon": "search",
+            "heading": "Güvenilir Formüller",
+            "text": "<p>Ar-Ge güvencesiyle yüksek standartlı formüller.</p>",
+            "link": ""
+          }
+        }
+      },
+      "block_order": [
+        "image_bf9aR9",
+        "image_gcNmVy",
+        "image_yX8NnD",
+        "image_qgFzka"
+      ],
+      "settings": {
+        "heading": "",
+        "size_heading_mobile": 70,
+        "size_heading": 70,
+        "icon_width_mobile": 36,
+        "icon_width_desktop": 48,
+        "icon_layout": "left",
+        "columns_desktop": "4",
+        "icon_layout_mobile": "grid",
+        "color_body_icon": "rgba(0,0,0,0)",
+        "color_background_icon": "rgba(0,0,0,0)",
+        "color_body_text": "rgba(0,0,0,0)",
+        "background_color": "rgba(0,0,0,0)",
+        "margin-top": 40,
+        "margin-bottom": 40
+      }
+    },
+    "newsletter_RKrFQt": {
+      "type": "newsletter",
+      "blocks": {
+        "heading_a9LR3K": {
+          "type": "heading",
+          "disabled": true,
+          "settings": {
+            "heading": "Subscribe to our emails",
+            "heading_disable_on_mobile": false,
+            "size_heading": 100,
+            "size_heading_mobile": 100
+          }
+        },
+        "paragraph_D6ggC7": {
+          "type": "paragraph",
+          "settings": {
+            "paragraph": "<h3>E-posta adresini bırak, yeni parfümler, özel kampanyalar ve Loris dünyasından ilham veren içerikleri ilk sen keşfet.</h3>",
+            "text_disable_on_mobile": false
+          }
+        },
+        "email_form_Eqqhw8": {
+          "type": "email_form",
+          "settings": {
+            "button_select": "primary"
+          }
+        }
+      },
+      "block_order": [
+        "heading_a9LR3K",
+        "paragraph_D6ggC7",
+        "email_form_Eqqhw8"
+      ],
+      "settings": {
+        "color-body-text": "rgba(0,0,0,0)",
+        "background_color": "rgba(0,0,0,0)",
+        "margin-top": 60,
+        "margin-bottom": 60
+      }
+    },
+    "custom_liquid_LB9H4L": {
+      "type": "custom-liquid",
+      "name": "t:sections.custom-liquid.presets.name",
+      "settings": {
+        "custom_liquid": "<style>\n/* .wt-options__list li[value=\"created-descending\"], */\n.wt-options__list li[value=\"created-ascending\"] {\n  display: none;\n}\n</style>\n\n<style>\n.hero .hero__pic .hero__img {\n  margin: 20px auto 0;\n}\n\n.collection-banner .hero__overlay {\n  padding-left: 0;\n  padding-right: 0;\n}\n.collection-banner .hero__overlay .hero__overlay__content {\n  width: 100%;\n}\n\n@media (min-width: 1200px) {\n.hero .hero__pic .hero__img,\n.collection-banner .hero__overlay .hero__overlay__content {\n  padding-left: calc(calc(var(--gap, 8px) * 2) + calc(var(--gap, 8px) * 2));\n  padding-right: calc(calc(var(--gap, 8px) * 2) + calc(var(--gap, 8px) * 2));\n  max-width: var(--site-max-width);\n  margin: 0 auto 25px !important;\n}\n}\n</style>"
+      }
+    }
+  },
+  "order": [
+    "breadcrumbs",
+    "banner",
+    "title",
+    "product-grid",
+    "collection_feature_GAmGBC",
+    "features_banner_hADmFT",
+    "newsletter_RKrFQt",
+    "custom_liquid_LB9H4L"
+  ]
+}

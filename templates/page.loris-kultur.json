@@ -1,0 +1,542 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "main-page",
+      "custom_css": [],
+      "settings": {
+        "compact-size-enabled": true,
+        "size_heading": 140,
+        "size_heading_mobile": 100,
+        "color-body-text": "rgba(0,0,0,0)",
+        "color-bg-overlay": "rgba(0,0,0,0)",
+        "color-overlay-opacity": 100,
+        "margin-top": 40,
+        "margin-bottom": 0
+      }
+    },
+    "background_video_MQqW9M": {
+      "type": "background-video",
+      "blocks": {
+        "subheading_jxxjLR": {
+          "type": "subheading",
+          "disabled": true,
+          "settings": {
+            "subheading": "Tell your story",
+            "subheading_disable_on_mobile": false
+          }
+        },
+        "heading_ik4idn": {
+          "type": "heading",
+          "disabled": true,
+          "settings": {
+            "heading": "Video scene",
+            "disable_on_mobile": false,
+            "size_heading": 100,
+            "size_heading_mobile": 100
+          }
+        },
+        "text_VxyxPR": {
+          "type": "text",
+          "disabled": true,
+          "settings": {
+            "text": "<p>Explore in motion</p>",
+            "disable_on_mobile": false
+          }
+        },
+        "button_UMrgAG": {
+          "type": "button",
+          "disabled": true,
+          "settings": {
+            "button_select": "primary",
+            "button_label": "Button label",
+            "disable_on_mobile": false,
+            "button_link": "",
+            "second_button_select": "primary",
+            "second_button_label": "Button label",
+            "second_disable_on_mobile": false,
+            "second_button_link": ""
+          }
+        }
+      },
+      "block_order": [
+        "subheading_jxxjLR",
+        "heading_ik4idn",
+        "text_VxyxPR",
+        "button_UMrgAG"
+      ],
+      "name": "t:sections.background-video.presets.name",
+      "settings": {
+        "heading": "Küresel Ailemizin Mutluluğu",
+        "full-width-enabled": false,
+        "video_hosted": "shopify://files/videos/Adsız (Banner Yatay).mp4",
+        "mobile_video_hosted": "shopify://files/videos/Adsız tasarım_fa4bf56f-8d2a-4b22-82b9-7b6627d2d40d.mp4",
+        "autoplay": true,
+        "video_controls": true,
+        "video_url": "",
+        "original_ratio": "original_ratio",
+        "desktop_fixed_height": 500,
+        "mobile_fixed_height": 780,
+        "color-body-heading": "rgba(0,0,0,0)",
+        "color-overlay": "rgba(0,0,0,0)",
+        "color-overlay-opacity": 27,
+        "color-body-text": "rgba(0,0,0,0)",
+        "desktop_text_horizontal_position": "center",
+        "mobile_text_horizontal_position": "center",
+        "margin-top": 20,
+        "margin-bottom": 0
+      }
+    },
+    "rich_text_NXYrca": {
+      "type": "rich-text",
+      "blocks": {
+        "heading_ETzmVF": {
+          "type": "heading",
+          "settings": {
+            "heading": "Dünya Çapında Ortak Bir Gelecek",
+            "disable_on_mobile": false,
+            "size_heading": 100,
+            "size_heading_mobile": 100
+          }
+        },
+        "text_Ng8c89": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Loris Perfume, 45’ten fazla ülke ve 500’ü aşkın mağazasıyla global bir aileye dönüşmüş durumda. Her renk, dil ve kültürden çalışanımızla; çeşitliliği bir zenginlik, farklılıkları ise ortak gücümüz olarak görüyoruz. Evrensel değerlerden ilham alıyor, tüm ekibimizin kendini güvende, değerli ve mutlu hissettiği bir çalışma ortamı inşa ediyoruz. Çalışan mutluluğunu yalnızca bir hedef değil, sürdürülebilir başarımızın temel yapı taşı olarak benimsiyoruz. Loris’te, dünya standartlarında bir iş deneyimiyle her bireyin gelişimine katkı sağlıyor; birlikte daha güçlü, daha kapsayıcı bir geleceğe yürüyoruz.</p>",
+            "disable_on_mobile": false
+          }
+        },
+        "button_U6gLjH": {
+          "type": "button",
+          "disabled": true,
+          "settings": {
+            "button_select": "primary",
+            "button_label": "Button label",
+            "button_link": "/",
+            "disable_on_mobile": false
+          }
+        }
+      },
+      "block_order": [
+        "heading_ETzmVF",
+        "text_Ng8c89",
+        "button_U6gLjH"
+      ],
+      "name": "t:sections.rich-text.presets.name",
+      "settings": {
+        "section_width": "regular",
+        "desktop_text_horizontal_position": "center",
+        "color-body-text": "rgba(0,0,0,0)",
+        "background_color": "rgba(0,0,0,0)",
+        "margin-top": 0,
+        "margin-bottom": 12
+      }
+    },
+    "image_banner_PbmVt8": {
+      "type": "image-banner",
+      "blocks": {
+        "subheading_yQ9Pwc": {
+          "type": "subheading",
+          "disabled": true,
+          "settings": {
+            "subheading": "Tell you story",
+            "subheading_disable_on_mobile": false
+          }
+        },
+        "heading_ThDAKV": {
+          "type": "heading",
+          "disabled": true,
+          "settings": {
+            "heading": "Image banner",
+            "disable_on_mobile": false,
+            "size_heading": 100,
+            "size_heading_mobile": 100
+          }
+        },
+        "text_EJKByy": {
+          "type": "text",
+          "disabled": true,
+          "settings": {
+            "text": "<p>Give customers details about the banner image(s) or content on the template.</p>",
+            "disable_on_mobile": false
+          }
+        },
+        "button_ai9YiT": {
+          "type": "button",
+          "disabled": true,
+          "settings": {
+            "button_select": "primary",
+            "button_label": "Button label",
+            "disable_on_mobile": false,
+            "button_link": "/",
+            "second_button_select": "primary",
+            "second_button_label": "Button label",
+            "second_disable_on_mobile": false,
+            "second_button_link": ""
+          }
+        }
+      },
+      "block_order": [
+        "subheading_yQ9Pwc",
+        "heading_ThDAKV",
+        "text_EJKByy",
+        "button_ai9YiT"
+      ],
+      "name": "t:sections.image-banner.presets.name",
+      "settings": {
+        "heading": "",
+        "full-width-enabled": false,
+        "slide_height": "adapt_to_first_image",
+        "desktop_fixed_height": 320,
+        "mobile_fixed_height": 460,
+        "desktop_image": "shopify://shop_images/yeni_koleksiyon_konulu_kadin_modasi_temali_banner_create_by-okan-krkc.png",
+        "desktop_text_vertical_position": "center",
+        "desktop_text_horizontal_position": "center",
+        "mobile_text_vertical_position": "center",
+        "mobile_text_horizontal_position": "center",
+        "color-heading": "rgba(0,0,0,0)",
+        "section-color-overlay": "rgba(0,0,0,0)",
+        "section-color-overlay-opacity": 100,
+        "color-body-text": "rgba(0,0,0,0)",
+        "text-container-color": "rgba(0,0,0,0)",
+        "color-overlay-opacity": 100,
+        "margin-top": 20,
+        "margin-bottom": 20
+      }
+    },
+    "rich_text_with_image_tVf7Cc": {
+      "type": "rich-text-with-image",
+      "blocks": {
+        "heading_gx9fjQ": {
+          "type": "heading",
+          "disabled": true,
+          "settings": {
+            "subheading": "<p>Customize Your Visual Layout</p>",
+            "font_uppercase": "none",
+            "disable_on_mobile": false
+          }
+        },
+        "text_nzeAEy": {
+          "type": "text",
+          "settings": {
+            "text": "Loris Perfüm olarak, kokunun büyüleyici dünyasını insani değerlerle zenginleştirerek daha adil ve sürdürülebilir bir gelecek inşa ediyoruz. PICTURE1 Felsefemizin kalbinde insan yer alır PICTURE2 ve bu temelden aldığımız ilhamla, yalnızca eşsiz kokular yaratmakla kalmıyor, aynı zamanda tüm ekosistemimiz için pozitif bir dönüşüm başlatıyoruz. PICTURE3",
+            "font_uppercase": "none",
+            "disable_on_mobile": false,
+            "size_heading": 100,
+            "size_heading_mobile": 100,
+            "line_height": 1.5,
+            "button_link1": "",
+            "picture2": "shopify://shop_images/love.png",
+            "button_link2": "",
+            "picture3": "shopify://shop_images/self-care.png",
+            "button_link3": ""
+          }
+        }
+      },
+      "block_order": [
+        "heading_gx9fjQ",
+        "text_nzeAEy"
+      ],
+      "name": "t:sections.rich-text-with-image.presets.name",
+      "settings": {
+        "desktop_text_horizontal_position": "center",
+        "color-body-text": "rgba(0,0,0,0)",
+        "background_color": "rgba(0,0,0,0)",
+        "margin-top": 20,
+        "margin-bottom": 20
+      }
+    },
+    "image_with_text_yYaRcQ": {
+      "type": "image-with-text",
+      "blocks": {
+        "subheading_reAF7J": {
+          "type": "subheading",
+          "disabled": true,
+          "settings": {
+            "subheading": "Herkesin Markasıyız",
+            "subheading_disable_on_mobile": false
+          }
+        },
+        "heading_xyWxLy": {
+          "type": "heading",
+          "settings": {
+            "heading": "İnsana Saygıdan Doğan Kültür",
+            "disable_on_mobile": false,
+            "size_heading": 100,
+            "size_heading_mobile": 100
+          }
+        },
+        "text_yUPKij": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Loris’te çalışma kültürümüz, Evrensel İnsan Hakları Beyannamesi’nin temel ilkeleri üzerine kuruludur. İnsan onuruna, özgürlüklere ve eşitliğe duyduğumuz bağlılık, sadece bugünümüzü değil, geleceğimizi de şekillendirir. Farklılıkların bir arada güç oluşturduğuna inanıyor, kapsayıcılığı kurumsal kimliğimizin ayrılmaz bir parçası olarak görüyoruz. Bu yaklaşım sayesinde, her bir çalışanımızın kendini değerli, güvende ve güçlü hissettiği bir ortam yaratıyor; birlikte daha adil, yenilikçi ve sürdürülebilir bir geleceğe ilerliyoruz.</p>",
+            "text_style": "body",
+            "disable_on_mobile": false
+          }
+        },
+        "button_qfEyXP": {
+          "type": "button",
+          "disabled": true,
+          "settings": {
+            "button_select": "primary",
+            "button_label": "Button label",
+            "button_link": "/",
+            "disable_on_mobile": false
+          }
+        }
+      },
+      "block_order": [
+        "subheading_reAF7J",
+        "heading_xyWxLy",
+        "text_yUPKij",
+        "button_qfEyXP"
+      ],
+      "name": "t:sections.image-with-text.presets.name",
+      "settings": {
+        "title": "Herkesin Dünyasına Ait",
+        "layout": "image_first",
+        "desktop-percentage-image-width": 50,
+        "full-width-enabled": false,
+        "slide_height": "adapt_to_first_image",
+        "desktop_fixed_height": 320,
+        "mobile_fixed_height": 460,
+        "section-color-body-text": "rgba(0,0,0,0)",
+        "section-color-overlay": "rgba(0,0,0,0)",
+        "section-color-overlay-opacity": 100,
+        "color-body-text": "rgba(0,0,0,0)",
+        "color-overlay": "rgba(0,0,0,0)",
+        "color-overlay-opacity": 100,
+        "desktop_image": "shopify://shop_images/Gemini_Generated_Image_112233_create_by-okan-krkc.png",
+        "desktop_text_vertical_position": "center",
+        "desktop_text_horizontal_position": "center",
+        "mobile_text_horizontal_position": "center",
+        "margin-top": 20,
+        "margin-bottom": 20
+      }
+    },
+    "image_with_text_Dtd74X": {
+      "type": "image-with-text",
+      "blocks": {
+        "subheading_93Hf9i": {
+          "type": "subheading",
+          "disabled": true,
+          "settings": {
+            "subheading": "Loris’te Her Yolculuk Değerli",
+            "subheading_disable_on_mobile": false
+          }
+        },
+        "heading_QkrHiw": {
+          "type": "heading",
+          "settings": {
+            "heading": "Loris’te Her Yolculuk Değerli",
+            "disable_on_mobile": false,
+            "size_heading": 100,
+            "size_heading_mobile": 100
+          }
+        },
+        "text_HyLKF3": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Loris’te çalışma ortamı sadece modern ve donanımlı alanlarla sınırlı değil; aynı zamanda eğlenceli, destekleyici ve adil bir atmosfer sunuyoruz. Mutlu çalışanlarımızın motivasyonu ve yaratıcılığı, şirketimizin en değerli gücü. Loris Akademi ile kişisel ve mesleki gelişimi destekleyen eğitim programlarımız sayesinde, her bireyin yolculuğuna rehberlik ediyor, yeteneklerini keşfetmesini sağlıyoruz. Böylece hem ekip olarak büyüyor hem de birlikte güçlü ve vizyoner bir geleceğe adım atıyoruz.</p>",
+            "text_style": "body",
+            "disable_on_mobile": false
+          }
+        },
+        "button_frqyHP": {
+          "type": "button",
+          "disabled": true,
+          "settings": {
+            "button_select": "primary",
+            "button_label": "Button label",
+            "button_link": "/",
+            "disable_on_mobile": false
+          }
+        }
+      },
+      "block_order": [
+        "subheading_93Hf9i",
+        "heading_QkrHiw",
+        "text_HyLKF3",
+        "button_frqyHP"
+      ],
+      "name": "t:sections.image-with-text.presets.name",
+      "settings": {
+        "title": "",
+        "layout": "text_first",
+        "desktop-percentage-image-width": 50,
+        "full-width-enabled": false,
+        "slide_height": "fixed_height",
+        "desktop_fixed_height": 480,
+        "mobile_fixed_height": 280,
+        "section-color-body-text": "rgba(0,0,0,0)",
+        "section-color-overlay": "rgba(0,0,0,0)",
+        "section-color-overlay-opacity": 100,
+        "color-body-text": "rgba(0,0,0,0)",
+        "color-overlay": "rgba(0,0,0,0)",
+        "color-overlay-opacity": 100,
+        "desktop_image": "shopify://shop_images/Gemini_Generated_Image_r7wky1r7wky1r7wk.png",
+        "desktop_text_vertical_position": "center",
+        "desktop_text_horizontal_position": "center",
+        "mobile_text_horizontal_position": "center",
+        "margin-top": 20,
+        "margin-bottom": 20
+      }
+    },
+    "before_and_after_rBFcRM": {
+      "type": "before-and-after",
+      "blocks": {
+        "subheading_6cGmWi": {
+          "type": "subheading",
+          "settings": {
+            "subheading": "İlham Veren İş Yaşamı",
+            "subheading_disable_on_mobile": false
+          }
+        },
+        "heading_y9Tm4F": {
+          "type": "heading",
+          "settings": {
+            "heading": "Çalışan Deneyiminde Sürekli İyileşme",
+            "disable_on_mobile": false,
+            "size_heading": 100,
+            "size_heading_mobile": 100
+          }
+        },
+        "text_XkA6pW": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Loris Parfüm’de çalışan mutluluğunu bir hedef değil, sürekli gelişen bir yolculuk olarak görüyoruz. 500’den fazla mağazamızda, her renk, dil ve kültürden ekip arkadaşımızla birlikte, <strong>dünya standartlarında çalışan deneyimi (EX)</strong> anlayışını benimsiyoruz.</p><p>Çalışan deneyimini yalnızca gözlemlemiyor, <strong>ölçümlüyor ve veriye dayalı aksiyonlarla sürekli iyileştiriyoruz</strong>:</p><p><strong>Yaşam döngüsü anketleri</strong> ile kariyer yolculuğunun her aşamasını takip ediyoruz.</p><p><strong>Anlık nabız (pulse) anketleri</strong> ile çalışanlarımızın duygularını gerçek zamanlı ölçüyoruz.<br/><strong>Açık uçlu geri bildirim kanalları</strong> ile seslerini özgürce duyurmalarını sağlıyoruz.<br/>Bu sayede onboarding’den gelişim fırsatlarına, tanıma kültüründen ayrılış süreçlerine kadar <strong>“moments that matter”</strong> noktalarını sürekli iyileştiriyoruz.</p><p>Uluslararası araştırmaların da gösterdiği gibi, bu tür EX metrikleri; daha <strong>düşük sirkülasyon, daha yüksek verimlilik ve daha mutlu ekipler</strong> yaratıyor. Biz de Loris’te, çalışan deneyimini güçlendirerek sadece bugünün değil, geleceğin de başarılı ve sürdürülebilir iş kültürünü inşa ediyoruz.</p>",
+            "text_style": "body",
+            "disable_on_mobile": false
+          }
+        },
+        "button_LR8nbY": {
+          "type": "button",
+          "settings": {
+            "button_select": "primary",
+            "button_label": "Kariyer sayfasını ziyaret edin",
+            "button_link": "shopify://pages/ik",
+            "disable_on_mobile": false
+          }
+        }
+      },
+      "block_order": [
+        "subheading_6cGmWi",
+        "heading_y9Tm4F",
+        "text_XkA6pW",
+        "button_LR8nbY"
+      ],
+      "name": "t:sections.before_and_after.name",
+      "settings": {
+        "title": "",
+        "layout": "image_first",
+        "before_image": "shopify://shop_images/Adsiz_tasarim_30.png",
+        "after_image": "shopify://shop_images/Adsiz_tasarim_29.png",
+        "desktop-percentage-image-width": 51,
+        "full-width-enabled": false,
+        "slide_height": "adapt_to_first_image",
+        "desktop_fixed_height": 320,
+        "mobile_fixed_height": 460,
+        "enable_badges": true,
+        "before_badge": "Loris'den Önce",
+        "after_badge": "Loris'le Tanıştıktan Sonra",
+        "section-color-body-text": "rgba(0,0,0,0)",
+        "section-color-overlay": "rgba(0,0,0,0)",
+        "section-color-overlay-opacity": 100,
+        "color-body-text": "rgba(0,0,0,0)",
+        "color-overlay": "rgba(0,0,0,0)",
+        "color-overlay-opacity": 100,
+        "desktop_text_vertical_position": "top",
+        "desktop_text_horizontal_position": "left",
+        "mobile_text_horizontal_position": "center",
+        "margin-top": 20,
+        "margin-bottom": 20
+      }
+    },
+    "image_with_text_NxQ9YJ": {
+      "type": "image-with-text",
+      "blocks": {
+        "subheading_hy78iA": {
+          "type": "subheading",
+          "disabled": true,
+          "settings": {
+            "subheading": "Loris Parfüm’de Hayat",
+            "subheading_disable_on_mobile": false
+          }
+        },
+        "heading_xb9TqN": {
+          "type": "heading",
+          "settings": {
+            "heading": "Loris Parfüm’de Hayat",
+            "disable_on_mobile": false,
+            "size_heading": 100,
+            "size_heading_mobile": 100
+          }
+        },
+        "text_UJb8La": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Loris Parfüm’de çalışan deneyimi, sadece bir iş değil; birlikte öğrenmenin, gelişmenin ve keyifle üretmenin yolculuğudur.</p><ul><li><strong>Loris Kültürü ve Değerleri:</strong> Çalışanlarımızın mutluluğu ve gelişimi, markamızın sürdürülebilir başarısının temelidir.<br/></li><li><strong>Loris Akademi:</strong> Eğitimler, potansiyeli keşfetmeyi, özgüveni ve aidiyet hissini güçlendirir.<br/></li><li><strong>Veriye Dayalı Deneyim:</strong> Yaşam döngüsü ve pulse anketleriyle kritik temas noktaları sürekli takip edilir; bağlılık ve verimlilik artar.<br/></li><li><strong>Loris Kampüsü:</strong> Yeni genel merkez, öğrenmeyi, paylaşmayı ve birlikte üretmeyi destekleyen bir yaşam alanıdır.</li></ul><p>Çalışanlarımızın mutluluğu ve gelişimi, Loris Parfüm’ün geleceğini her gün biraz daha güçlü kılar.</p>",
+            "text_style": "body",
+            "disable_on_mobile": false
+          }
+        },
+        "button_gyCfmp": {
+          "type": "button",
+          "settings": {
+            "button_select": "primary",
+            "button_label": "Akademiyi Ziyaret Et",
+            "button_link": "https://lorisakademi.com/",
+            "disable_on_mobile": false
+          }
+        }
+      },
+      "block_order": [
+        "subheading_hy78iA",
+        "heading_xb9TqN",
+        "text_UJb8La",
+        "button_gyCfmp"
+      ],
+      "name": "t:sections.image-with-text.presets.name",
+      "settings": {
+        "title": "",
+        "layout": "text_first",
+        "desktop-percentage-image-width": 50,
+        "full-width-enabled": false,
+        "slide_height": "fixed_height",
+        "desktop_fixed_height": 600,
+        "mobile_fixed_height": 400,
+        "section-color-body-text": "rgba(0,0,0,0)",
+        "section-color-overlay": "rgba(0,0,0,0)",
+        "section-color-overlay-opacity": 100,
+        "color-body-text": "rgba(0,0,0,0)",
+        "color-overlay": "rgba(0,0,0,0)",
+        "color-overlay-opacity": 100,
+        "desktop_image": "shopify://shop_images/Gemini_Generated_Image_create_by-okan-krkc.png",
+        "desktop_text_vertical_position": "center",
+        "desktop_text_horizontal_position": "left",
+        "mobile_text_horizontal_position": "center",
+        "margin-top": 20,
+        "margin-bottom": 20
+      }
+    }
+  },
+  "order": [
+    "main",
+    "background_video_MQqW9M",
+    "rich_text_NXYrca",
+    "image_banner_PbmVt8",
+    "rich_text_with_image_tVf7Cc",
+    "image_with_text_yYaRcQ",
+    "image_with_text_Dtd74X",
+    "before_and_after_rBFcRM",
+    "image_with_text_NxQ9YJ"
+  ]
+}

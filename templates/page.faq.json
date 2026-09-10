@@ -1,0 +1,233 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "main-page",
+      "disabled": true,
+      "settings": {
+        "compact-size-enabled": true,
+        "size_heading": 140,
+        "size_heading_mobile": 100,
+        "color-body-text": "rgba(0,0,0,0)",
+        "color-bg-overlay": "rgba(0,0,0,0)",
+        "color-overlay-opacity": 100,
+        "margin-top": 40,
+        "margin-bottom": 0
+      }
+    },
+    "b1762d2f-c545-46f9-ab66-b0f6dc390c56": {
+      "type": "rich-text",
+      "blocks": {
+        "template--15329436369096__b1762d2f-c545-46f9-ab66-b0f6dc390c56-heading-1": {
+          "type": "heading",
+          "settings": {
+            "heading": "Sıkça Sorulan Sorular",
+            "disable_on_mobile": false,
+            "size_heading": 160,
+            "size_heading_mobile": 150
+          }
+        },
+        "template--15329436369096__b1762d2f-c545-46f9-ab66-b0f6dc390c56-text-1": {
+          "type": "text",
+          "disabled": true,
+          "settings": {
+            "text": "<p>Discover the answers to your frequently asked questions about our products and services.</p>",
+            "disable_on_mobile": false
+          }
+        }
+      },
+      "block_order": [
+        "template--15329436369096__b1762d2f-c545-46f9-ab66-b0f6dc390c56-heading-1",
+        "template--15329436369096__b1762d2f-c545-46f9-ab66-b0f6dc390c56-text-1"
+      ],
+      "settings": {
+        "section_width": "short",
+        "desktop_text_horizontal_position": "center",
+        "color-body-text": "rgba(0,0,0,0)",
+        "background_color": "rgba(0,0,0,0)",
+        "margin-top": 32,
+        "margin-bottom": 0
+      }
+    },
+    "19343041-49f3-4eb8-918f-d93e323afa2e": {
+      "type": "collapsible_menu",
+      "blocks": {
+        "template--15329436369096__19343041-49f3-4eb8-918f-d93e323afa2e-collapsible_tab-1": {
+          "type": "collapsible_tab",
+          "settings": {
+            "heading": "Aldığım ürünleri nasıl değiştirebilirim ?",
+            "content": "<p>Mağazamızdan alınan ürünün değişimi hakkında:</p><p>1- Mağazamızdan almış olduğunuz ürünlerimizin değişimi için , alışveriş yapmış olduğunuz mağazamıza şikayet ve değişim talebinde bulunabilirsiniz.</p><p>2- Ürünü aldığınız mağazamızın farklı şehirde ise bu numaradan 444 8 345 bize ulaşarak müşteri temsilcimiz ile görüşebilirsiniz.</p><p>E-ticaret sitemizden alınan ürünün değişimi hakkında:</p><p>1- Yurtiçi Kargo tarafından tarafımızdan ödenecek fatura / bilgi makbuzunun altındaki açıklama alanında taleplerinizi belirterek taleplerinizi aşağıdaki adrese iletebilirsiniz. '' Sultan Orhan Mahallesi 1181/1 Sokak No:5 Gebze/Kocaeli '' Fatura / bilgi makbuzu altındaki bilgiler gönderilecek ürünün bilgilerini, ürün değişim / geri ödeme talebinin değiştirilmesini ve belgeyi ürünle birlikte içermelidir.</p><p>2- Kullanıcı Panelinde yer alan ''Yardım'' butonuna tıklayınız. Sağ kısımda yer alan ''Talep Oluştur'' butonuna tıklayarak değişim talebi oluşturabilirsiniz. En kısa sürede müşteri temsilcimiz sizinle iletişime geçecektir.</p><p>Yurt Dışı haricinde farklı kargo şirketleri tarafından gönderilen alıcı tarafından ödenen kargolar kabul edilmeyecektir.</p>",
+            "page": "",
+            "icon": "none"
+          }
+        },
+        "6c6c8546-4be8-47e9-8694-d542109d388e": {
+          "type": "collapsible_tab",
+          "settings": {
+            "heading": "Siparişini iptal ettiğim ürünün ücret iadesi ne zaman yapılacak?",
+            "content": "<p>Kargo ve Faturası kesilmeyen siparişlerinizin iptali yapıldıktan en az 1 iş günü içinde ücret iadesi kartınıza yapılmaktadır.</p>",
+            "page": "",
+            "icon": "none"
+          }
+        },
+        "18a26329-3e89-409b-b175-cad7e9531a44": {
+          "type": "collapsible_tab",
+          "settings": {
+            "heading": "Siparişimin teslimat adresini veya alıcı adını değiştirebilir miyim?",
+            "content": "<p>Ana sayfada yer alan \"Hesabım\" bölümünde bulunan “Siparişlerim“ sekmesinden siparişinizin durumunu kontrol edin.</p><p>Eğer siparişiniz “Siparişiniz Alındı ” statüsünde ise aşağıdaki kanallardan talebinizi bize iletin. “Hesabım” bölümünde “Yardım“ sekmesinde yer alan “Talep Oluştur Butonu'' üzerinden talep oluşturabilirsiniz veya 444 8 345 nolu numaradan müşteri temsilcimiz ile talep oluşturabilirsiniz.</p><p>Eğer siparişiniz “Kargoya Verildi” statüsündeyse alıcı ve/veya adres değişikliğini kargo firmaları da sadece belli bir süre içerisinde yapabilir. Değişiklik talebinizi kargonun gönderildiği kargo firması ile irtibata geçerek iletebilirsiniz.</p>",
+            "page": "",
+            "icon": "none"
+          }
+        },
+        "1587700a-5ee8-43f8-a35f-d929db42fb22": {
+          "type": "collapsible_tab",
+          "settings": {
+            "heading": "Siparişim ne zaman gelir?",
+            "content": "<p>Hafta içi cuma günü saat 12:00 'a kadar vermiş olduğunuz tüm siparişleriniz gün içerisinde Yurt İçi Kargo firmasına teslim edilmektedir. 1-3 iş günü içeresinde kargonuz teslimat adresinize iletilmiş olacaktır.</p><p>Hafta sonu Cuma günü saat 12:00 'den sonra vermiş olduğunuz tüm siparişleriniz Pazartesi Günü Yurt İçi Kargo firmasına teslim edilmektedir. 1-3 iş günü içeresinde kargonuz teslimat adresinize iletilmiş olacaktır.</p><p>Kargoya verildikten sonra siparişinizin kargo aşamalarını \"Hesabım\" bölümünde “Siparişlerim“ sekmesinden takip edebilirsiniz.</p>",
+            "page": "",
+            "icon": "none"
+          }
+        },
+        "bb27c4f2-0c26-45bf-8b45-d680bea4e03c": {
+          "type": "collapsible_tab",
+          "settings": {
+            "heading": "Siparişimi nasıl iptal edebilirim?",
+            "content": "<p>Yanlış ürün sipariş ettiyseniz veya fikrinizi değiştirdiyseniz ürünlerinizin kargo hazırlıkları başlamadan önce aşağıdaki şekilde kolayca iptal edebilirsiniz. 1-''Hesabım'' sekmesinden ''Yardıma'' tıklayınız. ''Yardım'' sekmesinden Talep oluştura tıklayarak değişim ve iptal için talebinizi oluşturabilirsiniz. 2- 444 8 345 nolu numaradan müşteri temsilcimiz ile talebinizi oluşturabilirsiniz. ÖNEMLİ: Ürünleriniz kargolanmak üzere hazırlanmaya başlandıysa (faturanız kesildiyse) veya kargoya verildiyse iptal edilemez. Bu durumda ürünü teslim aldığınızda iade edebilirsiniz.</p>",
+            "page": "",
+            "icon": "none"
+          }
+        },
+        "2c2aaa13-82fb-4138-aa8a-37f18b412379": {
+          "type": "collapsible_tab",
+          "settings": {
+            "heading": "Kampanyadan yararlandığım bir siparişte iptal ya da iade yaparsam kampanya iptal olur mu?",
+            "content": "<p>İptal ya da iade gerçekleştirildiği halde kampanya koşulları sağlanmaya devam ediyorsa kampanya iptal olmaz.</p><p>İptal ya da iade sonrası siparişte kalan ürünler kampanya şartlarını sağlamaya yetmiyorsa kampanya iptal olur. Ücret iadesi kampanyanın indirimi düşülerek yapılır. İPUCU: Kargo bedava kampanyasıyla oluşturulan siparişlerin iptal/iadesi olursa ve kalan tutar kampanya şartını sağlamıyorsa iade edilecek ürün bedelinden kargo ücreti düşülür.</p>",
+            "page": "",
+            "icon": "none"
+          }
+        },
+        "24d707a1-7b6d-40e9-a2b3-45c72368e607": {
+          "type": "collapsible_tab",
+          "settings": {
+            "heading": "İndirim kuponunu nasıl kullanabilirim ?",
+            "content": "<p>''Hesabım'' kısmında ''indirim kuponları'' kısımında aktif indirim kuponlarınız yer almaktadır. Burada yer alan kodu kopyalarak ''sepetim'' kısmında yer alan ''indirim kuponu'' kısmına ekleyerek indirim kuponundan yararlanabilirsiniz.</p>",
+            "page": "",
+            "icon": "none"
+          }
+        }
+      },
+      "block_order": [
+        "template--15329436369096__19343041-49f3-4eb8-918f-d93e323afa2e-collapsible_tab-1",
+        "6c6c8546-4be8-47e9-8694-d542109d388e",
+        "18a26329-3e89-409b-b175-cad7e9531a44",
+        "1587700a-5ee8-43f8-a35f-d929db42fb22",
+        "bb27c4f2-0c26-45bf-8b45-d680bea4e03c",
+        "2c2aaa13-82fb-4138-aa8a-37f18b412379",
+        "24d707a1-7b6d-40e9-a2b3-45c72368e607"
+      ],
+      "custom_css": [
+        "p {padding: 12px;}"
+      ],
+      "settings": {
+        "color-body-text": "rgba(0,0,0,0)",
+        "background_color": "rgba(0,0,0,0)",
+        "compact-size-enabled": true,
+        "margin-top": 8,
+        "margin-bottom": 60
+      }
+    },
+    "8cb67a60-3fd7-4c87-8040-f625fc677a4e": {
+      "type": "separator",
+      "settings": {
+        "heading": "",
+        "show-separator-line": true,
+        "full-width-line": true,
+        "color-background": "#dfdfdf",
+        "margin-top": 0,
+        "margin-bottom": 0
+      }
+    },
+    "0fb78468-9ddb-4ab4-b0f2-17627de7d650": {
+      "type": "features-banner",
+      "blocks": {
+        "template--15329436369096__0fb78468-9ddb-4ab4-b0f2-17627de7d650-image-1": {
+          "type": "image",
+          "settings": {
+            "desktop_image": "shopify://shop_images/vegan_formul.avif",
+            "select_icon": "bag",
+            "heading": "Vegan Formül",
+            "text": "<p>Hayvansal içerik kullanılmadan, vegan formüllerle üretilir.</p>",
+            "link": ""
+          }
+        },
+        "template--15329436369096__0fb78468-9ddb-4ab4-b0f2-17627de7d650-image-2": {
+          "type": "image",
+          "settings": {
+            "desktop_image": "shopify://shop_images/natur_750x_fc1dfda5-9070-4a1e-88b4-6ca01aa87c15.avif",
+            "select_icon": "bag",
+            "heading": "Doğadan İlham",
+            "text": "<p>En saf bitkisel özlerle, doğallığı her notada hissettirir.</p>",
+            "link": ""
+          }
+        },
+        "template--15329436369096__0fb78468-9ddb-4ab4-b0f2-17627de7d650-image-3": {
+          "type": "image",
+          "settings": {
+            "desktop_image": "shopify://shop_images/Group_1567.avif",
+            "select_icon": "bag",
+            "heading": "Hızlı Kargo",
+            "text": "<p>Siparişiniz hızla kapınıza güvenle teslim edilir.</p>",
+            "link": ""
+          }
+        },
+        "template--15329436369096__0fb78468-9ddb-4ab4-b0f2-17627de7d650-image-4": {
+          "type": "image",
+          "settings": {
+            "desktop_image": "shopify://shop_images/laboratory.png",
+            "select_icon": "bag",
+            "heading": "Güvenilir Formüller",
+            "text": "<p>Ar-Ge güvencesiyle yüksek standartlı formüller.</p>",
+            "link": ""
+          }
+        }
+      },
+      "block_order": [
+        "template--15329436369096__0fb78468-9ddb-4ab4-b0f2-17627de7d650-image-1",
+        "template--15329436369096__0fb78468-9ddb-4ab4-b0f2-17627de7d650-image-2",
+        "template--15329436369096__0fb78468-9ddb-4ab4-b0f2-17627de7d650-image-3",
+        "template--15329436369096__0fb78468-9ddb-4ab4-b0f2-17627de7d650-image-4"
+      ],
+      "settings": {
+        "heading": "",
+        "size_heading_mobile": 80,
+        "size_heading": 60,
+        "icon_width_mobile": 36,
+        "icon_width_desktop": 48,
+        "icon_layout": "center",
+        "columns_desktop": "4",
+        "icon_layout_mobile": "grid",
+        "color_body_icon": "rgba(0,0,0,0)",
+        "color_background_icon": "rgba(0,0,0,0)",
+        "color_body_text": "rgba(0,0,0,0)",
+        "background_color": "rgba(0,0,0,0)",
+        "margin-top": 36,
+        "margin-bottom": 36
+      }
+    }
+  },
+  "order": [
+    "main",
+    "b1762d2f-c545-46f9-ab66-b0f6dc390c56",
+    "19343041-49f3-4eb8-918f-d93e323afa2e",
+    "8cb67a60-3fd7-4c87-8040-f625fc677a4e",
+    "0fb78468-9ddb-4ab4-b0f2-17627de7d650"
+  ]
+}

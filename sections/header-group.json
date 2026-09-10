@@ -1,0 +1,312 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "type": "header",
+  "name": "Header Group",
+  "sections": {
+    "announcement-bar": {
+      "type": "announcement-bar",
+      "blocks": {
+        "announcement_bUNfri": {
+          "type": "announcement",
+          "settings": {
+            "text": "Çok Al Çok Kazan 2. Ürüne %30, 3. Ürüne %50 İndirim",
+            "link": "shopify://collections/kademeli-i̇ndirim-2-urun-30-3-urune-50-indirim"
+          }
+        },
+        "announcement_hnyc6E": {
+          "type": "announcement",
+          "disabled": true,
+          "settings": {
+            "text": "Oto Kokularında Büyük Fırsat: 2 AL 1 ÖDE!",
+            "link": "shopify://collections/arac-kokulari"
+          }
+        },
+        "announcement_7Xdp8C": {
+          "type": "announcement",
+          "disabled": true,
+          "settings": {
+            "text": "Ayın Yıldızları 1249 TL Yerine 949 TL",
+            "link": "shopify://collections/ozel-koleksiyon-hamdan-aqua-woods-i̇stanbulnight-earth"
+          }
+        }
+      },
+      "block_order": [
+        "announcement_bUNfri",
+        "announcement_hnyc6E",
+        "announcement_7Xdp8C"
+      ],
+      "custom_css": [],
+      "settings": {
+        "marquee": true,
+        "animation_speed": "100",
+        "checkbox_close_announcement": true,
+        "color-body-text": "#fdfdfd",
+        "background_color": "#962137"
+      }
+    },
+    "header": {
+      "type": "page-header",
+      "blocks": {
+        "column_7nMcNj": {
+          "type": "column",
+          "settings": {
+            "title": "NICHE",
+            "promo_section_width": 4,
+            "desktop_image_1": "shopify://shop_images/NICHE_SAFFRON_AMBER.png",
+            "heading_1": "Niche Saffron Ambre Parfüm",
+            "text_1": "Tutkunun Kendine Has Kokusu",
+            "link_1": "shopify://products/saffron-ambre-niche-parfum-70-ml",
+            "desktop_image_2": "shopify://shop_images/NICHE_Bergamot_Patchouli.png",
+            "heading_2": "Niche Bergamot Patchuli Parfüm",
+            "text_2": "Tatlı ve Egzotik Bir Dokunuş",
+            "link_2": "shopify://products/bergamot-patchouli-niche-parfum-70-ml",
+            "heading_3": "",
+            "text_3": "",
+            "link_3": "",
+            "heading_4": "",
+            "text_4": "",
+            "link_4": "",
+            "heading_5": "",
+            "text_5": "",
+            "link_5": "",
+            "heading_6": "",
+            "text_6": "",
+            "link_6": ""
+          }
+        },
+        "column_KheFRC": {
+          "type": "column",
+          "settings": {
+            "title": "FREQUENCE",
+            "promo_section_width": 4,
+            "desktop_image_1": "shopify://shop_images/k-222-frequence-kadin-edp-parfum-50-ml-2360.webp",
+            "heading_1": "K-222 Frequence ",
+            "text_1": "Kadın Parfümü",
+            "link_1": "shopify://products/k-222-frequence-kadin-parfum-edp-50ml",
+            "desktop_image_2": "shopify://shop_images/e-202-frequence-erkek-edp-parfum-50-ml-2328.webp",
+            "heading_2": "E-202 Frequence",
+            "text_2": "Erkek Parfümü",
+            "link_2": "shopify://products/e-202-frequence-erkek-edp-parfum-50ml",
+            "heading_3": "",
+            "text_3": "",
+            "link_3": "",
+            "heading_4": "",
+            "text_4": "",
+            "link_4": "",
+            "heading_5": "",
+            "text_5": "",
+            "link_5": "",
+            "heading_6": "",
+            "text_6": "",
+            "link_6": ""
+          }
+        },
+        "column_ifecVf": {
+          "type": "column",
+          "settings": {
+            "title": "EV & ORTAM",
+            "promo_section_width": 4,
+            "desktop_image_1": "shopify://shop_images/Sandal_Agaci.jpg",
+            "heading_1": "Sandal Ağacı Oda Kokusu",
+            "text_1": "Odanızın Ruhu",
+            "link_1": "shopify://products/loris-sandal-agaci-oda-kokusu-120ml",
+            "desktop_image_2": "shopify://shop_images/melon.jpg",
+            "heading_2": "Kavun Dekoratif Araç Kokusu",
+            "text_2": "En Çok Satan Araba Kokusu",
+            "link_2": "shopify://products/kavun-dekoratif-arac-kokusu-9-ml",
+            "heading_3": "",
+            "text_3": "",
+            "link_3": "",
+            "heading_4": "",
+            "text_4": "",
+            "link_4": "",
+            "heading_5": "",
+            "text_5": "",
+            "link_5": "",
+            "heading_6": "",
+            "text_6": "",
+            "link_6": ""
+          }
+        },
+        "column_ccbq3G": {
+          "type": "column",
+          "settings": {
+            "title": "KİŞİSEL BAKIM",
+            "promo_section_width": 4,
+            "desktop_image_1": "shopify://shop_images/JAPANESE_CHERRY.png",
+            "heading_1": "Japanese Cherry Duş Jeli",
+            "text_1": "Ferahlık Ruhunuzda",
+            "link_1": "shopify://products/japanese-cherry-dus-jeli-295-ml",
+            "desktop_image_2": "shopify://shop_images/JAPANESE_CHERRY_8c632424-9dfa-49a7-a3d0-1501f4f5321a.png",
+            "heading_2": "Japanese Cherry Losyon",
+            "text_2": "Vücudunuzda Loris",
+            "link_2": "shopify://products/japanese-cherry-tup-losyon-236-ml",
+            "heading_3": "",
+            "text_3": "",
+            "link_3": "",
+            "heading_4": "",
+            "text_4": "",
+            "link_4": "",
+            "heading_5": "",
+            "text_5": "",
+            "link_5": "",
+            "heading_6": "",
+            "text_6": "",
+            "link_6": ""
+          }
+        }
+      },
+      "block_order": [
+        "column_7nMcNj",
+        "column_KheFRC",
+        "column_ifecVf",
+        "column_ccbq3G"
+      ],
+      "custom_css": [
+        "@media (min-width: 1200px) {.wt-header.wt-header--transparent {/* background-color: #fffa; */ }}"
+      ],
+      "settings": {
+        "layout": "option_3",
+        "sticky_header": true,
+        "sticky_header_always": false,
+        "header_bg_opacity": 100,
+        "header_bg_blur": 0,
+        "header_always_blurred": false,
+        "show_line_separator": true,
+        "show_shadow": true,
+        "logo": "shopify://shop_images/GUNCEL_LORIS_LOGO-01.png",
+        "large_screen_logo_width": 170,
+        "mobile_screen_logo_width": 100,
+        "menu": "main-menu",
+        "teaser_menu": "",
+        "mobile_footer_menu": "",
+        "transparent_logo": "shopify://shop_images/GUNCEL_LORIS_LOGO-02_3.png",
+        "transparent_header_color": "rgba(0,0,0,0)",
+        "show_country_selector": true,
+        "show_country_selector_label": false,
+        "show_country_selector_flag": false,
+        "show_language_selector": true,
+        "drawer_title": "",
+        "typing_search": "Arayın...",
+        "suggestions_title": "",
+        "suggestions_menu": "search-bar"
+      }
+    },
+    "page_header_logo_banner_tpXcBm": {
+      "type": "page-header-logo-banner",
+      "disabled": true,
+      "custom_css": [
+        "@media (max-width: 767px) {.wt-video__image img:not(.wt-video__image-mobile) {display: none; }}",
+        "@media (min-width: 768px) {/* .wt-logo-banner .wt-video, */ .wt-logo-banner {height: auto; } .wt-video .wt-video__image img {object-fit: contain; object-position: top center; } .wt-video__image img.wt-video__image-mobile {display: none; }}"
+      ],
+      "settings": {
+        "logo_image": "shopify://shop_images/blank.png",
+        "video_hosted": "shopify://files/videos/LORİS 3al2öde 01 yatay.mp4",
+        "video_hosted_mobile": "shopify://files/videos/LORI╠çS 3al2o╠êde 01.mp4",
+        "additional_text": "",
+        "button_style": "secondary",
+        "button_label": "Tüm Ürünler",
+        "button_disable_on_mobile": false,
+        "button_link": "shopify://collections/tum-urunler",
+        "button_link_in_new_window": true,
+        "color-body-text": "#ffffff",
+        "color-overlay": "#151515",
+        "color-overlay-opacity": 0
+      }
+    },
+    "custom_liquid_6mwbd4": {
+      "type": "custom-liquid",
+      "name": "t:sections.custom-liquid.presets.name",
+      "settings": {
+        "custom_liquid": "<!--\n<style>\n@media (min-width: 1200px) {\n  .template-index .wt-header--transparent .wt-header__body .wt-header__logo-wrapper img {\n    filter: invert(1);\n  }\n  .template-index #header.wt-header--transparent  .wt-header__icon svg,\n  .template-index .wt-header--transparent .wt-header__icon::after,\n  .template-index .wt-header--transparent .wt-localization-trigger__label,\n  .template-index .wt-header--transparent .wt-localization-trigger svg,\n  .template-index .wt-header--transparent .wt-header__panel__link svg {\n    color: #fff;\n  }\n  .wt-header {\n    /* background-color: #fffa; */\n  }\n}\n</style>\n<style>\n.wt-section__wrapper .wt-logo-banner__additional {\n  width: 100%;\n  height: 100%;\n\n  padding-bottom: 25px;\n}\n.wt-section__wrapper .wt-logo-banner__additional .hero__button {\n  width: 100%;\n  height: 80%;\n  background-color: unset;\n  opacity: 0;\n}\n@media (max-width: 767px) {\n  .wt-section__wrapper .wt-logo-banner__additional .hero__button {\n    height: 70%;\n  }\n  section:has(.wt-section__wrapper) {\n    /* margin-top: 0 !important; */\n  }\n\n  .wt-logo-banner .wt-video__image img {\n    object-fit: contain;\n  }\n\n  section:has(.wt-section__wrapper) {\n    /* margin-top: -56px !important; */\n    margin-top: 0 !important;\n  }\n  .wt-logo-banner .wt-video__image img:first-of-type {\n  object-position: center top;\n  position: absolute;\n}\n}\n</style>\n\n<style>\n.wt-logo-banner__img-wrapper  .wt-logo-banner__logo {\n  max-width: 50%;\n  top: 0;\n  left: 0;\n  position: relative;\n}\n</style>\n\n<style>\n@media (max-width: 767px) {\n  .shopify-section-group-header-group.wt-video__section.wt-logo-banner {\n    max-height: 140vw;\n  }\n}\n</style>\n-->\n\n<style>\n@media (min-width: 1200px) {\n.wt-header__nav-teaser .wt-header__menu-trigger::after {\n    content: \"Menu\";\n  }\nhtml[lang=\"tr\"] .wt-header__nav-teaser .wt-header__menu-trigger::after {\n    content: \"Menü\";\n  }\n}\n</style>"
+      }
+    },
+    "notification_popup_6NjNTt": {
+      "type": "notification-popup",
+      "blocks": {
+        "heading_X6JJaV": {
+          "type": "heading",
+          "settings": {
+            "heading": "Kadınlar Gününe Özel",
+            "heading_disable_on_mobile": false,
+            "size_heading": 100,
+            "size_heading_mobile": 100
+          }
+        },
+        "paragraph_Gp7F6m": {
+          "type": "paragraph",
+          "settings": {
+            "paragraph": "<p>Loris'ten Kadınlar Günü'ne özel dev fırsat! 🌸 50ml + 10ml + Deodorant üçlüsü tek pakette, sadece 699 TL. Sınırlı stoklarla bu kokuyu kaçırma!</p><p><a href=\"/collections/kadinlar-gunune-ozel-kampanya\" title=\"Kadınlar Gününe Özel Kampanya\">🛍️ <strong>Hemen sepete ekle</strong></a></p>",
+            "text_disable_on_mobile": false
+          }
+        },
+        "email_form_Mm4nJa": {
+          "type": "email_form",
+          "disabled": true,
+          "settings": {
+            "button_select": "primary"
+          }
+        }
+      },
+      "block_order": [
+        "heading_X6JJaV",
+        "paragraph_Gp7F6m",
+        "email_form_Mm4nJa"
+      ],
+      "disabled": true,
+      "name": "t:sections.notification_popup.name",
+      "settings": {
+        "max_width": 600,
+        "delay": 0,
+        "show_border": false,
+        "show_shadow": true,
+        "mobile_image": "shopify://shop_images/1194_x_796-DIKEY.jpg",
+        "desktop_image": "shopify://shop_images/1194_x_796.jpg",
+        "desktop_vertical_position": "center",
+        "desktop_horizontal_position": "center",
+        "color-body-text": "rgba(0,0,0,0)",
+        "background_color": "rgba(0,0,0,0)"
+      }
+    },
+    "custom_liquid_KFBTMJ": {
+      "type": "custom-liquid",
+      "name": "t:sections.custom-liquid.presets.name",
+      "settings": {
+        "custom_liquid": "<style>\n.wt-language-list .wt-language-list__item:has(input[value=\"en\"]) {\n  /* display: none; */\n}\n</style>\n<style>\n.drawer__contents.wt-cart__drawer__content {\n  height: auto;\n}\n</style>\n<style>\n/* body:not(.search-overlay-on).template-index */ #header.wt-header--transparent.wt-header--v3 .wt-header__logo {\n  opacity: 1;\n}\n.wt-header__logo__img {\n  max-height: calc(var(--gap, 8px) * 5);\n}\n@media (min-width: 1200px) {\n  .wt-header__logo__img {\n    max-height: calc(var(--gap, 8px) * 7.5);\n  }\n}\n</style>"
+      }
+    },
+    "custom_liquid_JwzkYg": {
+      "type": "custom-liquid",
+      "name": "t:sections.custom-liquid.presets.name",
+      "settings": {
+        "custom_liquid": "{% assign gift_product = settings.gift_select_test %}\n{% assign gift_product2 = settings.gift_select_test_2 %}\n<script>\ndocument.addEventListener(\"DOMContentLoaded\", () => {\n// if(new URLSearchParams(window.location.search).get(\"test\")){\n\n  if(\n    document.querySelector(\".wt-cart__drawer__footer\")\n  ){\n    giftProducts();\n  }else{\n    var cartGiftCheckInterval = setInterval(() => {\n      if(\n        document.querySelector(\".wt-cart__drawer__footer\")\n      ){\n        giftProducts();\n        clearInterval(cartGiftCheckInterval);\n      }\n    }, 1000);\n  }\n\n// }\n});\n\nfunction giftProducts(){\n\n// .cart__contents .drawer__contents\ndocument.querySelector(\".wt-cart__drawer__footer\").insertAdjacentHTML(\n  \"afterbegin\", // afterend\n  `{% if gift_product != null %}\n  <div class=\"giftProducts\" style=\"margin-bottom: 8px;border: 1px solid #0002;padding: 5px 10px;\">\n  <span>\n  {% if request.locale.iso_code == \"tr\" %}\n  Hediye Seçenekleri:\n  {% elsif request.locale.iso_code == \"ar\" %}\n  خيارات الهدية:\n  {% else %}\n  Gift Options:\n  {% endif %}\n  </span>\n  <div>\n  <span>\n  <label for=\"giftProduct1\" onclick=\"giftAddCart({{ all_products[gift_product].selected_or_first_available_variant.id }}, 1, {{ all_products[gift_product].price }})\" style=\"display: grid;justify-items: center;text-align: center;\">\n  {% if all_products[gift_product].featured_image != null %}\n  <img style=\"height: 50px;display: block;\" src=\"{{ all_products[gift_product].featured_image | image_url: width: 200 }}\">\n  {% endif %}\n  {{ all_products[gift_product].title }} <span>{{ all_products[gift_product].price | money }}</span>\n  </label>\n  <input type=\"checkbox\" id=\"giftProduct1\" onclick=\"giftAddCart({{ all_products[gift_product].selected_or_first_available_variant.id }}, 1, {{ all_products[gift_product].price }})\" /><!-- type=\"radio\" name=\"giftSelect\" -->\n  </span>\n  {% if gift_product2 != null %}\n  <span>\n  <label for=\"giftProduct2\" onclick=\"giftAddCart({{ all_products[gift_product2].selected_or_first_available_variant.id }}, 2, {{ all_products[gift_product2].price }})\" style=\"display: grid;justify-items: center;text-align: center;\">\n  <img style=\"height: 50px;display: block;\" src=\"{{ all_products[gift_product2].featured_image | image_url: width: 200 }}\">\n  {{ all_products[gift_product2].title }} <span>{{ all_products[gift_product2].price | money }}</span>\n  </label>\n  <input type=\"checkbox\" id=\"giftProduct2\" onclick=\"giftAddCart({{ all_products[gift_product2].selected_or_first_available_variant.id }}, 2, {{ all_products[gift_product2].price }})\" />\n  </span>\n  {% endif %}\n  </div>\n  </div>\n  <style>\n.giftProducts div {\n  display: flex;\n  gap: 30px;\n  margin-top: 15px;\n}\n.giftProducts div span {\n  display: flex;\n  flex-direction: row-reverse;\n  gap: 10px;\n}\n.wt-cart__list li:has(.wt-cart__item__link[href*=\"hediye\" i][href*=\"ambalaj\" i]),\n.wt-cart__list li:has(.wt-cart__item__link[href*=\"hediye\" i][href*=\"kutu\" i]),\n.wt-cart__list li:has(.wt-cart__item__link[href*=\"hediye\" i][href*=\"paket\" i]) {\n  display: none;\n}\n  </style>\n  {% endif %}`\n);\n\nfetch(window.Shopify.routes.root + 'cart.js')\n.then(res => res.json())\n.then(data => {\n  var targetId = {{ all_products[gift_product].selected_or_first_available_variant.id }};\n  var targetId2 = {% if gift_product2 != null %}{{ all_products[gift_product2].selected_or_first_available_variant.id }}{% else %}9000{% endif %};\n  console.log(data);\n  if(\n    data.items.some(item => item.id === targetId) // data.items.filter(item => item.id === targetId).length\n  ){\n    document.querySelector(\".giftProducts #giftProduct1\").checked = true;\n    document.querySelector(\".wt-cart__subtotal__value\").dataset.giftPriceAdded = 1;\n  }else if(\n    data.items.some(item => item.id === targetId2)\n  ){\n    document.querySelector(\".giftProducts #giftProduct2\").checked = true;\n    document.querySelector(\".wt-cart__subtotal__value\").dataset.giftPriceAdded = 1;\n  }\n});\n\n}\n\nfunction giftAddCart(giftProductId, giftProductIndex, giftProductPrice){\n  var giftProductForm = new FormData();\n  if(\n    giftProductId\n  ){\n    giftProductForm.append(\"id\", giftProductId);\n  }\n  async function isInCart(targetIdParam) {\n    const res = await fetch(window.Shopify.routes.root + 'cart.js');\n    const data = await res.json();\n    return data.items.some(item => item.id === targetIdParam); // data.items.filter(item => item.id === targetIdParam).length\n  }\n  (async () => {\n  if(\n    giftProductIndex == 1\n  ){\n    if(document.querySelector(\".giftProducts #giftProduct2\")){\n      document.querySelector(\".giftProducts #giftProduct2\").checked = false;\n    }\n  }else{\n    document.querySelector(\".giftProducts #giftProduct1\").checked = false;\n  }\n  if(\n    // !document.querySelector('.js-counter-quantity[data-quantity-variant-id=\"' + {{ all_products[gift_product].selected_or_first_available_variant.id }} + '\"]')\n    !await isInCart(giftProductId)\n  ){\n    /* document.querySelector(\n      '.cart-item:has(.wt-cart__item__link[href*=\"?variant={{ all_products[gift_product].selected_or_first_available_variant.id }}\"]) .cart-page cart-remove-button'\n    )?.click(); */\n    fetch(\"/cart/change.js\", {\n      method: \"POST\",\n      headers: { \"Content-Type\": \"application/json\" },\n      body: JSON.stringify({\n        id: String({{ all_products[gift_product].selected_or_first_available_variant.id }}),\n        quantity: 0\n      })\n    })\n    .then(res => res.json())\n    .then(data => console.log(\"Yeni Sepet:\", data));\n    {% if gift_product2 != null %}\n    fetch(\"/cart/change.js\", {\n      method: \"POST\",\n      headers: { \"Content-Type\": \"application/json\" },\n      body: JSON.stringify({\n        id: String({{ all_products[gift_product2].selected_or_first_available_variant.id }}),\n        quantity: 0\n      })\n    })\n    .then(res => res.json())\n    .then(data => console.log(\"Yeni Sepet:\", data));\n    {% endif %}\n    fetch(\"https://lorisparfum.com/cart/add\", {\n      method: \"POST\",\n      credentials: \"include\",\n      body: giftProductForm\n    });\nif(typeof document.querySelector(\".wt-cart__subtotal__value\").dataset.giftPriceAdded == \"undefined\"){\n    document.querySelector(\".wt-cart__subtotal__value\").textContent =\n      (Number(document.querySelector(\".wt-cart__subtotal__value\").textContent.replace(\"TL\", \"\").replace(\",\", \"\").trim()) +\n      (giftProductPrice / 100)).toFixed(2) + \"TL\";\n    var cartNewCount = (Number(document.querySelector(\".wt-cart__drawer__header .wt-drawer__title__text\").textContent.replace(/\\D/g, \"\")) + 1);\n    document.querySelector(\".wt-cart__drawer__header .wt-drawer__title__text\").textContent =\n      \"Sepetiniz (\" +\n      cartNewCount +\n      \")\"; // (/[^0-9]/g)\n    document.querySelector(\".wt-header__panel__counter\").textContent = cartNewCount;\n}\ndocument.querySelector(\".wt-cart__subtotal__value\").dataset.giftPriceAdded = 1;\n  }else{\n    fetch(\"/cart/change.js\", {\n      method: \"POST\",\n      headers: { \"Content-Type\": \"application/json\" },\n      body: JSON.stringify({\n        id: String(giftProductId),\n        quantity: 0\n      })\n    })\n    .then(res => res.json())\n    .then(data => console.log(\"Yeni Sepet:\", data));\nif(document.querySelector(\".wt-cart__subtotal__value\").dataset.giftPriceAdded == \"1\"){\n    document.querySelector(\".wt-cart__subtotal__value\").textContent =\n      (Number(document.querySelector(\".wt-cart__subtotal__value\").textContent.replace(\"TL\", \"\").replace(\",\", \"\").trim()) -\n      (giftProductPrice / 100) ).toFixed(2) + \"TL\";\n    var cartNewCount = (Number(document.querySelector(\".wt-cart__drawer__header .wt-drawer__title__text\").textContent.replace(/\\D/g, \"\")) - 1);\n    document.querySelector(\".wt-cart__drawer__header .wt-drawer__title__text\").textContent =\n      \"Sepetiniz (\" +\n      cartNewCount +\n      \")\"; // (/[^0-9]/g)\n    document.querySelector(\".wt-header__panel__counter\").textContent = cartNewCount;\n}\ndocument.querySelector(\".wt-cart__subtotal__value\").removeAttribute(\"data-gift-price-added\");\n  }\n  })();\n}\n\n</script>"
+      }
+    },
+    "custom_liquid_7mq64c": {
+      "type": "custom-liquid",
+      "disabled": true,
+      "name": "t:sections.custom-liquid.presets.name",
+      "settings": {
+        "custom_liquid": "<style>\n  .val-particle {\n    position: fixed;\n    pointer-events: none;\n    font-size: 18px;\n    z-index: 9999;\n    animation: fadeFollow 1.6s ease-out forwards;\n    will-change: transform, opacity;\n    user-select: none;\n  }\n\n  @keyframes fadeFollow {\n    0% {\n      opacity: 1;\n      transform: translate(0, 0) scale(1);\n    }\n    100% {\n      opacity: 0;\n      transform: translate(var(--tx), var(--ty)) scale(0.6);\n    }\n  }\n\n  @media (max-width: 768px) {\n    .val-particle {\n      font-size: 15px;\n    }\n  }\n</style>\n\n<script>\n(function () {\n  'use strict';\n\n  const isMobile = window.matchMedia('(max-width: 768px)').matches;\n\n  /* 🎯 Emoji setleri */\n  const desktopParticles = [\n    { emoji: '🧴', weight: 35 },\n    { emoji: '❤️', weight: 30 },\n    { emoji: '🌸', weight: 25 },\n    { emoji: '✨', weight: 7 },\n    { emoji: '🎁', weight: 3 }\n  ];\n\n  const mobileParticles = [\n    { emoji: '❤️', weight: 40 },\n    { emoji: '🌸', weight: 35 },\n    { emoji: '✨', weight: 15 },\n    { emoji: '🎁', weight: 10 }\n  ];\n\n  const particles = isMobile ? mobileParticles : desktopParticles;\n\n  const maxParticles = isMobile ? 6 : 10;\n  const delay = isMobile ? 180 : 120;\n\n  let pool = [];\n  let lastTime = 0;\n\n  function initPool() {\n    for (let i = 0; i < maxParticles; i++) {\n      const el = document.createElement('span');\n      el.className = 'val-particle';\n      el.style.display = 'none';\n      document.body.appendChild(el);\n      pool.push(el);\n    }\n  }\n\n  function getFromPool() {\n    return pool.find(p => p.style.display === 'none');\n  }\n\n  function weightedEmoji() {\n    const bag = [];\n    particles.forEach(p => {\n      for (let i = 0; i < p.weight; i++) bag.push(p.emoji);\n    });\n    return bag[Math.floor(Math.random() * bag.length)];\n  }\n\n  function spawn(x, y) {\n    const el = getFromPool();\n    if (!el) return;\n\n    const emoji = weightedEmoji();\n    el.textContent = emoji;\n\n    /* 🎁 biraz daha yavaş & nadir his */\n    el.style.animationDuration = emoji === '🎁' ? '1.9s' : '1.6s';\n\n    const offsetX = (Math.random() - 0.5) * 20;\n    const offsetY = (Math.random() - 0.5) * 20;\n\n    el.style.setProperty('--tx', offsetX + 'px');\n    el.style.setProperty('--ty', offsetY + 'px');\n\n    el.style.left = x + 'px';\n    el.style.top = y + 'px';\n    el.style.display = 'block';\n\n    setTimeout(() => {\n      el.style.display = 'none';\n    }, 1800);\n  }\n\n  function handleMove(x, y) {\n    const now = Date.now();\n    if (now - lastTime > delay) {\n      spawn(x, y);\n      lastTime = now;\n    }\n  }\n\n  document.addEventListener('mousemove', e => {\n    if (!isMobile) handleMove(e.clientX, e.clientY);\n  }, { passive: true });\n\n  document.addEventListener('touchmove', e => {\n    if (isMobile && e.touches.length) {\n      const t = e.touches[0];\n      handleMove(t.clientX, t.clientY);\n    }\n  }, { passive: true });\n\n  document.addEventListener('touchstart', e => {\n    if (isMobile && e.touches.length) {\n      const t = e.touches[0];\n      handleMove(t.clientX, t.clientY);\n    }\n  }, { passive: true });\n\n  if (document.readyState === 'loading') {\n    document.addEventListener('DOMContentLoaded', initPool);\n  } else {\n    initPool();\n  }\n})();\n</script>"
+      }
+    }
+  },
+  "order": [
+    "announcement-bar",
+    "header",
+    "page_header_logo_banner_tpXcBm",
+    "custom_liquid_6mwbd4",
+    "notification_popup_6NjNTt",
+    "custom_liquid_KFBTMJ",
+    "custom_liquid_JwzkYg",
+    "custom_liquid_7mq64c"
+  ]
+}

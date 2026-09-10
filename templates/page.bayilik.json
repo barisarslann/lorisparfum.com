@@ -1,0 +1,687 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "custom_liquid_rYraar": {
+      "type": "custom-liquid",
+      "name": "t:sections.custom-liquid.presets.name",
+      "settings": {
+        "custom_liquid": "<style>\n.wt-page .wt-page__title {\n  display: none;\n}\n</style>"
+      }
+    },
+    "rich_text_EjrV68": {
+      "type": "rich-text",
+      "blocks": {
+        "heading_TFRKp8": {
+          "type": "heading",
+          "settings": {
+            "heading": "FRANCHISE",
+            "disable_on_mobile": false,
+            "size_heading": 100,
+            "size_heading_mobile": 100
+          }
+        },
+        "text_gheF8e": {
+          "type": "text",
+          "settings": {
+            "text": "<h1>Loris, Türkiye’de notalara döktüğü kokuları dünyaya yayıyor... Katılın, Başarıya Ortak Olun!</h1><p>LORIS, 2006 yılından bu yana koku trendleri üzerine çalışan, trendler yaratan yüzde yüz Türk sermayeli bir şirkettir. Türkiye’de notalara döktüğü kokuları 400’ü aşkın mağazası ile tüm dünyaya yaymaktadır.</p><p><a href=\"/pages/contact\" title=\"İletişim\"><strong>İLETİŞİM</strong></a></p><p></p>",
+            "disable_on_mobile": false
+          }
+        },
+        "button_PK6Pzh": {
+          "type": "button",
+          "settings": {
+            "button_select": "primary",
+            "button_label": "Başvuru Formu",
+            "button_link": "#basvuru-section",
+            "disable_on_mobile": false
+          }
+        }
+      },
+      "block_order": [
+        "heading_TFRKp8",
+        "text_gheF8e",
+        "button_PK6Pzh"
+      ],
+      "custom_css": [
+        ".hero__title {font-size: 20px;}"
+      ],
+      "name": "t:sections.rich-text.presets.name",
+      "settings": {
+        "section_width": "short",
+        "desktop_text_horizontal_position": "center",
+        "color-body-text": "rgba(0,0,0,0)",
+        "background_color": "rgba(0,0,0,0)",
+        "margin-top": 20,
+        "margin-bottom": 20
+      }
+    },
+    "main": {
+      "type": "main-page",
+      "custom_css": [],
+      "settings": {
+        "compact-size-enabled": false,
+        "size_heading": 140,
+        "size_heading_mobile": 100,
+        "color-body-text": "rgba(0,0,0,0)",
+        "color-bg-overlay": "rgba(0,0,0,0)",
+        "color-overlay-opacity": 100,
+        "margin-top": 40,
+        "margin-bottom": 0
+      }
+    },
+    "rich_text_with_image_bJntbe": {
+      "type": "rich-text-with-image",
+      "blocks": {
+        "heading_EULCpQ": {
+          "type": "heading",
+          "settings": {
+            "subheading": "<p>Loris Ailesine Katılın, Kârlı Bir İş Ortaklığına İlk Adımı Atın</p>",
+            "font_uppercase": "none",
+            "disable_on_mobile": false
+          }
+        },
+        "text_w8NyrY": {
+          "type": "text",
+          "settings": {
+            "text": "Türkiye’nin ve dünyanın birçok noktasında mağazaları bulunan PICTURE1  Loris Parfüm, güçlü marka değeri ve yenilikçi konseptiyle PICTURE2 yatırımcılarını kazançlı bir iş modeline davet ediyor. PICTURE3",
+            "font_uppercase": "none",
+            "disable_on_mobile": false,
+            "size_heading": 100,
+            "size_heading_mobile": 100,
+            "line_height": 1.5,
+            "picture1": "shopify://shop_images/pin.png",
+            "button_link1": "",
+            "picture2": "shopify://shop_images/Grey_Ghost_Halloween_Icon_Circle_Sticker.png",
+            "button_link2": "",
+            "picture3": "shopify://shop_images/Grey_Ghost_Halloween_Icon_Circle_Sticker_1.png",
+            "button_link3": ""
+          }
+        }
+      },
+      "block_order": [
+        "heading_EULCpQ",
+        "text_w8NyrY"
+      ],
+      "name": "t:sections.rich-text-with-image.presets.name",
+      "settings": {
+        "desktop_text_horizontal_position": "center",
+        "color-body-text": "rgba(0,0,0,0)",
+        "background_color": "rgba(0,0,0,0)",
+        "margin-top": 20,
+        "margin-bottom": 20
+      }
+    },
+    "button_HBCJPg": {
+      "type": "button",
+      "name": "t:sections.button.presets.name",
+      "settings": {
+        "button_select": "primary",
+        "button_horizontal_position": "center",
+        "button_label": "Kataloğu İncele",
+        "button_link": "shopify://pages/e-katalog",
+        "margin-top": 20,
+        "margin-bottom": 20,
+        "background_color": "rgba(0,0,0,0)"
+      }
+    },
+    "custom_liquid_enAnqx": {
+      "type": "custom-liquid",
+      "name": "t:sections.custom-liquid.presets.name",
+      "settings": {
+        "custom_liquid": "<div style=\"max-width: 100vw;overflow: hidden;\">\n  <div class=\"footerIcons\">\n    <span><img src=\"https://cdn.shopify.com/s/files/1/0761/3290/9270/files/8.png?v=1757567358\"></span>\n    <span><img src=\"https://cdn.shopify.com/s/files/1/0761/3290/9270/files/4_1173453c-e899-4b91-8010-0684a87ede84.png?v=1757567357\"></span>\n    <span><img src=\"https://cdn.shopify.com/s/files/1/0761/3290/9270/files/12.png?v=1757567357\"></span>\n    <span><img src=\"https://cdn.shopify.com/s/files/1/0761/3290/9270/files/14.png?v=1757567358\"></span>\n    <span><img src=\"https://cdn.shopify.com/s/files/1/0761/3290/9270/files/16.png?v=1757567357\"></span>\n    <span><img src=\"https://cdn.shopify.com/s/files/1/0761/3290/9270/files/10.png?v=1757567358\"></span>\n    <span><img src=\"https://cdn.shopify.com/s/files/1/0761/3290/9270/files/6.png?v=1757567358\"></span>\n    <span><img src=\"https://cdn.shopify.com/s/files/1/0761/3290/9270/files/18.png?v=1757567358\"></span>\n    <span><img src=\"https://cdn.shopify.com/s/files/1/0761/3290/9270/files/2_b0e47fc5-3a84-43fc-8d53-2e5fde8d4335.png?v=1757567357\"></span>\n    <span><img src=\"https://cdn.shopify.com/s/files/1/0761/3290/9270/files/8.png?v=1757567358\"></span>\n    <span><img src=\"https://cdn.shopify.com/s/files/1/0761/3290/9270/files/4_1173453c-e899-4b91-8010-0684a87ede84.png?v=1757567357\"></span>\n    <span><img src=\"https://cdn.shopify.com/s/files/1/0761/3290/9270/files/12.png?v=1757567357\"></span>\n    <span><img src=\"https://cdn.shopify.com/s/files/1/0761/3290/9270/files/14.png?v=1757567358\"></span>\n    <span><img src=\"https://cdn.shopify.com/s/files/1/0761/3290/9270/files/16.png?v=1757567357\"></span>\n    <span><img src=\"https://cdn.shopify.com/s/files/1/0761/3290/9270/files/10.png?v=1757567358\"></span>\n    <span><img src=\"https://cdn.shopify.com/s/files/1/0761/3290/9270/files/6.png?v=1757567358\"></span>\n    <span><img src=\"https://cdn.shopify.com/s/files/1/0761/3290/9270/files/18.png?v=1757567358\"></span>\n    <span><img src=\"https://cdn.shopify.com/s/files/1/0761/3290/9270/files/2_b0e47fc5-3a84-43fc-8d53-2e5fde8d4335.png?v=1757567357\"></span>\n    <span><img src=\"https://cdn.shopify.com/s/files/1/0761/3290/9270/files/8.png?v=1757567358\"></span>\n    <span><img src=\"https://cdn.shopify.com/s/files/1/0761/3290/9270/files/4_1173453c-e899-4b91-8010-0684a87ede84.png?v=1757567357\"></span>\n    <span><img src=\"https://cdn.shopify.com/s/files/1/0761/3290/9270/files/12.png?v=1757567357\"></span>\n    <span><img src=\"https://cdn.shopify.com/s/files/1/0761/3290/9270/files/14.png?v=1757567358\"></span>\n    <span><img src=\"https://cdn.shopify.com/s/files/1/0761/3290/9270/files/16.png?v=1757567357\"></span>\n    <span><img src=\"https://cdn.shopify.com/s/files/1/0761/3290/9270/files/10.png?v=1757567358\"></span>\n    <span><img src=\"https://cdn.shopify.com/s/files/1/0761/3290/9270/files/6.png?v=1757567358\"></span>\n    <span><img src=\"https://cdn.shopify.com/s/files/1/0761/3290/9270/files/18.png?v=1757567358\"></span>\n    <span><img src=\"https://cdn.shopify.com/s/files/1/0761/3290/9270/files/2_b0e47fc5-3a84-43fc-8d53-2e5fde8d4335.png?v=1757567357\"></span>\n  </div>\n</div>\n<style>\n  .footerIcons {\n    display: flex;\n    gap: 5px;\n  }\n  .footerIcons img {\n    min-width: 8.5%;\n  }\n  @media (max-width: 600px) {\n    .footerIcons img {\n      min-width: 26%;\n    }\n  }\n\n  /* Animasyon Kodları */\n  .shopify-section-group-footer-group { /* created by okan karakoc */\n    overflow: hidden;\n    white-space: nowrap;\n    width: 100%;\n    background: #fff;\n  }\n  .footerIcons {\n    display: inline-flex;\n    animation: marquee 30s linear infinite;\n  }\n  .footerIcons img {\n    display: inline-flex;\n    width: max-content;\n    align-items: center;\n  }\n  .footerIcons span img {\n    vertical-align: middle;\n    max-width: 150px;\n  }\n  @keyframes marquee {\n    0% {\n      transform: translateX(0%);\n    }\n    100% {\n      transform: translateX(-50%);\n    }\n  }\n</style>"
+      }
+    },
+    "image_with_text_Rarjfz": {
+      "type": "image-with-text",
+      "blocks": {
+        "subheading_Tyrby7": {
+          "type": "subheading",
+          "settings": {
+            "subheading": "Kazançlı Yatırıma İlk Adım",
+            "subheading_disable_on_mobile": false
+          }
+        },
+        "heading_fkqHQL": {
+          "type": "heading",
+          "settings": {
+            "heading": "Başvuru Süreci",
+            "disable_on_mobile": false,
+            "size_heading": 100,
+            "size_heading_mobile": 100
+          }
+        },
+        "text_7pMEGC": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Loris Parfüm, Türkiye’de ve dünya çapında büyüyen ağı ve güçlü marka değeriyle sektörde lider konumunu korumaktadır. Her yıl sayısız girişimci ve yatırımcı, Loris ailesine katılmak için başvuru yapıyor; bu yoğun ilgi, markamızın güvenilirliğini ve cazibesini açıkça gösteriyor.</p><p>Siz de bu prestijli markanın bir parçası olarak kazançlı ve sürdürülebilir bir iş modeline adım atabilir, kendi başarı hikâyenizi Loris ile birlikte yazabilirsiniz. Merkezi destek ekibimiz, mağaza konseptleri, eğitim programları ve operasyonel desteklerle her adımda yanınızda olacak. Yeni binamızın modern ve dinamik yapısı, markamızın gücünü ve geleceğe olan vizyonunu yansıtırken, sizi de Loris ailesinin bir parçası olmaya davet ediyor.</p>",
+            "text_style": "body",
+            "disable_on_mobile": false
+          }
+        },
+        "button_ckmtmt": {
+          "type": "button",
+          "disabled": true,
+          "settings": {
+            "button_select": "primary",
+            "button_label": "Akademiyi Ziyaret Et",
+            "button_link": "/",
+            "disable_on_mobile": false
+          }
+        }
+      },
+      "block_order": [
+        "subheading_Tyrby7",
+        "heading_fkqHQL",
+        "text_7pMEGC",
+        "button_ckmtmt"
+      ],
+      "name": "t:sections.image-with-text.presets.name",
+      "settings": {
+        "title": "",
+        "layout": "image_first",
+        "desktop-percentage-image-width": 50,
+        "full-width-enabled": false,
+        "slide_height": "adapt_to_first_image",
+        "desktop_fixed_height": 320,
+        "mobile_fixed_height": 460,
+        "section-color-body-text": "rgba(0,0,0,0)",
+        "section-color-overlay": "rgba(0,0,0,0)",
+        "section-color-overlay-opacity": 100,
+        "color-body-text": "rgba(0,0,0,0)",
+        "color-overlay": "rgba(0,0,0,0)",
+        "color-overlay-opacity": 100,
+        "desktop_image": "shopify://shop_images/unnamed.png",
+        "desktop_text_vertical_position": "center",
+        "desktop_text_horizontal_position": "center",
+        "mobile_text_horizontal_position": "center",
+        "margin-top": 20,
+        "margin-bottom": 20
+      }
+    },
+    "features_banner_xNAfAU": {
+      "type": "features-banner",
+      "blocks": {
+        "image_q8C9E3": {
+          "type": "image",
+          "settings": {
+            "desktop_image": "shopify://shop_images/assessment.png",
+            "select_icon": "user",
+            "heading": "Ön Değerlendirme",
+            "text": "<p>Başvurunuz detaylı şekilde incelenir.</p>",
+            "link": "#"
+          }
+        },
+        "image_dMHEhE": {
+          "type": "image",
+          "settings": {
+            "desktop_image": "shopify://shop_images/customer-service.png",
+            "select_icon": "bag",
+            "heading": "İlk İletişim",
+            "text": "<p>Hedefleriniz ve beklentileriniz dinlenir.</p>",
+            "link": "#"
+          }
+        },
+        "image_jnMmMJ": {
+          "type": "image",
+          "settings": {
+            "desktop_image": "shopify://shop_images/communication.png",
+            "select_icon": "bag",
+            "heading": "Ön Görüşme",
+            "text": "<p>Lokasyon, yatırım planı ve mağaza konsepti hakkında bilgilendirme yapılır.</p>",
+            "link": ""
+          }
+        },
+        "image_ADz8dH": {
+          "type": "image",
+          "settings": {
+            "desktop_image": "shopify://shop_images/trust.png",
+            "select_icon": "bag",
+            "heading": "Değerlendirme",
+            "text": "<p>Marka kriterlerimize uygunluğu netleştirilir ve sonraki adımlara geçilir.</p>",
+            "link": ""
+          }
+        }
+      },
+      "block_order": [
+        "image_q8C9E3",
+        "image_dMHEhE",
+        "image_jnMmMJ",
+        "image_ADz8dH"
+      ],
+      "name": "Icon with links",
+      "settings": {
+        "heading": "Süreçler",
+        "size_heading_mobile": 80,
+        "size_heading": 80,
+        "icon_width_mobile": 36,
+        "icon_width_desktop": 48,
+        "icon_layout": "center",
+        "columns_desktop": "4",
+        "icon_layout_mobile": "grid",
+        "color_body_icon": "rgba(0,0,0,0)",
+        "color_background_icon": "rgba(0,0,0,0)",
+        "color_body_text": "rgba(0,0,0,0)",
+        "background_color": "rgba(0,0,0,0)",
+        "margin-top": 0,
+        "margin-bottom": 32
+      }
+    },
+    "image_with_text_aqnVVa": {
+      "type": "image-with-text",
+      "blocks": {
+        "subheading_inQiMh": {
+          "type": "subheading",
+          "disabled": true,
+          "settings": {
+            "subheading": "Tell you story",
+            "subheading_disable_on_mobile": false
+          }
+        },
+        "heading_xtVTek": {
+          "type": "heading",
+          "settings": {
+            "heading": "Neden Loris Parfüm Bayiliği?",
+            "disable_on_mobile": false,
+            "size_heading": 100,
+            "size_heading_mobile": 100
+          }
+        },
+        "text_467T7R": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Loris Parfüm bayisi olarak, mağazanızın kurulumundan ürün teminine kadar <strong>anahtar teslim destek</strong> alırsınız; size sadece işinizi yönetmek ve büyütmek kalır. Türkiye’de ve dünya çapında tanınan güçlü bir marka olmanın avantajını kullanarak, müşteri sadakati ve yüksek bilinirlik sayesinde satışlarınızı hızla artırabilirsiniz.</p><p>Uzman ekibimiz, <strong>pazarlama kampanyalarından satış stratejilerine</strong> kadar her adımda yanınızdadır. Ayrıca <strong>Loris Akademi</strong> ile çalışanlarınızın profesyonel gelişimine yatırım yapabilir, mağazanızın verimliliğini ve müşteri memnuniyetini en üst seviyeye çıkarabilirsiniz.</p><p>Parfüm sektörünün yüksek potansiyelinden yararlanarak <strong>yüksek kar marjı</strong> elde eder, sektördeki tecrübemiz ve güçlü altyapımız sayesinde <strong>karlı ve sürdürülebilir bir iş modeline</strong> sahip olursunuz.</p><p>Siz de bu prestijli ailenin bir parçası olarak kendi başarı hikâyenizi yazmak için hemen başvurun.</p>",
+            "text_style": "body",
+            "disable_on_mobile": false
+          }
+        },
+        "button_BKrxqH": {
+          "type": "button",
+          "settings": {
+            "button_select": "primary",
+            "button_label": "Akademiyi Ziyaret Et",
+            "button_link": "/",
+            "disable_on_mobile": false
+          }
+        }
+      },
+      "block_order": [
+        "subheading_inQiMh",
+        "heading_xtVTek",
+        "text_467T7R",
+        "button_BKrxqH"
+      ],
+      "name": "t:sections.image-with-text.presets.name",
+      "settings": {
+        "title": "",
+        "layout": "text_first",
+        "desktop-percentage-image-width": 50,
+        "full-width-enabled": false,
+        "slide_height": "adapt_to_first_image",
+        "desktop_fixed_height": 320,
+        "mobile_fixed_height": 460,
+        "section-color-body-text": "rgba(0,0,0,0)",
+        "section-color-overlay": "rgba(0,0,0,0)",
+        "section-color-overlay-opacity": 100,
+        "color-body-text": "rgba(0,0,0,0)",
+        "color-overlay": "rgba(0,0,0,0)",
+        "color-overlay-opacity": 100,
+        "desktop_image": "shopify://shop_images/2025_EYLUL_KATALOG_TR.jpg",
+        "desktop_text_vertical_position": "center",
+        "desktop_text_horizontal_position": "center",
+        "mobile_text_horizontal_position": "center",
+        "margin-top": 20,
+        "margin-bottom": 20
+      }
+    },
+    "background_video_rFpcir": {
+      "type": "background-video",
+      "blocks": {
+        "subheading_R4mLwL": {
+          "type": "subheading",
+          "disabled": true,
+          "settings": {
+            "subheading": "Tell your story",
+            "subheading_disable_on_mobile": false
+          }
+        },
+        "heading_wdiAWg": {
+          "type": "heading",
+          "disabled": true,
+          "settings": {
+            "heading": "Video scene",
+            "disable_on_mobile": false,
+            "size_heading": 100,
+            "size_heading_mobile": 100
+          }
+        },
+        "text_CWt9Jc": {
+          "type": "text",
+          "disabled": true,
+          "settings": {
+            "text": "<p>Explore in motion</p>",
+            "disable_on_mobile": false
+          }
+        },
+        "button_AdwcJY": {
+          "type": "button",
+          "disabled": true,
+          "settings": {
+            "button_select": "primary",
+            "button_label": "Button label",
+            "disable_on_mobile": false,
+            "button_link": "",
+            "second_button_select": "primary",
+            "second_button_label": "Button label",
+            "second_disable_on_mobile": false,
+            "second_button_link": ""
+          }
+        }
+      },
+      "block_order": [
+        "subheading_R4mLwL",
+        "heading_wdiAWg",
+        "text_CWt9Jc",
+        "button_AdwcJY"
+      ],
+      "name": "t:sections.background-video.presets.name",
+      "settings": {
+        "heading": "",
+        "full-width-enabled": false,
+        "video_hosted": "shopify://files/videos/şube konsepti.mp4",
+        "autoplay": true,
+        "video_controls": true,
+        "video_url": "",
+        "original_ratio": "fixed_height",
+        "desktop_fixed_height": 640,
+        "mobile_fixed_height": 200,
+        "color-body-heading": "rgba(0,0,0,0)",
+        "color-overlay": "rgba(0,0,0,0)",
+        "color-overlay-opacity": 100,
+        "color-body-text": "rgba(0,0,0,0)",
+        "desktop_text_horizontal_position": "center",
+        "mobile_text_horizontal_position": "center",
+        "margin-top": 20,
+        "margin-bottom": 20
+      }
+    },
+    "rich_text_NGeQND": {
+      "type": "rich-text",
+      "blocks": {
+        "text_LkPe7q": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Loris Parfüm olarak, her şubemizde <strong>markamızın modern ve prestijli kimliğini yansıtan özel konseptler</strong> sunuyoruz. Mağaza tasarımlarımız, müşteri deneyimini ön planda tutacak şekilde profesyonelce planlanmıştır; <strong>görsel düzenleme, raf sistemleri ve dekorasyon</strong> standartları merkezi ekibimiz tarafından belirlenir.</p><p>Her şube, Loris markasının güçlü kimliğini ve kalite anlayışını yansıtırken, <strong>müşterilerinizin alışveriş deneyimini maksimuma çıkarmayı</strong> hedefler. Konseptlerimiz, farklı lokasyon ve metrekare büyüklüklerine uygun şekilde esnek ve uygulanabilir tasarlanmıştır.</p><p>Merkezi destek ekibimiz, şube açılışından günlük operasyonlara kadar her adımda yanınızda olarak <strong>marka bütünlüğünü ve operasyonel mükemmeliyeti</strong> garanti eder.</p>",
+            "disable_on_mobile": false
+          }
+        },
+        "button_VnW8pL": {
+          "type": "button",
+          "disabled": true,
+          "settings": {
+            "button_select": "primary",
+            "button_label": "Button label",
+            "button_link": "/",
+            "disable_on_mobile": false
+          }
+        }
+      },
+      "block_order": [
+        "text_LkPe7q",
+        "button_VnW8pL"
+      ],
+      "name": "t:sections.rich-text.presets.name__2",
+      "settings": {
+        "section_width": "regular",
+        "desktop_text_horizontal_position": "center",
+        "color-body-text": "rgba(0,0,0,0)",
+        "background_color": "rgba(0,0,0,0)",
+        "margin-top": 20,
+        "margin-bottom": 20
+      }
+    },
+    "multicolumn_Y4QYzN": {
+      "type": "multicolumn",
+      "blocks": {
+        "column_fB9WGM": {
+          "type": "column",
+          "settings": {
+            "heading": "Showroom Mağazalarımız",
+            "heading_disable_on_mobile": false,
+            "text": "<p><strong>Geniş Alanlarda Tam Loris Deneyimi ve Premium Hizmet</strong><br/><br/>Markamızın tüm ürün yelpazesini sergileyen, geniş ve deneyim odaklı mağazalardır. Profesyonel danışmanlık, özel koleksiyonlar ve deneyim alanları ile müşteriye kapsamlı bir Loris deneyimi sunar. Showroom’lar, hem yerel hem de uluslararası pazarda markanın prestijini ve kurumsal duruşunu güçlendirmek için tasarlanmıştır.</p>",
+            "text_disable_on_mobile": false,
+            "button_select": "primary",
+            "button_label": "",
+            "button_disable_on_mobile": false,
+            "button_link": "",
+            "button_link_in_new_window": false,
+            "desktop_image": "shopify://shop_images/Neuss_Siyah_Almanaya_loris_one_part_page-0004.jpg"
+          }
+        },
+        "column_eCGrFB": {
+          "type": "column",
+          "settings": {
+            "heading": "Kiosk Mağazalarımız",
+            "heading_disable_on_mobile": false,
+            "text": "<p><strong>AVM’lerde Stratejik Konumlanmış Hızlı ve Pratik Loris Alışverişi</strong><br/><br/>Yüksek yaya trafiğine sahip AVM girişleri ve ana koridorlarda konumlanan kompakt mağazalar, hızlı erişim ve pratik alışveriş imkânı sunar. Sık tercih edilen ürünlerimizle müşteriye etkili bir deneyim yaşatırken, marka görünürlüğünü maksimum seviyeye çıkarır. Yatırım açısından düşük maliyetli ve yüksek geri dönüş potansiyeline sahip bir konsepttir.</p>",
+            "text_disable_on_mobile": false,
+            "button_select": "primary",
+            "button_label": "",
+            "button_disable_on_mobile": false,
+            "button_link": "",
+            "button_link_in_new_window": false,
+            "desktop_image": "shopify://shop_images/Loris_Erasta_Tek_Parca_page-0007.jpg"
+          }
+        },
+        "column_DJwjbN": {
+          "type": "column",
+          "settings": {
+            "heading": "Pop-up Mağazalarımız",
+            "heading_disable_on_mobile": false,
+            "text": "<p><strong>Küçük Showroomlar ile Kişiselleştirilmiş Loris Deneyimi</strong><br/><br/>Butik ölçekli mağazalarımız, seçili ürün koleksiyonlarını müşterilere deneyimleme fırsatı sunar. Alan tasarımı ve görselliği ile markanın imajını güçlendirirken, kişiye özel hizmet ve danışmanlık deneyimi sağlar. Hem lokal pazarda marka bilinirliğini artırmak hem de müşteriye premium bir alışveriş deneyimi yaşatmak için idealdir.</p>",
+            "text_disable_on_mobile": false,
+            "button_select": "primary",
+            "button_label": "",
+            "button_disable_on_mobile": false,
+            "button_link": "",
+            "button_link_in_new_window": false,
+            "desktop_image": "shopify://shop_images/mus_loris_tek_parca_1__page-0003.jpg"
+          }
+        }
+      },
+      "block_order": [
+        "column_fB9WGM",
+        "column_eCGrFB",
+        "column_DJwjbN"
+      ],
+      "name": "t:sections.multicolumn.presets.name",
+      "settings": {
+        "heading": "Şube Konseptleri",
+        "swipe_on_mobile": false,
+        "full-width-enabled": false,
+        "image_ratio": "adapt",
+        "column_alignment": "left",
+        "size_heading": 100,
+        "size_heading_mobile": 100,
+        "color-body-text": "rgba(0,0,0,0)",
+        "background_color": "rgba(0,0,0,0)",
+        "margin-top": 20,
+        "margin-bottom": 20
+      }
+    },
+    "image_with_text_JbPWmk": {
+      "type": "image-with-text",
+      "blocks": {
+        "subheading_KAPJRX": {
+          "type": "subheading",
+          "disabled": true,
+          "settings": {
+            "subheading": "Tell you story",
+            "subheading_disable_on_mobile": false
+          }
+        },
+        "heading_KcehpU": {
+          "type": "heading",
+          "settings": {
+            "heading": "Profesyonel Destek ve Operasyonel Kolaylık",
+            "disable_on_mobile": false,
+            "size_heading": 100,
+            "size_heading_mobile": 100
+          }
+        },
+        "text_tqXMtb": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Loris Parfüm şubelerinde, <strong>mimar ve mağaza görsel tasarım uzmanları</strong> konseptin doğru uygulanmasını sağlarken, <strong>bölge müdürlerimiz</strong> operasyonel süreçlerde sürekli destek sunar.</p><p>Bayilerimiz, <strong>7/24 ulaşabilecekleri merkezimiz</strong> sayesinde her türlü ihtiyaçlarına anında çözüm bulur. Böylece her şube, Loris’in prestijini ve kalite standartlarını en yüksek seviyede yansıtır.</p>",
+            "text_style": "body",
+            "disable_on_mobile": false
+          }
+        },
+        "button_z8kXbC": {
+          "type": "button",
+          "disabled": true,
+          "settings": {
+            "button_select": "primary",
+            "button_label": "Button label",
+            "button_link": "/",
+            "disable_on_mobile": false
+          }
+        }
+      },
+      "block_order": [
+        "subheading_KAPJRX",
+        "heading_KcehpU",
+        "text_tqXMtb",
+        "button_z8kXbC"
+      ],
+      "name": "t:sections.image-with-text.presets.name",
+      "settings": {
+        "title": "",
+        "layout": "image_first",
+        "desktop-percentage-image-width": 50,
+        "full-width-enabled": false,
+        "slide_height": "fixed_height",
+        "desktop_fixed_height": 420,
+        "mobile_fixed_height": 460,
+        "section-color-body-text": "rgba(0,0,0,0)",
+        "section-color-overlay": "rgba(0,0,0,0)",
+        "section-color-overlay-opacity": 100,
+        "color-body-text": "rgba(0,0,0,0)",
+        "color-overlay": "rgba(0,0,0,0)",
+        "color-overlay-opacity": 100,
+        "desktop_image": "shopify://shop_images/Gemini_Generated_Image_pgccnlpgccnlpgcc.png",
+        "desktop_text_vertical_position": "center",
+        "desktop_text_horizontal_position": "center",
+        "mobile_text_horizontal_position": "center",
+        "margin-top": 20,
+        "margin-bottom": 20
+      }
+    },
+    "rich_text_3fbBMR": {
+      "type": "rich-text",
+      "blocks": {
+        "heading_JyMm9c": {
+          "type": "heading",
+          "settings": {
+            "heading": "Siz de Loris Ailesine Katılın",
+            "disable_on_mobile": false,
+            "size_heading": 150,
+            "size_heading_mobile": 100
+          }
+        },
+        "text_DVHNVz": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Loris Parfüm, yalnızca güçlü bir marka değil; aynı zamanda iş ortaklarına her adımda destek sunan bir aile. Şube konseptlerinden pazarlama desteğine, Loris Akademi’den 7/24 merkez iletişim hattına kadar sunduğumuz imkanlarla, işinizi güvenle büyütebileceğiniz bir sistem inşa ediyoruz.</p><p>Siz de dünya çapında sayısız başvuru alan bu büyük ailenin bir parçası olmak, prestijli bir yatırımın kapılarını aralamak ve kendi başarı hikayenizi yazmak için ilk adımı hemen atın.</p><p><strong>Aşağıdaki formu doldurarak başvurunuzu şimdi gerçekleştirin, Loris dünyasına katılma yolculuğunuzu başlatalım.</strong></p>",
+            "disable_on_mobile": false
+          }
+        },
+        "button_bNYXxM": {
+          "type": "button",
+          "disabled": true,
+          "settings": {
+            "button_select": "primary",
+            "button_label": "Button label",
+            "button_link": "/",
+            "disable_on_mobile": false
+          }
+        }
+      },
+      "block_order": [
+        "heading_JyMm9c",
+        "text_DVHNVz",
+        "button_bNYXxM"
+      ],
+      "name": "t:sections.rich-text.presets.name",
+      "settings": {
+        "section_width": "regular",
+        "desktop_text_horizontal_position": "left",
+        "color-body-text": "rgba(0,0,0,0)",
+        "background_color": "rgba(0,0,0,0)",
+        "margin-top": 20,
+        "margin-bottom": 0
+      }
+    },
+    "custom_liquid_3i7yJN": {
+      "type": "custom-liquid",
+      "name": "t:sections.custom-liquid.presets.name",
+      "settings": {
+        "custom_liquid": "<section id=\"basvuru-section\">\n<iframe id=\"basvuru-form\" src=\"https://www.lorisbayilikbasvurusu.com/\" style=\"border:0px #ffffff none;width: 100%;height: 750px;/* 700px */max-width: 410px;margin: 0 auto;display: block;\" name=\"myiFrame\" scrolling=\"no\" frameborder=\"1\" marginheight=\"0px\" marginwidth=\"0px\" height=\"400px\" width=\"600px\" allowfullscreen></iframe>"
+      }
+    },
+    "17575280251cf479ef": {
+      "type": "apps",
+      "blocks": {
+        "forms_inline_ppKqhg": {
+          "type": "shopify://apps/forms/blocks/inline/8744a304-fcb1-4347-b211-bb6b4759a76a",
+          "settings": {
+            "form_id": "650353",
+            "text_color": "#202020",
+            "button_background_color": "#202020",
+            "button_label_color": "#ffffff",
+            "links_color": "#1878b9",
+            "errors_color": "#e02229",
+            "text_alignment": "center",
+            "form_alignment": "center",
+            "padding_top": 0,
+            "padding_bottom": 24,
+            "padding_right": 0,
+            "padding_left": 0
+          }
+        }
+      },
+      "block_order": [
+        "forms_inline_ppKqhg"
+      ],
+      "disabled": true,
+      "settings": {
+        "include_margins": true
+      }
+    }
+  },
+  "order": [
+    "custom_liquid_rYraar",
+    "rich_text_EjrV68",
+    "main",
+    "rich_text_with_image_bJntbe",
+    "button_HBCJPg",
+    "custom_liquid_enAnqx",
+    "image_with_text_Rarjfz",
+    "features_banner_xNAfAU",
+    "image_with_text_aqnVVa",
+    "background_video_rFpcir",
+    "rich_text_NGeQND",
+    "multicolumn_Y4QYzN",
+    "image_with_text_JbPWmk",
+    "rich_text_3fbBMR",
+    "custom_liquid_3i7yJN",
+    "17575280251cf479ef"
+  ]
+}
