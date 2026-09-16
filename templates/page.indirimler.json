@@ -95,7 +95,6 @@
         },
         "slide_YA36UV": {
           "type": "slide",
-          "disabled": true,
           "settings": {
             "subheading": "",
             "subheading_disable_on_mobile": false,
@@ -105,7 +104,7 @@
             "size_heading_mobile": 100,
             "text": "",
             "text_disable_on_mobile": false,
-            "button_select": "primary",
+            "button_select": "secondary",
             "button_label": "Keşfet",
             "button_disable_on_mobile": false,
             "button_link": "shopify://collections/frequence",
@@ -116,10 +115,10 @@
             "color-body-text": "rgba(0,0,0,0)",
             "color-overlay": "rgba(0,0,0,0)",
             "color-overlay-opacity": 0,
-            "desktop_image": "shopify://shop_images/Artboard-3-copy-3-100.jpg",
+            "desktop_image": "shopify://shop_images/FREQUENCE-BANNER_e3319b1f-498b-4851-a43e-8a618abd7b81.jpg",
             "desktop_text_vertical_position": "bottom",
             "desktop_text_horizontal_position": "center",
-            "mobile_image": "shopify://shop_images/Artboard_3_copy_7-100_63ba3e5c-4c03-4b45-89ce-a9a1db1467a4.jpg",
+            "mobile_image": "shopify://shop_images/FREQUENCE-ST.jpg",
             "mobile_text_vertical_position": "bottom",
             "mobile_text_horizontal_position": "center",
             "out-background-color": "rgba(0,0,0,0)",
@@ -128,7 +127,6 @@
         },
         "slide_feUC3D": {
           "type": "slide",
-          "disabled": true,
           "settings": {
             "subheading": "",
             "subheading_disable_on_mobile": false,
@@ -138,7 +136,7 @@
             "size_heading_mobile": 100,
             "text": "",
             "text_disable_on_mobile": false,
-            "button_select": "primary",
+            "button_select": "secondary",
             "button_label": "Keşfet",
             "button_disable_on_mobile": false,
             "button_link": "shopify://collections/cubuklu-oda-kokusu",
@@ -149,10 +147,10 @@
             "color-body-text": "rgba(0,0,0,0)",
             "color-overlay": "rgba(0,0,0,0)",
             "color-overlay-opacity": 0,
-            "desktop_image": "shopify://shop_images/Artboard_2-100.jpg",
+            "desktop_image": "shopify://shop_images/ODA-KOKUSU-BANNER.jpg",
             "desktop_text_vertical_position": "bottom",
             "desktop_text_horizontal_position": "center",
-            "mobile_image": "shopify://shop_images/Artboard_3_copy_6-100.jpg",
+            "mobile_image": "shopify://shop_images/ODA-KOKUSU-ST.jpg",
             "mobile_text_vertical_position": "bottom",
             "mobile_text_horizontal_position": "center",
             "out-background-color": "rgba(0,0,0,0)",
@@ -161,6 +159,7 @@
         },
         "slide_8GFHVp": {
           "type": "slide",
+          "disabled": true,
           "settings": {
             "subheading": "",
             "subheading_disable_on_mobile": false,
@@ -193,6 +192,7 @@
         },
         "slide_chJEhK": {
           "type": "slide",
+          "disabled": true,
           "settings": {
             "subheading": "",
             "subheading_disable_on_mobile": false,
@@ -292,7 +292,7 @@
       "type": "featured-collection",
       "name": "t:sections.featured-collection.presets.name",
       "settings": {
-        "title": "Frequence Serisinde Çok Al Az Öde 2. Ürüne %30 İndirim, 3. Ürüne %50 İndirim",
+        "title": "Frequence Serisinde 2. Ürüne %50 İndirim",
         "disable_on_mobile": false,
         "hide_empty_section": false,
         "collection": "frequence",
@@ -387,7 +387,7 @@
       "type": "featured-collection",
       "name": "t:sections.featured-collection.presets.name",
       "settings": {
-        "title": "Oda Kokularında Çok Al Az Öde 2. Ürüne %30 İndirim, 3. Ürüne %50 İndirim",
+        "title": "Oda Kokularında 2. Ürüne %50 İndirim",
         "disable_on_mobile": false,
         "hide_empty_section": false,
         "collection": "oda-kokulari",
@@ -467,7 +467,7 @@
       "type": "featured-collection",
       "name": "t:sections.featured-collection.presets.name",
       "settings": {
-        "title": "Araç Kokularında Çok Al Az Öde 2. Ürüne %30 İndirim, 3. Ürüne %50 İndirim",
+        "title": "Araç Kokularında 2 Al 1 Öde",
         "disable_on_mobile": false,
         "hide_empty_section": false,
         "collection": "arac-kokulari",

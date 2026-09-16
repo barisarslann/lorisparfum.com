@@ -17,13 +17,12 @@
         "announcement_bUNfri": {
           "type": "announcement",
           "settings": {
-            "text": "Çok Al Çok Kazan 2. Ürüne %30, 3. Ürüne %50 İndirim",
-            "link": "shopify://collections/kademeli-i̇ndirim-2-urun-30-3-urune-50-indirim"
+            "text": "Frequence ve Oda Kokularında 2. Ürüne %50 İndirim",
+            "link": "shopify://collections/frequence-ve-120-ml-oda-kokusu-urunlerinde-2-si-50-i̇ndirim"
           }
         },
         "announcement_hnyc6E": {
           "type": "announcement",
-          "disabled": true,
           "settings": {
             "text": "Oto Kokularında Büyük Fırsat: 2 AL 1 ÖDE!",
             "link": "shopify://collections/arac-kokulari"
