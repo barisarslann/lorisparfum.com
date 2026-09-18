@@ -1,0 +1,32 @@
+.product-fragrance-family {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  align-items: start;
+  gap: 8px 12px;
+  margin: 0;
+  padding-block: 16px;
+  border-top: 1px solid var(--custom-section-color-border, var(--color-border, #dedede));
+  color: var(--color-custom-text, var(--color-body-text));
+  font-size: 1.4rem;
+  line-height: 1.5;
+}
+
+.product-fragrance-family__label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0;
+  font-weight: 600;
+}
+
+.product-fragrance-family__icon {
+  flex: 0 0 20px;
+  width: 20px;
+  height: 20px;
+}
+
+.product-fragrance-family__value {
+  min-width: 0;
+  margin: 0;
+  overflow-wrap: anywhere;
+}

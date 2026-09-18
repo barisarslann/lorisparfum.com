@@ -235,6 +235,10 @@
             "custom_liquid": "<collapsible-section class=\"wt-collapse wt-collapse--always  scroll-trigger animate--slide-in  \"\n  data-toggle-tabindex=\"button, [href], input, select\">\n  <div class=\"wt-collapse__trigger\" role=\"button\" tabindex=\"0\" data-open=\"false\" aria-expanded=\"false\"\n    aria-controls=\"CollapsibleTab-collapsible_tab_RfgVzn\">\n    <div class=\"wt-collapse__trigger__text\">\n\n      <div class=\"wt-collapse__trigger__icon\" style=\"display: none;\">\n        <svg class=\"svg-icon svg-icon--accordion color-foreground-\" aria-hidden=\"true\" focusable=\"false\"\n          role=\"presentation\" xmlns=\"http://www.w3.org/2000/svg\" width=\"16\" height=\"16\" viewBox=\"0 0 16 16\">\n          <path fill-rule=\"evenodd\"\n            d=\"M14.441 3.733a.5.5 0 010 .707l-7.94 7.94a.5.5 0 01-.707 0L2.52 9.105a.5.5 0 11.707-.707l2.922 2.922 7.586-7.587a.5.5 0 01.707 0z\"\n            clip-rule=\"evenodd\" />\n        </svg>\n      </div>\n\n      <span class=\"wt-collapse__trigger__title\">\n        {% if request.locale.iso_code == \"tr\" %}\n        Koku Profili\n        {% elsif request.locale.iso_code == \"ar\" %}\n        ملف العطر\n        {% else %}\n        Scent Profile\n        {% endif %}\n      </span>\n    </div>\n    <div class=\"wt-icon\" aria-hidden=\"true\">\n\n      <svg class=\"svg-icon svg-icon--plus \" aria-hidden=\"true\" id=\"\" focusable=\"false\" role=\"presentation\"\n        xmlns=\"http://www.w3.org/2000/svg\" data-icon-theme=\"option_1\" width=\"72\" height=\"72\" viewBox=\"0 0 72 72\">\n        <title></title>\n        <g id=\"Plus\">\n          <rect class=\"icon-plus-y\" width=\"54\" height=\"4\" rx=\"2\" y=\"34\" x=\"9\" />\n          <rect class=\"icon-plus-x\" width=\"4\" height=\"54\" rx=\"2\" y=\"9\" x=\"34\" />\n        </g>\n      </svg>\n\n    </div>\n  </div>\n  <div class=\"wt-collapse__target\" id=\"CollapsibleTab-collapsible_tab_RfgVzn\">\n\n    <div class=\"wt-collapse__target--text\" data-block-id-for-variant-metafield=\"collapsible_tab_RfgVzn\">\n      <div class=\"wt-collapse__target__content rte\">\n        <p>{{ product.metafields.custom.koku_profili | metafield_tag }}</p>\n\n      </div>\n    </div>\n  </div>\n</collapsible-section>"
           }
         },
+        "fragrance_family": {
+          "type": "fragrance_family",
+          "settings": {}
+        },
         "separator_HEwhhT": {
           "type": "separator",
           "settings": {
@@ -321,6 +325,7 @@
         "a05fcf3e-8e1a-4f1f-8d97-2055eb17138d",
         "collapsible_tab_RfgVzn",
         "custom_liquid_qzYiee",
+        "fragrance_family",
         "separator_HEwhhT",
         "custom_liquid_KnpjgN",
         "separator_MKMqEa",
