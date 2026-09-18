@@ -1,5 +1,6 @@
 {{ 'photoswipe.css' | asset_url | stylesheet_tag }}
 {{ 'module-product-gallery.css' | asset_url | stylesheet_tag }}
+{{ 'component-product-fragrance-family.css' | asset_url | stylesheet_tag }}
 
 {% assign background_rgb = section.settings.background_color | color_to_rgb %}
 {% assign text_rgb = section.settings.text_color | color_to_rgb %}
@@ -842,6 +843,8 @@
               {% render block %}
             {%- when 'custom_liquid' -%}
               {{ block.settings.custom_liquid }}
+            {%- when 'fragrance_family' -%}
+              {% render 'product-fragrance-family', product: product, block: block %}
             {%- when 'title' -%}
               <div
                 data-block-id="{{ block.id }}"
@@ -2529,6 +2532,17 @@
   "blocks": [
     {
       "type": "@app"
+    },
+    {
+      "type": "fragrance_family",
+      "name": "Koku ailesi",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "paragraph",
+          "content": "Ürünün Koku Ailesi meta alanını gösterir. Alan boşsa bu satır görünmez."
+        }
+      ]
     },
     {
       "type": "custom_liquid",
