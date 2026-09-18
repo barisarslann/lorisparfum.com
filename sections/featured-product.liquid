@@ -274,13 +274,7 @@
                 {% endif %}
                 <!-- CUSTOM --><!-- Badge -->
                 {% if downcase_tag == custom-badge-5-input %}
-                  <div class="card__badges--item" data-custom-badge="{{ settings.custom-badge-5-input }}">
-                    {% if settings['badges-uppercase'] == 'uppercase' %}
-                      {{ settings['custom-badge-5-input'] | upcase }}
-                    {% else %}
-                      {{ settings['custom-badge-5-input'] }}
-                    {% endif %}
-                  </div>
+                  {% render 'three-for-two-badge' %}
                 {% endif %}
                 {% if downcase_tag == custom-badge-6-input %}
                   <div class="card__badges--item" data-custom-badge="{{ settings.custom-badge-6-input }}">

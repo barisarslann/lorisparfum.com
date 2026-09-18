@@ -1,0 +1,11 @@
+{%- assign badge_label = settings['custom-badge-5-label'] | default: '3 Al 2 Öde' -%}
+<div
+  class="card__badges--item card__badges--three-for-two"
+  data-custom-badge="{{ settings['custom-badge-5-input'] | escape }}"
+>
+  {%- if settings['badges-uppercase'] == 'uppercase' -%}
+    {{- badge_label | upcase | escape -}}
+  {%- else -%}
+    {{- badge_label | escape -}}
+  {%- endif -%}
+</div>
