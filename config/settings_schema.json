@@ -1478,12 +1478,11 @@
         "id": "custom-badge-5-source",
         "label": "Rozet yönetimi",
         "options": [
-          { "value": "collection", "label": "Koleksiyon" },
-          { "value": "tag", "label": "Ürün etiketi" },
-          { "value": "disabled", "label": "Kapalı" }
+          { "value": "disabled", "label": "Kapalı" },
+          { "value": "collection", "label": "Koleksiyon" }
         ],
-        "default": "tag",
-        "info": "Koleksiyon modunda yalnızca seçilen koleksiyondaki ürünlerde rozet görünür; ürün etiketleri dikkate alınmaz."
+        "default": "disabled",
+        "info": "Rozeti açmak için Koleksiyon seçeneğini etkinleştirin ve aşağıdan bir koleksiyon seçin."
       },
       {
         "type": "collection",
@@ -1502,12 +1501,6 @@
         "id": "custom-badge-5-background",
         "default": "#AD95E3",
         "label": "t:settings_schema.product-badges.settings.background"
-      },
-      {
-        "type": "text",
-        "id": "custom-badge-5-input",
-        "label": "t:settings_schema.product-badges.settings.input",
-        "info": "Yalnızca Ürün etiketi modunda kullanılır."
       },
       {
         "type": "text",
