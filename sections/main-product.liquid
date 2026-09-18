@@ -614,9 +614,9 @@
             {% assign custom-badge-3-input = settings['custom-badge-3-input'] | downcase %}
             {% assign custom-badge-4-input = settings['custom-badge-4-input'] | downcase %}
             <!-- CUSTOM --><!-- Badge -->
-            {% assign custom-badge-5-input = settings['custom-badge-5-input'] | downcase %}
             {% assign custom-badge-6-input = settings['custom-badge-6-input'] | downcase %}
 
+            {% render 'three-for-two-badge', product: product %}
             {% for tag in product.tags %}
               {% assign downcase_tag = tag | downcase %}
               {% if downcase_tag == custom-badge-1-input %}
@@ -664,9 +664,6 @@
                 </div>
               {% endif %}
               <!-- CUSTOM --><!-- Badge -->
-              {% if downcase_tag == custom-badge-5-input %}
-                {% render 'three-for-two-badge' %}
-              {% endif %}
               {% if downcase_tag == custom-badge-6-input %}
                 <!-- CUSTOM -->
                 <div class="card__badges--item" data-custom-badge="{{ settings.custom-badge-6-input }}" style="z-index: 1;background: unset;padding: 0;">
