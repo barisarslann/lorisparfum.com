@@ -1474,6 +1474,24 @@
         "content": "Badge 5 — 3 Al 2 Öde"
       },
       {
+        "type": "select",
+        "id": "custom-badge-5-source",
+        "label": "Rozet yönetimi",
+        "options": [
+          { "value": "collection", "label": "Koleksiyon" },
+          { "value": "tag", "label": "Ürün etiketi" },
+          { "value": "disabled", "label": "Kapalı" }
+        ],
+        "default": "tag",
+        "info": "Koleksiyon modunda yalnızca seçilen koleksiyondaki ürünlerde rozet görünür; ürün etiketleri dikkate alınmaz."
+      },
+      {
+        "type": "collection",
+        "id": "custom-badge-5-collection",
+        "label": "3 Al 2 Öde koleksiyonu",
+        "info": "Online Mağaza kanalında yayınlanan bir koleksiyon seçin. Ürün ekleyip çıkarmak için manuel koleksiyon kullanabilirsiniz. Seçim boşsa koleksiyon modunda rozet görünmez."
+      },
+      {
         "type": "color",
         "id": "custom-badge-5-text",
         "default": "#FFFFFF",
@@ -1488,7 +1506,8 @@
       {
         "type": "text",
         "id": "custom-badge-5-input",
-        "label": "t:settings_schema.product-badges.settings.input"
+        "label": "t:settings_schema.product-badges.settings.input",
+        "info": "Yalnızca Ürün etiketi modunda kullanılır."
       },
       {
         "type": "text",

@@ -1,11 +1,36 @@
-{%- assign badge_label = settings['custom-badge-5-label'] | default: '3 Al 2 Öde' -%}
-<div
-  class="card__badges--item card__badges--three-for-two"
-  data-custom-badge="{{ settings['custom-badge-5-input'] | escape }}"
->
-  {%- if settings['badges-uppercase'] == 'uppercase' -%}
-    {{- badge_label | upcase | escape -}}
-  {%- else -%}
-    {{- badge_label | escape -}}
-  {%- endif -%}
-</div>
+{%- liquid
+  assign badge_source = settings['custom-badge-5-source'] | default: 'tag'
+  assign show_badge = false
+
+  if badge_source == 'collection'
+    assign badge_collection = settings['custom-badge-5-collection']
+    if badge_collection.id != blank
+      assign product_collection_ids = product.collections | map: 'id'
+      if product_collection_ids contains badge_collection.id
+        assign show_badge = true
+      endif
+    endif
+  elsif badge_source == 'tag'
+    assign badge_tag = settings['custom-badge-5-input'] | downcase
+    if badge_tag != blank
+      for tag in product.tags
+        assign downcase_tag = tag | downcase
+        if downcase_tag == badge_tag
+          assign show_badge = true
+          break
+        endif
+      endfor
+    endif
+  endif
+-%}
+
+{%- if show_badge -%}
+  {%- assign badge_label = settings['custom-badge-5-label'] | default: '3 Al 2 Öde' -%}
+  <div class="card__badges--item card__badges--three-for-two">
+    {%- if settings['badges-uppercase'] == 'uppercase' -%}
+      {{- badge_label | upcase | escape -}}
+    {%- else -%}
+      {{- badge_label | escape -}}
+    {%- endif -%}
+  </div>
+{%- endif -%}
