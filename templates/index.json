@@ -98,7 +98,6 @@
       "blocks": {
         "slide_gzDJwg": {
           "type": "slide",
-          "disabled": true,
           "settings": {
             "subheading": "",
             "subheading_disable_on_mobile": false,
@@ -119,10 +118,10 @@
             "color-body-text": "rgba(0,0,0,0)",
             "color-overlay": "rgba(0,0,0,0)",
             "color-overlay-opacity": 0,
-            "desktop_image": "shopify://shop_images/banner_69bedd3f-6031-468f-b6c6-cf1d1f8ac0c6.jpg",
+            "desktop_image": "shopify://shop_images/banner_33bb1db1-93ca-41e0-a3ad-dbb1c96625b2.jpg",
             "desktop_text_vertical_position": "bottom",
             "desktop_text_horizontal_position": "center",
-            "mobile_image": "shopify://shop_images/ST_a9b04a7c-917a-4e0f-8153-fe7230aa258e.jpg",
+            "mobile_image": "shopify://shop_images/ST_f4af3aac-acc0-40d3-b189-399aaf37db6b.jpg",
             "mobile_text_vertical_position": "bottom",
             "mobile_text_horizontal_position": "center",
             "out-background-color": "rgba(0,0,0,0)",
@@ -229,6 +228,7 @@
         },
         "slide_MF3gm9": {
           "type": "slide",
+          "disabled": true,
           "settings": {
             "subheading": "",
             "subheading_disable_on_mobile": false,
@@ -281,10 +281,10 @@
             "color-body-text": "rgba(0,0,0,0)",
             "color-overlay": "rgba(0,0,0,0)",
             "color-overlay-opacity": 0,
-            "desktop_image": "shopify://shop_images/BANNER_2a7a88d0-eba1-40fd-a164-6accd959cf88.jpg",
+            "desktop_image": "shopify://shop_images/BANNER_1e8e1b4a-45c8-4157-89f1-f4a43c373d18.jpg",
             "desktop_text_vertical_position": "bottom",
             "desktop_text_horizontal_position": "right",
-            "mobile_image": "shopify://shop_images/ST_645d38b4-8400-448b-ab60-315ad3ce3832.jpg",
+            "mobile_image": "shopify://shop_images/ST_bf4eb4f1-d61a-469d-9b11-5547a3927c46.jpg",
             "mobile_text_vertical_position": "bottom",
             "mobile_text_horizontal_position": "center",
             "out-background-color": "rgba(0,0,0,0)",
@@ -293,6 +293,7 @@
         },
         "slide_FEpyhy": {
           "type": "slide",
+          "disabled": true,
           "settings": {
             "subheading": "",
             "subheading_disable_on_mobile": false,
@@ -325,6 +326,7 @@
         },
         "slide_jybfEW": {
           "type": "slide",
+          "disabled": true,
           "settings": {
             "subheading": "",
             "subheading_disable_on_mobile": false,

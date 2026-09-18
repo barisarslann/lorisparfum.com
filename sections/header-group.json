@@ -16,6 +16,7 @@
       "blocks": {
         "announcement_bUNfri": {
           "type": "announcement",
+          "disabled": true,
           "settings": {
             "text": "Frequence ve Oda Kokularında 2. Ürüne %50 İndirim",
             "link": "shopify://collections/frequence-ve-120-ml-oda-kokusu-urunlerinde-2-si-50-i̇ndirim"
@@ -23,6 +24,7 @@
         },
         "announcement_hnyc6E": {
           "type": "announcement",
+          "disabled": true,
           "settings": {
             "text": "Oto Kokularında Büyük Fırsat: 2 AL 1 ÖDE!",
             "link": "shopify://collections/arac-kokulari"
@@ -30,10 +32,9 @@
         },
         "announcement_7Xdp8C": {
           "type": "announcement",
-          "disabled": true,
           "settings": {
-            "text": "Ayın Yıldızları 1249 TL Yerine 949 TL",
-            "link": "shopify://collections/ozel-koleksiyon-hamdan-aqua-woods-i̇stanbulnight-earth"
+            "text": "Çok Al Çok Kazan 2. Ürüne %30, 3. Ürüne %50 İndirim",
+            "link": "shopify://collections/cok-al-cok-kazan-tum-urunlerde-2-urune-30-3-urune-50-i̇ndirim"
           }
         }
       },

@@ -95,6 +95,7 @@
         },
         "slide_YA36UV": {
           "type": "slide",
+          "disabled": true,
           "settings": {
             "subheading": "",
             "subheading_disable_on_mobile": false,
@@ -127,6 +128,7 @@
         },
         "slide_feUC3D": {
           "type": "slide",
+          "disabled": true,
           "settings": {
             "subheading": "",
             "subheading_disable_on_mobile": false,
@@ -159,7 +161,6 @@
         },
         "slide_8GFHVp": {
           "type": "slide",
-          "disabled": true,
           "settings": {
             "subheading": "",
             "subheading_disable_on_mobile": false,
@@ -292,7 +293,7 @@
       "type": "featured-collection",
       "name": "t:sections.featured-collection.presets.name",
       "settings": {
-        "title": "Frequence Serisinde 2. Ürüne %50 İndirim",
+        "title": "Frequence Serisinde 2. Ürüne %30, 3. Ürüne %50 İndirim",
         "disable_on_mobile": false,
         "hide_empty_section": false,
         "collection": "frequence",
@@ -387,7 +388,7 @@
       "type": "featured-collection",
       "name": "t:sections.featured-collection.presets.name",
       "settings": {
-        "title": "Oda Kokularında 2. Ürüne %50 İndirim",
+        "title": "Oda Kokularında 2. Ürüne %30, 3. Ürüne %50 İndirim",
         "disable_on_mobile": false,
         "hide_empty_section": false,
         "collection": "oda-kokulari",
@@ -467,7 +468,7 @@
       "type": "featured-collection",
       "name": "t:sections.featured-collection.presets.name",
       "settings": {
-        "title": "Araç Kokularında 2 Al 1 Öde",
+        "title": "Araç Kokularında 2. Ürüne %30, 3. Ürüne %50 İndirim",
         "disable_on_mobile": false,
         "hide_empty_section": false,
         "collection": "arac-kokulari",
