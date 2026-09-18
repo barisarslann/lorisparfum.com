@@ -1,0 +1,35 @@
+{% comment %}
+  Renders the product's Koku Ailesi single-line text metafield.
+  Accepts: product and the main-product section block.
+{% endcomment %}
+{%- assign fragrance_family = product.metafields.custom.koku_ailesi.value | strip -%}
+
+{%- if fragrance_family != blank -%}
+  <dl class="product-fragrance-family" data-block-id="{{ block.id }}" {{ block.shopify_attributes }}>
+    <dt class="product-fragrance-family__label">
+      <svg
+        class="product-fragrance-family__icon"
+        xmlns="http://www.w3.org/2000/svg"
+        width="20"
+        height="20"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="1.6"
+        stroke-linecap="round"
+        aria-hidden="true"
+        focusable="false"
+      >
+        <path d="M6 21c-6-6 6-12 0-18M12 21c-6-6 6-12 0-18M18 21c-6-6 6-12 0-18" />
+      </svg>
+      <span>
+        {%- case request.locale.iso_code -%}
+          {%- when 'tr' -%}Koku Ailesi
+          {%- when 'ar' -%}العائلة العطرية
+          {%- else -%}Fragrance Family
+        {%- endcase -%}
+      </span>
+    </dt>
+    <dd class="product-fragrance-family__value">{{ fragrance_family | escape }}</dd>
+  </dl>
+{%- endif -%}
