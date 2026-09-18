@@ -1471,7 +1471,7 @@
       /* - CUSTOM - */ /* Badge */
       {
         "type": "header",
-        "content": "Badge 5" /* t:settings_schema.product-badges.settings.badge__5.content */
+        "content": "Badge 5 — 3 Al 2 Öde"
       },
       {
         "type": "color",
@@ -1482,7 +1482,7 @@
       {
         "type": "color",
         "id": "custom-badge-5-background",
-        "default": "#000000",
+        "default": "#AD95E3",
         "label": "t:settings_schema.product-badges.settings.background"
       },
       {
@@ -1491,10 +1491,10 @@
         "label": "t:settings_schema.product-badges.settings.input"
       },
       {
-        /* - CUSTOM - */
-        "type": "image_picker",
-        "id": "custom-badge-5-input_image",
-        "label": "Image"
+        "type": "text",
+        "id": "custom-badge-5-label",
+        "label": "Etiket yazısı",
+        "default": "3 Al 2 Öde"
       },
       {
         "type": "header",

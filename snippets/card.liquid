@@ -218,15 +218,7 @@
               {% endif %}
               <!-- CUSTOM --><!-- Badge -->
               {% if downcase_tag == custom-badge-5-input %}
-                <!-- CUSTOM -->
-                <div class="card__badges--item" data-custom-badge="{{ settings.custom-badge-5-input }}" style="z-index: 1;background: unset;padding: 0;">
-                  {% if settings['badges-uppercase'] == 'uppercase' %}
-                    {{ settings['custom-badge-5-input'] | upcase }}
-                  {% else %}
-                    <!-- CUSTOM -->
-                    <img src="/cdn/shop/{{ settings['custom-badge-5-input_image'] }}?width=150" style="width: 75px;"><!-- settings['custom-badge-5-input'] -->
-                  {% endif %}
-                </div>
+                {% render 'three-for-two-badge' %}
               {% endif %}
               {% if downcase_tag == custom-badge-6-input %}
                 <!-- CUSTOM -->
