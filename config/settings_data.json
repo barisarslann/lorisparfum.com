@@ -139,12 +139,15 @@
     "custom-badge-3-input_image": "shopify://shop_images/2.urun_50.png",
     "custom-badge-4-input": "2Al1Öde..",
     "custom-badge-4-input_image": "shopify://shop_images/2AL1_DE-Etiket.png",
-    "custom-badge-5-source": "disabled",
-    "custom-badge-5-input": "3Al2Öde",
+    "custom-badge-5-source": "collection",
+    "custom-badge-5-collection": "cok-al-cok-kazan-tum-urunlerde-2-urune-30-3-urune-50-i̇ndirim",
+    "custom-badge-5-background": "#B82039",
+    "custom-badge-5-label": "2.Ürüne %30, 3.Ürüne %50 İndirim",
     "custom-badge-6-input": "1500TL.",
     "custom-badge-6-input_image": "shopify://shop_images/Adsiz_tasarim_6.jpg",
     "animations": true,
     "disabled_animations_on_mobile": false,
+    "custom-badge-5-input": "3Al2Öde",
     "custom-badge-5-input_image": "shopify://shop_images/3_al_2_ode_renkli_fotografli_indirim_simdi_satin_al_instagram_hikayesi_1.png",
     "gift_select_test2": [],
     "logo": "shopify://shop_images/Path_849.svg",
@@ -334,16 +337,6 @@
         "settings": {
           "storefrontAccessToken": "",
           "scriptInitMode": "immediate"
-        }
-      },
-      "8746983209849429782": {
-        "type": "shopify://apps/dealeasy/blocks/app-embed/e47a8634-0496-480d-9e46-6f7fafd34b30",
-        "disabled": false,
-        "settings": {
-          "dealeasy_public_access_token": "",
-          "using_translated_handles": false,
-          "bundle_cart_validation": false,
-          "custom_script_and_style": "<script></script>\n<style></style>"
         }
       },
       "14060519483573897956": {

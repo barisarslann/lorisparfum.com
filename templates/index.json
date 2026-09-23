@@ -627,7 +627,7 @@
         "heading_QUKcCw": {
           "type": "heading",
           "settings": {
-            "heading": "Yaz Esintisine Niche Dokunuş: Okyanus ve Narenciyenin Eşsiz Uyumu",
+            "heading": "Sonbahar Esintisine Niche Dokunuş: Amber ve Odunsu Notaların Eşsiz Uyumu",
             "disable_on_mobile": false,
             "size_heading": 300,
             "size_heading_mobile": 200
@@ -636,7 +636,7 @@
         "text_mWnmEE": {
           "type": "text",
           "settings": {
-            "text": "<p>Loris'in Niche koleksiyonu, sıcak günlerin enerjisini ve yaz mevsiminin canlı ruhunu koku diline çeviriyor. Taze narenciye ve okyanus notaları ilk dokunuşta ferahlık sunarken; tropikal meyve nüansları, hafif çiçek akorları ve güneşten ilham alan sıcak dokunuşlar kompozisyona eşsiz bir karakter katıyor. Özenle seçilmiş doğal esanslarla hazırlanan bu seri, yazın özgürlüğünü hissetmek isteyenlere hitap ederken kişiliğinizi sıcak ve etkileyici bir şekilde yansıtmanızı sağlar.</p>",
+            "text": "<p>Loris'in Niche koleksiyonu, serinleyen havaların dinginliğini ve sonbahar mevsiminin asil ruhunu koku diline çeviriyor. Zengin amber ve baharat notaları ilk dokunuşta derinlik sunarken; odunsu nüanslar, vanilya akorları ve topraktan ilham alan sıcak dokunuşlar kompozisyona eşsiz bir karakter katıyor. Özenle seçilmiş doğal esanslarla hazırlanan bu seri, sonbaharın zarafetini hissetmek isteyenlere hitap ederken kişiliğinizi sofistike ve etkileyici bir şekilde yansıtmanızı sağlar.</p>",
             "disable_on_mobile": false
           }
         },
@@ -658,10 +658,10 @@
       "settings": {
         "desktop_text_horizontal_position": "center",
         "rotation": 15,
-        "image_1": "shopify://shop_images/LOVE-BLOSSOM.jpg",
-        "button_link1": "shopify://products/niche-love-blossom-exclusive-parfum-70-ml",
-        "image_2": "shopify://shop_images/PETALIA.jpg",
-        "button_link2": "shopify://products/loris-petalia-niche-parfum-70-ml",
+        "image_1": "shopify://shop_images/NICHE_SAFFRON_AMBER.png",
+        "button_link1": "shopify://products/saffron-ambre-niche-parfum-70-ml",
+        "image_2": "shopify://shop_images/NICHE_Bergamot_Patchouli.png",
+        "button_link2": "shopify://products/bergamot-patchouli-niche-parfum-70-ml",
         "color-body-text": "rgba(0,0,0,0)",
         "background_color": "#f4efe6",
         "margin-top": 20,
