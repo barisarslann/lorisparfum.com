@@ -1,0 +1,86 @@
+{% comment %}
+  Params: block, section, product
+{% endcomment %}
+{%- assign inventory_qty = product.selected_or_first_available_variant.inventory_quantity -%}
+<div
+  class="product__inventory no-js-hidden{% if settings.animations %} scroll-trigger animate--slide-in{% endif %}{% if settings.disabled_animations_on_mobile %} disabled-on-mobile{% endif %}{% if product.selected_or_first_available_variant.inventory_management != 'shopify' %} visibility-hidden{% endif %}"
+  data-block-id="{{ block.id }}"
+  {{ block.shopify_attributes }}
+  id="Inventory-{{ section.id }}"
+  role="status"
+>
+  {%- if product.selected_or_first_available_variant.inventory_management == 'shopify' -%}
+    {%- if inventory_qty > 0 -%}
+      {%- if block.settings.show_progress_bar -%}
+        {%- if block.settings.stock_levels_count >= 3 and block.settings.level_3_threshold > 0 and inventory_qty <= block.settings.level_3_threshold -%}
+          <div class="product__inventory-message product__inventory-message--level-3 rte">
+            {{- block.settings.level_3_message | replace: '[quantity]', inventory_qty -}}
+          </div>
+        {%- elsif block.settings.stock_levels_count >= 2 and block.settings.level_2_threshold > 0 and inventory_qty <= block.settings.level_2_threshold -%}
+          <div class="product__inventory-message product__inventory-message--level-2 rte">
+            {{- block.settings.level_2_message | replace: '[quantity]', inventory_qty -}}
+          </div>
+        {%- elsif block.settings.level_1_threshold > 0 and inventory_qty <= block.settings.level_1_threshold -%}
+          <div class="product__inventory-message product__inventory-message--level-1 rte">
+            {{- block.settings.level_1_message | replace: '[quantity]', inventory_qty -}}
+          </div>
+        {%- endif -%}
+      {%- else -%}
+        {%- if inventory_qty <= block.settings.inventory_threshold -%}
+          <p class="product__inventory-status">
+            <svg width="15" height="15" aria-hidden="true">
+              <circle cx="7.5" cy="7.5" r="7.5" fill="rgb(238,148,65, 0.3)"/>
+              <circle cx="7.5" cy="7.5" r="5" stroke="rgb(255, 255, 255)" stroke-width="1" fill="rgb(238,148,65)"/>
+            </svg>
+            {%- if block.settings.show_inventory_quantity -%}
+              {%- if block.settings.inventory_quantity_threshold == 0 or inventory_qty <= block.settings.inventory_quantity_threshold -%}
+                {{- 'products.product.inventory_low_stock_show_count' | t: quantity: inventory_qty -}}
+              {%- else -%}
+                {{- 'products.product.inventory_low_stock' | t -}}
+              {%- endif -%}
+            {%- else -%}
+              {{- 'products.product.inventory_low_stock' | t -}}
+            {%- endif -%}
+          </p>
+        {%- else -%}
+          <p class="product__inventory-status">
+            <svg width="15" height="15" aria-hidden="true">
+              <circle cx="7.5" cy="7.5" r="7.5" fill="rgb(62,214,96, 0.3)"/>
+              <circle cx="7.5" cy="7.5" r="5" stroke="rgb(255, 255, 255)" stroke-width="1" fill="rgb(62,214,96)"/>
+            </svg>
+            {%- if block.settings.show_inventory_quantity -%}
+              {%- if block.settings.inventory_quantity_threshold == 0 or inventory_qty <= block.settings.inventory_quantity_threshold -%}
+                {{- 'products.product.inventory_in_stock_show_count' | t: quantity: inventory_qty -}}
+              {%- else -%}
+                {{- 'products.product.inventory_in_stock' | t -}}
+              {%- endif -%}
+            {%- else -%}
+              {{- 'products.product.inventory_in_stock' | t -}}
+            {%- endif -%}
+          </p>
+        {%- endif -%}
+      {%- endif -%}
+    {%- else -%}
+      <p class="product__inventory-status">
+        {%- if product.selected_or_first_available_variant.inventory_policy == 'continue' -%}
+          <svg width="15" height="15" aria-hidden="true">
+            <circle cx="7.5" cy="7.5" r="7.5" fill="rgb(62,214,96, 0.3)"/>
+            <circle cx="7.5" cy="7.5" r="5" stroke="rgb(255, 255, 255)" stroke-width="1" fill="rgb(62,214,96)"/>
+          </svg>
+          {{- 'products.product.inventory_out_of_stock_continue_selling' | t -}}
+        {%- else -%}
+          <svg width="15" height="15" aria-hidden="true">
+            <circle cx="7.5" cy="7.5" r="7.5" fill="rgb(200,200,200, 0.3)"/>
+            <circle cx="7.5" cy="7.5" r="5" stroke="rgb(255, 255, 255)" stroke-width="1" fill="rgb(200,200,200)"/>
+          </svg>
+          {{- 'products.product.inventory_out_of_stock' | t -}}
+        {%- endif -%}
+      </p>
+    {%- endif -%}
+    {%- if block.settings.show_progress_bar and block.settings.progress_bar_max_value > 0 -%}
+      <div class="product__inventory-bar">
+        <div class="product__inventory-bar-fill"></div>
+      </div>
+    {%- endif -%}
+  {%- endif -%}
+</div>

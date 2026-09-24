@@ -40,6 +40,11 @@
     },
     "continue_shopping": "Jatka ostoksia",
     "pagination": {
+      "previous_label": "Edellinen",
+      "next_label": "Seuraava",
+      "load_more": "Lataa lisää",
+      "load_previous": "Lataa edelliset",
+      "showing": "Näytetään {{ count }} / {{ total }} tuotetta",
       "label": "Sivunumerointi",
       "page": "Sivu {{ number }}",
       "next": "Seuraava sivu",
@@ -52,6 +57,8 @@
       "view": "Näytä ostoskori ({{ count }})",
       "item_added": "Tuote lisätty ostoskoriisi"
     },
+    "copy": "Kopioi",
+    "copied": "Kopioitu",
     "share": {
       "copy_to_clipboard": "Kopioi linkki",
       "share_url": "Linkki",
@@ -60,9 +67,6 @@
     },
     "quick_add": {
       "view_all_details": "Näytä kaikki tiedot"
-    },
-    "icons": {
-      "icon_title": ""
     },
     "slider": {
       "of": "/",
@@ -74,7 +78,9 @@
   "newsletter": {
     "label": "Sähköpostiosoitteesi",
     "success": "Kiitos tilauksesta",
-    "button_label": "Tilaa"
+    "button_label": "Tilaa",
+    "close": "Sulje ponnahdusikkuna",
+    "consent_checkbox_label": "Haluan tilata uutiskirjeen (tietoa kampanjoista, alennuksista, ensiesittelyistä, kilpailuista)."
   },
   "accessibility": {
     "skip_to_text": "Ohita ja siirry sisältöön",
@@ -95,7 +101,10 @@
     "star_reviews_info": "{{ rating_value }} / {{ rating_max }} tähteä",
     "collapsible_content_title": "Pudotettava sisältö",
     "complementary_products": "Täydentävät tuotteet",
-    "searching": "Haku käynnissä..."
+    "searching": "Haku käynnissä...",
+    "scroll_to_top": "Scroll to top",
+    "open": "Avaa",
+    "subscription_widget__selling_plan_select": "Toimitustiheys tuotteelle {{ plan_group }}"
   },
   "blogs": {
     "article": {
@@ -115,7 +124,10 @@
       "back_to_blog": "Takaisin blogiin",
       "share": "Jaa tämä artikkeli",
       "success": "Kommenttisi julkaiseminen onnistui! Kiitos!",
-      "success_moderated": "Kommenttisi julkaiseminen onnistui. Julkaisemme sen jonkin ajan kuluttua, kun blogimme on tarkastettu."
+      "success_moderated": "Kommenttisi julkaiseminen onnistui. Julkaisemme sen jonkin ajan kuluttua, kun blogimme on tarkastettu.",
+      "date_format": "%d.%m.%Y",
+      "published_on": "{{ date }}",
+      "posted_by": "Kirjoittanut {{ author }}"
     }
   },
   "onboarding": {
@@ -125,6 +137,7 @@
   "products": {
     "product": {
       "add_to_cart": "Lisää ostoskoriin",
+      "pick_size": "Valitse {{ option }}",
       "description": "Kuvaus",
       "on_sale": "Alennusmyynti",
       "product_variants": "Tuoteversiot",
@@ -138,7 +151,8 @@
         "from_price_html": "Alkaen {{ price }}",
         "regular_price": "Normaalihinta",
         "sale_price": "Myyntihinta",
-        "unit_price": "Yksikköhinta"
+        "unit_price": "Yksikköhinta",
+        "free": "Ilmainen"
       },
       "share": "Jaa tämä tuote",
       "sold_out": "Loppuunmyyty",
@@ -185,7 +199,9 @@
       "volume_pricing": {
         "note": "TODO",
         "price_range": "TODO"
-      }
+      },
+      "select_option": "Valitse vaihtoehto",
+      "select_options": "Valitse vaihtoehdot"
     },
     "modal": {
       "label": "Mediagalleria"
@@ -222,6 +238,10 @@
     }
   },
   "templates": {
+    "404": {
+      "title": "Sivua ei löytynyt",
+      "subtext": "404"
+    },
     "search": {
       "no_results": "Ei tuloksia haulla \"{{ terms }}\". Tarkista oikeinkirjoitus tai kokeile toista sanaa tai ilmaisua.",
       "results_with_count": {
@@ -242,7 +262,9 @@
         "products": "Tuotteet",
         "pages": "Sivut",
         "articles": "Artikkelit",
-        "suggestions": "Ehdotukset"
+        "suggestions": "Ehdotukset",
+        "popular_searches": "Suositut haut",
+        "useful_links": "Hyödylliset linkit"
       },
       "search_for": "Katso kaikki kohteelle \"{{ terms }}\""
     },
@@ -260,13 +282,12 @@
         "error_heading": "Mukauta seuraavat:",
         "title": "Yhteydenottolomake"
       }
-    },
-    "404": {
-      "title": "Sivua ei löytynyt",
-      "subtext": "404"
     }
   },
   "sections": {
+    "shoppable_buy_all": {
+      "add_all_to_cart": "Lisää kaikki ostoskoriin"
+    },
     "header": {
       "announcement": "Ilmoitus",
       "menu": "Valikko",
@@ -305,7 +326,29 @@
         "title": "Onko sinulla tili?",
         "paragraph_html": "<a href=\"{{ link }}\" tabindex=\"-1\" class=\"link underlined-link\">Kirjaudu sisään</a> nopeampaan kassakäyntiin."
       },
-      "view_cart": "Näytä ostoskori"
+      "view_cart": "Näytä ostoskori",
+      "checkbox": "Paketo lahjaksi",
+      "order_note": "Tilauksen huomautus",
+      "estimate_shipping": "Toimitus",
+      "discount_code": "Alennuskoodi",
+      "features": {
+        "country_region": "Maa/alue",
+        "postal_zip": "Postinumero",
+        "apply": "Käytä",
+        "calculate": "Laske",
+        "discount_placeholder": "Anna alennuskoodi",
+        "shipping_select_country_zip": "Valitse maa ja anna postinumero.",
+        "shipping_calculating": "Lasketaan…",
+        "shipping_no_rate": "Tälle kohteelle ei ole toimitusvaihtoehtoa. Tarkista osoite.",
+        "shipping_one_rate": "Tälle kohteelle on yksi toimitusvaihtoehto:",
+        "shipping_n_rates": "Tälle kohteelle on {{ count }} toimitusvaihtoehtoa:",
+        "shipping_free": "Ilmainen",
+        "discount_enter_code": "Anna alennuskoodi.",
+        "discount_applying": "Käytetään…",
+        "discount_applied": "Alennus käytetty!",
+        "discount_invalid": "Alennuskoodi ei kelpaa tai se ei koske nykyistä ostoskoria.",
+        "discount_error": "Jokin meni pieleen. Yritä uudelleen."
+      }
     },
     "footer": {
       "payment": "Maksutavat",
@@ -369,6 +412,54 @@
       },
       "error": {
         "invalid_format": "Virheellinen päivämäärämuoto. Anna päivämäärä ja aika muodossa VVVV-KK-PP TT:MM."
+      }
+    },
+    "localization_drawer": {
+      "title": "Sijainnin määritys",
+      "country_label": "Maa/alue",
+      "language_label": "Kieli",
+      "drawer_title": "Paikallistamisasetukset",
+      "current_country_info": "Toimitus kohdistuu tällä hetkellä maahan {{ countryName }} ja tilauksesi laskutetaan valuutassa {{ currencyIso }} {{ currencySymbol }}.",
+      "search_location": {
+        "label": "Etsi sijainti",
+        "placeholder": "Hae sijaintia..."
+      }
+    },
+    "bundle-builder": {
+      "add_to_bundle": "Lisää pakettiin",
+      "status": {
+        "discount": "🎉 Sait alennuksen.",
+        "add_more": "Voit vielä lisätä enemmän."
+      },
+      "toggle": "Näytä/piilota pakettipaneeli",
+      "remove_item": "Poista tuote",
+      "error_message": "Tapahtui virhe. Yritä uudelleen."
+    },
+    "quiz": {
+      "back": "Palaa takaisin",
+      "prev_question": "Edellinen",
+      "next_question": "Seuraava",
+      "see_results": "Katso tulokset"
+    },
+    "blog_posts": {
+      "tags_all": "Kaikki julkaisut"
+    },
+    "compare_products": {
+      "name": "Vertaile tuotteita",
+      "badge": {
+        "compare": "VS"
+      },
+      "placeholders": {
+        "left_text": "Vasen",
+        "right_text": "Oikea"
+      },
+      "aria": {
+        "table": "Vertailutaulukko"
+      },
+      "blocks": {
+        "table_row": {
+          "center_text_default": "Kirjoita tekstiä..."
+        }
       }
     }
   },
@@ -534,7 +625,7 @@
   },
   "aria-label": {
     "announcement-bar": "Sulje ilmoituspalkki",
-    "contact-form": "Lähetä lomake",
+    "contact-form": "Lähetä",
     "featured-collection": "Näytä kaikki",
     "featured-product-3d-model": "Katso 3D-malli",
     "main-product-video": "Toista video",
@@ -572,6 +663,15 @@
     "price-from": "Hinta alkaen",
     "price-to": "Hintaan asti",
     "remove-price-range": "Poista hintahaarukan suodatin",
-    "sort-options": "Lajitteluvaihtoehdot"
+    "sort-options": "Lajitteluvaihtoehdot",
+    "lookbook-button": "Näytä tiedot",
+    "pills-navigation": "Pill-navigointi",
+    "collection-tabs": "Kokoelmavälilehdet"
+  },
+  "placeholder": {
+    "select_option": "Valitse vaihtoehto"
+  },
+  "cross_sell": {
+    "empty_msg": "Ei näytettäviä tuotteita. Tämä lohko ei näy asiakkaille kaupan näkymässä."
   }
 }

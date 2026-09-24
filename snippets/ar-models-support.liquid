@@ -1,0 +1,21 @@
+<script>
+    function setupShopifyXr(){
+      if (!window.ShopifyXR) {
+        document.addEventListener('shopify_xr_initialized', function() {
+          setupShopifyXr();
+        });
+      }else{
+        {% assign models = product.media | where: 'media_type', 'model' | json -%}
+        window.ShopifyXR.addModels({{ models }});
+        window.ShopifyXR.setupXRElements();
+      }
+    }
+    
+    window.Shopify.loadFeatures([
+      {
+        name: 'shopify-xr',
+        version: '1.0',
+        onLoad: setupShopifyXr
+      }
+    ]);
+</script>

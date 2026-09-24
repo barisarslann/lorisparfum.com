@@ -1,0 +1,70 @@
+{%- liquid
+  assign btn_style = button_style | default: 'primary'
+
+  capture button_classes
+    echo 'hero__button hero__button--primary'
+    if btn_style != 'primary'
+      echo ' hero__button--secondary'
+    endif
+    if btn_style == 'link'
+      echo ' hero__button--link'
+    endif
+  endcapture
+-%}
+
+{%- if slot == 'previous' -%}
+  {%- if paginate.previous -%}
+    <a
+      class="{{ button_classes }} wt-load-more__button wt-load-more__button--prev wt-load-more__button--span"
+      href="{{ paginate.previous.url }}"
+      rel="prev"
+      data-load-prev
+    ><span>{{ 'general.pagination.load_previous' | t }}</span></a>
+  {%- endif -%}
+{%- else -%}
+  {%- liquid
+    assign total = paginate.items
+    assign loaded = loaded_count | default: 0
+    assign progress_pct = 0
+    if total > 0
+      assign progress_pct = loaded | times: 100 | divided_by: total
+    endif
+  -%}
+  {{ 'module-load-more.css' | asset_url | stylesheet_tag }}
+  <load-more-pagination
+    class="wt-load-more"
+    data-grid-id="product-grid"
+    data-section-id="{{ section_id }}"
+    data-total="{{ total }}"
+    data-loaded="{{ loaded }}"
+    {%- if paginate.next %} data-next-url="{{ paginate.next.url }}"{% endif -%}
+    {%- if paginate.previous %} data-prev-url="{{ paginate.previous.url }}"{% endif %}
+    data-showing-template="{{ 'general.pagination.showing' | t: count: '%count%', total: total }}"
+  >
+    {%- comment -%}
+      Only render the bottom indicator while there is a further page to load. On the last
+      page (a direct ?page=N refresh landing on it) there is nothing more to fetch, so we
+      drop the whole "Load more" + progress block and leave an empty host element that still
+      wires up the "Load previous" button relocated to the top of the grid.
+    {%- endcomment -%}
+    {%- if paginate.next -%}
+      <div class="wt-load-more__bar-wrap">
+        <a
+          class="{{ button_classes }} wt-load-more__button wt-load-more__button--next"
+          href="{{ paginate.next.url }}"
+          rel="next"
+          data-load-more
+        ><span>{{ 'general.pagination.load_more' | t }}</span></a>
+
+        {%- if show_progress -%}
+          <div class="wt-load-more__bar" role="presentation">
+            <span class="wt-load-more__bar-fill" style="--wt-load-more-progress: {{ progress_pct }}%;"></span>
+          </div>
+          <p class="wt-load-more__count" aria-live="polite">
+            {{- 'general.pagination.showing' | t: count: loaded, total: total -}}
+          </p>
+        {%- endif -%}
+      </div>
+    {%- endif -%}
+  </load-more-pagination>
+{%- endif -%}

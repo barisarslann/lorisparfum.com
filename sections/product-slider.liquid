@@ -1,20 +1,14 @@
 {{ 'section-products-slider.css' | asset_url | stylesheet_tag }}
+{{ 'swiper.css' | asset_url | stylesheet_tag }}
 
 {% assign background_section_rgb = section.settings['section-color-overlay'] | color_to_rgb %}
 {% assign heading_rgb = section.settings['color-heading-text'] | color_to_rgb %}
 
-{% assign background_rgb = section.settings['color-overlay'] | color_to_rgb %}
-{% assign text_rgb = section.settings['color-body-text'] | color_to_rgb %}
-
 <style>
   [data-section-id="{{ section.id }}"]
   {
-  {% if background_section_rgb  != 'rgba(0, 0, 0, 0.0)' %}
+  {% if section.settings['section-color-overlay'] != blank and section.settings['section-color-overlay'] != 'transparent' and background_section_rgb != 'rgba(0, 0, 0, 0.0)' %}
     --color-custom-background: {{ background_section_rgb  }};
-  {% endif %}
-
-  {% if text_rgb != 'rgba(0, 0, 0, 0.0)' %}
-    --color-custom-text: {{ section.settings.color-body-text }};
   {% endif %}
 
   {% if section.settings.margin-top %}
@@ -25,10 +19,18 @@
     --section-gap-bottom: {{ section.settings.margin-bottom }}px;
   {% endif %}
 
+      {%- if section.settings.show_mobile_spacing -%}
+          --section-gap-top-mobile: {{ section.settings.margin-top-mobile }}px;
+      {%- endif -%}
+
+      {%- if section.settings.show_mobile_spacing -%}
+          --section-gap-bottom-mobile: {{ section.settings.margin-bottom-mobile }}px;
+      {%- endif -%}
+
   }
 
   [data-section-id="{{ section.id }}"] .headline__title{
-  {% if heading_rgb != 'rgba(0, 0, 0, 0.0)' %}
+  {% if section.settings['color-heading-text'] != blank and section.settings['color-heading-text'] != 'transparent' and heading_rgb != 'rgba(0, 0, 0, 0.0)' %}
     --color-custom-text: {{ section.settings.color-heading-text }};
   {% endif %}
   }
@@ -53,6 +55,7 @@
 {% endif %}
 
 <script src="{{ 'products-slider.js' | asset_url }}"></script>
+<script type="module" src="{{ 'slider.js' | asset_url }}" defer="defer"></script>
 
 <div class="wt-products-slider__section-wrapper" id="{{ section.id }}" data-section-id="{{ section.id }}">
   {% render 'headline', title: section.settings.heading %}
@@ -67,20 +70,22 @@
         <slideshow-section class="wt-slider" data-skip-center-nav-method="true">
           <div
             data-swiper
-            class="loading"
+            class="swiper wt-slider__container loading"
           >
-            <div data-swiper-container>
+            <div data-swiper-container class="swiper-wrapper wt-slider__wrapper">
               {% for block in section.blocks %}
                 {% assign background_color = block.settings.background_color | color_to_rgb %}
                 {% assign text_color = block.settings.text_color | color_to_rgb %}
                 {% assign promo_text_color = block.settings.promo_text_color | color_to_rgb %}
+                
                 <div
                   data-swiper-slide
                   data-block-id="{{ block.id }}"
+                  class="swiper-slide wt-slider__slide"
                   style="
-                    {% if background_color  != 'rgba(0, 0, 0, 0.0)' %}--slide-bg-color: {{ background_color }}{% endif %};
-                    {% if text_color  != 'rgba(0, 0, 0, 0.0)' %}--slide-text-color: {{ text_color }}{% endif %};
-                    {% if promo_text_color  != 'rgba(0, 0, 0, 0.0)' %}--slide-promo-text-color: {{ promo_text_color }}{% endif %};
+                    {% if block.settings['background_color'] != blank and block.settings['background_color'] != 'transparent' and background_color != 'rgba(0, 0, 0, 0.0)' %}--slide-bg-color: {{ background_color }}{% endif %};
+                    {% if block.settings['text_color'] != blank and block.settings['text_color'] != 'transparent' and text_color != 'rgba(0, 0, 0, 0.0)' %}--slide-text-color: {{ text_color }}{% endif %};
+                    {% if block.settings.promo_text_color != blank and block.settings.promo_text_color != 'transparent' and promo_text_color != 'rgba(0, 0, 0, 0.0)' %}--slide-promo-text-color: {{ promo_text_color }}{% endif %};
                   "
                   {{ block.shopify_attributes }}
                 >
@@ -123,8 +128,9 @@
         <slideshow-section class="wt-slider" data-skip-center-nav-method="true">
           <div
             data-swiper
+            class="swiper wt-slider__container loading"
           >
-            <div data-swiper-container>
+            <div data-swiper-container class="swiper-wrapper wt-slider__wrapper">
               {% for block in section.blocks %}
                 {% assign background_color = block.settings.background_color | color_to_rgb %}
                 {% assign text_color = block.settings.text_color | color_to_rgb %}
@@ -132,10 +138,11 @@
                 <div
                   data-swiper-slide
                   data-block-id="{{ block.id }}"
+                  class="swiper-slide wt-slider__slide"
                   style="
-                    {% if background_color  != 'rgba(0, 0, 0, 0.0)' %}--slide-bg-color: {{ background_color }}{% endif %};
-                    {% if text_color  != 'rgba(0, 0, 0, 0.0)' %}--slide-text-color: {{ text_color }}{% endif %};
-                    {% if promo_text_color  != 'rgba(0, 0, 0, 0.0)' %}--slide-promo-text-color: {{ promo_text_color }}{% endif %};
+                    {% if block.settings['background_color'] != blank and block.settings['background_color'] != 'transparent' and background_color != 'rgba(0, 0, 0, 0.0)' %}--slide-bg-color: {{ background_color }}{% endif %};
+                    {% if block.settings['text_color'] != blank and block.settings['text_color'] != 'transparent' and text_color != 'rgba(0, 0, 0, 0.0)' %}--slide-text-color: {{ text_color }}{% endif %};
+                    {% if block.settings.promo_text_color != blank and block.settings.promo_text_color != 'transparent' and promo_text_color != 'rgba(0, 0, 0, 0.0)' %}--slide-promo-text-color: {{ promo_text_color }}{% endif %};
                   "
                   {{ block.shopify_attributes }}
                 >
@@ -259,6 +266,14 @@
       "default": false
     },
     {
+      "type": "checkbox",
+      "id": "show_review_count",
+      "default": true,
+      "label": "t:sections.featured-collection.settings.show_review_count.label",
+      "info": "t:sections.featured-collection.settings.show_review_count.info",
+      "visible_if": "{{ section.settings.show_rating }}"
+    },
+    {
       "type": "header",
       "content": "t:sections.products_slider.settings.layout.heading.label"
     },
@@ -309,13 +324,11 @@
     {
       "type": "color",
       "id": "color-heading-text",
-      "default": "transparent",
       "label": "t:sections.global.heading-color"
     },
     {
       "type": "color",
       "id": "section-color-overlay",
-      "default": "transparent",
       "label": "t:sections.global.section-background-color"
     },
     {
@@ -342,6 +355,33 @@
       "step": 4,
       "default": 20,
       "label": "t:sections.settings.settings.distance-bottom.label"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_mobile_spacing",
+      "label": "t:sections.settings.settings.show-mobile-spacing.label"
+    },
+    {
+      "type": "range",
+      "id": "margin-top-mobile",
+      "min": 0,
+      "max": 100,
+      "step": 2,
+      "default": 20,
+      "unit": "px",
+      "label": "t:sections.settings.settings.distance-top-mobile.label",
+      "visible_if": "{{ section.settings.show_mobile_spacing }}"
+    },
+    {
+      "type": "range",
+      "id": "margin-bottom-mobile",
+      "min": 0,
+      "max": 100,
+      "step": 2,
+      "default": 20,
+      "unit": "px",
+      "label": "t:sections.settings.settings.distance-bottom-mobile.label",
+      "visible_if": "{{ section.settings.show_mobile_spacing }}"
     }
   ],
   "blocks": [
@@ -475,7 +515,7 @@
   ],
   "presets": [
     {
-      "category": "Products",
+      "category": "t:sections.categories.products",
       "name": "t:sections.products_slider.presets.name",
       "blocks": [
         {

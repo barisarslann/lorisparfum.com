@@ -4,9 +4,11 @@
   {% assign is_color_swatch = true %}
 {% endif %}
 
+{% assign open_section = is_open |  default: false %}
+
 <collapsible-section
   class="f-brands filter js-filter"
-  data-open="false"
+  data-open="{{ open_section }}"
   data-index="{{ index }}"
   data-toggle-tabindex=".form-checkbox__input"
 >
@@ -18,8 +20,8 @@
     class="filter__header wt-collapse__trigger"
     role="button"
     tabindex="{% if filter_position == 'always' %}0{% else %}-1{% endif %}"
-    data-open="false"
-    aria-expanded="false"
+    data-open="{{ open_section }}"
+    aria-expanded="{{ open_section }}"
     aria-controls="wt-filter-{{ filter.param_name }}"
   >
     <div>

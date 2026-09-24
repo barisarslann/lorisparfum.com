@@ -1,3 +1,12 @@
+{% if block.settings.custom_item_width_enabled %}
+  <style>
+    [data-block-id="{{ block.id }}"] {
+      --countdown-counter-item-width: {{ block.settings.counter_item_width }}px;
+      --countdown-counter-item-width-mobile: {{ block.settings.counter_item_width_mobile }}px;
+    }
+  </style>
+{% endif %}
+
 <countdown-timer
   id="{{ block.id }}"
   data-block-id="{{ block.id }}"
@@ -14,6 +23,9 @@
   data-translation-invalid-date="{{ 'sections.countdown_timer.error.invalid_format.short' | t }}"
   {% if block.settings.labels_below %}
     data-long-labels
+  {% endif %}
+  {% if block.settings.custom_item_width_enabled %}
+    data-custom-item-width
   {% endif %}
   class="wt-countdown-timer"
   data-style="{{ block.settings.style }}"

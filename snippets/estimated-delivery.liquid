@@ -1,0 +1,56 @@
+{%- liquid
+  assign has_select_icon = false
+  if block.settings.select_icon != 'none' and block.settings.select_icon != blank
+    assign has_select_icon = true
+  endif
+  assign has_icon = false
+  if block.settings.icon != blank or has_select_icon
+    assign has_icon = true
+  endif
+-%}
+
+<style not-quick-add>
+  .wt-estimated-delivery[data-block-id="{{ block.id }}"] {
+    --flex-gap: {{ block.settings.gap }}px;
+    --icon-size: {{ block.settings.icon_height }}px;
+    --icon-size-desktop: {{ block.settings.icon_height_desktop }}px;
+    --icon-margin: {{ block.settings.icon_margin }}px;
+    --icon-margin-desktop: {{ block.settings.icon_margin_desktop }}px;
+    {% if block.settings.background_color != blank %}
+      --background: {{ block.settings.background_color }};
+    {% else %}
+      --padding-inline: 0;
+    {% endif %}
+    {% if block.settings.text_color %}--color: {{ block.settings.text_color }};{% endif %}
+    {% if block.settings.text_transform and block.settings.text_transform != 'none' %}--text-transform: {{ block.settings.text_transform }};{% endif %}
+  }
+</style>
+
+<estimated-delivery
+  not-quick-add
+  class="wt-estimated-delivery"
+  data-block-id="{{ block.id }}"
+  data-value="{{ block.settings.delivery_value | escape }}"
+  data-exclude-weekends="{{ block.settings.exclude_weekends }}"
+  {{ block.shopify_attributes }}
+>
+  {% if has_icon %}
+    <span class="wt-estimated-delivery__icon">
+      {% if block.settings.icon != blank %}
+        {{
+          block.settings.icon
+          | image_url: width: block.settings.icon_height_desktop
+          | image_tag: loading: 'lazy', alt: ''
+        }}
+      {% elsif block.settings.select_icon != 'none' and block.settings.select_icon != blank %}
+        {%- render 'icons', id: block.settings.select_icon -%}
+      {% endif %}
+    </span>
+  {% endif %}
+  <span class="wt-estimated-delivery__content">
+    {% if block.settings.label != blank %}
+      <span class="wt-estimated-delivery__label">{{ block.settings.label }}</span>
+    {% endif %}
+    <span class="wt-estimated-delivery__date" aria-live="polite"></span>
+  </span>
+</estimated-delivery>

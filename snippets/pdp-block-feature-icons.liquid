@@ -1,0 +1,129 @@
+{% comment %}
+  Params: block, product
+{% endcomment %}
+{% liquid
+  assign icons_list = null
+  assign uploaded_icons = null
+
+  assign metafield = block.settings.metafield | strip | split: '.'
+  assign metafield_namespace = metafield | first | strip
+  assign metafield_key = metafield | last | strip
+  assign feature_icons = product.metafields[metafield_namespace][metafield_key]
+
+  if feature_icons.type == 'list.metaobject_reference' and feature_icons.value.count > 0
+    assign icons_list = feature_icons.value
+  endif
+
+  if block.settings.icon_1_image != null or block.settings.icon_2_image != null or block.settings.icon_3_image != null or block.settings.icon_4_image != null or block.settings.icon_1_select != 'none' or block.settings.icon_2_select != 'none' or block.settings.icon_3_select != 'none' or block.settings.icon_4_select != 'none'
+    assign uploaded_icons = true
+  endif
+%}
+
+{% if icons_list or uploaded_icons %}
+  <div
+    class="wt-product__feature-icons{% if settings.animations %} scroll-trigger animate--slide-in{% endif %}{% if settings.disabled_animations_on_mobile %} disabled-on-mobile{% endif %}"
+    data-block-id="{{ block.id }}"
+    not-quick-add
+  >
+    <ul
+      class="wt-product__feature-icons__list{% if block.settings.layout_select == 'row' %} wt-product__feature-icons__list--row{% elsif block.settings.layout_select == 'row-left' %} wt-product__feature-icons__list--row-left{% endif %}"
+    >
+      {% if block.settings.icon_1_image != null %}
+        <li class="wt-product__feature-icons__item{% if block.settings.layout_select == 'column' %} wt-product__feature-icons__item--row{% endif %}">
+          {%- assign icon_1_alt = block.settings.icon_1_image.alt | default: '' | escape -%}
+          {{ block.settings.icon_1_image | image_url: width: block.settings.icon_1_image.width | image_tag: alt: icon_1_alt }}
+          {%- if block.settings.icon_1_text != blank and block.settings.show_icons_label -%}
+            <label class="wt-product__feature-icons__label" for="{{ block.settings.icon_1_text }}">
+              {{- block.settings.icon_1_text -}}
+            </label>
+          {%- endif -%}
+        </li>
+      {% elsif block.settings.icon_1_select != 'none' %}
+        <li class="wt-product__feature-icons__item{% if block.settings.layout_select == 'column' %} wt-product__feature-icons__item--row{% endif %}">
+          {% render 'icons', id: block.settings.icon_1_select %}
+          {%- if block.settings.icon_1_text != blank and block.settings.show_icons_label -%}
+            <label class="wt-product__feature-icons__label" for="{{ block.settings.icon_1_text }}">
+              {{- block.settings.icon_1_text -}}
+            </label>
+          {%- endif -%}
+        </li>
+      {% endif %}
+
+      {% if block.settings.icon_2_image != null %}
+        <li class="wt-product__feature-icons__item{% if block.settings.layout_select == 'column' %} wt-product__feature-icons__item--row{% endif %}">
+          {%- assign icon_2_alt = block.settings.icon_2_image.alt | default: '' | escape -%}
+          {{ block.settings.icon_2_image | image_url: width: block.settings.icon_2_image.width | image_tag: alt: icon_2_alt }}
+          {%- if block.settings.icon_2_text != blank and block.settings.show_icons_label -%}
+            <label class="wt-product__feature-icons__label" for="{{ block.settings.icon_2_text }}">
+              {{- block.settings.icon_2_text -}}
+            </label>
+          {%- endif -%}
+        </li>
+      {% elsif block.settings.icon_2_select != 'none' %}
+        <li class="wt-product__feature-icons__item{% if block.settings.layout_select == 'column' %} wt-product__feature-icons__item--row{% endif %}">
+          {% render 'icons', id: block.settings.icon_2_select %}
+          {%- if block.settings.icon_2_text != blank and block.settings.show_icons_label -%}
+            <label class="wt-product__feature-icons__label" for="{{ block.settings.icon_2_text }}">
+              {{- block.settings.icon_2_text -}}
+            </label>
+          {%- endif -%}
+        </li>
+      {% endif %}
+
+      {% if block.settings.icon_3_image != null %}
+        <li class="wt-product__feature-icons__item{% if block.settings.layout_select == 'column' %} wt-product__feature-icons__item--row{% endif %}">
+          {%- assign icon_3_alt = block.settings.icon_3_image.alt | default: '' | escape -%}
+          {{ block.settings.icon_3_image | image_url: width: block.settings.icon_3_image.width | image_tag: alt: icon_3_alt }}
+          {%- if block.settings.icon_3_text != blank and block.settings.show_icons_label -%}
+            <label class="wt-product__feature-icons__label" for="{{ block.settings.icon_3_text }}">
+              {{- block.settings.icon_3_text -}}
+            </label>
+          {%- endif -%}
+        </li>
+      {% elsif block.settings.icon_3_select != 'none' %}
+        <li class="wt-product__feature-icons__item{% if block.settings.layout_select == 'column' %} wt-product__feature-icons__item--row{% endif %}">
+          {% render 'icons', id: block.settings.icon_3_select %}
+          {%- if block.settings.icon_3_text != blank and block.settings.show_icons_label -%}
+            <label class="wt-product__feature-icons__label" for="{{ block.settings.icon_3_text }}">
+              {{- block.settings.icon_3_text -}}
+            </label>
+          {%- endif -%}
+        </li>
+      {% endif %}
+
+      {% if block.settings.icon_4_image != null %}
+        <li class="wt-product__feature-icons__item{% if block.settings.layout_select == 'column' %} wt-product__feature-icons__item--row{% endif %}">
+          {%- assign icon_4_alt = block.settings.icon_4_image.alt | default: '' | escape -%}
+          {{ block.settings.icon_4_image | image_url: width: block.settings.icon_4_image.width | image_tag: alt: icon_4_alt }}
+          {%- if block.settings.icon_4_text != blank and block.settings.show_icons_label -%}
+            <label class="wt-product__feature-icons__label" for="{{ block.settings.icon_4_text }}">
+              {{- block.settings.icon_4_text -}}
+            </label>
+          {%- endif -%}
+        </li>
+      {% elsif block.settings.icon_4_select != 'none' %}
+        <li class="wt-product__feature-icons__item{% if block.settings.layout_select == 'column' %} wt-product__feature-icons__item--row{% endif %}">
+          {% render 'icons', id: block.settings.icon_4_select %}
+          {%- if block.settings.icon_4_text != blank and block.settings.show_icons_label -%}
+            <label class="wt-product__feature-icons__label" for="{{ block.settings.icon_4_text }}">
+              {{- block.settings.icon_4_text -}}
+            </label>
+          {%- endif -%}
+        </li>
+      {% endif %}
+
+      {% for icon in icons_list %}
+        <li class="wt-product__feature-icons__item{% if block.settings.layout_select == 'column' %} wt-product__feature-icons__item--row{% endif %}">
+          {%- if icon.image -%}
+            {{ icon.image | image_url: width: icon.image.width | image_tag: alt: icon.label }}
+          {%- endif -%}
+          {%- if icon.label != blank and block.settings.show_icons_label -%}
+            <label class="wt-product__feature-icons__label" for="{{ icon.label }}">
+              {{- icon.label -}}
+            </label>
+          {%- endif -%}
+        </li>
+      {% endfor %}
+    </ul>
+  </div>
+{% endif %}

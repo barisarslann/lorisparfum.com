@@ -408,3 +408,38 @@ div.pswp__img--placeholder,
 .pswp--one-slide .pswp__counter {
   display: none;
 }
+
+.pswp__video-container {
+  position: relative;
+  height: 100%;
+  width: auto;
+}
+.pswp__video-container video-controls {
+  display: flex;
+  height: 100%;
+}
+
+.pswp__video {
+  width: 100%;
+  height: auto;
+  max-height: 100dvh;
+  display: block;
+  margin: 0 auto;
+  object-fit: contain;
+}
+
+.pswp__video-overlay {
+  position: absolute;
+  bottom: 1rem;
+  right: 1rem;
+  display: flex;
+  gap: 0.5rem;
+  z-index: 1;
+}
+.pswp__video-overlay .shoppable-video__control-button,
+.pswp__video-overlay .wt-hero-video__sound-toggle {
+  position: static;
+  top: auto;
+  left: auto;
+}
+/*# sourceMappingURL=photoswipe.css.map */

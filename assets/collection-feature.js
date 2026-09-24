@@ -18,10 +18,8 @@ if (!customElements.get("collection-feature")) {
 
       // Initialize component properties
       _initProperties() {
-        this.sectionId = this.dataset.sectionId;
-        this.section = document.querySelector(
-          `[data-section-id="${this.sectionId}"]`,
-        );
+        this.section = this.closest('[data-section-id]');
+        this.sectionId = this.section?.dataset?.sectionId;
         if (!this.section) {
           console.error("Section not found");
           return;

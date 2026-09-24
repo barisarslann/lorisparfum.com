@@ -1,0 +1,127 @@
+{% if block.settings.subheading %}
+  <style>
+    [data-block-id="{{ block.id }}"] {
+      {% if block.settings.subheading_advanced_settings %}
+        --font-subheading-scale: {{ block.settings.size_text_mobile | divided_by: 100.0 }};
+        --font-subheading-scale-desk: {{ block.settings.size_text_desktop | divided_by: 100.0 }};
+        --subheading-letter-spacing: {{ block.settings.letter_spacing }}px;
+        {% if block.settings.text_uppercase %}
+          --subheading-text-transform: uppercase;
+        {% endif %}
+        {% if block.settings.text_style == 'body' %}
+          --subheading-font-family: var(--font-base);
+        {% endif %}
+      {% endif %}
+    }
+  </style>
+  {% assign prefix = 'hero' %}
+  <div
+    data-block-id="{{ block.id }}"
+    {{ block.shopify_attributes }}
+    class="{% if prefix %}{{ prefix }}{% else %}block{% endif %}__subheading {% if block.settings.subheading_disable_on_mobile %}{% if prefix %}{{ prefix }}{% else %}block{% endif %}__subheading--mobile{% endif %}{% if settings.animations %} scroll-trigger animate--slide-in{% endif %}{% if settings.disabled_animations_on_mobile %} disabled-on-mobile{% endif %}"
+  >
+    {{ block.settings.subheading | escape | newline_to_br }}
+  </div>
+{% endif %}
+
+{% schema %}
+{
+  "name": "t:sections.global.subheading_block_name",
+  "settings": [
+    {
+      "type": "text",
+      "id": "subheading",
+      "label": "t:sections.settings.settings.subheading.label",
+      "default": "Tell your story"
+    },
+    {
+      "type": "checkbox",
+      "id": "subheading_disable_on_mobile",
+      "label": "t:sections.global.disable_on_mobile",
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "subheading_advanced_settings",
+      "label": "t:sections.global.subheading_advanced_settings",
+      "info": "t:sections.global.subheading_advanced_settings_info",
+      "default": false
+    },
+    {
+      "type": "select",
+      "id": "text_style",
+      "options": [
+        {
+          "value": "subtitle",
+          "label": "t:sections.global.text_style_subtitle"
+        },
+        {
+          "value": "body",
+          "label": "t:sections.global.text_style_body"
+        }
+      ],
+      "default": "subtitle",
+      "label": "t:sections.global.text_style_name",
+      "visible_if": "{{ block.settings.subheading_advanced_settings }}"
+    },
+    {
+      "type": "checkbox",
+      "id": "text_uppercase",
+      "label": "t:sections.settings.settings.text_uppercase.label",
+      "default": false,
+      "visible_if": "{{ block.settings.subheading_advanced_settings }}"
+    },
+    {
+      "type": "range",
+      "id": "letter_spacing",
+      "min": 0,
+      "max": 3,
+      "step": 0.1,
+      "default": 1,
+      "unit": "px",
+      "label": "t:sections.settings.settings.letter_spacing.label",
+      "visible_if": "{{ block.settings.subheading_advanced_settings }}"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.global.desktop_version",
+      "visible_if": "{{ block.settings.subheading_advanced_settings }}"
+    },
+    {
+      "type": "range",
+      "id": "size_text_desktop",
+      "min": 50,
+      "max": 300,
+      "step": 10,
+      "default": 100,
+      "unit": "%",
+      "label": "t:sections.settings.settings.size-text.label",
+      "visible_if": "{{ block.settings.subheading_advanced_settings }}"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.global.mobile_version",
+      "visible_if": "{{ block.settings.subheading_advanced_settings }}"
+    },
+    {
+      "type": "range",
+      "id": "size_text_mobile",
+      "min": 50,
+      "max": 300,
+      "step": 10,
+      "default": 100,
+      "unit": "%",
+      "label": "t:sections.settings.settings.size-text-mobile.label",
+      "visible_if": "{{ block.settings.subheading_advanced_settings }}"
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:sections.global.subheading_block_name",
+      "settings": {
+        "subheading": "Subheading"
+      }
+    }
+  ]
+}
+{% endschema %}

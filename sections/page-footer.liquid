@@ -10,11 +10,84 @@
     [data-block-id="{{ block.id }}"]
     {
       --size-image: {{ block.settings.image-width }}px;
+      {% if block.type == 'image_with_text' %}
+        --image-width-desktop: {{ block.settings.image_width_desktop }}px;
+        --image-width-mobile: {{ block.settings.image_width_mobile }}px;
+        --image-with-text-color: {{ block.settings.color }};
+      {% endif %}
     }
   {%- endfor -%}
 </style>
 
-<footer class="wt-footer">
+{% if section.settings.show-scroll-effect %}
+  <script>
+    (function () {
+      const FOOTER_SCROLL_CLASS = 'footer-scroll-effect';
+      const MIN_SECTION_RATIO = 1.5; // viewport multiplier (150%)
+      const rootSection = document.querySelector('main#root');
+
+      // check root section height condition
+      const hasRequiredRootHeight = rootSection
+              ? rootSection.offsetHeight >= window.innerHeight * MIN_SECTION_RATIO
+              : false;
+
+      function getAvailableViewportHeight() {
+        const header = document.querySelector('[data-sticky-always="true"]');
+        const headerHeight = header ? header.offsetHeight : 0;
+        return window.innerHeight - headerHeight;
+      }
+
+      function updateFooterScrollClass() {
+        const footer = document.querySelector('footer.wt-footer');
+        const footerHeight = footer ? footer.offsetHeight : 0;
+
+        const availableHeight = getAvailableViewportHeight();
+        const footerFitsViewport = footerHeight < availableHeight;
+
+        if (!footerFitsViewport) {
+            document.body.classList.remove(FOOTER_SCROLL_CLASS);
+            return;
+        }
+
+        const scrollBottomPos = window.innerHeight + window.scrollY;
+        const footerShowPos = document.documentElement.scrollHeight - footerHeight;
+
+        const atBottom = scrollBottomPos >= document.documentElement.scrollHeight;
+
+        // if viewport bottom has reached the top of the footer AND root is tall enough, add the class
+        if (scrollBottomPos >= footerShowPos && hasRequiredRootHeight) {
+          document.body.classList.add(FOOTER_SCROLL_CLASS);
+        } else {
+          // otherwise remove the class
+          document.body.classList.remove(FOOTER_SCROLL_CLASS);
+        }
+
+        // if scrolled all the way to the bottom of the page,
+        // remove the class to improve mobile UX when footer collapsible sections open
+        if (atBottom) {
+          if (window.innerWidth < 1200) {
+            document.body.classList.remove(FOOTER_SCROLL_CLASS);
+          }
+        }
+      }
+
+      document.addEventListener('DOMContentLoaded', () => {
+        if (!hasRequiredRootHeight) {
+          document.body.classList.remove(FOOTER_SCROLL_CLASS);
+          return;
+        }
+
+        updateFooterScrollClass();
+        window.addEventListener('scroll', updateFooterScrollClass, { passive: true });
+        window.addEventListener('resize', updateFooterScrollClass, { passive: true });
+      });
+    })();
+  </script>
+{% endif %}
+
+
+
+<footer class="wt-footer {% if section.settings.show-scroll-effect %}wt-footer--scroll-effect{% endif %}">
   <div class="wt-footer__body">
     {% for block in section.blocks %}
       <div class="wt-footer__block wt-footer__block--{{ block.type }}">
@@ -80,7 +153,7 @@
           {%- when 'image' -%}
             <section class="wt-footer__msg" data-block-id="{{ block.id }}">
               {% if block.settings.desktop_image != blank %}
-                {% assign alt_text = block.settings.desktop_image.alt | escape %}
+                {% assign alt_text = block.settings.desktop_image.alt | escape | default: "" %}
                 {{
                   block.settings.desktop_image
                   | image_url: width: 750
@@ -94,6 +167,24 @@
               {% else %}
                 {{ 'collection-apparel-2' | placeholder_svg_tag: 'wt-footer__image' }}
               {% endif %}
+            </section>
+
+          {%- when 'image_with_text' -%}
+            <section class="wt-footer__msg wt-footer__image-with-text" data-block-id="{{ block.id }}">
+              {% if block.settings.image != blank %}
+                {%- assign footer_img_alt = block.settings.image.alt | default: "" | escape -%}
+                {{
+                  block.settings.image
+                  | image_url: width: 750
+                  | image_tag:
+                    loading: 'lazy',
+                    sizes: '(min-width: 750px) 750px, 320px',
+                    widths: '750, 1500, 3000',
+                    alt: footer_img_alt,
+                    class: 'wt-footer__image-with-text__image'
+                }}
+              {% endif %}
+              <div class="wt-footer__text rte">{{ block.settings.text }}</div>
             </section>
 
           {%- when 'newsletter' -%}
@@ -123,26 +214,44 @@
                     type="submit"
                     class="wt-newsletter__send wt-newsletter__send--{{ block.settings.button_type }}"
                     name="commit"
-                    aria-label="{{ 'newsletter.button_label' | t }}"
+                    aria-label="aria-label={% if block.settings.button_label != blank %}{{ block.settings.button_label }}{% else %}{{'newsletter.button_label' | t }}{% endif %}"
                   >
                     <span class="wt-newsletter__send__text">
-                      {{ 'newsletter.button_label' | t }}
+                      {% if block.settings.button_label != blank %}{{ block.settings.button_label }}{% else %}{{'newsletter.button_label' | t }}{% endif %}
                     </span>
                   </button>
                 </div>
+                {% if block.settings.show_consent_checkbox %}
+                  <div class="wt-newsletter__consent">
+                    <label class="wt-newsletter__consent-label">
+                      <input
+                        type="checkbox"
+                        name="contact[tags]"
+                        value="newsletter_consent"
+                        required
+                        oninvalid="this.setCustomValidity('{{ block.settings.consent_validation_message | escape }}')"
+                        oninput="this.setCustomValidity('')"
+                      >
+                      {% if block.settings.consent_checkbox_label != blank %}<div class="rte">{{ block.settings.consent_checkbox_label }}</div>{% endif %}
+                    </label>
+                  </div>
+                {% endif %}
 
                 {%- if form.errors -%}
-                  {% for error in form.errors %}
-                    <small class="newsletter-form__message form__message" id="Newsletter-error--{{ section.id }}">
-                      {%- render 'icon-error' -%}
-                      {% if error == 'form' %}
-                        {{ form.errors.messages[error] }}
-                      {% else %}
-                        {{ form.errors.translated_fields[error] }} - {{ form.errors.messages[error] }}
-                      {% endif %}
-                    </small>
-                  {% endfor %}
-                {%- endif -%}
+                <div class="form__message">
+                  <div class="form__error-field">
+                {% for error in form.errors %}
+                  <p id="Newsletter-error--{{ section.id }}">
+                    {% if error == 'form' %}
+                      {{ form.errors.messages[error] }}
+                    {% else %}
+                      {{ form.errors.translated_fields[error] }} - {{ form.errors.messages[error] }}
+                    {% endif %}
+                  </p>
+                {% endfor %}
+              </div>
+              </div>
+              {%- endif -%}
 
                 {%- if form.posted_successfully? -%}
                   <div class="form__message">
@@ -157,21 +266,9 @@
       </div>
     {%- endfor -%}
   </div>
-  
+
   <div class="wt-footer__aside">
-      <!-- CUSTOM -->
-      <a href="https://etbis.ticaret.gov.tr/tr/Anasayfa/SiteAra?url=loris+kozmetik&cityId=&districtId=&sector=&isItCrossBorder=" target="_blank"
-        style="max-width: var(--site-max-width);padding-left: calc(calc(var(--gap, 8px) * 2) + calc(var(--gap, 8px) * 2));padding-right: calc(calc(var(--gap, 8px) * 2) + calc(var(--gap, 8px) * 2));width: 100%;margin: 0 auto;white-space: collapse;">
-        {% if request.locale.iso_code == "tr" %}
-        Şirketimize ait ETBIS kaydını görüntülemek için <b>tıklayınız</b>
-        {% elsif request.locale.iso_code == "ar" %}
-        لعرض تسجيل ETBIS الخاص بشركتنا <b>انقر هنا</b>
-        {% else %}
-        To view the ETBIS registration of our company, <b>click here</b>
-        {% endif %}
-      </a>
-      
-    <div class="wt-footer__aside__wrapper">        
+    <div class="wt-footer__aside__wrapper">
       {% if section.settings.show_country_selector
         or section.settings.show_language_selector
         or section.settings['show-social-media-icons']
@@ -200,7 +297,7 @@
       {% endif %}
 
       {% if section.settings['show-payments-icons'] %}
-        <div class="wt-footer__aside-block wt-footer__aside-block--payment">
+        <div class="wt-footer__aside-block wt-footer__aside-block--payment{% if section.settings.payment_icons_monochrome %} wt-footer__aside-block--payment-monochrome{% endif %}">
           <ul class="wt-footer__aside-list" role="list">
             {%- for type in shop.enabled_payment_types -%}
               <li class="wt-footer__aside-list__item">
@@ -227,7 +324,7 @@
   {% if section.settings['big-logo'] != null %}
     <div class="wt-footer__big-logo">
       {% assign big_logo = section.settings['big-logo'] | get_image %}
-      {% assign alt_text = big_logo.alt | default: big_logo.filename | escape %}
+      {% assign alt_text = big_logo.alt | escape | default: "" %}
       {{
         section.settings['big-logo']
         | image_url: width: 3840
@@ -245,9 +342,21 @@
 {% schema %}
 {
   "name": "t:sections.footer.name",
+  "class": "wt-footer-page-section",
   "tag": "section",
   "max_blocks": 5,
   "settings": [
+    {
+      "type": "header",
+      "content": "t:sections.page-footer.settings.header__1.content"
+    },
+    {
+      "type": "checkbox",
+      "id": "show-scroll-effect",
+      "label": "t:sections.footer.settings.scroll_effect.label",
+      "info": "t:sections.footer.settings.scroll_effect.info",
+      "default": false
+    },
     {
       "type": "header",
       "content": "t:sections.footer.settings.social_media_icons.content",
@@ -313,6 +422,12 @@
       "id": "show-payments-icons",
       "label": "t:sections.footer.settings.show-payments-icons.label",
       "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "payment_icons_monochrome",
+      "label": "t:sections.footer.settings.payment_icons_monochrome.label",
+      "default": false
     },
     {
       "type": "checkbox",
@@ -406,6 +521,48 @@
       ]
     },
     {
+      "type": "image_with_text",
+      "name": "t:sections.footer.blocks.image_with_text.name",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "t:sections.settings.settings.image.label"
+        },
+        {
+          "type": "range",
+          "id": "image_width_desktop",
+          "min": 100,
+          "max": 500,
+          "step": 10,
+          "default": 150,
+          "label": "t:sections.footer.blocks.image_with_text.settings.image_width_desktop.label",
+          "unit": "px"
+        },
+        {
+          "type": "range",
+          "id": "image_width_mobile",
+          "min": 80,
+          "max": 300,
+          "step": 10,
+          "default": 120,
+          "label": "t:sections.footer.blocks.image_with_text.settings.image_width_mobile.label",
+          "unit": "px"
+        },
+        {
+          "type": "richtext",
+          "id": "text",
+          "label": "t:sections.settings.settings.text.label",
+          "default": "<p>Add short information here</p>"
+        },
+        {
+          "type": "color",
+          "id": "color",
+          "label": "t:sections.footer.blocks.image_with_text.settings.color.label"
+        }
+      ]
+    },
+    {
       "type": "text",
       "name": "t:sections.footer.blocks.text.name",
       "settings": [
@@ -479,6 +636,33 @@
             }
           ],
           "default": "primary"
+        },
+        {
+          "type": "text",
+          "id": "button_label",
+          "label": "t:sections.image-with-text.button.settings.button_label.label"
+        },
+        {
+          "type": "header",
+          "content": "t:sections.newsletter.blocks.email_form.settings.consent_checkbox.header"
+        },
+        {
+          "type": "checkbox",
+          "id": "show_consent_checkbox",
+          "label": "t:sections.newsletter.blocks.email_form.settings.show_consent_checkbox.label",
+          "default": false
+        },
+        {
+          "type": "richtext",
+          "id": "consent_checkbox_label",
+          "label": "t:sections.newsletter.blocks.email_form.settings.consent_checkbox_label.label",
+          "default": "<p>I want to sign up for the Newsletter (information about promotions, discounts, premieres, contests).</p>"
+        },
+        {
+          "type": "text",
+          "id": "consent_validation_message",
+          "label": "t:sections.newsletter.blocks.email_form.settings.consent_validation_message.label",
+          "default": "Please check this box to proceed."
         }
       ]
     }

@@ -40,6 +40,11 @@
     },
     "continue_shopping": "เลือกซื้อต่อ",
     "pagination": {
+      "previous_label": "ก่อนหน้า",
+      "next_label": "ถัดไป",
+      "load_more": "โหลดเพิ่มเติม",
+      "load_previous": "โหลดก่อนหน้า",
+      "showing": "กำลังแสดง {{ count }} จาก {{ total }} รายการ",
       "label": "การแบ่งหน้า",
       "page": "หน้า {{ number }}",
       "next": "หน้าถัดไป",
@@ -52,6 +57,8 @@
       "view": "ดูรถตะกร้าสินค้าของฉัน ({{ count }})",
       "item_added": "รายการที่เพิ่มในตะกร้าสินค้าของคุณ"
     },
+    "copy": "คัดลอก",
+    "copied": "คัดลอกแล้ว",
     "share": {
       "copy_to_clipboard": "คัดลอกลิงก์",
       "share_url": "ลิงก์",
@@ -60,9 +67,6 @@
     },
     "quick_add": {
       "view_all_details": "ดูรายละเอียดทั้งหมด"
-    },
-    "icons": {
-      "icon_title": ""
     },
     "slider": {
       "of": "ของ",
@@ -74,7 +78,9 @@
   "newsletter": {
     "label": "อีเมลของคุณ",
     "success": "ขอขอบคุณที่สมัครรับข้อมูล",
-    "button_label": "สมัครรับข้อมูล"
+    "button_label": "สมัครรับข้อมูล",
+    "close": "ปิดป็อปอัป",
+    "consent_checkbox_label": "ฉันต้องการสมัครรับจดหมายข่าว (ข้อมูลเกี่ยวกับโปรโมชั่น ส่วนลด การเปิดตัวสินค้าใหม่ และการแข่งขัน)"
   },
   "accessibility": {
     "skip_to_text": "ข้ามไปยังเนื้อหา",
@@ -95,7 +101,10 @@
     "star_reviews_info": "{{ rating_value }} จาก {{ rating_max }} ดาว",
     "collapsible_content_title": "เนื้อหาที่ยุบได้",
     "complementary_products": "ผลิตภัณฑ์เสริม",
-    "searching": "กำลังค้นหา..."
+    "searching": "กำลังค้นหา...",
+    "scroll_to_top": "Scroll to top",
+    "open": "เปิด",
+    "subscription_widget__selling_plan_select": "ความถี่ในการจัดส่งสำหรับ {{ plan_group }}"
   },
   "blogs": {
     "article": {
@@ -115,7 +124,10 @@
       "back_to_blog": "กลับไปยังบล็อก",
       "share": "แชร์บทความนี้",
       "success": "โพสต์ความคิดเห็นของคุณเรียบร้อยแล้ว! ขอบคุณ!",
-      "success_moderated": "โพสต์ความคิดเห็นของคุณเรียบร้อยแล้ว เนื่องจากบล็อกของเราอยู่ในระหว่างการตรวจสอบ เราจะเผยแพร่ความคิดเห็นของคุณในอีกสักครู่"
+      "success_moderated": "โพสต์ความคิดเห็นของคุณเรียบร้อยแล้ว เนื่องจากบล็อกของเราอยู่ในระหว่างการตรวจสอบ เราจะเผยแพร่ความคิดเห็นของคุณในอีกสักครู่",
+      "date_format": "%d/%m/%Y",
+      "published_on": "เมื่อ {{ date }}",
+      "posted_by": "โดย {{ author }}"
     }
   },
   "onboarding": {
@@ -125,6 +137,7 @@
   "products": {
     "product": {
       "add_to_cart": "เพิ่มลงในตะกร้าสินค้า",
+      "pick_size": "เลือก {{ option }}",
       "description": "คำอธิบาย",
       "on_sale": "การลดราคา",
       "product_variants": "ตัวเลือกสินค้า",
@@ -138,7 +151,8 @@
         "from_price_html": "จาก {{ price }}",
         "regular_price": "ราคาปกติ",
         "sale_price": "ราคาช่วงลดราคา",
-        "unit_price": "ราคาต่อหน่วย"
+        "unit_price": "ราคาต่อหน่วย",
+        "free": "ฟรี"
       },
       "share": "แชร์สินค้ารายการนี้",
       "sold_out": "ขายหมดแล้ว",
@@ -185,7 +199,9 @@
       "volume_pricing": {
         "note": "TODO",
         "price_range": "TODO"
-      }
+      },
+      "select_option": "เลือกตัวเลือก",
+      "select_options": "เลือกตัวเลือก"
     },
     "modal": {
       "label": "แกลเลอรีสื่อ"
@@ -222,6 +238,10 @@
     }
   },
   "templates": {
+    "404": {
+      "title": "ไม่พบหน้า",
+      "subtext": "404"
+    },
     "search": {
       "no_results": "ไม่พบผลลัพธ์สำหรับ “{{ terms }}” ตรวจสอบการสะกดคำหรือลองค้นหาคำอื่น",
       "results_with_count": {
@@ -242,7 +262,9 @@
         "products": "สินค้า",
         "pages": "หน้า",
         "articles": "บทความ",
-        "suggestions": "ข้อเสนอแนะ"
+        "suggestions": "ข้อเสนอแนะ",
+        "popular_searches": "การค้นหายอดนิยม",
+        "useful_links": "ลิงก์ที่มีประโยชน์"
       },
       "search_for": "ดูทั้งหมดสำหรับ “{{ terms }}”"
     },
@@ -260,13 +282,12 @@
         "error_heading": "โปรดแก้ไขข้อมูลดังต่อไปนี้:",
         "title": "แบบฟอร์มติดต่อ"
       }
-    },
-    "404": {
-      "title": "ไม่พบหน้า",
-      "subtext": "404"
     }
   },
   "sections": {
+    "shoppable_buy_all": {
+      "add_all_to_cart": "เพิ่มทั้งหมดลงในตะกร้า"
+    },
     "header": {
       "announcement": "การประกาศ",
       "menu": "เมนู",
@@ -305,7 +326,29 @@
         "title": "มีบัญชีอยู่แล้วใช่ไหม?",
         "paragraph_html": "<a href=\"{{ link }}\" tabindex=\"-1\" class=\"link underlined-link\">เข้าสู่ระบบ</a> เพื่อชำระเงินได้เร็วขึ้น."
       },
-      "view_cart": "ดูตะกร้า"
+      "view_cart": "ดูตะกร้า",
+      "checkbox": "ห่อเป็นของขวัญ",
+      "order_note": "หมายเหตุคำสั่งซื้อ",
+      "estimate_shipping": "การจัดส่ง",
+      "discount_code": "รหัสส่วนลด",
+      "features": {
+        "country_region": "ประเทศ/ภูมิภาค",
+        "postal_zip": "รหัสไปรษณีย์",
+        "apply": "ใช้",
+        "calculate": "คำนวณ",
+        "discount_placeholder": "กรุณากรอกรหัสส่วนลด",
+        "shipping_select_country_zip": "กรุณาเลือกประเทศและกรอกรหัสไปรษณีย์",
+        "shipping_calculating": "กำลังคำนวณ…",
+        "shipping_no_rate": "ไม่มีอัตราค่าจัดส่งสำหรับปลายทางนี้ โปรดตรวจสอบที่อยู่อีกครั้ง",
+        "shipping_one_rate": "มีอัตราค่าจัดส่งหนึ่งรายการสำหรับปลายทางนี้:",
+        "shipping_n_rates": "มีอัตราค่าจัดส่ง {{ count }} รายการสำหรับปลายทางนี้:",
+        "shipping_free": "ฟรี",
+        "discount_enter_code": "กรุณากรอกรหัสส่วนลด",
+        "discount_applying": "กำลังใช้…",
+        "discount_applied": "ใช้ส่วนลดเรียบร้อยแล้ว!",
+        "discount_invalid": "รหัสส่วนลดไม่ถูกต้องหรือไม่สามารถใช้กับตะกร้าสินค้าปัจจุบันได้",
+        "discount_error": "เกิดข้อผิดพลาด กรุณาลองใหม่อีกครั้ง"
+      }
     },
     "footer": {
       "payment": "วิธีการชำระเงิน",
@@ -369,6 +412,54 @@
       },
       "error": {
         "invalid_format": "รูปแบบวันที่ไม่ถูกต้อง กรุณาใส่วันที่และเวลาในรูปแบบ YYYY-MM-DD HH:MM."
+      }
+    },
+    "localization_drawer": {
+      "title": "การปรับแต่งท้องถิ่น",
+      "country_label": "ประเทศ/ภูมิภาค",
+      "language_label": "ภาษา",
+      "drawer_title": "ตัวเลือกการปรับแต่งท้องถิ่น",
+      "current_country_info": "คุณกำลังจัดส่งสินค้าไปยัง {{ countryName }} และคำสั่งซื้อของคุณจะถูกเรียกเก็บเงินใน {{ currencyIso }} {{ currencySymbol }}.",
+      "search_location": {
+        "label": "ค้นหาตำแหน่ง",
+        "placeholder": "ค้นหาสถานที่..."
+      }
+    },
+    "bundle-builder": {
+      "add_to_bundle": "เพิ่มในบันเดิล",
+      "status": {
+        "discount": "🎉 คุณได้รับส่วนลด",
+        "add_more": "คุณยังสามารถเพิ่มสินค้าได้อีก"
+      },
+      "toggle": "สลับแผงชุดสินค้า",
+      "remove_item": "ลบรายการ",
+      "error_message": "เกิดข้อผิดพลาด กรุณาลองใหม่อีกครั้ง"
+    },
+    "quiz": {
+      "back": "ย้อนกลับ",
+      "prev_question": "ก่อนหน้า",
+      "next_question": "ถัดไป",
+      "see_results": "ดูผลลัพธ์"
+    },
+    "blog_posts": {
+      "tags_all": "บทความทั้งหมด"
+    },
+    "compare_products": {
+      "name": "เปรียบเทียบสินค้า",
+      "badge": {
+        "compare": "VS"
+      },
+      "placeholders": {
+        "left_text": "ซ้าย",
+        "right_text": "ขวา"
+      },
+      "aria": {
+        "table": "ตารางเปรียบเทียบ"
+      },
+      "blocks": {
+        "table_row": {
+          "center_text_default": "พิมพ์ข้อความ..."
+        }
       }
     }
   },
@@ -534,7 +625,7 @@
   },
   "aria-label": {
     "announcement-bar": "ปิดแถบประกาศ",
-    "contact-form": "ส่งแบบฟอร์ม",
+    "contact-form": "ส่ง",
     "featured-collection": "ดูทั้งหมด",
     "featured-product-3d-model": "ดูโมเดล 3 มิติ",
     "main-product-video": "เล่นวิดีโอ",
@@ -572,6 +663,15 @@
     "price-from": "ราคาเริ่มต้นที่",
     "price-to": "ราคาถึง",
     "remove-price-range": "ลบตัวกรองช่วงราคา",
-    "sort-options": "ตัวเลือกการเรียงลำดับ"
+    "sort-options": "ตัวเลือกการเรียงลำดับ",
+    "lookbook-button": "ดูรายละเอียด",
+    "pills-navigation": "การนำทางแบบแท็บ",
+    "collection-tabs": "แท็บคอลเลกชัน"
+  },
+  "placeholder": {
+    "select_option": "เลือกตัวเลือก"
+  },
+  "cross_sell": {
+    "empty_msg": "ไม่มีสินค้าให้แสดง บล็อกนี้จะไม่ปรากฏให้ลูกค้าเห็นบนหน้าร้าน"
   }
 }

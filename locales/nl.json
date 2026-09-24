@@ -40,6 +40,11 @@
     },
     "continue_shopping": "Terugkeren naar winkel",
     "pagination": {
+      "previous_label": "Vorige",
+      "next_label": "Volgende",
+      "load_more": "Meer laden",
+      "load_previous": "Vorige laden",
+      "showing": "{{ count }} van {{ total }} artikelen weergegeven",
       "label": "Paginering",
       "page": "Pagina {{ number }}",
       "next": "Volgende pagina",
@@ -52,6 +57,8 @@
       "view": "Winkelwagen bekijken ({{ count }})",
       "item_added": "Artikel toegevoegd aan winkelwagen"
     },
+    "copy": "Kopiëren",
+    "copied": "Gekopieerd",
     "share": {
       "copy_to_clipboard": "Link kopiëren",
       "share_url": "Link",
@@ -60,9 +67,6 @@
     },
     "quick_add": {
       "view_all_details": "Bekijk alle details"
-    },
-    "icons": {
-      "icon_title": ""
     },
     "slider": {
       "of": "of",
@@ -74,7 +78,9 @@
   "newsletter": {
     "label": "Je e-mailadres",
     "success": "Bedankt voor het abonneren",
-    "button_label": "Abonneren"
+    "button_label": "Abonneren",
+    "close": "Pop-up sluiten",
+    "consent_checkbox_label": "Ik wil me aanmelden voor de nieuwsbrief (informatie over promoties, kortingen, premières, wedstrijden)."
   },
   "accessibility": {
     "skip_to_text": "Meteen naar de content",
@@ -95,7 +101,10 @@
     "star_reviews_info": "{{ rating_value }} van de {{ rating_max }} sterren",
     "collapsible_content_title": "Inklapbare inhoud",
     "complementary_products": "Aanvullende producten",
-    "searching": "Zoeken bezig..."
+    "searching": "Zoeken bezig...",
+    "scroll_to_top": "Scroll to top",
+    "open": "Openen",
+    "subscription_widget__selling_plan_select": "Bezorgfrequentie voor {{ plan_group }}"
   },
   "blogs": {
     "article": {
@@ -115,7 +124,10 @@
       "back_to_blog": "Terug naar blog",
       "share": "Dit artikelen delen",
       "success": "Je reactie is geplaatst! Bedankt!",
-      "success_moderated": "Je reactie is geplaatst. Wij publiceren het zo; onze blog wordt gemodereerd."
+      "success_moderated": "Je reactie is geplaatst. Wij publiceren het zo; onze blog wordt gemodereerd.",
+      "date_format": "%d-%m-%Y",
+      "published_on": "op {{ date }}",
+      "posted_by": "Geplaatst door {{ author }}"
     }
   },
   "onboarding": {
@@ -125,6 +137,7 @@
   "products": {
     "product": {
       "add_to_cart": "Aan winkelwagen toevoegen",
+      "pick_size": "{{ option }} selecteren",
       "description": "Beschrijving",
       "on_sale": "Aanbieding",
       "product_variants": "Productvarianten",
@@ -138,7 +151,8 @@
         "from_price_html": "Vanaf {{ price }}",
         "regular_price": "Normale prijs",
         "sale_price": "Aanbiedingsprijs",
-        "unit_price": "Eenheidsprijs"
+        "unit_price": "Eenheidsprijs",
+        "free": "Gratis"
       },
       "share": "Dit product delen",
       "sold_out": "Uitverkocht",
@@ -185,7 +199,9 @@
       "volume_pricing": {
         "note": "TODO",
         "price_range": "TODO"
-      }
+      },
+      "select_option": "Selecteer een optie",
+      "select_options": "Opties selecteren"
     },
     "modal": {
       "label": "Mediagalerij"
@@ -222,6 +238,10 @@
     }
   },
   "templates": {
+    "404": {
+      "title": "Pagina niet gevonden",
+      "subtext": "404"
+    },
     "search": {
       "no_results": "Geen resultaten gevonden voor “{{ terms }}”. Controleer de spelling of gebruik een ander woord of een andere zin.",
       "results_with_count": {
@@ -242,7 +262,9 @@
         "products": "Producten",
         "pages": "Pagina's",
         "articles": "Artikelen",
-        "suggestions": "Suggesties"
+        "suggestions": "Suggesties",
+        "popular_searches": "Populaire zoekopdrachten",
+        "useful_links": "Nuttige links"
       },
       "search_for": "Bekijk alles voor \"{{ terms }}\""
     },
@@ -260,13 +282,12 @@
         "error_heading": "Pas het volgende aan:",
         "title": "Contactformulier"
       }
-    },
-    "404": {
-      "title": "Pagina niet gevonden",
-      "subtext": "404"
     }
   },
   "sections": {
+    "shoppable_buy_all": {
+      "add_all_to_cart": "Alles in winkelwagen"
+    },
     "header": {
       "announcement": "Aankondiging",
       "menu": "Menu",
@@ -305,7 +326,29 @@
         "title": "Heb je een account?",
         "paragraph_html": "<a href=\"{{ link }}\" tabindex=\"-1\" class=\"link underlined-link\">Log in</a> om sneller af te rekenen."
       },
-      "view_cart": "Winkelwagen bekijken"
+      "view_cart": "Winkelwagen bekijken",
+      "checkbox": "Inpakken als cadeau",
+      "order_note": "Bestelnotitie",
+      "estimate_shipping": "Verzending",
+      "discount_code": "Kortingscode",
+      "features": {
+        "country_region": "Land/regio",
+        "postal_zip": "Postcode",
+        "apply": "Toepassen",
+        "calculate": "Berekenen",
+        "discount_placeholder": "Voer een kortingscode in",
+        "shipping_select_country_zip": "Selecteer een land en voer een postcode in.",
+        "shipping_calculating": "Berekenen…",
+        "shipping_no_rate": "Er is geen verzendtarief beschikbaar voor deze bestemming. Controleer het adres.",
+        "shipping_one_rate": "Er is één verzendtarief beschikbaar voor deze bestemming:",
+        "shipping_n_rates": "Er zijn {{ count }} verzendtarieven beschikbaar voor deze bestemming:",
+        "shipping_free": "Gratis",
+        "discount_enter_code": "Voer een kortingscode in.",
+        "discount_applying": "Toepassen…",
+        "discount_applied": "Korting toegepast!",
+        "discount_invalid": "Kortingscode is ongeldig of niet van toepassing op de huidige winkelwagen.",
+        "discount_error": "Er is iets misgegaan. Probeer het opnieuw."
+      }
     },
     "footer": {
       "payment": "Betaalmethoden",
@@ -369,6 +412,54 @@
       },
       "error": {
         "invalid_format": "Ongeldig datumformaat. Voer de datum en tijd in het formaat JJJJ-MM-DD UU:MM in."
+      }
+    },
+    "localization_drawer": {
+      "title": "Lokalisatie",
+      "country_label": "Land/regio",
+      "language_label": "Taal",
+      "drawer_title": "Lokalisatie-opties",
+      "current_country_info": "U verzendt momenteel naar {{ countryName }} en uw bestelling wordt gefactureerd in {{ currencyIso }} {{ currencySymbol }}.",
+      "search_location": {
+        "label": "Zoeklocatie",
+        "placeholder": "Zoek locatie..."
+      }
+    },
+    "bundle-builder": {
+      "add_to_bundle": "Toevoegen aan bundel",
+      "status": {
+        "discount": "🎉 Je hebt korting gekregen.",
+        "add_more": "Je kunt nog meer toevoegen."
+      },
+      "toggle": "Bundelpaneel in-/uitschakelen",
+      "remove_item": "Item verwijderen",
+      "error_message": "Er is een fout opgetreden. Probeer het opnieuw."
+    },
+    "quiz": {
+      "back": "Terug",
+      "prev_question": "Vorige",
+      "next_question": "Volgende",
+      "see_results": "Resultaten bekijken"
+    },
+    "blog_posts": {
+      "tags_all": "Alle berichten"
+    },
+    "compare_products": {
+      "name": "Producten vergelijken",
+      "badge": {
+        "compare": "VS"
+      },
+      "placeholders": {
+        "left_text": "Links",
+        "right_text": "Rechts"
+      },
+      "aria": {
+        "table": "Vergelijkingstabel"
+      },
+      "blocks": {
+        "table_row": {
+          "center_text_default": "Typ hier tekst..."
+        }
       }
     }
   },
@@ -534,7 +625,7 @@
   },
   "aria-label": {
     "announcement-bar": "Sluit mededelingenbalk",
-    "contact-form": "Verzend een formulier",
+    "contact-form": "Verzenden",
     "featured-collection": "Bekijk alles",
     "featured-product-3d-model": "Bekijk 3D-model",
     "main-product-video": "Video afspelen",
@@ -572,6 +663,15 @@
     "price-from": "Prijs vanaf",
     "price-to": "Prijs tot",
     "remove-price-range": "Verwijder prijsbereikfilter",
-    "sort-options": "Sorteer opties"
+    "sort-options": "Sorteer opties",
+    "lookbook-button": "Zie details",
+    "pills-navigation": "Pills-navigatie",
+    "collection-tabs": "Collectietabbladen"
+  },
+  "placeholder": {
+    "select_option": "Selecteer een optie"
+  },
+  "cross_sell": {
+    "empty_msg": "Geen producten beschikbaar om te tonen. Dit blok zal niet zichtbaar zijn voor klanten in de winkel."
   }
 }

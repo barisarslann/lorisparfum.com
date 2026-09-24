@@ -1,0 +1,56 @@
+{% comment %}
+  Params: block, product
+{% endcomment %}
+<collapsible-section
+  class="wt-collapse wt-collapse--always{% if settings.animations %} scroll-trigger animate--slide-in{% endif %}{% if settings.disabled_animations_on_mobile %} disabled-on-mobile{% endif %}"
+  data-toggle-tabindex="button, [href], input, select"
+  not-quick-add
+>
+  <div
+    role="button"
+    tabindex="0"
+    class="wt-collapse__trigger{% if block.settings.is_open %} wt-collapse__trigger--active{% endif %}"
+    {% if block.settings.is_open %}
+      data-open="true"
+    {% endif %}
+    aria-expanded="{% if block.settings.is_open %}true{% else %}false{% endif %}"
+    aria-controls="Specification-{{ block.id }}"
+  >
+    <div class="wt-collapse__trigger__text">
+      {% if block.settings.icon != 'none' %}
+        <div class="wt-collapse__trigger__icon">
+          {% render 'icons', id: block.settings.icon %}
+        </div>
+      {% endif %}
+      <div class="wt-collapse__trigger__title">{{ block.settings.heading }}</div>
+    </div>
+    <div class="wt-icon" aria-hidden="true">
+      {% render 'icons', id: 'plus' %}
+    </div>
+  </div>
+  <div class="wt-collapse__target" data-block-id="{{ block.id }}" id="Specification-{{ block.id }}">
+    <div class="wt-collapse__target--text rte">
+      <div class="wt-product__spec">
+        {% assign metafield = block.settings.metafield | strip | split: '.' %}
+        {% assign metafield_namespace = metafield | first | strip %}
+        {% assign metafield_key = metafield | last | strip %}
+        {% assign specification = product.metafields[metafield_namespace][metafield_key] | newline_to_br %}
+        {% assign text = specification | strip_newlines %}
+        {% assign table_rows = text | split: '<br /><br />' %}
+        {% for row in table_rows %}
+          <div class="wt-product__spec__row">
+            {% assign row_cells = row | split: '<br />' %}
+            {% for cell in row_cells limit: 1 %}
+              <div class="wt-product__spec__cell wt-product__spec__cell--title"><p>{{ cell }}</p></div>
+            {% endfor %}
+            <div class="wt-product__spec__cell">
+              {% for cell in row_cells offset: 1 %}
+                <p>{{ cell }}</p>
+              {% endfor %}
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</collapsible-section>

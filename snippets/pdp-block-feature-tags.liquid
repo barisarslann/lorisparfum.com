@@ -1,0 +1,36 @@
+{% comment %}
+  Params: block, product
+{% endcomment %}
+<div
+  data-block-id="{{ block.id }}"
+  class="wt-product__feature-tags wt-product__option__body--tiles{% if settings.animations %} scroll-trigger animate--slide-in{% endif %}{% if settings.disabled_animations_on_mobile %} disabled-on-mobile{% endif %}"
+>
+  {% assign metafield = block.settings.metafield | strip | split: '.' %}
+  {% assign metafield_namespace = metafield | first | strip %}
+  {% assign metafield_key = metafield | last | strip %}
+  {% assign feature_tags = product.metafields[metafield_namespace][metafield_key] %}
+
+  {% if feature_tags.type == 'list.metaobject_reference' %}
+    <ul class="f-button__list">
+      {% for tag in feature_tags.value %}
+        {% if forloop.index > block.settings.limit %}
+          {% break %}
+        {% endif %}
+        <li class="f-button__list__item">
+          <span class="f-button__list__link">{{ tag.label }}</span>
+        </li>
+      {% endfor %}
+    </ul>
+  {% elsif feature_tags.type == 'list.single_line_text_field' %}
+    <ul class="f-button__list">
+      {% for tag in feature_tags.value %}
+        {% if forloop.index > block.settings.limit %}
+          {% break %}
+        {% endif %}
+        <li class="f-button__list__item">
+          <span class="f-button__list__link">{{ tag }}</span>
+        </li>
+      {% endfor %}
+    </ul>
+  {% endif %}
+</div>

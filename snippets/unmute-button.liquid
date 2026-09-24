@@ -1,0 +1,20 @@
+{%liquid
+  assign state = 'off'
+  assign state_class = ''
+
+  if initial_state == 'on'
+    assign initial_state = 'on'
+    assign state_class = 'wt-hero-video__sound-toggle--unmuted'
+  endif
+%}
+
+<button
+    type="button"
+    aria-label="{{ 'aria-label.video-reels-toggle-sound' | t }}"
+    aria-pressed="false"
+    class="wt-hero-video__sound-toggle {{ state_class }}"
+    data-sound="{{ state }}"
+>
+    {% render 'icons', id: 'volume' %}
+    {% render 'icons', id: 'volume-muted' %}
+</button>

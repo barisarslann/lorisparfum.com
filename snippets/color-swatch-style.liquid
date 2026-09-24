@@ -20,11 +20,31 @@
   %}
 {% elsif value.swatch.color %}
   {% assign color_swatch_style = 'background-color: rgb(' | append: value.swatch.color.rgb | append: ')' %}
+{% elsif variation_value.image %}
+  {% assign image_url = variation_value.image | image_url: width: 120 %}
+  {% assign swatch_focal_point = variation_value.image.presentation.focal_point %}
+  {% assign color_swatch_style = 'background-image: url('
+    | append: image_url
+    | append: '); background-position: '
+    | append: swatch_focal_point
+  %}
+{% elsif variation_value.color %}
+  {% assign color_swatch_style = 'background-color: ' | append: variation_value.color %}
 {% else %}
-  {% comment %} it used for filters {% endcomment %}
-  {% unless value.size > 0 %}
-    {% assign value = value.value %}
-  {% endunless %}
+
+  {% comment %} it checks if the value is a filter value {% endcomment %}
+  {% if value.param_name %}
+    {% comment %}
+      FilterSettingGroup-based filter values have a GID as value.value (e.g. gid://shopify/FilterSetti
+      In that case, use value.label (the human-readable name like "Black") for color lookup
+      so swatches_config matching and CSS color name fallback work correctly.
+    {% endcomment %}
+    {% if value.value contains 'gid://' %}
+      {% assign value = value.label %}
+    {% else %}
+      {% assign value = value.value %}
+    {% endif %}
+  {% endif %}
 
   {%- assign color_value_downcase = value | downcase -%}
 

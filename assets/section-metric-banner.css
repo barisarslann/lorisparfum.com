@@ -1,0 +1,82 @@
+.wt-metric-banner-section .wt-keys__content {
+  width: 100%;
+}
+.wt-metric-banner-section .wt-keys__slide-item, .wt-metric-banner-section .wt-keys__item {
+  display: flex;
+  align-items: flex-start;
+}
+.wt-metric-banner-section .wt-keys__slide-item--bg, .wt-metric-banner-section .wt-keys__item--bg {
+  padding: calc(var(--gap, 8px) * 2);
+  background-color: var(--color-background-block, transparent);
+  border-radius: var(--border-radius);
+}
+@media (min-width: 1200px) {
+  .wt-metric-banner-section .wt-keys__slide-item--bg, .wt-metric-banner-section .wt-keys__item--bg {
+    padding: calc(var(--gap, 8px) * 2) calc(var(--gap, 8px) * 3);
+  }
+}
+.wt-metric-banner-section .wt-keys__item--bg {
+  width: 100%;
+}
+@media (max-width: 599px) {
+  .wt-metric-banner-section .wt-keys__list--center {
+    align-items: center;
+    text-align: center;
+  }
+}
+.wt-metric-banner-section .wt-keys__text > p {
+  margin-top: calc(var(--gap, 8px) * 0.5);
+}
+.wt-metric-banner-section .wt-keys__text > p:first-child {
+  margin-top: 0;
+}
+.wt-metric-banner-section .wt-keys__title {
+  font-size: calc(var(--font-headline-size) * var(--font-headline-scale, 1));
+}
+@media (min-width: 1200px) {
+  .wt-metric-banner-section .wt-keys__title {
+    font-size: min( calc(var(--font-headline-size) * var(--font-headline-scale-desk, 1)), calc(var(--font-headline-size) + 13.5vw) );
+  }
+}
+.wt-metric-banner-section .wt-keys__title .headline {
+  padding-inline: 0;
+  text-align: inherit;
+}
+.wt-metric-banner-section .wt-keys__title .headline--rich > * {
+  padding-bottom: calc(var(--gap, 8px) * 0.5);
+}
+.wt-metric-banner-section .wt-keys__title--numbers {
+  padding: 0 calc(var(--gap, 8px) * 2);
+  font-variant-numeric: tabular-nums;
+}
+
+@media (max-width: 599px) {
+  body .wt-metric-banner-keys.is-slider {
+    display: none;
+  }
+}
+body .wt-metric-banner-keys.is-slider ~ .wt-slider {
+  display: none;
+}
+@media (max-width: 599px) {
+  body .wt-metric-banner-keys.is-slider ~ .wt-slider {
+    display: block;
+  }
+}
+body .wt-metric-banner-keys.is-slider ~ .wt-slider .wt-keys__slide-item {
+  align-items: center;
+}
+@media (min-width: 600px) {
+  body .wt-metric-banner-keys--slider {
+    display: none;
+  }
+}
+body .wt-metric-banner-keys--slider [data-swiper-slide] {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+body .wt-metric-banner-keys--slider [data-swiper-slide].center {
+  flex-direction: column;
+}
+/*# sourceMappingURL=section-metric-banner.css.map */

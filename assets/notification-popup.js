@@ -15,7 +15,8 @@ class NotificationPopup extends HTMLElement {
       this.popup.classList.add("wt-popup-fade-in");
     }, this.delay * 1000);
 
-    this.closeBtn.addEventListener("click", () => {
+    this.closeBtn.addEventListener("click", (event) => {
+      event.preventDefault();
       this.popup.classList.add("hidden");
       this.setCookie("hideNotificationPopup", "true", 7);
     });

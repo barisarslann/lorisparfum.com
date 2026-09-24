@@ -11,6 +11,12 @@ if (!customElements.get("scrolling-text-banner")) {
         this.mobileBreakpoint = 600; // Width threshold for mobile devices
         this.mobileSpeedFactor = 0.7; // Default factor for mobile speed adjustment
         this.resizeObserver = null; // For observing size changes
+        this.sectionType = this.dataset.sectionType;
+        this.itemIteration = 10;
+        this.showDots = this.dataset.dotSeparator;
+        this.dot = `<svg width="20" height="20" aria-hidden="true">
+                    <circle cx="10" cy="10"/>
+                    </svg>`;
       }
 
       connectedCallback() {
@@ -28,8 +34,12 @@ if (!customElements.get("scrolling-text-banner")) {
           this.mobileSpeedFactor;
 
         // Initialize the scrolling text
-        this.initializeScrollingText();
-
+        if (this.sectionType === 'scrolling-text-with-icon'){
+          this.initializeScrollingIcon();
+        } else {
+          this.initializeScrollingText();
+        }
+        
         // Add resize listener
         this.observeResizing();
       }
@@ -54,6 +64,70 @@ if (!customElements.get("scrolling-text-banner")) {
           return this.speed * this.mobileSpeedFactor;
         }
         return this.speed;
+      }
+
+      initializeScrollingIcon(){
+        // Find the `.hero__title` element inside the component
+        const heroIcon = this.querySelectorAll(".hero__icon-with-text");
+        if (!heroIcon.length) {
+          console.error(
+            "No `.hero__icon-with-text` element found inside the scrolling-text-banner component.",
+          );
+          return;
+        }
+        
+        const parentElement = heroIcon[0].parentElement;
+        const iterations = Math.ceil(this.itemIteration / heroIcon.length);
+
+        // Create a container for the scrolling container
+        const scrollingOuter = document.createElement("div");
+        scrollingOuter.classList.add("scrolling-outer");
+
+        // Create a container for the scrolling wrappers
+        const scrollingContainer = document.createElement("div");
+        scrollingContainer.classList.add("scrolling-container");
+
+        scrollingOuter.appendChild(scrollingContainer);
+        parentElement?.appendChild(scrollingOuter);
+
+        // Create two wrappers for seamless animation
+        for (let i = 0; i < 2; i++) {
+          const wrapper = document.createElement("div");
+          wrapper.classList.add("scrolling-wrapper");
+
+          // Create and append three divs with the text content inside the wrapper
+          for (let j = 0; j < iterations; j++) {
+            heroIcon.forEach((icon) => {
+              const textWrapper = document.createElement("div");
+              textWrapper.classList.add("scrolling-text");
+              const clone = icon.cloneNode(true);
+              clone.classList.remove('scroll-trigger', 'scroll-trigger--offscreen', 'scroll-trigger--cancel');
+              const htmlContent = clone.outerHTML;
+              if(htmlContent){
+                if(this.showDots == "true"){
+                  textWrapper.innerHTML = htmlContent + this.dot;
+                  textWrapper.style.marginRight = `${this.spacing}px`;
+                  textWrapper.style.gap = `${this.spacing}px`;
+                } else {
+                  textWrapper.innerHTML = htmlContent;
+                  textWrapper.style.marginRight = `${this.spacing}px`;
+                }
+              }
+              wrapper.appendChild(textWrapper);
+            })
+          }
+
+          // Append the wrapper to the container
+          scrollingContainer.appendChild(wrapper);
+        }
+
+        heroIcon.forEach((icon) => {
+          icon.style.display = 'none';
+          icon.inert = true;
+        })
+
+        // Set animation speed dynamically
+        this.setAnimationSpeed(scrollingContainer);
       }
 
       initializeScrollingText() {
@@ -89,11 +163,17 @@ if (!customElements.get("scrolling-text-banner")) {
           wrapper.classList.add("scrolling-wrapper");
 
           // Create and append three divs with the text content inside the wrapper
-          for (let j = 0; j < 10; j++) {
+          for (let j = 0; j < this.itemIteration; j++) {
             const textWrapper = document.createElement("div");
             textWrapper.classList.add("scrolling-text");
-            textWrapper.textContent = textContent;
-            textWrapper.style.marginRight = `${this.spacing}px`; // Apply spacing
+            if(this.showDots == "true"){
+              textWrapper.innerHTML = textContent + this.dot;
+              textWrapper.style.marginRight = `${this.spacing}px`; // Apply spacing
+              textWrapper.style.gap = `${this.spacing}px`;
+            } else {
+              textWrapper.textContent = textContent;
+              textWrapper.style.marginRight = `${this.spacing}px`;
+            }
             wrapper.appendChild(textWrapper);
           }
 
@@ -127,13 +207,24 @@ if (!customElements.get("scrolling-text-banner")) {
 
       observeResizing() {
         // Observe the size of the `.hero__title` element
-        const heroTitle = this.querySelector(".hero__title");
-        if (!heroTitle) return;
+        if (this.sectionType === 'scrolling-text-with-icon'){
+          const heroIcon = this.querySelectorAll(".hero__icon-with-text");
+          if (!heroIcon.length) return;
+          this.resizeObserver = new ResizeObserver(() => {
+            this.recalculateAnimation();
+          });
+          heroIcon.forEach((icon) => {
+            this.resizeObserver.observe(icon);
+          })
+        } else {
+          const heroTitle = this.querySelector(".hero__title");
+          if (!heroTitle) return;
 
-        this.resizeObserver = new ResizeObserver(() => {
-          this.recalculateAnimation();
-        });
-        this.resizeObserver.observe(heroTitle);
+          this.resizeObserver = new ResizeObserver(() => {
+            this.recalculateAnimation();
+          });
+          this.resizeObserver.observe(heroTitle);
+        }
       }
 
       recalculateAnimation() {

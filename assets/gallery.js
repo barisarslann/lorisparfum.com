@@ -15,6 +15,48 @@ const lightbox = new PhotoSwipeLightbox({
 
   bgOpacity: 1,
 });
+lightbox.addFilter("clickedIndex", (clickedIndex, e) => {
+  if (e.target.closest(".wt-video__overlay__controls, .pswp__video-overlay")) return -1;
+  return clickedIndex;
+});
+
+lightbox.addFilter("itemData", (itemData) => {
+  const el = itemData.element;
+  if (el?.dataset.pswpType === "video") {
+    const src = el.dataset.videoSrc;
+    const useNativeControls = el.dataset.videoControls !== "false";
+    const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const autoplayAttr = reduceMotion ? "" : " autoplay";
+    const slide = el.closest("[data-swiper-slide]");
+    const slideVideo = slide?.querySelector("video");
+    const mutedAttr = slideVideo?.muted !== false ? " muted" : "";
+    const tpl = slide?.querySelector(".wt-pswp-video-controls-template");
+    let html = `<div class="pswp__video-container">`;
+    if (!useNativeControls && tpl) {
+      html += `<video-controls><div class="pswp__video-overlay">${tpl.innerHTML}</div><video src="${src}"${autoplayAttr}${mutedAttr} playsinline loop class="pswp__video"></video></video-controls>`;
+    } else {
+      html += `<video src="${src}" controls${autoplayAttr}${mutedAttr} playsinline loop class="pswp__video"></video>`;
+    }
+    html += `</div>`;
+    itemData.html = html;
+    // PhotoSwipe requires non-zero width/height to render HTML content; use viewport size
+    itemData.width = document.documentElement.clientWidth;
+    itemData.height = document.documentElement.clientHeight;
+  }
+  return itemData;
+});
+
+lightbox.on("contentActivate", ({ content }) => {
+  if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+  requestAnimationFrame(() => {
+    content.element?.querySelector(".pswp__video")?.play().catch(() => {});
+  });
+});
+
+lightbox.on("contentDeactivate", ({ content }) => {
+  content.element?.querySelector("video")?.pause();
+});
+
 lightbox.init();
 lightbox.on("beforeOpen", () => {
   badges?.classList.add("hide");
@@ -45,36 +87,68 @@ if (!customElements.get("gallery-section")) {
         this.isProductPage = this.dataset.productPage === "";
 
         this.galleryLoader = this.querySelector("#gallery-loader");
-        this.renderedSlides = [];
         this.readConfiguration();
+        this.renderedSlides = Array.from(
+          this.elements.gallery.querySelectorAll("[data-swiper-slide]"),
+        );
+
+        this.elements.gallery.addEventListener("click", (e) => {
+          const muteBtn = e.target.closest(".wt-hero-video__sound-toggle");
+          if (!muteBtn) return;
+          if (muteBtn.closest("video-controls")) return;
+          e.preventDefault();
+          const slide = muteBtn.closest("[data-swiper-slide]");
+          const video = slide?.querySelector("video");
+          if (!video) return;
+          video.muted = !video.muted;
+          muteBtn.setAttribute("data-sound", video.muted ? "off" : "on");
+          muteBtn.setAttribute("aria-pressed", video.muted ? "false" : "true");
+          muteBtn.classList.toggle("wt-hero-video__sound-toggle--unmuted", !video.muted);
+        });
+
         this.initializeGallery();
         this.galleryLoader?.classList.add("hidden");
         this.classList.remove("loading");
         this.classList.add("loaded");
 
         this.setStickyGallery();
+
+        if (this.isProductPage) {
+          if ("ResizeObserver" in window) {
+            this._stickyResizeObserver = new ResizeObserver(() => {
+              this.setStickyGallery();
+            });
+            this._stickyResizeObserver.observe(this);
+          }
+          this._stickyResizeHandler = () => this.setStickyGallery();
+          window.addEventListener("resize", this._stickyResizeHandler);
+        }
       }
 
       disconnectedCallback() {
         // this.destroyGallery();
+        this._stickyResizeObserver?.disconnect();
+        if (this._stickyResizeHandler) {
+          window.removeEventListener("resize", this._stickyResizeHandler);
+        }
       }
 
       setStickyGallery() {
-        if (this.isProductPage) {
-          const headerHeight =
-            document.querySelector(".wt-header")?.offsetHeight;
-          const swiperRect = this.getBoundingClientRect();
+        if (!this.isProductPage) return;
 
-          const fitsInViewport =
-            swiperRect.top >= 0 &&
-            swiperRect.left >= 0 &&
-            swiperRect.height <= window.innerHeight;
+        const headerHeight =
+          document.querySelector(".wt-header")?.offsetHeight || 0;
 
-          const positionTopValue = `${headerHeight + 16}px`;
+        const galleryHeight = this.offsetHeight;
+        const fitsInViewport =
+          galleryHeight > 0 &&
+          galleryHeight + headerHeight + 32 <= window.innerHeight;
 
-          this.style.setProperty("--position-top", positionTopValue);
-          this.classList.add("wt-product__gallery--sticky", fitsInViewport);
-        }
+        this.style.setProperty("--position-top", `${headerHeight + 16}px`);
+        this.classList.toggle(
+          "wt-product__gallery--sticky",
+          fitsInViewport,
+        );
       }
 
       readConfiguration() {
@@ -115,6 +189,55 @@ if (!customElements.get("gallery-section")) {
 
         let autoHeightEnabled = window.innerWidth <= 768;
 
+        const UNMUTE_CLASS_TOGGLE = "wt-hero-video__sound-toggle--unmuted";
+
+        function handleSlideVideos(swiper) {
+          const allVideos = Array.from(swiper.slides).flatMap((slide) =>
+            Array.from(slide.querySelectorAll("video")),
+          );
+          const allToggleBtns = Array.from(swiper.slides).flatMap((slide) =>
+            Array.from(slide.querySelectorAll(".wt-hero-video__sound-toggle")),
+          );
+
+          allVideos.forEach((video) => {
+            video.pause();
+            video.currentTime = 0;
+            video.muted = true;
+            video.controls = false;
+            clearTimeout(video._hideCtrlsTimer);
+          });
+
+          // reset all toggle buttons to "off" state
+          allToggleBtns.forEach((btn) => {
+            btn.setAttribute("data-sound", "off");
+            btn.classList.remove(UNMUTE_CLASS_TOGGLE);
+          });
+
+          const activeSlide = swiper.slides[swiper.activeIndex];
+          const activeVideo = activeSlide?.querySelector("video");
+          if (activeVideo) {
+            activeVideo.muted = true;
+            activeVideo.play().catch((err) => {
+              console.warn("Video playback failed:", err);
+            });
+          }
+        }
+
+        function initVideoInteractions(swiper) {
+          handleSlideVideos(swiper);
+
+          swiper.el.addEventListener("click", (e) => {
+            const video = e.target.closest("video");
+            if (!video) return;
+            video.controls = true;
+            video.blur();
+            clearTimeout(video._hideCtrlsTimer);
+            video._hideCtrlsTimer = setTimeout(() => {
+              video.controls = false;
+            }, 3000);
+          });
+        }
+
         // gallery swiper configuration
         const default_gallery_configuration = {
           autoHeight: autoHeightEnabled,
@@ -131,6 +254,10 @@ if (!customElements.get("gallery-section")) {
           pagination: {
             el: ".swiper-pagination",
             type: "fraction",
+          },
+          on: {
+            afterInit: initVideoInteractions,
+            slideChangeTransitionEnd: handleSlideVideos,
           },
         };
 
@@ -437,29 +564,34 @@ if (!customElements.get("gallery-section")) {
         const lowercaseOptions = options.map((option) =>
           option.toLowerCase().replace(/\s/g, ""),
         );
-      
+
         return slides.filter((slide) => {
           let media = slide.querySelector("img");
           if (media == null) media = slide?.querySelector("video");
           const alt = media ? media.getAttribute("alt") : "";
           const mediaId = media ? media.getAttribute("data-media-id") : "";
-      
+
           if (mediaId === featured_media_id) return true;
-      
+
           const altHashtags = (alt?.match(/#[^\s#]+/g) || []).map((hashtag) =>
-            hashtag.slice(1).toLowerCase()
+            hashtag.slice(1).toLowerCase(),
           );
-      
+
           if (altHashtags.length === 0) return true;
-          if (altHashtags.some((tag) => tag.split("|").includes("all"))) return true;
-      
+          if (altHashtags.some((tag) => tag.split("|").includes("all")))
+            return true;
+
           if (matchAll) {
             return altHashtags.every((tag) =>
-              tag.split("|").some((variant) => lowercaseOptions.includes(variant.trim()))
+              tag
+                .split("|")
+                .some((variant) => lowercaseOptions.includes(variant.trim())),
             );
           } else {
             return altHashtags.some((tag) =>
-              tag.split("|").some((variant) => lowercaseOptions.includes(variant.trim()))
+              tag
+                .split("|")
+                .some((variant) => lowercaseOptions.includes(variant.trim())),
             );
           }
         });
@@ -625,14 +757,37 @@ if (!customElements.get("gallery-section")) {
       }
 
       setActiveMedia(mediaId, prepend) {
-        let media = this.elements.gallery.querySelector(
+        const media = this.elements.gallery.querySelector(
           `[data-media-id="${mediaId}"]`,
         );
 
-        if (this.gallerySwiper != null) {
-          this.gallerySwiper.slideTo(this.indexInParent(media));
-          this.thumbsSwiper.slideTo(this.indexInParent(media));
-        }
+        if (this.gallerySwiper == null) return;
+
+        const idx = this.indexInParent(media);
+        this.gallerySwiper.slideTo(idx);
+        this.thumbsSwiper.slideTo(idx);
+
+        const thumbImgs = this.elements.thumbs.querySelectorAll("img");
+        const pending = Array.from(thumbImgs).filter((img) => !img.complete);
+        if (pending.length === 0) return;
+
+        const token = (this._setActiveMediaToken =
+          (this._setActiveMediaToken || 0) + 1);
+
+        Promise.all(
+          pending.map(
+            (img) =>
+              new Promise((resolve) => {
+                img.addEventListener("load", resolve, { once: true });
+                img.addEventListener("error", resolve, { once: true });
+              }),
+          ),
+        ).then(() => {
+          if (token !== this._setActiveMediaToken) return;
+          if (!this.thumbsSwiper) return;
+          this.thumbsSwiper.update();
+          this.thumbsSwiper.slideTo(idx, 0, false);
+        });
       }
 
       matchResolution() {

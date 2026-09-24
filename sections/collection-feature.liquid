@@ -15,7 +15,15 @@
         --section-gap-bottom: {{ section.settings.margin-bottom }}px;
     {% endif %}
 
-    {% if background_rgb != 'rgba(0, 0, 0, 0.0)' %}
+      {%- if section.settings.show_mobile_spacing -%}
+          --section-gap-top-mobile: {{ section.settings.margin-top-mobile }}px;
+      {%- endif -%}
+
+      {%- if section.settings.show_mobile_spacing -%}
+          --section-gap-bottom-mobile: {{ section.settings.margin-bottom-mobile }}px;
+      {%- endif -%}
+
+    {% if section.settings['background_color'] != blank and section.settings['background_color'] != 'transparent' and background_rgb != 'rgba(0, 0, 0, 0.0)' %}
       --color-background: {{ section.settings.background_color }};
     {% endif %}
 
@@ -23,7 +31,7 @@
       --border-radius: 0;
     {% endif %}
 
-    {% if text_rgb != 'rgba(0, 0, 0, 0.0)' %}
+    {% if section.settings['color-body-text'] != blank and section.settings['color-body-text'] != 'transparent' and text_rgb != 'rgba(0, 0, 0, 0.0)' %}
       --color-custom-text: {{ section.settings.color-body-text }};
     {% endif %}
 
@@ -37,7 +45,7 @@
   [data-section-id="{{ section.id }}"] .headline__title,
   [data-section-id="{{ section.id }}"]
     {
-      {% if text_rgb != 'rgba(0, 0, 0, 0.0)' %}
+      {% if section.settings['color-body-text'] != blank and section.settings['color-body-text'] != 'transparent' and text_rgb != 'rgba(0, 0, 0, 0.0)' %}
         --color-custom-text: {{ section.settings.color-body-text }};
       {% endif %}
     }
@@ -56,11 +64,19 @@
   class="collection-feature__wrapper {% if settings.animations %} scroll-trigger animate--slide-in {% endif %} {% if settings.disabled_animations_on_mobile %} disabled-on-mobile {% endif %}"
   data-section-id="{{ section.id }}"
 >
-  {% if section.settings.heading != blank %}
-    {% render 'headline', title: section.settings.heading %}
+  {% if section.settings.advanced_heading %}
+    {% if section.settings.heading_richtext != blank %}
+        <div class="headline headline--rich {% if settings.animations %} scroll-trigger animate--slide-in {% endif %} {% if settings.disabled_animations_on_mobile %} disabled-on-mobile {% endif %}">
+            {{ section.settings.heading_richtext }}
+        </div>
+    {% endif %}
+  {% else %}
+    {% if section.settings.heading != blank %}
+        {% render 'headline', title: section.settings.heading %}
+    {% endif %}
   {% endif %}
 
-  <collection-feature data-section-id="{{ section.id }}">
+  <collection-feature>
     <ul class="collection-feature__container">
       {%- for block in section.blocks -%}
         {% assign background_rgb = block.settings.background_color | color_to_rgb %}
@@ -69,8 +85,8 @@
         <li
           class="collection-feature__item"
           data-block-id="{{ block.id }}"
-          data-hover-color="{% if text_rgb != 'rgba(0, 0, 0, 0.0)' %}{{ block.settings.color-body-text }}{% endif %}"
-          data-hover-background=" {% if background_rgb != 'rgba(0, 0, 0, 0.0)' %}{{ block.settings.background_color }}{% endif %}"
+          data-hover-color="{% if block.settings['color-body-text'] != blank and block.settings['color-body-text'] != 'transparent' and text_rgb != 'rgba(0, 0, 0, 0.0)' %}{{ block.settings.color-body-text }}{% endif %}"
+          data-hover-background=" {% if block.settings['background_color'] != blank and block.settings['background_color'] != 'transparent' and background_rgb != 'rgba(0, 0, 0, 0.0)' %}{{ block.settings.background_color }}{% endif %}"
         >
           <a
             href="{% if block.settings.collection%}{{ block.settings.collection.url }}{% endif %}"
@@ -107,10 +123,28 @@
   "tag": "section",
   "settings": [
     {
+      "type": "paragraph",
+      "content": "t:sections.collection-feature.settings.support_info.content"
+    },
+    {
+      "type": "checkbox",
+      "id": "advanced_heading",
+      "label": "t:sections.global.advanced_heading.label",
+      "info": "t:sections.global.advanced_heading.info"
+    },
+    {
       "type": "textarea",
       "id": "heading",
+      "label": "t:sections.settings.settings.heading.label",
       "default": "Collection feature",
-      "label": "t:sections.settings.settings.heading.label"
+      "visible_if": "{{ section.settings.advanced_heading == false }}"
+    },
+    {
+      "type": "richtext",
+      "id": "heading_richtext",
+      "label": "t:sections.logo-banner.settings.content.headline.label",
+      "default": "<h2>Collection feature</h2>",
+      "visible_if": "{{ section.settings.advanced_heading == true }}"
     },
     {
       "type": "range",
@@ -158,13 +192,11 @@
     {
       "type": "color",
       "id": "color-body-text",
-      "default": "transparent",
       "label": "t:sections.settings.settings.text-color.label"
     },
     {
       "type": "color",
       "id": "background_color",
-      "default": "transparent",
       "label": "t:sections.settings.settings.background-color.label"
     },
     {
@@ -191,6 +223,33 @@
       "default": 20,
       "label": "t:sections.settings.settings.distance-bottom.label",
       "info": "t:sections.settings.settings.distance-bottom.info"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_mobile_spacing",
+      "label": "t:sections.settings.settings.show-mobile-spacing.label"
+    },
+    {
+      "type": "range",
+      "id": "margin-top-mobile",
+      "min": 0,
+      "max": 100,
+      "step": 2,
+      "default": 20,
+      "unit": "px",
+      "label": "t:sections.settings.settings.distance-top-mobile.label",
+      "visible_if": "{{ section.settings.show_mobile_spacing }}"
+    },
+    {
+      "type": "range",
+      "id": "margin-bottom-mobile",
+      "min": 0,
+      "max": 100,
+      "step": 2,
+      "default": 20,
+      "unit": "px",
+      "label": "t:sections.settings.settings.distance-bottom-mobile.label",
+      "visible_if": "{{ section.settings.show_mobile_spacing }}"
     }
   ],
   "blocks": [
@@ -222,13 +281,11 @@
         {
           "type": "color",
           "id": "color-body-text",
-          "default": "transparent",
           "label": "t:sections.settings.settings.text-color.label"
         },
         {
           "type": "color",
           "id": "background_color",
-          "default": "transparent",
           "label": "t:sections.settings.settings.background-color.label"
         }
       ]
@@ -237,6 +294,7 @@
   "presets": [
     {
       "name": "t:sections.collection-feature.name",
+      "category": "t:sections.categories.collections",
       "blocks": [
         {
           "type": "column"

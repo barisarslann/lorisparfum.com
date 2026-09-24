@@ -1,28 +1,62 @@
 {% if blocks %}
+  {{ 'simple-block.css' | asset_url | stylesheet_tag }}
   {%- for block in blocks -%}
     {%- case block.type -%}
       {%- when 'subheading' -%}
         {% if block.settings.subheading %}
-          <h2
+          <div
             data-block-id="{{ block.id }}"
-            class="{% if prefix %}{{ prefix }}{% else %}block{% endif %}__subheading {% if prefix %}{{ prefix }}{% else %}block{% endif %}{% if block.settings.subheading_disable_on_mobile %}__subheading--mobile{% endif %}"
+            {{ block.shopify_attributes }}
+            class="{% if prefix %}{{ prefix }}{% else %}block{% endif %}__subheading {% if block.settings.subheading_disable_on_mobile %}{% if prefix %}{{ prefix }}{% else %}block{% endif %}__subheading--mobile{% endif %} {% if settings.animations %} scroll-trigger animate--slide-in {% endif %} {% if settings.disabled_animations_on_mobile %} disabled-on-mobile {% endif %}"
           >
             {{ block.settings.subheading | escape | newline_to_br }}
-          </h2>
+          </div>
+        {% endif %}
+      {%- when 'subheading_richtext' -%}
+        {% if block.settings.subheading_richtext %}
+          <div
+            data-block-id="{{ block.id }}"
+            class="{% if prefix %}{{ prefix }}{% else %}block{% endif %}__subheading {% if block.settings.subheading_richtext_disable_on_mobile %}{% if prefix %}{{ prefix }}{% else %}block{% endif %}__subheading--mobile{% endif %} {% if settings.animations %} scroll-trigger animate--slide-in {% endif %} {% if settings.disabled_animations_on_mobile %} disabled-on-mobile {% endif %}"
+          >
+            {{ block.settings.subheading_richtext | newline_to_br }}
+          </div>
         {% endif %}
       {%- when 'heading' -%}
         {% if block.settings.heading %}
-          <h2
-            data-block-id="{{ block.id }}"
-            class="{% if prefix %}{{ prefix }}{% else %}block{% endif %}__title {% if prefix %}{{ prefix }}{% else %}block{% endif %}{% if block.settings.disable_on_mobile %}__title--mobile{% endif %}"
-          >
-            {{ block.settings.heading | escape | newline_to_br }}
-          </h2>
+          {% if block.settings.advanced_heading %}
+            {% liquid
+              assign apply_gradient_class = false
+              assign underline_style = block.settings.heading_underline_style | default: 'none'
+
+              if block.settings.heading_richtext_color != blank and block.settings.heading_richtext_color != 'rgba(0,0,0,0)' and block.settings.heading_richtext_color != 'transparent'
+                assign apply_gradient_class = true
+              endif
+
+              if block.settings.heading_richtext_gradient != blank and block.settings.heading_richtext_gradient != 'rgba(0,0,0,0)' and block.settings.heading_richtext_gradient != 'transparent'
+                assign apply_gradient_class = true
+              endif
+            %}
+            <heading-underline
+              data-block-id="{{ block.id }}"
+              {% if block.settings.heading_underline_color != blank %}style="--underline-color: {{ block.settings.heading_underline_color }};" {% endif %}{% if underline_style != 'none' %}data-underline-style="{{ underline_style }}"{% endif %}
+              class="headline headline--rich
+              {% if apply_gradient_class %} headline--rich-gradient{% endif %}
+              {% if settings.animations %} scroll-trigger animate--slide-in {% endif %} {% if settings.disabled_animations_on_mobile %} disabled-on-mobile {% endif %}{% if block.settings.disable_on_mobile %}{% if prefix %}{{ prefix }}{% else %}block{% endif %}__title--mobile{% endif %}">
+                {{ block.settings.heading_richtext }}
+            </heading-underline>
+          {% else %}
+           <h2
+              data-block-id="{{ block.id }}"
+              class="{% if prefix %}{{ prefix }}{% else %}block{% endif %}__title {% if block.settings.disable_on_mobile %}{% if prefix %}{{ prefix }}{% else %}block{% endif %}__title--mobile{% endif %} {% if settings.animations %} scroll-trigger animate--slide-in {% endif %} {% if settings.disabled_animations_on_mobile %} disabled-on-mobile {% endif %}"
+              >
+                {{ block.settings.heading | escape | newline_to_br }}
+            </h2>
+          {% endif %}
         {% endif %}
         {% if block.settings.subheading %}
           <div
             data-block-id="{{ block.id }}"
-            class="{% if prefix %}{{ prefix }}{% else %}block{% endif %}__text {% if block.settings.disable_on_mobile %}hero__title--mobile{% endif %}"
+            class="{% if prefix %}{{ prefix }}{% else %}block{% endif %}__text {% if block.settings.disable_on_mobile %}hero__title--mobile{% endif %} {% if settings.animations %} scroll-trigger animate--slide-in {% endif %} {% if settings.disabled_animations_on_mobile %} disabled-on-mobile {% endif %}"
           >
             {{ block.settings.subheading }}
           </div>
@@ -30,7 +64,7 @@
       {%- when 'text' -%}
         {% if block.settings.text and rich_text_with_image == true %}
           <div
-            class="rich-text-image {% if block.settings.disable_on_mobile %}hero__title--mobile{% endif %}"
+            class="rich-text-image {% if block.settings.disable_on_mobile %}hero__title--mobile{% endif %} {% if settings.animations %} scroll-trigger animate--slide-in {% endif %} {% if settings.disabled_animations_on_mobile %} disabled-on-mobile {% endif %}"
             data-block-id="{{ block.id }}"
           >
             {% assign text = block.settings.text %}
@@ -39,14 +73,17 @@
             {% if block.settings.picture1 == null
               and block.settings.picture2 == null
               and block.settings.picture3 == null
+              and block.settings.picture4 == null
             %}
               {% assign pic1url = 'product-1' | placeholder_svg_tag %}
               {% assign pic2url = 'product-2' | placeholder_svg_tag %}
               {% assign pic3url = 'product-3' | placeholder_svg_tag %}
+              {% assign pic4url = 'product-4' | placeholder_svg_tag %}
               {% assign text = text
                 | replace: 'PICTURE1', pic1url
                 | replace: 'PICTURE2', pic2url
                 | replace: 'PICTURE3', pic3url
+                | replace: 'PICTURE4', pic4url
               %}
             {% endif %}
 
@@ -54,7 +91,11 @@
               {% assign pic1url = block.settings.picture1.src | image_url: width: 200 | image_tag %}
               {% assign link1 = block.settings.button_link1 %}
               {% if link1.size > 0 %}
-                {% assign pic1tag = '<a href="' | append: link1 | append: '">' | append: pic1url | append: '</a>' %}
+                {% if block.settings.button_link1_new_window %}
+                  {% assign pic1tag = '<a href="' | append: link1 | append: '" target="_blank" rel="noreferrer noopener">' | append: pic1url | append: '</a>' %}
+                {% else %}
+                  {% assign pic1tag = '<a href="' | append: link1 | append: '">' | append: pic1url | append: '</a>' %}
+                {% endif %}
               {% else %}
                 {% assign pic1tag = pic1url %}
               {% endif %}
@@ -65,7 +106,11 @@
               {% assign pic2url = block.settings.picture2.src | image_url: width: 200 | image_tag %}
               {% assign link2 = block.settings.button_link2 %}
               {% if link2.size > 0 %}
-                {% assign pic2tag = '<a href="' | append: link2 | append: '">' | append: pic2url | append: '</a>' %}
+                {% if block.settings.button_link2_new_window %}
+                  {% assign pic2tag = '<a href="' | append: link2 | append: '" target="_blank" rel="noreferrer noopener">' | append: pic2url | append: '</a>' %}
+                {% else %}
+                  {% assign pic2tag = '<a href="' | append: link2 | append: '">' | append: pic2url | append: '</a>' %}
+                {% endif %}
               {% else %}
                 {% assign pic2tag = pic2url %}
               {% endif %}
@@ -76,27 +121,46 @@
               {% assign pic3url = block.settings.picture3.src | image_url: width: 200 | image_tag %}
               {% assign link3 = block.settings.button_link3 %}
               {% if link3.size > 0 %}
-                {% assign pic3tag = '<a href="' | append: link3 | append: '">' | append: pic3url | append: '</a>' %}
+                {% if block.settings.button_link3_new_window %}
+                  {% assign pic3tag = '<a href="' | append: link3 | append: '" target="_blank" rel="noreferrer noopener">' | append: pic3url | append: '</a>' %}
+                {% else %}
+                  {% assign pic3tag = '<a href="' | append: link3 | append: '">' | append: pic3url | append: '</a>' %}
+                {% endif %}
               {% else %}
                 {% assign pic3tag = pic3url %}
               {% endif %}
               {% assign text = text | replace: 'PICTURE3', pic3tag %}
             {% endif %}
 
-            <h3 class="rich-text-image__heading rte">
+            {% if block.settings.picture4 %}
+              {% assign pic4url = block.settings.picture4.src | image_url: width: 200 | image_tag %}
+              {% assign link4 = block.settings.button_link4 %}
+              {% if link4.size > 0 %}
+                {% if block.settings.button_link4_new_window %}
+                  {% assign pic4tag = '<a href="' | append: link4 | append: '" target="_blank" rel="noreferrer noopener">' | append: pic4url | append: '</a>' %}
+                {% else %}
+                  {% assign pic4tag = '<a href="' | append: link4 | append: '">' | append: pic4url | append: '</a>' %}
+                {% endif %}
+              {% else %}
+                {% assign pic4tag = pic4url %}
+              {% endif %}
+              {% assign text = text | replace: 'PICTURE4', pic4tag %}
+            {% endif %}
+
+            <h2 class="rich-text-image__heading rte">
               {{ text }}
-            </h3>
+            </h2>
           </div>
         {% elsif block.settings.text %}
           <div
             data-block-id="{{ block.id }}"
-            class="{% if prefix %}{{ prefix }}{% else %}block{% endif %}__text {% if block.settings.disable_on_mobile %}{% if prefix %}{{ prefix }}{% else %}block{% endif %}__text--mobile{% endif %} rte"
+            class="{% if prefix %}{{ prefix }}{% else %}block{% endif %}__text {% if block.settings.disable_on_mobile %}{% if prefix %}{{ prefix }}{% else %}block{% endif %}__text--mobile{% endif %} rte {% if settings.animations %} scroll-trigger animate--slide-in {% endif %} {% if settings.disabled_animations_on_mobile %} disabled-on-mobile {% endif %}"
           >
             {{ block.settings.text }}
           </div>
         {% endif %}
       {%- when 'button' -%}
-        <div class="hero__button--gap">
+        <div class="hero__button--gap {% if settings.animations %} scroll-trigger animate--slide-in {% endif %} {% if settings.disabled_animations_on_mobile %} disabled-on-mobile {% endif %}">
           {% if block.settings.button_link and block.settings.button_label != blank %}
             <a
               href="{{ block.settings.button_link }}"
@@ -104,32 +168,98 @@
                 target="_blank" rel="noreferrer noopener"
                 tabindex="0"
               {% endif %}
-              aria-label="{{ block.settings.button_label }}"
-              class="hero__button--primary {% if block.settings.button_select != 'primary' %} hero__button--secondary {% endif %}{% if block.settings.button_select == 'link' %} hero__button--link {% endif %}{% if prefix %}{{ prefix }}{% else %}block{% endif %}__button {% if prefix %}{{ prefix }}{% else %}block{% endif %}{% if block.settings.disable_on_mobile %}__button--mobile{% endif %}"
+              aria-label="{{ block.settings.button_label }} {{ block.settings.button_link | split: '/' | last | replace: '-', ' ' | capitalize }}"
+              class="hero__button--primary {% if block.settings.button_select != 'primary' %} hero__button--secondary {% endif %}{% if block.settings.button_select == 'link' %} hero__button--link {% endif %}{% if prefix %}{{ prefix }}{% else %}block{% endif %}__button {% if block.settings.disable_on_mobile %}{% if prefix %}{{ prefix }}{% else %}block{% endif %}__button--mobile{% endif %}"
             >
               <span>{{ block.settings.button_label }}</span>
+              <span class="visually-hidden">: {{ block.settings.button_link | split: '/' | last | replace: '-', ' ' | capitalize }}</span>
             </a>
           {% endif %}
 
-          {% if block.settings.second_button_link %}
+          {% if block.settings.second_button_link and block.settings.second_button_label != blank %}
             <a
               href="{{ block.settings.second_button_link }}"
-              {% if button_link_in_new_window %}
+              {% if block.settings.second_button_link_in_new_window %}
                 target="_blank" rel="noreferrer noopener"
               {% endif %}
-              ><button
                 aria-label="{{ block.settings.second_button_label }}"
-                class="hero__button--primary {% if block.settings.second_button_select != 'primary' %} hero__button--secondary {% endif %}{% if block.settings.second_button_select == 'link' %} hero__button--link {% endif %}{% if prefix %}{{ prefix }}{% else %}block{% endif %}__button {% if prefix %}{{ prefix }}{% else %}block{% endif %}{% if block.settings.second_disable_on_mobile %}__button--mobile{% endif %}"
+                class="hero__button--primary {% if block.settings.second_button_select != 'primary' %} hero__button--secondary {% endif %}{% if block.settings.second_button_select == 'link' %} hero__button--link {% endif %}{% if prefix %}{{ prefix }}{% else %}block{% endif %}__button {% if block.settings.second_disable_on_mobile %}{% if prefix %}{{ prefix }}{% else %}block{% endif %}__button--mobile{% endif %}"
               >
                 <span>
                   {{ block.settings.second_button_label }}
                 </span>
-              </button></a
-            >
+            </a>
           {% endif %}
         </div>
       {%- when 'countdown_timer' %}
         {% render 'countdown-timer', block: block %}
+      {%- when 'icon_with_text' %}
+        <div data-block-id="{{ block.id }}" class="hero__icon-with-text{% if block.settings.align_icon_top %} hero__icon-with-text--align-top{% endif %} {% if settings.animations %} scroll-trigger animate--slide-in {% endif %} {% if settings.disabled_animations_on_mobile %} disabled-on-mobile {% endif %}">
+          <div class="hero__icon-container">
+            {%- if block.settings.icon == blank -%}
+              {% render 'icons',
+                id: block.settings.select_icon,
+                url: block.settings.image.url,
+                icon_class: 'hero__icon'
+              %}
+            {% else %}
+              {% render 'responsive-icon-image',
+                image: block.settings.icon,
+                height_desktop: block.settings.icon_height_desktop,
+                height_mobile: block.settings.icon_height,
+                class: 'hero__icon'
+              %}
+            {% endif %}
+          </div>
+          <div class="hero__icon-text">
+            {{ block.settings.text }}
+          </div>
+        </div>
+      {% when 'table' %}
+        <div class="hero__table {% if block.settings.full-width-enabled %}hero__table--full-width{% endif %} {% if settings.animations %} scroll-trigger animate--slide-in {% endif %} {% if settings.disabled_animations_on_mobile %} disabled-on-mobile {% endif %}" data-block-id="{{ block.id }}">
+            <div class="hero__table-container">
+              {% if block.settings.metafield != empty %}
+                {% assign metafield = block.settings.metafield | strip | split: '.' %}
+                {% assign metafield_namespace = metafield | first | strip %}
+                {% assign metafield_key = metafield | last | strip %}
+                {% assign specification = product.metafields[metafield_namespace][metafield_key]
+                  | newline_to_br
+                %}
+              {% else %}
+                {% assign specification = block.settings.table_content | newline_to_br %}
+              {% endif %}
+
+              {% assign text = specification | strip_newlines %}
+              {% assign table_rows = text | split: '<br /><br />' %}
+
+
+              {% for row in table_rows %}
+                <div class="hero__table__row hero__table__row--mobile--{{ block.settings.mobile_layout }}">
+                  {% assign row_cells = row | split: '<br />' %}
+                  {% for cell in row_cells limit: 1 %}
+                    <div class="hero__table__cell--title hero__table__cell hero__table__cell--{{ block.settings.desktop_text_horizontal_position }} hero__table__cell--mobile--{{ block.settings.mobile_text_horizontal_position }}">
+                      <p>{{ cell }}</p>
+                    </div>
+                  {% endfor %}
+                  <div class="hero__table__cell--content  hero__table__cell hero__table__cell--{{ block.settings.desktop_text_horizontal_position }} hero__table__cell--mobile--{{ block.settings.mobile_text_horizontal_position }}">
+                    {% for cell in row_cells offset: 1 %}
+                      <p>{{ cell }}</p>
+                    {% endfor %}
+                  </div>
+                </div>
+              {% endfor %}
+            </div>
+          </div>
+      {%- when 'custom_liquid' %}
+        <div data-block-id="{{ block.id }}" class="{% if prefix %}{{ prefix }}{% else %}block{% endif %}__custom-liquid {% if settings.animations %} scroll-trigger animate--slide-in {% endif %} {% if settings.disabled_animations_on_mobile %} disabled-on-mobile {% endif %}">
+          {{ block.settings.liquid_code }}
+        </div>
+      {%- when 'ui_spacer' %}
+        {% render 'ui-spacer',
+          block_id: block.id,
+          spacer_mobile_height: block.settings.spacer_mobile_height,
+          spacer_desktop_height: block.settings.spacer_desktop_height
+        %}
     {%- endcase -%}
   {%- endfor -%}
 {% else %}

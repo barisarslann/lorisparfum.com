@@ -43,7 +43,7 @@
 }
 @media (max-width: 1199px) {
   .wt-mosaic__container--reversed .wt-mosaic__aside {
-    margin-bottom: calc(var(--gap, 8px) * 2);
+    margin-bottom: var(--mosaic-gap-mobile, calc(var(--gap, 8px) * 2));
   }
 }
 .wt-mosaic__container--reversed .wt-mosaic__main:not(:last-child) {
@@ -85,7 +85,7 @@
   }
 }
 .wt-mosaic__main:not(:last-child), .wt-mosaic__aside:not(:last-child), .wt-mosaic__aside__item:not(:last-child) {
-  margin-bottom: calc(var(--gap, 8px) * 2);
+  margin-bottom: var(--mosaic-gap-mobile, calc(var(--gap, 8px) * 2));
 }
 @media (min-width: 1200px) {
   .wt-mosaic__main:not(:last-child), .wt-mosaic__aside:not(:last-child), .wt-mosaic__aside__item:not(:last-child) {
@@ -107,13 +107,13 @@
 }
 @media (max-width: 1199px) {
   .wt-mosaic--reversed .wt-mosaic__main:not(:last-child) {
-    margin-top: calc(var(--gap, 8px) * 2);
+    margin-top: var(--mosaic-gap-mobile, calc(var(--gap, 8px) * 2));
     margin-bottom: 0;
   }
 }
 @media (min-width: 1200px) {
   .wt-mosaic__main {
-    width: calc(66.66% - var(--gap));
+    width: calc(66.66% - var(--mosaic-gap, calc(var(--gap, 8px) * 2)) / 2);
     min-height: initial;
     display: flex;
   }
@@ -140,7 +140,7 @@
   flex-direction: column;
 }
 .wt-mosaic__aside__item:not(:last-child) {
-  margin-bottom: calc(var(--gap, 8px) * 2);
+  margin-bottom: var(--mosaic-gap-mobile, calc(var(--gap, 8px) * 2));
 }
 @media (min-width: 600px) {
   .wt-mosaic__aside__item:not(:last-child) {
@@ -152,6 +152,7 @@
 }
 .wt-mosaic__aside__item .hero {
   width: 100%;
+  display: flex;
 }
 @media (min-width: 600px) {
   .wt-mosaic__aside__item .hero__overlay {
@@ -164,7 +165,7 @@
     justify-content: space-between;
   }
   .wt-mosaic__aside__item {
-    width: calc(50% - var(--gap));
+    width: calc(50% - var(--mosaic-gap, calc(var(--gap, 8px) * 2)) / 2);
     min-height: 30vw;
   }
 }
@@ -172,12 +173,12 @@
   .wt-mosaic__aside {
     flex-direction: column;
     justify-content: space-between;
-    width: calc(33.33% - var(--gap));
+    width: calc(33.33% - var(--mosaic-gap, calc(var(--gap, 8px) * 2)) / 2);
   }
   .wt-mosaic__aside__item {
     min-height: initial;
     width: 100%;
-    height: calc(50% - var(--gap));
+    height: calc(50% - var(--mosaic-gap, calc(var(--gap, 8px) * 2)) / 2);
   }
 }
 @media (min-width: 600px) {
@@ -192,3 +193,4 @@
 .wt-mosaic .hero__button--no {
   display: none;
 }
+/*# sourceMappingURL=collage.css.map */

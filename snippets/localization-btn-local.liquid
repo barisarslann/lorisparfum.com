@@ -1,6 +1,9 @@
+{% assign tab_index = tabindex | default: '0' %}
+
 <button
   class="wt-localization-trigger wt-localization-trigger--local {{ custom_class }}"
   data-open-drawer="country"
+  tabindex="{{ tab_index }}"
 >
   <span class="wt-localization-trigger__label">
     {% if show_country_flag %}

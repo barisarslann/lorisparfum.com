@@ -1,0 +1,149 @@
+{% assign prefix = 'hero' %}
+<div class="hero__button--gap{% if block.settings.enable_full_width_on_mobile %} hero__button--full-width-mobile{% endif %}{% if settings.animations %} scroll-trigger animate--slide-in{% endif %}{% if settings.disabled_animations_on_mobile %} disabled-on-mobile{% endif %}">
+    {% if block.settings.button_link and block.settings.button_label != blank %}
+      <a
+        href="{{ block.settings.button_link }}"
+        {% if block.settings.button_link_in_new_window %}
+          target="_blank" rel="noreferrer noopener"
+          tabindex="0"
+        {% endif %}
+        aria-label="{{ block.settings.button_label }}"
+        class="hero__button hero__button--primary {% if block.settings.button_select != 'primary' %} hero__button--secondary {% endif %}{% if block.settings.button_select == 'link' %} hero__button--link {% endif %}{% if prefix %}{{ prefix }}{% else %}block{% endif %}__button {% if block.settings.disable_on_mobile %}{% if prefix %}{{ prefix }}{% else %}block{% endif %}__button--mobile{% endif %}"
+      >
+        <span>{{ block.settings.button_label }}</span>
+      </a>
+    {% endif %}
+
+    {% if block.settings.second_button_link and block.settings.second_button_label != blank %}
+      <a
+        href="{{ block.settings.second_button_link }}"
+        {% if block.settings.second_button_link_in_new_window %}
+          target="_blank" rel="noreferrer noopener"
+        {% endif %}
+          aria-label="{{ block.settings.second_button_label }}"
+          class="hero__button hero__button--primary {% if block.settings.second_button_select != 'primary' %} hero__button--secondary {% endif %}{% if block.settings.second_button_select == 'link' %} hero__button--link {% endif %}{% if prefix %}{{ prefix }}{% else %}block{% endif %}__button {% if block.settings.second_disable_on_mobile %}{% if prefix %}{{ prefix }}{% else %}block{% endif %}__button--mobile{% endif %}"
+        >
+          <span>
+            {{ block.settings.second_button_label }}
+          </span>
+      </a>
+    {% endif %}
+  </div>
+
+{% schema %}
+{
+    "name": "t:sections.image-banner.button.name",
+    "settings": [
+      {
+        "type": "checkbox",
+        "id": "enable_full_width_on_mobile",
+        "label": "t:sections.global.enable_full_width_on_mobile",
+        "default": false
+      },
+      {
+        "type": "header",
+        "content": "t:sections.global.button_1"
+      },
+      {
+        "type": "select",
+        "id": "button_select",
+        "options": [
+          {
+            "value": "primary",
+            "label": "t:sections.settings.settings.button_select.primary.label"
+          },
+          {
+            "value": "secondary",
+            "label": "t:sections.settings.settings.button_select.secondary.label"
+          },
+          {
+            "value": "link",
+            "label": "t:sections.settings.settings.button_select.link.label"
+          }
+        ],
+        "default": "primary",
+        "label": "t:sections.settings.settings.button_select.default.label"
+      },
+      {
+        "id": "button_label",
+        "type": "text",
+        "default": "Button label",
+        "label": "t:sections.settings.settings.button_label.label"
+      },
+      {
+        "type": "checkbox",
+        "id": "disable_on_mobile",
+        "label": "t:sections.global.disable_on_mobile",
+        "default": false
+      },
+      {
+        "type": "url",
+        "id": "button_link",
+        "label": "t:sections.settings.settings.link.label",
+        "default": "/"
+      },
+      {
+        "type": "checkbox",
+        "id": "button_link_in_new_window",
+        "label": "t:sections.global.button_link_in_new_window",
+        "default": false
+      },
+      {
+        "type": "header",
+        "content": "t:sections.global.button_2"
+      },
+      {
+        "type": "select",
+        "id": "second_button_select",
+        "options": [
+          {
+            "value": "primary",
+            "label": "t:sections.settings.settings.button_select.primary.label"
+          },
+          {
+            "value": "secondary",
+            "label": "t:sections.settings.settings.button_select.secondary.label"
+          },
+          {
+            "value": "link",
+            "label": "t:sections.settings.settings.button_select.link.label"
+          }
+        ],
+        "default": "primary",
+        "label": "t:sections.settings.settings.button_select.default.label"
+      },
+      {
+        "id": "second_button_label",
+        "type": "text",
+        "default": "Button label",
+        "label": "t:sections.settings.settings.button_label.label"
+      },
+      {
+        "type": "checkbox",
+        "id": "second_disable_on_mobile",
+        "label": "t:sections.global.disable_on_mobile",
+        "default": false
+      },
+      {
+        "type": "url",
+        "id": "second_button_link",
+        "label": "t:sections.settings.settings.link.label"
+      },
+      {
+        "type": "checkbox",
+        "id": "second_button_link_in_new_window",
+        "label": "t:sections.global.button_link_in_new_window",
+        "default": false
+      }
+    ],
+    "presets": [
+      {
+        "name": "t:blocks.button.presets.name",
+        "settings": {
+          "button_label": "Button label",
+          "second_button_label": "Button label"
+        }
+      }
+    ]
+  }
+{% endschema %}

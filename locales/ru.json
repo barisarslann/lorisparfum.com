@@ -40,6 +40,11 @@
     },
     "continue_shopping": "Продолжить покупки",
     "pagination": {
+      "previous_label": "Назад",
+      "next_label": "Вперёд",
+      "load_more": "Загрузить ещё",
+      "load_previous": "Загрузить предыдущие",
+      "showing": "Показано {{ count }} из {{ total }} товаров",
       "label": "Разбивка на страницы",
       "page": "Страница {{ number }}",
       "next": "Следующая страница",
@@ -52,6 +57,8 @@
       "view": "Просмотреть корзину ({{ count }})",
       "item_added": "Товар добавлен в корзину."
     },
+    "copy": "Копировать",
+    "copied": "Скопировано",
     "share": {
       "copy_to_clipboard": "Копировать ссылку",
       "share_url": "Ссылка",
@@ -60,9 +67,6 @@
     },
     "quick_add": {
       "view_all_details": "Посмотреть все детали"
-    },
-    "icons": {
-      "icon_title": ""
     },
     "slider": {
       "of": "из",
@@ -74,7 +78,9 @@
   "newsletter": {
     "label": "Ваш адрес электронной почты",
     "success": "Спасибо, что подписались!",
-    "button_label": "Подписаться"
+    "button_label": "Подписаться",
+    "close": "Закрыть всплывающее окно",
+    "consent_checkbox_label": "Я хочу подписаться на рассылку новостей (информация об акциях, скидках, премьерах, конкурсах)."
   },
   "accessibility": {
     "skip_to_text": "Перейти к контенту",
@@ -95,7 +101,10 @@
     "star_reviews_info": "{{ rating_value }} из {{ rating_max }} звезд",
     "collapsible_content_title": "Свернутое содержимое",
     "complementary_products": "Дополнительные товары",
-    "searching": "Поиск выполняется..."
+    "searching": "Поиск выполняется...",
+    "scroll_to_top": "Scroll to top",
+    "open": "Открыть",
+    "subscription_widget__selling_plan_select": "Периодичность доставки для {{ plan_group }}"
   },
   "blogs": {
     "article": {
@@ -115,7 +124,10 @@
       "comments": {
         "one": "Комментарии: {{ count }}",
         "other": "Комментариев: {{ count }}"
-      }
+      },
+      "date_format": "%d.%m.%Y",
+      "published_on": "{{ date }}",
+      "posted_by": "Автор: {{ author }}"
     }
   },
   "onboarding": {
@@ -125,6 +137,7 @@
   "products": {
     "product": {
       "add_to_cart": "Добавить в корзину",
+      "pick_size": "Выберите {{ option }}",
       "description": "Описание",
       "on_sale": "Распродажа",
       "product_variants": "Варианты товара",
@@ -145,7 +158,8 @@
         "from_price_html": "От {{ price }}",
         "regular_price": "Обычная цена",
         "sale_price": "Цена со скидкой",
-        "unit_price": "Цена за единицу"
+        "unit_price": "Цена за единицу",
+        "free": "Бесплатно"
       },
       "pickup_availability": {
         "view_store_info": "Сведения о магазине",
@@ -185,7 +199,9 @@
       "volume_pricing": {
         "note": "TODO",
         "price_range": "TODO"
-      }
+      },
+      "select_option": "Выберите опцию",
+      "select_options": "Выбрать варианты"
     },
     "modal": {
       "label": "Галерея мультимедиа"
@@ -222,6 +238,10 @@
     }
   },
   "templates": {
+    "404": {
+      "title": "Страница не найдена",
+      "subtext": "404"
+    },
     "search": {
       "no_results": "По запросу «{{ terms }}» ничего не найдено. Проверьте правописание или выберите другие слова либо фразу.",
       "title": "Результаты поиска",
@@ -242,7 +262,9 @@
         "products": "Товары",
         "pages": "Страницы",
         "articles": "Статьи",
-        "suggestions": "Предложения"
+        "suggestions": "Предложения",
+        "popular_searches": "Популярные запросы",
+        "useful_links": "Полезные ссылки"
       },
       "search_for": "Посмотреть все для \"{{ terms }}\""
     },
@@ -260,13 +282,12 @@
         "error_heading": "Измените следующие элементы:",
         "title": "Форма обратной связи"
       }
-    },
-    "404": {
-      "title": "Страница не найдена",
-      "subtext": "404"
     }
   },
   "sections": {
+    "shoppable_buy_all": {
+      "add_all_to_cart": "Добавить всё в корзину"
+    },
     "header": {
       "announcement": "Объявление",
       "menu": "Меню",
@@ -305,7 +326,29 @@
         "title": "У вас есть аккаунт?",
         "paragraph_html": "<a href=\"{{ link }}\" tabindex=\"-1\" class=\"link underlined-link\">Войдите в систему</a>, чтобы быстрее оформить заказ."
       },
-      "view_cart": "Просмотр корзины"
+      "view_cart": "Просмотр корзины",
+      "checkbox": "Упаковать как подарок",
+      "order_note": "Комментарий к заказу",
+      "estimate_shipping": "Доставка",
+      "discount_code": "Промокод",
+      "features": {
+        "country_region": "Страна/регион",
+        "postal_zip": "Почтовый индекс",
+        "apply": "Применить",
+        "calculate": "Рассчитать",
+        "discount_placeholder": "Введите промокод",
+        "shipping_select_country_zip": "Выберите страну и введите почтовый индекс.",
+        "shipping_calculating": "Расчёт…",
+        "shipping_no_rate": "Для этого места доставки нет доступных тарифов. Проверьте правильность адреса.",
+        "shipping_one_rate": "Для этого места доставки доступен один тариф:",
+        "shipping_n_rates": "Для этого места доставки доступно {{ count }} тарифов:",
+        "shipping_free": "Бесплатно",
+        "discount_enter_code": "Введите промокод.",
+        "discount_applying": "Применение…",
+        "discount_applied": "Скидка применена!",
+        "discount_invalid": "Промокод недействителен или не применим к текущей корзине.",
+        "discount_error": "Что-то пошло не так. Попробуйте ещё раз."
+      }
     },
     "footer": {
       "payment": "Способы оплаты",
@@ -369,6 +412,54 @@
       },
       "error": {
         "invalid_format": "Неверный формат даты. Пожалуйста, введите дату и время в формате ГГГГ-ММ-ДД ЧЧ:ММ."
+      }
+    },
+    "localization_drawer": {
+      "title": "Локализация",
+      "country_label": "Страна/регион",
+      "language_label": "Язык",
+      "drawer_title": "Опции локализации",
+      "current_country_info": "Вы в настоящее время осуществляете доставку в {{ countryName }} и ваш заказ будет выставлен в {{ currencyIso }} {{ currencySymbol }}.",
+      "search_location": {
+        "label": "Поиск местоположения",
+        "placeholder": "Поиск местоположения..."
+      }
+    },
+    "bundle-builder": {
+      "add_to_bundle": "Добавить в набор",
+      "status": {
+        "discount": "🎉 Вы получили скидку.",
+        "add_more": "Вы можете добавить ещё."
+      },
+      "toggle": "Переключить панель комплекта",
+      "remove_item": "Удалить товар",
+      "error_message": "Произошла ошибка. Попробуйте ещё раз."
+    },
+    "quiz": {
+      "back": "Назад",
+      "prev_question": "Предыдущий",
+      "next_question": "Далее",
+      "see_results": "Посмотреть результаты"
+    },
+    "blog_posts": {
+      "tags_all": "Все статьи"
+    },
+    "compare_products": {
+      "name": "Сравнить товары",
+      "badge": {
+        "compare": "VS"
+      },
+      "placeholders": {
+        "left_text": "Слева",
+        "right_text": "Справа"
+      },
+      "aria": {
+        "table": "Таблица сравнения"
+      },
+      "blocks": {
+        "table_row": {
+          "center_text_default": "Введите текст..."
+        }
       }
     }
   },
@@ -534,7 +625,7 @@
   },
   "aria-label": {
     "announcement-bar": "Закрыть информационную панель",
-    "contact-form": "Отправить форму",
+    "contact-form": "Отправить",
     "featured-collection": "Посмотреть все",
     "featured-product-3d-model": "Посмотреть 3D модель",
     "main-product-video": "Воспроизвести видео",
@@ -572,6 +663,15 @@
     "price-from": "Цена от",
     "price-to": "Цена до",
     "remove-price-range": "Убрать фильтр по диапазону цен",
-    "sort-options": "Варианты сортировки"
+    "sort-options": "Варианты сортировки",
+    "lookbook-button": "Посмотреть детали",
+    "pills-navigation": "Навигация по вкладкам",
+    "collection-tabs": "Вкладки коллекций"
+  },
+  "placeholder": {
+    "select_option": "Выберите вариант"
+  },
+  "cross_sell": {
+    "empty_msg": "Нет продуктов для отображения. Этот блок не будет виден клиентам на витрине магазина."
   }
 }

@@ -121,12 +121,13 @@
   line-height: var(--font-headline-line-height, normal);
   color: var(--color-custom-text, var(--color-headings-text, var(--color-text)));
   font-size: calc(var(--font-headline-size) * var(--font-headline-scale, 1));
-  margin: 0 0 calc(var(--gap, 8px) * 1);
+  margin-top: 0;
+  margin-inline: 0;
   overflow: visible;
 }
 @media (min-width: 1200px) {
   .wt-map-address__content__title {
-    font-size: min( calc(var(--font-headline-size) * var(--font-headline-scale-desk, 1)), calc(var(--font-headline-size) + 2.5vw) );
+    font-size: min( calc(var(--font-headline-size) * var(--font-headline-scale-desk, 1)), calc(var(--font-headline-size) + 13.5vw) );
   }
 }
 @media (min-width: 1200px) {
@@ -206,14 +207,16 @@
   color: var(--color-custom-text, var(--color-button-secondary-text));
   text-underline-offset: 6px;
   border-color: transparent;
-  height: 3rem;
-  padding: 0;
+  height: auto;
+  padding: 0 0 1px;
   margin-top: 4px;
   overflow: visible;
   border-radius: 0;
+  display: inline-block;
 }
 .wt-map-address__content__button[data-button-style=link] span {
   position: relative;
+  display: inline-block;
 }
 .wt-map-address__content__button[data-button-style=link] span::before {
   content: "";
@@ -249,3 +252,4 @@
   transform: scale(1);
   transition: 0.4s transform ease 0.3s;
 }
+/*# sourceMappingURL=section-map-address.css.map */

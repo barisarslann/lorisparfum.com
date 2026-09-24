@@ -3,13 +3,16 @@
 
 <style>
   .wt-announcement {
-      {% if background_rgb != 'rgba(0, 0, 0, 0.0)' %}
+      {% if section.settings.background_color != blank and section.settings.background_color != 'transparent' and background_rgb != 'rgba(0, 0, 0, 0.0)' %}
         --color-background: {{ section.settings.background_color }};
       {% endif %}
 
-      {% if text_rgb != 'rgba(0, 0, 0, 0.0)' %}
+      {% if section.settings['color-body-text'] != blank and section.settings['color-body-text'] != 'transparent' and text_rgb != 'rgba(0, 0, 0, 0.0)' %}
         --color-text: {{ section.settings.color-body-text }};
       {% endif %}
+
+      --font-text-scale-desk: {{ section.settings.size_text_desktop | divided_by: 100.0 }};
+      --font-text-scale: {{ section.settings.size_text_mobile | divided_by: 100.0 }};
   }
 </style>
 
@@ -17,14 +20,18 @@
 
 <announcement-bar class="wt-announcement-bar">
   <script>
-    (() => {
-      const isHidden = localStorage.getItem("wt-announcement-hidden");
-      const announcementCount = Number({{ section.blocks.size }}) ;
+    {% if request.design_mode %}
+      document.querySelector('.wt-announcement-bar').style.display = 'block';
+    {% else %}
+      (() => {
+        const isHidden = localStorage.getItem("wt-announcement-hidden");
+        const announcementCount = Number({{ section.blocks.size }}) ;
 
-      if ((!isHidden || new Date().getTime() > Number(isHidden)) && announcementCount > 0) {
-        document.querySelector('.wt-announcement-bar').style.display = 'block';
-      }
-    })();
+        if ((!isHidden || new Date().getTime() > Number(isHidden)) && announcementCount > 0) {
+          document.querySelector('.wt-announcement-bar').style.display = 'block';
+        }
+      })();
+    {% endif %}
   </script>
 
   <div
@@ -66,6 +73,7 @@
                   <a
                     href="{{ block.settings.link }}"
                     tabindex="{% if section.settings.marquee %}-1{% else %}0{% endif %}"
+                    {% if block.settings.button_link_in_new_window %}target="_blank" rel="noreferrer noopener"{% endif %}
                   >
                 {%- endif -%}
                 {{ block.settings.text | escape }}
@@ -95,7 +103,11 @@
                 >
                   {%- if block.settings.text != blank -%}
                     {%- if block.settings.link != blank -%}
-                      <a href="{{ block.settings.link }}" tabindex="-1">
+                      <a
+                        href="{{ block.settings.link }}"
+                        tabindex="-1"
+                        {% if block.settings.button_link_in_new_window %}target="_blank" rel="noreferrer noopener"{% endif %}
+                      >
                     {%- endif -%}
                     {{ block.settings.text | escape }}
                     {%- if block.settings.link != blank -%}
@@ -183,6 +195,10 @@
   "class": "wt-announcement",
   "settings": [
     {
+      "type": "paragraph",
+      "content": "t:sections.announcement-bar.settings.support_info.content"
+    },
+    {
       "type": "header",
       "content": "t:sections.announcement-bar.settings.behavior.content"
     },
@@ -196,6 +212,10 @@
       "type": "select",
       "id": "animation_speed",
       "options": [
+        {
+          "value": "400",
+          "label": "t:sections.announcement-bar.settings.animation-speed.options.very_slow.label"
+        },
         {
           "value": "150",
           "label": "t:sections.announcement-bar.settings.animation-speed.options.slow.label"
@@ -230,14 +250,40 @@
     {
       "type": "color",
       "id": "color-body-text",
-      "default": "transparent",
       "label": "t:sections.settings.settings.text-color.label"
     },
     {
       "type": "color",
       "id": "background_color",
-      "default": "transparent",
       "label": "t:sections.settings.settings.background-color.label"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.global.desktop_version"
+    },
+    {
+      "type": "range",
+      "id": "size_text_desktop",
+      "min": 80,
+      "max": 200,
+      "step": 10,
+      "default": 100,
+      "unit": "%",
+      "label": "t:sections.settings.settings.size-text.label"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.global.mobile_version"
+    },
+    {
+      "type": "range",
+      "id": "size_text_mobile",
+      "min": 80,
+      "max": 200,
+      "step": 10,
+      "default": 100,
+      "unit": "%",
+      "label": "t:sections.settings.settings.size-text-mobile.label"
     }
   ],
   "blocks": [
@@ -256,6 +302,12 @@
           "type": "url",
           "id": "link",
           "label": "t:sections.announcement-bar.blocks.announcement.settings.link.label"
+        },
+        {
+          "type": "checkbox",
+          "id": "button_link_in_new_window",
+          "label": "t:sections.global.button_link_in_new_window",
+          "default": false
         }
       ]
     }

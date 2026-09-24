@@ -22,11 +22,16 @@ class CartDrawerSection extends HTMLElement {
     this.mainTrigger = document.querySelector(".wt-cart__trigger");
     this.toggleEelements = () =>
       this.querySelectorAll(this.dataset.toggleTabindex);
+
+    // Stores element that opened the drawer (for focus restore after close)
+    this.openerEl = null;
   }
 
   connectedCallback() {
     if (this.cartType === "page" || this.isCartPage) {
-      document.addEventListener('cart-drawer:refresh', (e) => this.refreshCartDrawer(e))
+      document.addEventListener("cart-drawer:refresh", (e) =>
+        this.refreshCartDrawer(e),
+      );
       return;
     }
 
@@ -43,6 +48,41 @@ class CartDrawerSection extends HTMLElement {
     if (this.cartUpdateUnsubscriber) {
       this.cartUpdateUnsubscriber();
     }
+  }
+
+  rememberOpener(e) {
+    // Prefer currentTarget (the element with listener), fallback to activeElement
+    const current = e?.currentTarget;
+    const active = document.activeElement;
+
+    // If click landed on svg/span inside button, climb up to interactive parent
+    const interactive =
+      current instanceof HTMLElement
+        ? current.closest?.("button, a, [tabindex], input, select") || current
+        : null;
+
+    this.openerEl =
+      interactive instanceof HTMLElement
+        ? interactive
+        : active instanceof HTMLElement
+          ? active
+          : null;
+  }
+
+  restoreFocusToOpener() {
+    const el = this.openerEl;
+    if (!el) return;
+    if (!document.contains(el)) return;
+
+    const isDisabled =
+      el.hasAttribute("disabled") ||
+      el.getAttribute("aria-disabled") === "true";
+    if (isDisabled) return;
+
+    // Wait one frame so DOM/classes settle after closing
+    requestAnimationFrame(() => {
+      el.focus?.();
+    });
   }
 
   getFocusableElements() {
@@ -68,9 +108,12 @@ class CartDrawerSection extends HTMLElement {
     if (this.hasAttribute("open")) {
       this.removeAttribute("open");
       this.isOpen = false;
-      this.mainTrigger.focus();
+      // this.mainTrigger.focus();
       this.temporaryHideFocusVisible();
       setTabindex(this.toggleEelements(), "-1");
+
+      // Restore focus to the element that opened the drawer
+      this.restoreFocusToOpener();
     } else {
       this.setAttribute("open", "");
       this.isOpen = true;
@@ -84,6 +127,17 @@ class CartDrawerSection extends HTMLElement {
     this.onToggle();
     this.drawer.classList.toggle(this.classDrawerActive);
     this.body.classList.toggle(this.activeOverlayBodyClass);
+
+    // dispatch a custom event on the document
+    const eventName = this.isOpen
+      ? PUB_SUB_EVENTS.cartDrawerOpen
+      : PUB_SUB_EVENTS.cartDrawerClose;
+
+    document.dispatchEvent(
+      new CustomEvent(eventName, {
+        bubbles: true,
+      }),
+    );
   }
 
   init() {
@@ -112,6 +166,10 @@ class CartDrawerSection extends HTMLElement {
     this.triggers().forEach((trigger) => {
       trigger.addEventListener("click", (e) => {
         e.preventDefault();
+
+        // Save opener only when opening
+        if (!this.isOpen) this.rememberOpener(e);
+
         this.toggleDrawerClasses();
       });
     });
@@ -123,7 +181,9 @@ class CartDrawerSection extends HTMLElement {
       }
     });
 
-    document.addEventListener('cart-drawer:refresh', (e) => this.refreshCartDrawer(e))
+    document.addEventListener("cart-drawer:refresh", (e) =>
+      this.refreshCartDrawer(e),
+    );
   }
 
   renderContents(parsedState, isClosedCart = true) {
@@ -165,19 +225,21 @@ class CartDrawerSection extends HTMLElement {
     ];
   }
 
-  refreshCartDrawer(e){
+  refreshCartDrawer(e) {
     const sectionsToRender = this.getSectionsToRender();
-    fetch(`${window.Shopify.routes.root}?sections=${sectionsToRender[0].id},${sectionsToRender[1].id}`)
-    .then(response => response.json())
-    .then((response) => {
-      const parsedState = {
-        "sections": response
-      }
-      this.renderContents(parsedState, false);
-    })
-    .catch(e => {
-      console.log(e)
-    })
+    fetch(
+      `${window.Shopify.routes.root}?sections=${sectionsToRender[0].id},${sectionsToRender[1].id}`,
+    )
+      .then((response) => response.json())
+      .then((response) => {
+        const parsedState = {
+          sections: response,
+        };
+        this.renderContents(parsedState, false);
+      })
+      .catch((e) => {
+        console.error(e);
+      });
   }
 
   setActiveElement(element) {
@@ -188,6 +250,21 @@ class CartDrawerSection extends HTMLElement {
 customElements.define("cart-drawer", CartDrawerSection);
 
 class CartDrawerItems extends CartItems {
+  onCartUpdate() {
+    fetch(`${routes.cart_url}?section_id=cart-drawer`)
+      .then((response) => response.text())
+      .then((responseText) => {
+        const html = new DOMParser().parseFromString(responseText, "text/html");
+        const source = html.querySelector("cart-drawer-items");
+        if (source) {
+          this.innerHTML = source.innerHTML;
+        }
+      })
+      .catch((e) => {
+        console.error(e);
+      });
+  }
+
   getSectionsToRender() {
     return [
       {

@@ -11,14 +11,15 @@
 
 <style>
   section[id="shopify-section-{{ section.id }}"]{
-  {% if background_section_rgb != 'rgba(0, 0, 0, 0.0)' %}
+  {% if section.settings['section-color-overlay'] != blank and section.settings['section-color-overlay'] != 'transparent' and background_section_rgb != 'rgba(0, 0, 0, 0.0)' %}
     --color-overlay-rgb: {{ section.settings.section-color-overlay | color_to_rgb | remove: 'rgb(' | remove: ')' }};
     --color-overlay-opacity: {{ section.settings.section-color-overlay-opacity | divided_by: 100.0 }};
   {% endif %}
   }
 
-  section[id="shopify-section-{{ section.id }}"] .headline__title {
-  {% if heading_rgb != 'rgba(0, 0, 0, 0.0)' %}
+  section[id="shopify-section-{{ section.id }}"] .headline__title,
+  section[id="shopify-section-{{ section.id }}"] div.headline--rich {
+  {% if section.settings['section-color-body-text'] != blank and section.settings['section-color-body-text'] != 'transparent' and heading_rgb != 'rgba(0, 0, 0, 0.0)' %}
     --color-custom-text: {{ section.settings.section-color-body-text }};
   {% endif %}
   }
@@ -35,14 +36,22 @@
     --section-gap-bottom: {{ section.settings.margin-bottom }}px;
   {% endif %}
 
-  {% if background_rgb != 'rgba(0, 0, 0, 0.0)' %}
+      {%- if section.settings.show_mobile_spacing -%}
+          --section-gap-top-mobile: {{ section.settings.margin-top-mobile }}px;
+      {%- endif -%}
+
+      {%- if section.settings.show_mobile_spacing -%}
+          --section-gap-bottom-mobile: {{ section.settings.margin-bottom-mobile }}px;
+      {%- endif -%}
+
+  {% if section.settings.background_color != blank and section.settings.background_color != 'transparent' and background_rgb != 'rgba(0, 0, 0, 0.0)' %}
     --color-background: {{ section.settings.background_color }};
     --color-background-rgb: {{ section.settings.background_color | color_to_rgb | remove: 'rgb(' | remove: ')' }};
     --color-background-opacity: {{ section.settings.background_color_opacity | divided_by: 100.0 }};
     --color-background-blur: {{ section.settings.background_blur }}px;
   {% endif %}
 
-  {% if text_rgb != 'rgba(0, 0, 0, 0.0)' %}
+  {% if section.settings['color-body-text'] != blank and section.settings['color-body-text'] != 'transparent' and text_rgb != 'rgba(0, 0, 0, 0.0)' %}
     --color-custom-text: {{ section.settings.color-body-text }};
   {% endif %}
 
@@ -81,11 +90,19 @@
 </style>
 
 <section
-  class="wt-map-address {% if settings.animations %} scroll-trigger animate--slide-in {% endif %} {% if settings.disabled_animations_on_mobile %} disabled-on-mobile {% endif %}"
+  class="wt-map-address {% if settings.animations and section.settings['full-width-enabled'] != true %} scroll-trigger animate--slide-in {% endif %} {% if settings.disabled_animations_on_mobile %} disabled-on-mobile {% endif %}"
   data-section-id="{{ section.id }}"
 >
-  {% if section.settings.heading != blank %}
-    {% render 'headline', title: section.settings.heading %}
+  {% if section.settings.advanced_heading %}
+    {% if section.settings.heading_richtext != blank %}
+        <div class="headline headline--rich {% if settings.animations %} scroll-trigger animate--slide-in {% endif %} {% if settings.disabled_animations_on_mobile %} disabled-on-mobile {% endif %}">
+            {{ section.settings.heading_richtext }}
+        </div>
+    {% endif %}
+  {% else %}
+    {% if section.settings.heading != blank %}
+        {% render 'headline', title: section.settings.heading %}
+    {% endif %}
   {% endif %}
 
   <div
@@ -139,6 +156,7 @@
               href="{{ block.settings.button_link }}"
               class="wt-map-address__content__button wt-map-address__content__button--{{ block.settings.button_style }}"
               data-button-style="{{ block.settings.button_style }}"
+              {% if block.settings.button_link_in_new_window %}target="_blank" rel="noreferrer noopener"{% endif %}
             >
               <span>{{ block.settings.button_label }}</span>
             </a>
@@ -151,14 +169,28 @@
 
 {% schema %}
 {
-  "name": "Map with Address",
+  "name": "t:sections.map-address.name",
   "tag": "section",
   "settings": [
     {
-      "type": "text",
+      "type": "checkbox",
+      "id": "advanced_heading",
+      "label": "t:sections.global.advanced_heading.label",
+      "info": "t:sections.global.advanced_heading.info"
+    },
+    {
+      "type": "textarea",
       "id": "heading",
+      "label": "t:sections.settings.settings.heading.label",
       "default": "t:sections.map_address.settings.heading.default",
-      "label": "t:sections.settings.settings.heading.label"
+      "visible_if": "{{ section.settings.advanced_heading == false }}"
+    },
+    {
+      "type": "richtext",
+      "id": "heading_richtext",
+      "label": "t:sections.logo-banner.settings.content.headline.label",
+      "default": "<h2>Map with Address</h2>",
+      "visible_if": "{{ section.settings.advanced_heading == true }}"
     },
     {
       "id": "address",
@@ -190,23 +222,23 @@
       "options": [
         {
           "value": "default",
-          "label": "Default"
+          "label": "t:sections.map-address.settings.map_style.options__1.label"
         },
         {
           "value": "dark",
-          "label": "Dark"
+          "label": "t:sections.map-address.settings.map_style.options__2.label"
         },
         {
           "value": "silver",
-          "label": "Silver"
+          "label": "t:sections.map-address.settings.map_style.options__3.label"
         },
         {
           "value": "retro",
-          "label": "Retro"
+          "label": "t:sections.map-address.settings.map_style.options__4.label"
         },
         {
           "value": "aubergine",
-          "label": "Aubergine"
+          "label": "t:sections.map-address.settings.map_style.options__5.label"
         }
       ]
     },
@@ -296,7 +328,7 @@
     },
     {
       "type": "header",
-      "content": "Desktop Layout"
+      "content": "t:sections.map-address.settings.header__1.content"
     },
     {
       "type": "select",
@@ -350,13 +382,11 @@
     {
       "type": "color",
       "id": "section-color-body-text",
-      "default": "transparent",
       "label": "t:sections.global.heading-color"
     },
     {
       "type": "color",
       "id": "section-color-overlay",
-      "default": "transparent",
       "label": "t:sections.global.section-background-color"
     },
     {
@@ -372,7 +402,6 @@
     {
       "type": "color",
       "id": "color-body-text",
-      "default": "transparent",
       "label": "t:sections.settings.settings.text-color.label"
     },
     {
@@ -426,12 +455,39 @@
       "default": 20,
       "label": "t:sections.settings.settings.distance-bottom.label",
       "info": "t:sections.settings.settings.distance-bottom.info"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_mobile_spacing",
+      "label": "t:sections.settings.settings.show-mobile-spacing.label"
+    },
+    {
+      "type": "range",
+      "id": "margin-top-mobile",
+      "min": 0,
+      "max": 100,
+      "step": 2,
+      "default": 20,
+      "unit": "px",
+      "label": "t:sections.settings.settings.distance-top-mobile.label",
+      "visible_if": "{{ section.settings.show_mobile_spacing }}"
+    },
+    {
+      "type": "range",
+      "id": "margin-bottom-mobile",
+      "min": 0,
+      "max": 100,
+      "step": 2,
+      "default": 20,
+      "unit": "px",
+      "label": "t:sections.settings.settings.distance-bottom-mobile.label",
+      "visible_if": "{{ section.settings.show_mobile_spacing }}"
     }
   ],
   "blocks": [
     {
       "type": "address_header",
-      "name": "Address Header",
+      "name": "t:sections.map-address.blocks.address_header.name",
       "limit": 1,
       "settings": [
         {
@@ -470,60 +526,67 @@
     },
     {
       "type": "map_address",
-      "name": "Address",
+      "name": "t:sections.map-address.blocks.map_address.name",
       "limit": 1,
       "settings": [
         {
           "type": "richtext",
           "id": "address_to_display",
-          "label": "Your Address",
+          "label": "t:sections.map-address.blocks.map_address.settings.address_to_display.label",
           "default": "<p>Your address here</p>"
         }
       ]
     },
     {
       "type": "button",
-      "name": "Button",
+      "name": "t:sections.map-address.blocks.button.name",
       "limit": 1,
       "settings": [
         {
           "type": "select",
           "id": "button_style",
           "default": "primary",
-          "label": "Style",
+          "label": "t:sections.map-address.blocks.button.settings.button_style.label",
           "options": [
             {
               "value": "primary",
-              "label": "Primary"
+              "label": "t:sections.map-address.blocks.button.settings.button_style.options__1.label"
             },
             {
               "value": "secondary",
-              "label": "Secondary"
+              "label": "t:sections.map-address.blocks.button.settings.button_style.options__2.label"
             },
             {
               "value": "link",
-              "label": "Link"
+              "label": "t:sections.map-address.blocks.button.settings.button_style.options__3.label"
             }
           ]
         },
         {
           "type": "text",
           "id": "button_label",
-          "label": "Text",
+          "label": "t:sections.map-address.blocks.button.settings.button_label.label",
           "default": "Button label"
         },
         {
           "type": "url",
           "id": "button_link",
-          "label": "Link",
+          "label": "t:sections.map-address.blocks.button.settings.button_link.label",
           "default": "/"
+        },
+        {
+          "type": "checkbox",
+          "id": "button_link_in_new_window",
+          "label": "t:sections.global.button_link_in_new_window",
+          "default": false
         }
       ]
     }
   ],
   "presets": [
     {
-      "name": "Map with Address",
+      "name": "t:sections.map-address.name",
+      "category": "t:sections.categories.other",
       "blocks": [
         {
           "type": "address_header",

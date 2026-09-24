@@ -1,0 +1,14 @@
+{% comment %}
+  Params: block, product
+{% endcomment %}
+{% render 'popup',
+  product: product,
+  id: block.id,
+  shopify_attributes: block.shopify_attributes,
+  size_icon: block.settings.size_icon,
+  size_link: block.settings.size_link,
+  size_page: block.settings.size_page,
+  size_content: block.settings.size_content,
+  metafield_name: block.settings.metafield,
+  enable-striped-rows: block.settings.enable-striped-rows
+%}

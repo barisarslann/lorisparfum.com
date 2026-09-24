@@ -4,7 +4,12 @@
   <div class="customer__account-details">
     <div class="customer__account">
       <h2 class="customer__title">{{ 'customer.account.title' | t }}</h2>
-      <a class="customer__account__link" href="{{ routes.account_logout_url }}">
+
+      <a class="customer__account-addresses" href="{{ routes.account_addresses_url }}">
+        {{ 'customer.account.view_addresses' | t }} ({{ customer.addresses_count }})
+      </a>
+
+      <a class="customer__account__link" href="{{ routes.account_logout_url }}" data-no-instant>
         {% render 'icons', id: 'user' %}
         {{ 'customer.log_out' | t }}
       </a>
@@ -14,10 +19,6 @@
       <h2>{{ 'customer.account.details' | t }}</h2>
 
       {{ customer.default_address | format_address }}
-
-      <a href="{{ routes.account_addresses_url }}">
-        {{ 'customer.account.view_addresses' | t }} ({{ customer.addresses_count }})
-      </a>
     </div>
   </div>
 

@@ -1,7 +1,7 @@
 {%- assign total_active_values = 0 -%}
 {%- for filter in results.filters -%}
   {% if filter.type == 'price_range' %}
-    {%- assign max_price_amount = filter.range_max | money | strip_html | escape -%}
+    {%- assign max_price_amount = filter.range_max | divided_by: 100.0 | ceil | times: 100 | money | strip_html | escape -%}
     {%- assign min_price_amount = 0 | money -%}
     {% assign max_filter_amount = filter.max_value.value | money %}
     {% assign min_filter_amount = filter.min_value.value | money %}

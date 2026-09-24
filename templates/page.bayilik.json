@@ -11,7 +11,7 @@
   "sections": {
     "custom_liquid_rYraar": {
       "type": "custom-liquid",
-      "name": "t:sections.custom-liquid.presets.name",
+      "name": "Custom Liquid",
       "settings": {
         "custom_liquid": "<style>\n.wt-page .wt-page__title {\n  display: none;\n}\n</style>"
       }
@@ -121,10 +121,10 @@
     },
     "button_HBCJPg": {
       "type": "button",
-      "name": "t:sections.button.presets.name",
+      "name": "Button",
       "settings": {
-        "button_select": "primary",
         "button_horizontal_position": "center",
+        "button_select": "primary",
         "button_label": "Kataloğu İncele",
         "button_link": "shopify://pages/e-katalog",
         "margin-top": 20,
@@ -134,7 +134,7 @@
     },
     "custom_liquid_enAnqx": {
       "type": "custom-liquid",
-      "name": "t:sections.custom-liquid.presets.name",
+      "name": "Custom Liquid",
       "settings": {
         "custom_liquid": "<div style=\"max-width: 100vw;overflow: hidden;\">\n  <div class=\"footerIcons\">\n    <span><img src=\"https://cdn.shopify.com/s/files/1/0761/3290/9270/files/8.png?v=1757567358\"></span>\n    <span><img src=\"https://cdn.shopify.com/s/files/1/0761/3290/9270/files/4_1173453c-e899-4b91-8010-0684a87ede84.png?v=1757567357\"></span>\n    <span><img src=\"https://cdn.shopify.com/s/files/1/0761/3290/9270/files/12.png?v=1757567357\"></span>\n    <span><img src=\"https://cdn.shopify.com/s/files/1/0761/3290/9270/files/14.png?v=1757567358\"></span>\n    <span><img src=\"https://cdn.shopify.com/s/files/1/0761/3290/9270/files/16.png?v=1757567357\"></span>\n    <span><img src=\"https://cdn.shopify.com/s/files/1/0761/3290/9270/files/10.png?v=1757567358\"></span>\n    <span><img src=\"https://cdn.shopify.com/s/files/1/0761/3290/9270/files/6.png?v=1757567358\"></span>\n    <span><img src=\"https://cdn.shopify.com/s/files/1/0761/3290/9270/files/18.png?v=1757567358\"></span>\n    <span><img src=\"https://cdn.shopify.com/s/files/1/0761/3290/9270/files/2_b0e47fc5-3a84-43fc-8d53-2e5fde8d4335.png?v=1757567357\"></span>\n    <span><img src=\"https://cdn.shopify.com/s/files/1/0761/3290/9270/files/8.png?v=1757567358\"></span>\n    <span><img src=\"https://cdn.shopify.com/s/files/1/0761/3290/9270/files/4_1173453c-e899-4b91-8010-0684a87ede84.png?v=1757567357\"></span>\n    <span><img src=\"https://cdn.shopify.com/s/files/1/0761/3290/9270/files/12.png?v=1757567357\"></span>\n    <span><img src=\"https://cdn.shopify.com/s/files/1/0761/3290/9270/files/14.png?v=1757567358\"></span>\n    <span><img src=\"https://cdn.shopify.com/s/files/1/0761/3290/9270/files/16.png?v=1757567357\"></span>\n    <span><img src=\"https://cdn.shopify.com/s/files/1/0761/3290/9270/files/10.png?v=1757567358\"></span>\n    <span><img src=\"https://cdn.shopify.com/s/files/1/0761/3290/9270/files/6.png?v=1757567358\"></span>\n    <span><img src=\"https://cdn.shopify.com/s/files/1/0761/3290/9270/files/18.png?v=1757567358\"></span>\n    <span><img src=\"https://cdn.shopify.com/s/files/1/0761/3290/9270/files/2_b0e47fc5-3a84-43fc-8d53-2e5fde8d4335.png?v=1757567357\"></span>\n    <span><img src=\"https://cdn.shopify.com/s/files/1/0761/3290/9270/files/8.png?v=1757567358\"></span>\n    <span><img src=\"https://cdn.shopify.com/s/files/1/0761/3290/9270/files/4_1173453c-e899-4b91-8010-0684a87ede84.png?v=1757567357\"></span>\n    <span><img src=\"https://cdn.shopify.com/s/files/1/0761/3290/9270/files/12.png?v=1757567357\"></span>\n    <span><img src=\"https://cdn.shopify.com/s/files/1/0761/3290/9270/files/14.png?v=1757567358\"></span>\n    <span><img src=\"https://cdn.shopify.com/s/files/1/0761/3290/9270/files/16.png?v=1757567357\"></span>\n    <span><img src=\"https://cdn.shopify.com/s/files/1/0761/3290/9270/files/10.png?v=1757567358\"></span>\n    <span><img src=\"https://cdn.shopify.com/s/files/1/0761/3290/9270/files/6.png?v=1757567358\"></span>\n    <span><img src=\"https://cdn.shopify.com/s/files/1/0761/3290/9270/files/18.png?v=1757567358\"></span>\n    <span><img src=\"https://cdn.shopify.com/s/files/1/0761/3290/9270/files/2_b0e47fc5-3a84-43fc-8d53-2e5fde8d4335.png?v=1757567357\"></span>\n  </div>\n</div>\n<style>\n  .footerIcons {\n    display: flex;\n    gap: 5px;\n  }\n  .footerIcons img {\n    min-width: 8.5%;\n  }\n  @media (max-width: 600px) {\n    .footerIcons img {\n      min-width: 26%;\n    }\n  }\n\n  /* Animasyon Kodları */\n  .shopify-section-group-footer-group { /* created by okan karakoc */\n    overflow: hidden;\n    white-space: nowrap;\n    width: 100%;\n    background: #fff;\n  }\n  .footerIcons {\n    display: inline-flex;\n    animation: marquee 30s linear infinite;\n  }\n  .footerIcons img {\n    display: inline-flex;\n    width: max-content;\n    align-items: center;\n  }\n  .footerIcons span img {\n    vertical-align: middle;\n    max-width: 150px;\n  }\n  @keyframes marquee {\n    0% {\n      transform: translateX(0%);\n    }\n    100% {\n      transform: translateX(-50%);\n    }\n  }\n</style>"
       }
@@ -501,10 +501,9 @@
         "column_eCGrFB",
         "column_DJwjbN"
       ],
-      "name": "t:sections.multicolumn.presets.name",
+      "name": "Multicolumn",
       "settings": {
         "heading": "Şube Konseptleri",
-        "swipe_on_mobile": false,
         "full-width-enabled": false,
         "image_ratio": "adapt",
         "column_alignment": "left",
@@ -631,7 +630,7 @@
     },
     "custom_liquid_3i7yJN": {
       "type": "custom-liquid",
-      "name": "t:sections.custom-liquid.presets.name",
+      "name": "Custom Liquid",
       "settings": {
         "custom_liquid": "<section id=\"basvuru-section\">\n<iframe id=\"basvuru-form\" src=\"https://www.lorisbayilikbasvurusu.com/\" style=\"border:0px #ffffff none;width: 100%;height: 750px;/* 700px */max-width: 410px;margin: 0 auto;display: block;\" name=\"myiFrame\" scrolling=\"no\" frameborder=\"1\" marginheight=\"0px\" marginwidth=\"0px\" height=\"400px\" width=\"600px\" allowfullscreen></iframe>"
       }

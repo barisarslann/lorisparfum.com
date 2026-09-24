@@ -1,0 +1,13 @@
+{% comment %}
+  Params: block
+{% endcomment %}
+<div data-block-id="{{ block.id }}">
+  <hr
+    class="wt-separator__line wt-product__separator{% if settings.animations %} scroll-trigger animate--slide-in{% endif %}{% if settings.disabled_animations_on_mobile %} disabled-on-mobile{% endif %}"
+    style="
+      background-color: {{ block.settings.color-background }};
+      {% unless block.settings.show-separator-line %} background: transparent {% endunless %}
+    "
+    not-quick-add
+  >
+</div>

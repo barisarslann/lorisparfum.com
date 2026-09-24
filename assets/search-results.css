@@ -65,6 +65,9 @@
   border: none;
   border-radius: 0;
   padding: 8px;
+  background: transparent;
+  color: var(--color-links);
+  border-bottom: 2px solid transparent;
 }
 .search-results-tab__item:hover, .search-results-tab__item.active {
   background: none;
@@ -81,6 +84,7 @@
   }
 }
 .search-results__terms {
+  cursor: pointer;
   font-style: normal;
   text-decoration: underline;
 }
@@ -94,6 +98,7 @@
 .search-results__fieldset {
   border: 1px solid var(--color-input-border);
   border-radius: var(--border-radius-button);
+  background-color: var(--color-input-background);
   height: var(--input-height);
   display: flex;
   justify-content: center;
@@ -145,3 +150,7 @@
 .template-search main {
   flex: 1;
 }
+.template-search .card__price {
+  margin-bottom: calc(var(--gap, 8px) * 0.5);
+}
+/*# sourceMappingURL=search-results.css.map */

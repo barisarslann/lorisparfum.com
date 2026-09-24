@@ -2,6 +2,13 @@
   {% assign checked = false %}
 {% endif %}
 {% assign tabindex_value = tabindex | default: '0' %}
+{%- liquid
+  if id != blank
+    assign checkbox_id = id
+  else
+    assign checkbox_id = 'checkbox-form-' | append: label
+  endif
+-%}
 {%- assign swatches_config = settings.swatches_config | newline_to_br | split: '<br />' -%}
 {% capture swatch_style %}
     {% render 'color-swatch-style', swatches_config: swatches_config, value: val %};
@@ -10,22 +17,18 @@
 <label
   class="form-checkbox {{ label_class }}{% if is_color_swatch %} form-checkbox--color{% endif %}"
   id="{{ value }}"
-  for="checkbox-form-{{label}}"
+  for="{{ checkbox_id }}"
 >
   <input
     type="checkbox"
-    {% if id %}
-      id="{{ id }}"
-    {% else %}
-      id="checkbox-form-{{ label }}"
-    {% endif %}
+    id="{{ checkbox_id }}"
     class="form-checkbox__input {{ custom_class }}{% if is_color_swatch %} form-checkbox__input--color{% endif %}"
     {% if checked %}
       checked="checked"
     {% endif %}
     value="{{ value }}"
-    name="{{ name }}"
-    data-label="{{ label }}"
+    name="{{ name | escape }}"
+    data-label="{{ label | escape }}"
     tabindex="{{ tabindex_value }}"
   >
 

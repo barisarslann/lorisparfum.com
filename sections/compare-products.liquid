@@ -1,0 +1,284 @@
+{% comment %}
+  Compare Products — custom section with two block types:
+  - Table Row
+  - Images
+
+  Notes:
+  - "Transparent" defaults inherit global theme colors.
+  - Background opacity is applied only when a non-transparent color is chosen.
+{% endcomment %}
+
+{%- liquid
+  assign bg_color = section.settings.background_color
+  assign bg_opacity = section.settings.background_opacity | divided_by: 100.0
+  assign text_color = section.settings.text_color
+  assign text_left = section.settings.text_color_left
+  assign text_right = section.settings.text_color_right
+  assign odd_bg = section.settings.odd_row_background
+  assign pad_top = section.settings.padding_top
+  assign pad_bottom = section.settings.padding_bottom
+  assign resolved_bg = bg_color
+  if bg_color != 'rgba(0,0,0,0)' and bg_color != blank
+    assign resolved_bg = bg_color | color_modify: 'alpha', bg_opacity
+  endif
+-%}
+
+<style>
+  [data-section-id="{{ section.id }}"].compare-products {
+    --section-compare-page-width: {{ section.settings.section_width }}px;
+    --section-gap-top: {{ pad_top }}px;
+    --section-gap-bottom: {{ pad_bottom }}px;
+
+    {% if resolved_bg != 'rgba(0,0,0,0)' and resolved_bg != blank %}
+      --color-section-background: {{ resolved_bg }};
+    {% endif %}
+
+    {% if text_left != blank and text_left != 'rgba(0,0,0,0)' %}
+      --color-section-text-left: {{ text_left }};
+    {% endif %}
+
+    {% if text_right != blank and text_right != 'rgba(0,0,0,0)' %}
+      --color-section-text-right: {{ text_right }};
+    {% endif %}
+
+    {% if text_color != blank and text_color != 'rgba(0,0,0,0)' %}
+      --color-section-text: {{ text_color }};
+    {% endif %}
+
+    {%- if section.settings.show_mobile_spacing -%}
+        --section-gap-top-mobile: {{ section.settings.margin-top-mobile }}px;
+    {%- endif -%}
+
+    {%- if section.settings.show_mobile_spacing -%}
+        --section-gap-bottom-mobile: {{ section.settings.margin-bottom-mobile }}px;
+    {%- endif -%}
+
+    --color-background-row-odd: {{ odd_bg }};
+  }
+</style>
+
+{{ 'section-compare-products.css' | asset_url | stylesheet_tag }}
+
+<div
+  data-section-id="{{ section.id }}"
+  class="compare-products {% if settings.animations %} scroll-trigger animate--slide-in {% endif %} {% if settings.disabled_animations_on_mobile %} disabled-on-mobile {% endif %}"
+>
+  {% if section.settings.advanced_heading %}
+    {% if section.settings.heading_richtext != blank %}
+      <div class="headline headline--rich {% if settings.animations %} scroll-trigger animate--slide-in {% endif %} {% if settings.disabled_animations_on_mobile %} disabled-on-mobile {% endif %}">
+        {{ section.settings.heading_richtext }}
+      </div>
+    {% endif %}
+  {% else %}
+    {% if section.settings.heading != blank %}
+      {% render 'headline', title: section.settings.heading %}
+    {% endif %}
+  {% endif %}
+
+  <div class="compare-products__inner">
+    {% content_for "block", type: "compare-images", id: "locked_group_product_images" %}
+    {% content_for "block", type: "compare-group", id: "locked_group_compare_group" %}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "t:sections.compare_products.name",
+  "tag": "section",
+  "class": "section wt-shopify-section",
+  "settings": [
+    {
+      "type": "paragraph",
+      "content": "t:sections.compare_products.settings.support_info.content"
+    },
+    {
+      "type": "checkbox",
+      "id": "advanced_heading",
+      "label": "t:sections.global.advanced_heading.label",
+      "info": "t:sections.global.advanced_heading.info"
+    },
+    {
+      "type": "textarea",
+      "id": "heading",
+      "label": "t:sections.settings.settings.heading.label",
+      "default": "t:sections.compare_products.name",
+      "visible_if": "{{ section.settings.advanced_heading == false }}"
+    },
+    {
+      "type": "richtext",
+      "id": "heading_richtext",
+      "label": "t:sections.logo-banner.settings.content.headline.label",
+      "default": "<h2>Compare Products</h2>",
+      "visible_if": "{{ section.settings.advanced_heading }}"
+    },
+    {
+      "type": "range",
+      "id": "section_width",
+      "label": "t:sections.compare_products.settings.section_width",
+      "min": 400,
+      "max": 1600,
+      "step": 40,
+      "unit": "px",
+      "default": 800
+    },
+    {
+      "type": "header",
+      "content": "t:sections.compare_products.settings.colors_header"
+    },
+    {
+       "type": "paragraph",
+       "content": "t:sections.compare_products.settings.colors_info"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "t:sections.compare_products.settings.background_color"
+    },
+    {
+      "type": "range",
+      "id": "background_opacity",
+      "label": "t:sections.compare_products.settings.background_opacity",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "%",
+      "default": 100
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "t:sections.compare_products.settings.text_color"
+    },
+    {
+      "type": "color",
+      "id": "text_color_left",
+      "label": "t:sections.compare_products.settings.text_color_left",
+      "default": "#4a5d44"
+    },
+    {
+      "type": "color",
+      "id": "text_color_right",
+      "label": "t:sections.compare_products.settings.text_color_right",
+      "default": "#d22027"
+    },
+    {
+      "type": "color",
+      "id": "odd_row_background",
+      "label": "t:sections.compare_products.settings.odd_row_background",
+      "default": "#f7f1e9"
+    },
+
+    { "type": "header", "content": "t:sections.compare_products.settings.spacing_header" },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "t:sections.compare_products.settings.padding_top",
+      "info": "t:sections.compare_products.settings.spacing_info",
+      "min": 0,
+      "max": 120,
+      "step": 2,
+      "unit": "px",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "t:sections.compare_products.settings.padding_bottom",
+      "min": 0,
+      "max": 120,
+      "step": 2,
+      "unit": "px",
+      "default": 20
+    },
+    {
+      "type": "checkbox",
+      "id": "show_mobile_spacing",
+      "label": "t:sections.settings.settings.show-mobile-spacing.label"
+    },
+    {
+      "type": "range",
+      "id": "margin-top-mobile",
+      "min": 0,
+      "max": 100,
+      "step": 2,
+      "default": 20,
+      "unit": "px",
+      "label": "t:sections.settings.settings.distance-top-mobile.label",
+      "visible_if": "{{ section.settings.show_mobile_spacing }}"
+    },
+    {
+      "type": "range",
+      "id": "margin-bottom-mobile",
+      "min": 0,
+      "max": 100,
+      "step": 2,
+      "default": 20,
+      "unit": "px",
+      "label": "t:sections.settings.settings.distance-bottom-mobile.label",
+      "visible_if": "{{ section.settings.show_mobile_spacing }}"
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:sections.compare_products.name",
+      "category": "t:sections.categories.products",
+      "blocks": [
+        {
+          "type": "compare-images",
+          "static": true,
+          "id": "locked_group_product_images",
+          "settings": {
+            "badge_text": "<strong>VS</strong>"
+          }
+        },
+        {
+          "type": "compare-group",
+          "static": true,
+          "id": "locked_group_compare_group",
+          "blocks": [
+            {
+              "type": "compare-row",
+              "settings": {
+                "left_content_type": "text",
+                "left_text": "100",
+                "right_content_type": "text",
+                "right_text": "100",
+                "center_text": "Compare Label"
+              }
+            },
+            {
+              "type": "compare-row",
+              "settings": {
+                "left_content_type": "text",
+                "left_text": "Test",
+                "right_content_type": "text",
+                "right_text": "Test",
+                "center_text": "Compare Label text"
+              }
+            },
+            {
+              "type": "compare-row",
+              "settings": {
+                "left_content_type": "text",
+                "left_text": "<strong>100</strong>",
+                "right_content_type": "text",
+                "right_text": "<strong>100</strong>",
+                "center_text": "Compare Label with longer text"
+              }
+            },
+            {
+              "type": "compare-row",
+              "settings": {
+                "left_content_type": "icon",
+                "selected_left_icon": "check",
+                "right_content_type": "icon",
+                "selected_right_icon": "close"
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

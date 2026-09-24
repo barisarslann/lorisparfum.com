@@ -1,3 +1,13 @@
+{%- if id == 'arrow-left' or id == 'arrow-right' -%}
+  {%- if settings.nav_icon_style == 'minimal' -%}
+    {%- assign icon_class = icon_class | append: ' svg-icon--' | append: id | strip -%}
+    {%- assign id = id | prepend: 'nav-' | append: '-minimal' -%}
+  {%- elsif settings.nav_icon_style == 'arrow' -%}
+    {%- assign icon_class = icon_class | append: ' svg-icon--' | append: id | strip -%}
+    {%- assign id = id | prepend: 'nav-' | append: '-arrow' -%}
+  {%- endif -%}
+{%- endif -%}
+
 {% if settings.iconset == 'option_1' %}
   {% render 'icon-set_1',
     id: id,

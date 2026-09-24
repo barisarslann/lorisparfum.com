@@ -12,19 +12,42 @@ class StickyBuyButton extends HTMLElement {
   initialize() {
     const addToCartModule = document.querySelector(".wt-product__add-to-cart");
     const btn = this.querySelector("button");
+    const addToCart = this.dataset.addToCart === "";
 
     const forObserver = document.querySelectorAll(
       ".wt-product__add-to-cart, .wt-footer, .wt-product__name",
     );
 
+    this._bundleEl = document.querySelector(".wt-bundle");
+
     let intersected = [];
 
+    const updateVisibility = () => {
+      if (intersected.length || this._overlapsBundlePanel()) {
+        this.classList.remove(this.activeClass);
+      } else {
+        this.classList.add(this.activeClass);
+      }
+    };
+
     btn.addEventListener("click", (e) => {
-      e.preventDefault();
-      addToCartModule.scrollIntoView({
-        behavior: "smooth",
-        block: "center",
-      });
+      if (!addToCart) {
+        e.preventDefault();
+        addToCartModule.scrollIntoView({
+          behavior: "smooth",
+          block: "center",
+        });
+      } else {
+        const loader = this.querySelector(".loading-overlay__spinner");
+        btn.classList.add("loading");
+        if (loader) loader.classList.remove("hidden");
+      }
+    });
+
+    subscribe(PUB_SUB_EVENTS.cartUpdate, () => {
+      const loader = this.querySelector(".loading-overlay__spinner");
+      btn.classList.remove("loading");
+      if (loader) loader.classList.add("hidden");
     });
 
     const observer = new IntersectionObserver((entries) => {
@@ -34,16 +57,29 @@ class StickyBuyButton extends HTMLElement {
           : (intersected = intersected.filter((item) => item !== target));
       });
 
-      if (intersected.length) {
-        this.classList.remove(this.activeClass);
-      } else {
-        this.classList.add(this.activeClass);
-      }
+      updateVisibility();
     });
 
     forObserver.forEach((item) => {
       observer.observe(item);
     });
+
+    if (this._bundleEl) {
+      this._onScroll = updateVisibility;
+      window.addEventListener("scroll", this._onScroll, { passive: true });
+    }
+  }
+
+  _overlapsBundlePanel() {
+    if (!this._bundleEl || window.innerWidth > 899) return false;
+    const rect = this._bundleEl.getBoundingClientRect();
+    const topEntered = rect.top <= window.innerHeight;
+    const bottomClearedFold = window.innerHeight - rect.bottom >= 100;
+    return topEntered && !bottomClearedFold;
+  }
+
+  disconnectedCallback() {
+    if (this._onScroll) window.removeEventListener("scroll", this._onScroll);
   }
 }
 
@@ -198,12 +234,14 @@ if (!customElements.get("gallery-fashion")) {
         window.addEventListener("scroll", updateProgressBar.bind(this));
 
         function handleThumbsClick(event) {
-          if (event.target.className === "wt-product__img") {
+          if (event.target.closest(".thumbs-list-item")) {
             const thumbnails = Array.from(
-              event.currentTarget.querySelectorAll("img"),
+              event.currentTarget.querySelectorAll(".wt-product__img"),
             );
-            const index = thumbnails.indexOf(event.target);
-
+            const targetImage = event.target
+              .closest(".thumbs-list-item")
+              .querySelector(".wt-product__img");
+            const index = thumbnails.indexOf(targetImage);
             const fullImage = this.querySelectorAll(
               ".wt-masonry__wrapper .wt-product__img, .wt-masonry__wrapper .wt-product__thumbnail-video",
             )[index];
@@ -239,6 +277,38 @@ if (!customElements.get("gallery-fashion")) {
         window.addEventListener("resize", this.handleResize.bind(this));
       }
 
+      /**
+       * Wait until all images inside masonry wrapper are loaded
+       * then run callback
+       */
+      waitForMasonryImages(callback) {
+        const masonry = this.querySelector(".swiper-wrapper--masonry");
+        if (!masonry) return;
+
+        const images = masonry.querySelectorAll("img");
+        if (images.length === 0) {
+          callback();
+          return;
+        }
+
+        let loaded = 0;
+        const checkDone = () => {
+          loaded++;
+          if (loaded === images.length) {
+            callback();
+          }
+        };
+
+        images.forEach((img) => {
+          if (img.complete) {
+            checkDone();
+          } else {
+            img.addEventListener("load", checkDone, { once: true });
+            img.addEventListener("error", checkDone, { once: true });
+          }
+        });
+      }
+
       init() {
         this.reinitAfterDelay = this.reinitAfterDelay.bind(this);
         if (this.isTransparentHeaderEnabled()) {
@@ -248,7 +318,12 @@ if (!customElements.get("gallery-fashion")) {
           const isHeaderSticky =
             document.body.classList.contains("page-header-sticky");
           if (isHeaderSticky) {
-            stickyHeaderThreshold.style.height = `${this.querySelector(".swiper-wrapper--masonry").offsetHeight}px`;
+            this.waitForMasonryImages(() => {
+              const masonry = this.querySelector(".swiper-wrapper--masonry");
+              if (masonry) {
+                stickyHeaderThreshold.style.height = `${masonry.offsetHeight}px`;
+              }
+            });
           }
           this.setTopMargin();
           this.observeHeader();

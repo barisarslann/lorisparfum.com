@@ -1,0 +1,102 @@
+{%- if block.settings.left_product_image == blank and block.settings.right_product_image == blank or block.settings.image_bg_radius != 0 -%}
+  {% assign image_width = 100 %}
+  {% assign image_height = 100 %}
+{%- else -%}
+  {% assign image_width = 85 %}
+  {% assign image_height = 74 %}
+{%- endif -%}
+
+<style>
+  [data-section-id="{{ section.id }}"].compare-products {
+    --color-block-background: {{ block.settings.image_background }};
+    --color-block-badge-background: {{ block.settings.badge_background }};
+    --color-block-badge-text: {{ block.settings.badge_text_color }};
+    --border-custom-radius-block: {{ block.settings.image_bg_radius }}px;
+    
+    --image-width: {{ image_width }}%;
+    --image-height: {{ image_height }}%;
+  }
+</style>
+<div class="compare-products__images" {{ block.shopify_attributes }}>
+  <div class="compare-products__image__cell">
+    {%- if block.settings.left_product_image != blank -%}
+      {%- assign left_alt = block.settings.left_product_image.alt | default: "" | escape -%}
+      {{
+        block.settings.left_product_image
+        | image_url: width: 900
+        | image_tag: class: 'compare-products__image', loading: 'lazy', alt: left_alt
+      }}
+    {%- else -%}
+      {{ 'image' | placeholder_svg_tag: 'placeholder-svg compare-products__image' }}
+    {%- endif -%}
+  </div>
+  <div class="compare-products__image__cell">
+    {%- if block.settings.right_product_image != blank -%}
+      {%- assign right_alt = block.settings.right_product_image.alt | default: "" | escape -%}
+      {{
+        block.settings.right_product_image
+        | image_url: width: 900
+        | image_tag: class: 'compare-products__image', loading: 'lazy', alt: right_alt
+      }}
+    {%- else -%}
+      {{ 'image' | placeholder_svg_tag: 'placeholder-svg compare-products__image' }}
+    {%- endif -%}
+  </div>
+  <div class="compare-products__badge">
+    {{ block.settings.badge_text }}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "t:sections.compare_products.blocks.images.name",
+  "class": "compare-products__images__block",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "left_product_image",
+      "label": "t:sections.compare_products.blocks.images.left_product_image"
+    },
+    {
+      "type": "image_picker",
+      "id": "right_product_image",
+      "label": "t:sections.compare_products.blocks.images.right_product_image"
+    },
+    {
+      "type": "color",
+      "id": "image_background",
+      "label": "t:sections.compare_products.blocks.images.image_background",
+      "default": "#f7f1e9"
+    },
+    {
+      "type": "range",
+      "id": "image_bg_radius",
+      "label": "t:sections.compare_products.blocks.images.image_background_radius",
+      "min": 0,
+      "max": 200,
+      "unit": "px",
+      "step": 2,
+      "default": 0
+    },
+    { "type": "header", "content": "t:sections.compare_products.blocks.images.badge_header" },
+    {
+      "type": "inline_richtext",
+      "id": "badge_text",
+      "label": "t:sections.compare_products.blocks.images.badge_text",
+      "default": "t:sections.compare_products.blocks.images.badge_text_default"
+    },
+    {
+      "type": "color",
+      "id": "badge_background",
+      "label": "t:sections.compare_products.blocks.images.badge_background",
+      "default": "#FF6720"
+    },
+    {
+      "type": "color",
+      "id": "badge_text_color",
+      "label": "t:sections.compare_products.blocks.images.badge_text_color",
+      "default": "#ffffff"
+    }
+  ]
+}
+{% endschema %}

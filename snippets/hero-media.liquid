@@ -1,0 +1,288 @@
+{% comment %}
+  hero-media.liquid
+  Renders a hero area with optional desktop/mobile images, Shopify hosted video,
+  YouTube/Vimeo, before/after comparison, and optional play/pause and mute controls.
+
+  Required CSS (included in main.scss build):
+  - wonder-theme/sections/hero for .hero
+  - wonder-theme/sections/video for .wt-video__* video layout and controls
+  Sections using only this snippet do not need to load section-video.css;
+  some sections still load it for other layout or legacy reasons.
+
+  Reusable across sections; currently used by blur-banner. Consider using in
+  image-banner, background-video, and other video/image sections for consistency.
+
+  Parameters (all optional):
+  - desktop_image, mobile_image: Image objects for picture
+  - video: Shopify hosted video (desktop)
+  - mobile_video: Shopify hosted video (mobile)
+  - video_url: External video (YouTube/Vimeo) – uses video_url.type, video_id
+  - placeholder: Placeholder image key when no image (e.g. 'hero-apparel-2')
+  - hide_image: If true, only video is shown (no fallback picture)
+  - autoplay: Boolean (default true)
+  - video_controls: Boolean – show native video controls
+  - video_custom_play_controls: Boolean – show custom play/pause (when video_controls false)
+  - video_custom_mute_controls: Boolean – show custom mute (when video_controls false)
+  - button_link, button_label, button_link_in_new_window: Link wrapping video/image
+  - link_image: Boolean – wrap image in link when button_link set
+  - loader, loading_option: Pass-through for picture snippet
+  - block: Block object for picture (e.g. section block)
+  - lcp_tweak, lcp_optimized: LCP optimization flags for picture
+  - before_after: If true, render before-after-comparison instead
+  - classname: Extra CSS class(es) on .hero
+  - blocks: Used for data-blocks-size attribute
+  - enable_full_screen_mode: Adds wt-video--fullscreen class
+{% endcomment %}
+{%- liquid
+  # --------------------------------
+  # Basics / defaults
+  # --------------------------------
+  assign video_id = video.id | default: video_url.id
+  assign hide_picture = hide_image | default: false
+
+  if autoplay == null
+    assign autoplay = true
+  endif
+
+  if lcp_tweak
+    assign lcp_optimized = true
+  endif
+
+  # --------------------------------
+  # Control buttons
+  # --------------------------------
+  assign play_pause_button = false
+  assign unmute_button = false
+
+  if video_controls == false and video_custom_play_controls == true
+    assign play_pause_button = true
+  endif
+  if video_controls == false and video_custom_mute_controls == true
+    assign unmute_button = true
+  endif
+
+  # --------------------------------
+  # Presence flags
+  # --------------------------------
+  assign has_desktop_image = false
+  if desktop_image != blank
+    assign has_desktop_image = true
+  endif
+
+  assign has_mobile_image = false
+  if mobile_image != blank
+    assign has_mobile_image = true
+  endif
+
+  assign has_desktop_video = false
+  if video != blank
+    assign has_desktop_video = true
+  endif
+
+  assign has_mobile_video = false
+  if mobile_video != blank
+    assign has_mobile_video = true
+  endif
+
+  # --------------------------------
+  # Visibility classes (exclusive cases)
+  # --------------------------------
+  assign video_class = ''
+  assign mobile_video_class = ''
+  assign video_visibility_class = ''
+  assign picture_visibility_class = ''
+
+  # CASE 1: desktop video only + mobile image -> hide video on mobile, picture on desktop
+  if has_desktop_video and has_mobile_video == false and has_mobile_image
+    assign video_class = 'wt-mobile-hidden'
+    assign video_visibility_class = 'wt-mobile-hidden'
+    assign picture_visibility_class = 'wt-desktop-hidden'
+
+    # CASE 2: mobile video only + desktop image -> hide mobile video on desktop, picture on mobile
+  elsif has_mobile_video and has_desktop_video == false and has_desktop_image
+    assign mobile_video_class = 'wt-desktop-hidden'
+    assign video_visibility_class = 'wt-desktop-hidden'
+    assign picture_visibility_class = 'wt-mobile-hidden'
+
+    # CASE 3: both videos exist -> split by viewport, hide picture entirely
+  elsif has_desktop_video and has_mobile_video
+    assign video_class = 'wt-mobile-hidden'
+    assign mobile_video_class = 'wt-desktop-hidden'
+    assign picture_visibility_class = 'wt-hidden'
+    assign video_visibility_class = ''
+  endif
+
+  assign additional_class_for_video = ''
+  if video_controls
+    assign additional_class_for_video = 'hero--video-with-controls'
+  endif
+-%}
+
+<div
+  class="hero hero--video-background {{ classname }} {{ additional_class_for_video }}"
+  data-blocks-size="{{ blocks.size }}"
+>
+  {% if video_url != blank or video or mobile_video %}
+    {% if video or mobile_video %}
+      <div
+        class="
+          wt-video__movie wt-video__movie--shopify-video wt-video__item
+          {% if settings.animations %} scroll-trigger animate--slide-in {% endif %}
+          {% if settings.disabled_animations_on_mobile %} disabled-on-mobile {% endif %}
+          {% if enable_full_screen_mode %}wt-video--fullscreen{% endif %}
+          {{ video_visibility_class }}
+        "
+      >
+        {%- liquid
+          if has_desktop_video and has_mobile_video == false
+            assign video_class = ''
+          endif
+          if has_mobile_video and has_desktop_video == false
+            assign mobile_video_class = ''
+          endif
+        -%}
+
+        {% if mobile_video %}
+          {% if button_link and button_label == blank or button_link and link_image %}
+            <a
+              href="{{ button_link }}"
+              aria-label="{{ button_label }}"
+              {% if button_link_in_new_window %}
+                target="_blank" rel="noreferrer noopener"
+              {% endif %}
+            >
+          {% endif %}
+
+          {% if mobile_video %}
+            {% if play_pause_button or unmute_button %}
+              <video-controls class="{{ mobile_video_class }}">
+            {% endif %}
+
+            {% if play_pause_button %}
+              {% render 'play-pause-button', classname: mobile_video_class %}
+            {% endif %}
+
+            {% if unmute_button %}
+              {% render 'unmute-button' %}
+            {% endif %}
+
+            {{
+              mobile_video
+              | video_tag:
+                autoplay: autoplay,
+                loop: true,
+                muted: true,
+                controls: video_controls,
+                image_size: '600x',
+                class: mobile_video_class
+            }}
+
+            {% if play_pause_button or unmute_button %}
+              </video-controls>
+            {% endif %}
+          {% else %}
+            {% assign video_class = '' %}
+          {% endif %}
+        {% endif %}
+
+        {% if video %}
+          {% if play_pause_button or unmute_button %}
+            <video-controls class="{{ video_class }}">
+          {% endif %}
+
+          {% if play_pause_button %}
+            {% render 'play-pause-button', classname: video_class %}
+          {% endif %}
+
+          {% if unmute_button %}
+            {% render 'unmute-button' %}
+          {% endif %}
+
+          {{
+            video
+            | video_tag:
+              autoplay: autoplay,
+              loop: true,
+              muted: true,
+              controls: video_controls,
+              image_size: '600x',
+              class: video_class
+          }}
+
+          {% if play_pause_button or unmute_button %}
+            </video-controls>
+          {% endif %}
+        {% endif %}
+
+        {% if button_link and button_label == blank or button_link and link_image %}
+          </a>
+        {% endif %}
+      </div>
+    {% else %}
+      {% assign external_video_controls = 0 %}
+      {% if video_controls %}
+        {% assign external_video_controls = 1 %}
+      {% endif %}
+
+      {%- if video_url.type == 'youtube' -%}
+        <iframe
+          src="https://www.youtube.com/embed/{{ video_id }}?autoplay=1&mute=1&controls={{ external_video_controls }}"
+          frameborder="0"
+          class="wt-video__movie wt-video__item wt-video__item--bg"
+          allow="autoplay; encrypted-media"
+          title="{{ 'aria-label.hero-yt' | t }}"
+        ></iframe>
+      {%- elsif video_url.type == 'vimeo' -%}
+        <iframe
+          src="https://player.vimeo.com/video/{{ video_id }}?transparent=0&controls={{ external_video_controls }}&autoplay=1&loop=1&muted=1&playsinline=1"
+          frameborder="0"
+          class="js-vimeo wt-video__movie wt-video__item wt-video__item--bg"
+          allow="autoplay; encrypted-media"
+          style="background-color:  black;"
+          title="{{ 'aria-label.hero-vimeo' | t }}"
+        ></iframe>
+      {%- endif -%}
+    {% endif %}
+
+    {%- if hide_picture == false -%}
+      {% if has_desktop_image or has_mobile_image %}
+        <div class="{{ picture_visibility_class }} hero__pic-wrapper">
+          {% render 'picture',
+            desktop_image: desktop_image,
+            mobile_image: mobile_image,
+            placeholder: placeholder,
+            button_link: button_link,
+            button_label: button_label,
+            button_link_in_new_window: button_link_in_new_window,
+            loader: loader,
+            loading_option: loading_option,
+            block: block,
+            link_image: link_image,
+            lcp_optimized: lcp_optimized
+          %}
+        </div>
+      {% endif %}
+    {% endif %}
+
+  {% elsif before_after %}
+    {% render 'before-after-comparison' %}
+  {% else %}
+    {%- if hide_picture == false -%}
+      {% render 'picture',
+        desktop_image: desktop_image,
+        mobile_image: mobile_image,
+        placeholder: placeholder,
+        button_link: button_link,
+        button_label: button_label,
+        button_link_in_new_window: button_link_in_new_window,
+        loader: loader,
+        loading_option: loading_option,
+        block: block,
+        link_image: link_image,
+        lcp_optimized: lcp_optimized
+      %}
+    {%- else -%}
+      <div class="hero__pic hero__pic--no-img"></div>
+    {%- endif -%}
+  {% endif %}
+</div>

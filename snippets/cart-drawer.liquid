@@ -1,15 +1,33 @@
 <script src="{{ 'cart.js' | asset_url }}" defer="defer"></script>
 <script src="{{ 'cart-drawer.js' | asset_url }}" defer="defer"></script>
 <script src="{{ 'cart-drawer-note.js' | asset_url }}" defer="defer"></script>
+{% if settings.enable_discount_progress_bar %}
+  <script src="{{ 'discount-progress-bar.js' | asset_url }}" defer="defer"></script>
+{% endif %}
+{% if settings.cart_show_additional_service %}
+  {% if settings.cart_additional_service_product != blank %}
+    <script src="{{ 'cart-service-checkbox.js' | asset_url }}" defer="defer"></script>
+  {% else %}
+    <script src="{{ 'cart-checkbox-attribute.js' | asset_url }}" defer="defer"></script>
+  {% endif %}
+{% endif %}
+{% if settings.cart_show_order_note or settings.cart_features_enable_estimate_shipping or settings.cart_features_enable_discount_code %}
+  <script src="{{ 'cart-additional-features.js' | asset_url }}" defer="defer"></script>
+{% endif %}
 
 {% if settings.enable_cross_sells %}
+  {{ 'section-shoppable-video.css' | asset_url | stylesheet_tag }}
+  {{ 'shoppable-image.css' | asset_url | stylesheet_tag }}
+  {{ 'swiper.css' | asset_url | stylesheet_tag }}
+  {{ 'cart-drawer.css' | asset_url | stylesheet_tag }}
   <script src="{{ 'quick-add.js' | asset_url }}" defer="defer"></script>
+  <script src="{{ 'subscription-widget.js' | asset_url }}" defer="defer"></script>
   <script src="{{ 'product-form.js' | asset_url }}" defer="defer"></script>
 {% endif %}
 
 <cart-drawer
   class="wt-cart {% if cart == empty %}wt-cart--empty{% endif %}"
-  data-toggle-tabindex=".wt-cart__drawer__close--button,.button--continue-shopping,.giftnote__drawercart__addnote,.wt-cart__item__remove, .js-counter-button, .js-counter-quantity, .wt-cart__cta, .wt-cart__item__link, .wt-cart__login__text a, .policy-link, .wt-cart__show-cart"
+  data-toggle-tabindex=".wt-cart__drawer__close--button,.wt-button--continue-shopping,.giftnote__drawercart__addnote,.wt-cart__item__remove, .js-counter-button, .js-counter-quantity, .wt-cart__cta, .wt-cart__item__link, .wt-cart__login__text a, .policy-link, .wt-cart__show-cart"
   data-cart-type="{{ settings.cart_type }}"
 >
   <div class="page-overlay-cart"></div>
@@ -41,6 +59,10 @@
       <div class="wt-cart__drawer__body">
         {% if settings.enable_free_shipping_bar and cart != empty %}
           {% render 'cart-free-shipping-bar' %}
+        {% endif %}
+
+        {% if settings.enable_discount_progress_bar and cart != empty %}
+          {% render 'discount-progress-bar' %}
         {% endif %}
 
         <cart-drawer-items class="wt-cart__drawer__items">
@@ -77,14 +99,13 @@
       {% if cart != empty %}
         <footer class="wt-cart__drawer__footer">
           <div class="wt-cart__subtitle">
-            {% if settings.cart_show_additional_service %}
+            {%- if settings.cart_show_additional_service -%}
               {% render 'cart-checkbox' %}
-            {% endif %}
-
-            {% if settings.cart_show_order_note %}
-              {% render 'cart-note' %}
-            {% endif %}
+            {%- endif -%}
           </div>
+          
+          {% render 'cart-additional-features', context: 'drawer' %}
+
 
           {% render 'cart-footer' %}
           <div id="cart-errors"></div>
@@ -93,3 +114,6 @@
     </div>
   </div>
 </cart-drawer>
+{% if settings.enable_cross_sells and cart == empty %}
+  <script type="module" src="{{ 'slider.js' | asset_url }}" defer="defer"></script>
+{% endif %}

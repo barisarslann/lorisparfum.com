@@ -1,0 +1,6 @@
+{% comment %}
+  Params: block
+{% endcomment %}
+{%- unless block.settings.hide_widget and block.settings.discount_code == blank -%}
+  {% render 'countdown-with-discount', block: block %}
+{%- endunless -%}

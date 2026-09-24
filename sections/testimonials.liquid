@@ -1,3 +1,5 @@
+{{ 'swiper.css' | asset_url | stylesheet_tag }}
+
 {% assign background_rgb = section.settings.background_color | color_to_rgb %}
 {% assign text_rgb = section.settings.text_color | color_to_rgb %}
 
@@ -5,7 +7,7 @@
   [data-section-id="{{ section.id }}"]
   {
 
-    {% if background_rgb != 'rgba(0, 0, 0, 0.0)' %}
+    {% if section.settings.background_color != blank and section.settings.background_color != 'transparent' and background_rgb != 'rgba(0, 0, 0, 0.0)' %}
       --color-custom-background: {{ section.settings.background_color }};
     {% endif %}
 
@@ -17,6 +19,14 @@
     --section-gap-bottom: {{ section.settings.margin-bottom }}px;
     {% endif %}
 
+      {%- if section.settings.show_mobile_spacing -%}
+          --section-gap-top-mobile: {{ section.settings.margin-top-mobile }}px;
+      {%- endif -%}
+
+      {%- if section.settings.show_mobile_spacing -%}
+          --section-gap-bottom-mobile: {{ section.settings.margin-bottom-mobile }}px;
+      {%- endif -%}
+
     --font-text-scale-desk: {{ section.settings.testimonial_text_size_desktop | divided_by: 100.0 }};
 
     --font-text-scale: {{ section.settings.testimonial_text_size | divided_by: 100.0 }};
@@ -24,9 +34,10 @@
   }
 
   [data-section-id="{{ section.id }}"] .headline__title,
+  [data-section-id="{{ section.id }}"] div.headline--rich,
   [data-section-id="{{ section.id }}"] .wt-test__list
   {
-      {% if text_rgb != 'rgba(0, 0, 0, 0.0)' %}
+      {% if section.settings.text_color != blank and section.settings.text_color != 'transparent' and text_rgb != 'rgba(0, 0, 0, 0.0)' %}
         --color-custom-text: {{ section.settings.text_color }};
       {% endif %}
   }
@@ -42,13 +53,26 @@
 </style>
 
 <div data-section-id="{{ section.id }}" class="wt-test">
-  <slideshow-section class="wt-test__container wt-slider">
-    {% render 'headline', title: section.settings.heading %}
+  <script type="module" src="{{ 'slider.js' | asset_url }}" defer="defer"></script>
+  <slideshow-section class="wt-test__container wt-slider" data-skip-center-nav-method="true">
+    {% if section.settings.advanced_heading %}
+      {% if section.settings.heading_richtext != blank %}
+          <div class="headline headline--rich {% if settings.animations %} scroll-trigger animate--slide-in {% endif %} {% if settings.disabled_animations_on_mobile %} disabled-on-mobile {% endif %}">
+              {{ section.settings.heading_richtext }}
+          </div>
+      {% endif %}
+    {% else %}
+      {% if section.settings.heading != blank %}
+          {% render 'headline', title: section.settings.heading %}
+      {% endif %}
+    {% endif %}
+
     <div
       data-swiper
       class="{% if settings.animations %} scroll-trigger animate--slide-in {% endif %} {% if settings.disabled_animations_on_mobile %} disabled-on-mobile {% endif %}"
     >
       <div data-swiper-container class="wt-test__list rte">
+        {% assign my_counter = 0 %}
         {% for block in section.blocks %}
           <div data-swiper-slide class="wt-test__item" data-block-id="{{ block.id }}">
             {% assign image_class = 'wt-test__image' %}
@@ -63,7 +87,7 @@
             {% endif %}
 
             {%- if block.settings.desktop_image != blank -%}
-              {% assign alt_text = block.settings.desktop_image.alt | escape %}
+              {% assign alt_text = block.settings.desktop_image.alt | escape | default: "" %}
 
               {{
                 block.settings.desktop_image
@@ -76,7 +100,8 @@
                   class: image_class
               }}
             {%- else -%}
-              {{ 'product-apparel-' | append: forloop.index | placeholder_svg_tag: image_class }}
+              {% assign my_counter = my_counter | modulo: 4 | plus: 1 %}
+              {{ 'product-apparel-' | append: my_counter  | placeholder_svg_tag: image_class }}
             {%- endif -%}
 
             {% if block.settings.icon_select == '80' %}
@@ -132,10 +157,24 @@
       "content": "t:sections.global.general"
     },
     {
+      "type": "checkbox",
+      "id": "advanced_heading",
+      "label": "t:sections.global.advanced_heading.label",
+      "info": "t:sections.global.advanced_heading.info"
+    },
+    {
       "type": "textarea",
       "id": "heading",
       "label": "t:sections.settings.settings.heading.label",
-      "default": "Testimonials"
+      "default": "Testimonials",
+      "visible_if": "{{ section.settings.advanced_heading == false }}"
+    },
+    {
+      "type": "richtext",
+      "id": "heading_richtext",
+      "label": "t:sections.logo-banner.settings.content.headline.label",
+      "default": "<h2>Testimonials</h2>",
+      "visible_if": "{{ section.settings.advanced_heading == true }}"
     },
     {
       "type": "select",
@@ -189,13 +228,11 @@
     {
       "type": "color",
       "id": "text_color",
-      "default": "transparent",
       "label": "t:sections.settings.settings.text-color.label"
     },
     {
       "type": "color",
       "id": "background_color",
-      "default": "transparent",
       "label": "t:sections.settings.settings.background-color.label"
     },
     {
@@ -222,13 +259,40 @@
       "unit": "px",
       "label": "t:sections.settings.settings.distance-bottom.label",
       "info": "t:sections.settings.settings.distance-bottom.info"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_mobile_spacing",
+      "label": "t:sections.settings.settings.show-mobile-spacing.label"
+    },
+    {
+      "type": "range",
+      "id": "margin-top-mobile",
+      "min": 0,
+      "max": 100,
+      "step": 2,
+      "default": 20,
+      "unit": "px",
+      "label": "t:sections.settings.settings.distance-top-mobile.label",
+      "visible_if": "{{ section.settings.show_mobile_spacing }}"
+    },
+    {
+      "type": "range",
+      "id": "margin-bottom-mobile",
+      "min": 0,
+      "max": 100,
+      "step": 2,
+      "default": 20,
+      "unit": "px",
+      "label": "t:sections.settings.settings.distance-bottom-mobile.label",
+      "visible_if": "{{ section.settings.show_mobile_spacing }}"
     }
   ],
   "blocks": [
     {
       "type": "image",
       "name": "t:sections.testimonials.settings.image.name",
-      "limit": 10,
+      "limit": 9,
       "settings": [
         {
           "type": "select",
@@ -306,6 +370,7 @@
   "presets": [
     {
       "name": "t:sections.testimonials.settings.presets.name",
+      "category": "t:sections.categories.testimonials",
       "blocks": [
         {
           "type": "image"

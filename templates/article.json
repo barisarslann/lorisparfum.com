@@ -15,7 +15,6 @@
         "featured_image": {
           "type": "featured_image",
           "settings": {
-            "full_width_enabled": false,
             "slide_height": "fixed_height",
             "desktop_fixed_height": 320,
             "mobile_fixed_height": 460

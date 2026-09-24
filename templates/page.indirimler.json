@@ -50,14 +50,14 @@
             "color-body-text": "rgba(0,0,0,0)",
             "color-overlay": "rgba(0,0,0,0)",
             "color-overlay-opacity": 0,
+            "out-background-color": "rgba(0,0,0,0)",
+            "out-text-color": "rgba(0,0,0,0)",
             "desktop_image": "shopify://shop_images/BANNER_2a7a88d0-eba1-40fd-a164-6accd959cf88.jpg",
             "desktop_text_vertical_position": "bottom",
             "desktop_text_horizontal_position": "center",
             "mobile_image": "shopify://shop_images/ST_645d38b4-8400-448b-ab60-315ad3ce3832.jpg",
             "mobile_text_vertical_position": "bottom",
-            "mobile_text_horizontal_position": "center",
-            "out-background-color": "rgba(0,0,0,0)",
-            "out-text-color": "rgba(0,0,0,0)"
+            "mobile_text_horizontal_position": "center"
           }
         },
         "slide_49AG8k": {
@@ -83,14 +83,14 @@
             "color-body-text": "rgba(0,0,0,0)",
             "color-overlay": "rgba(0,0,0,0)",
             "color-overlay-opacity": 0,
+            "out-background-color": "rgba(0,0,0,0)",
+            "out-text-color": "rgba(0,0,0,0)",
             "desktop_image": "shopify://shop_images/Niche_Tester_Hediye_1.svg",
             "desktop_text_vertical_position": "bottom",
             "desktop_text_horizontal_position": "center",
             "mobile_image": "shopify://shop_images/Tester_Kit.svg",
             "mobile_text_vertical_position": "bottom",
-            "mobile_text_horizontal_position": "center",
-            "out-background-color": "rgba(0,0,0,0)",
-            "out-text-color": "rgba(0,0,0,0)"
+            "mobile_text_horizontal_position": "center"
           }
         },
         "slide_YA36UV": {
@@ -116,14 +116,14 @@
             "color-body-text": "rgba(0,0,0,0)",
             "color-overlay": "rgba(0,0,0,0)",
             "color-overlay-opacity": 0,
+            "out-background-color": "rgba(0,0,0,0)",
+            "out-text-color": "rgba(0,0,0,0)",
             "desktop_image": "shopify://shop_images/FREQUENCE-BANNER_e3319b1f-498b-4851-a43e-8a618abd7b81.jpg",
             "desktop_text_vertical_position": "bottom",
             "desktop_text_horizontal_position": "center",
             "mobile_image": "shopify://shop_images/FREQUENCE-ST.jpg",
             "mobile_text_vertical_position": "bottom",
-            "mobile_text_horizontal_position": "center",
-            "out-background-color": "rgba(0,0,0,0)",
-            "out-text-color": "rgba(0,0,0,0)"
+            "mobile_text_horizontal_position": "center"
           }
         },
         "slide_feUC3D": {
@@ -149,14 +149,14 @@
             "color-body-text": "rgba(0,0,0,0)",
             "color-overlay": "rgba(0,0,0,0)",
             "color-overlay-opacity": 0,
+            "out-background-color": "rgba(0,0,0,0)",
+            "out-text-color": "rgba(0,0,0,0)",
             "desktop_image": "shopify://shop_images/ODA-KOKUSU-BANNER.jpg",
             "desktop_text_vertical_position": "bottom",
             "desktop_text_horizontal_position": "center",
             "mobile_image": "shopify://shop_images/ODA-KOKUSU-ST.jpg",
             "mobile_text_vertical_position": "bottom",
-            "mobile_text_horizontal_position": "center",
-            "out-background-color": "rgba(0,0,0,0)",
-            "out-text-color": "rgba(0,0,0,0)"
+            "mobile_text_horizontal_position": "center"
           }
         },
         "slide_8GFHVp": {
@@ -181,14 +181,14 @@
             "color-body-text": "rgba(0,0,0,0)",
             "color-overlay": "rgba(0,0,0,0)",
             "color-overlay-opacity": 0,
+            "out-background-color": "rgba(0,0,0,0)",
+            "out-text-color": "rgba(0,0,0,0)",
             "desktop_image": "shopify://shop_images/banner_69bedd3f-6031-468f-b6c6-cf1d1f8ac0c6.jpg",
             "desktop_text_vertical_position": "bottom",
             "desktop_text_horizontal_position": "center",
             "mobile_image": "shopify://shop_images/ST_a9b04a7c-917a-4e0f-8153-fe7230aa258e.jpg",
             "mobile_text_vertical_position": "bottom",
-            "mobile_text_horizontal_position": "center",
-            "out-background-color": "rgba(0,0,0,0)",
-            "out-text-color": "rgba(0,0,0,0)"
+            "mobile_text_horizontal_position": "center"
           }
         },
         "slide_chJEhK": {
@@ -214,14 +214,14 @@
             "color-body-text": "rgba(0,0,0,0)",
             "color-overlay": "rgba(0,0,0,0)",
             "color-overlay-opacity": 0,
+            "out-background-color": "rgba(0,0,0,0)",
+            "out-text-color": "rgba(0,0,0,0)",
             "desktop_image": "shopify://shop_images/Banner_ing.jpg",
             "desktop_text_vertical_position": "bottom",
             "desktop_text_horizontal_position": "center",
             "mobile_image": "shopify://shop_images/story.jpg",
             "mobile_text_vertical_position": "bottom",
-            "mobile_text_horizontal_position": "center",
-            "out-background-color": "rgba(0,0,0,0)",
-            "out-text-color": "rgba(0,0,0,0)"
+            "mobile_text_horizontal_position": "center"
           }
         },
         "slide_mPeQcc": {
@@ -247,14 +247,14 @@
             "color-body-text": "rgba(0,0,0,0)",
             "color-overlay": "rgba(0,0,0,0)",
             "color-overlay-opacity": 0,
+            "out-background-color": "rgba(0,0,0,0)",
+            "out-text-color": "rgba(0,0,0,0)",
             "desktop_image": "shopify://shop_images/BANNER_TR.jpg",
             "desktop_text_vertical_position": "bottom",
             "desktop_text_horizontal_position": "center",
             "mobile_image": "shopify://shop_images/ANNELER-GUNU_ST.jpg",
             "mobile_text_vertical_position": "bottom",
-            "mobile_text_horizontal_position": "center",
-            "out-background-color": "rgba(0,0,0,0)",
-            "out-text-color": "rgba(0,0,0,0)"
+            "mobile_text_horizontal_position": "center"
           }
         }
       },
@@ -291,7 +291,7 @@
     },
     "featured_collection_KehQAt": {
       "type": "featured-collection",
-      "name": "t:sections.featured-collection.presets.name",
+      "name": "Featured collection",
       "settings": {
         "title": "Frequence Serisinde 2. Ürüne %30, 3. Ürüne %50 İndirim",
         "disable_on_mobile": false,
@@ -323,7 +323,7 @@
     "featured_collection_WF6kGi": {
       "type": "featured-collection",
       "disabled": true,
-      "name": "t:sections.featured-collection.presets.name",
+      "name": "Featured collection",
       "settings": {
         "title": "Niche  Serisinde 3 AL 2 ÖDE",
         "disable_on_mobile": false,
@@ -355,7 +355,7 @@
     "featured_collection_WrGCtp": {
       "type": "featured-collection",
       "disabled": true,
-      "name": "t:sections.featured-collection.presets.name",
+      "name": "Featured collection",
       "settings": {
         "title": "Kreasyon Serisinde 3 AL 2 ÖDE",
         "disable_on_mobile": false,
@@ -386,7 +386,7 @@
     },
     "featured_collection_7rCY4g": {
       "type": "featured-collection",
-      "name": "t:sections.featured-collection.presets.name",
+      "name": "Featured collection",
       "settings": {
         "title": "Oda Kokularında 2. Ürüne %30, 3. Ürüne %50 İndirim",
         "disable_on_mobile": false,
@@ -417,7 +417,7 @@
     },
     "featured_collection_mPmUfa": {
       "type": "featured-collection",
-      "name": "t:sections.featured-collection.presets.name",
+      "name": "Featured collection",
       "settings": {
         "title": "Yeni ve Popüler Ürünlere Göz At",
         "disable_on_mobile": false,
@@ -453,10 +453,10 @@
     },
     "button_6Qk7jQ": {
       "type": "button",
-      "name": "t:sections.button.presets.name",
+      "name": "Button",
       "settings": {
-        "button_select": "link",
         "button_horizontal_position": "center",
+        "button_select": "link",
         "button_label": "Yenİ TÜm ÜRünleri Keşfet",
         "button_link": "shopify://collections/yeni",
         "margin-top": 20,
@@ -466,7 +466,7 @@
     },
     "featured_collection_PmUg7L": {
       "type": "featured-collection",
-      "name": "t:sections.featured-collection.presets.name",
+      "name": "Featured collection",
       "settings": {
         "title": "Araç Kokularında 2. Ürüne %30, 3. Ürüne %50 İndirim",
         "disable_on_mobile": false,

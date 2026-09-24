@@ -5,24 +5,34 @@ if (!customElements.get("video-reels")) {
       constructor() {
         super();
         this.activeClass = "active";
-        this.swiper = this.querySelector(".wt-slider__container");
       }
 
       connectedCallback() {
+        this._sectionObserver = null;
         this.init();
       }
 
-      updateAllVideosSound(swiper) {
-        const soundOn = swiper.el.dataset.sound === "on";
-        swiper.slides.forEach((slide) => {
-          let video = slide.querySelector("video");
-          if (video) {
-            video.muted = !soundOn;
-          }
-        });
+      disconnectedCallback() {
+        if (this._sectionObserver) {
+          this._sectionObserver.disconnect();
+          this._sectionObserver = null;
+        }
+        this._initObserver?.disconnect();
+        this._initObserver = null;
+        this.removeVideoEventHandlers();
+
+        if (this._playTimeout) {
+          clearTimeout(this._playTimeout);
+          this._playTimeout = null;
+        }
+
+        // A detached <video> keeps decoding until it is paused.
+        this.querySelectorAll("video").forEach((video) => video.pause());
       }
 
       observeSection() {
+        this._sectionObserver?.disconnect();
+
         const observerOptions = {
           root: null,
           rootMargin: "0px",
@@ -32,9 +42,7 @@ if (!customElements.get("video-reels")) {
         const sectionObserver = new IntersectionObserver(
           (entries, observer) => {
             entries.forEach((entry) => {
-              const video = document.querySelector(
-                ".swiper-slide-active video",
-              );
+              const video = this.querySelector(".swiper-slide-active video");
 
               if (video) {
                 if (entry.isIntersecting) {
@@ -49,32 +57,74 @@ if (!customElements.get("video-reels")) {
         );
 
         sectionObserver.observe(this);
+        this._sectionObserver = sectionObserver;
       }
 
-      handleSoundToggle(swiper) {
-        swiper.slides.forEach((slide, index) => {
-          const button = slide.querySelector(".wt-video__sound-toggle");
+      hardStopAllExceptActive(swiper) {
+        const active = swiper.slides[swiper.activeIndex];
+        swiper.slides.forEach((slide) => {
           const video = slide.querySelector("video");
-          const that = this;
+          if (!video) return;
 
-          button.addEventListener("click", function () {
-            if (!video) return;
-            if (video.muted) {
-              video.muted = false;
-              swiper.el.dataset.sound = "on";
-            } else {
-              video.muted = true;
-              swiper.el.dataset.sound = "off";
-            }
-            that.updateAllVideosSound(swiper);
-          });
+          //Stop and mute all except active
+          if (slide !== active) {
+            video.pause();
+            video.muted = true;
+            video.removeAttribute("autoplay"); // avoid Safari storms
+            video.autoplay = false;
+          }
         });
       }
 
-      pasueAllVideos() {
-        const videos = this.querySelectorAll("video");
-        videos.forEach((video) => {
+      handleSoundToggle(swiper) {
+        swiper.slides.forEach((slide) => {
+          const button = slide.querySelector(".wt-video__sound-toggle");
+          if (!button || button._bound) return; // bind only once
+          button._bound = true;
+
+          button.addEventListener(
+            "click",
+            () => {
+              const activeSlide = swiper.slides[swiper.activeIndex];
+              const activeVideo = activeSlide?.querySelector("video");
+              if (!activeVideo) return;
+
+              // stop and mute everything except active
+              this.hardStopAllExceptActive(swiper);
+
+              // toggle global state and apply ONLY to active video
+              const soundOn = swiper.el.dataset.sound === "on";
+              const nextSoundOn = !soundOn;
+              swiper.el.dataset.sound = nextSoundOn ? "on" : "off";
+              activeVideo.muted = !nextSoundOn;
+
+              // inline playback hints for Safari/iOS
+              activeVideo.setAttribute("playsinline", "");
+              activeVideo.setAttribute("webkit-playsinline", "");
+              activeVideo.removeAttribute("autoplay");
+              activeVideo.autoplay = false;
+
+              // (re)play only the active one; tiny delay helps Safari
+              setTimeout(() => {
+                activeVideo.play().catch(() => {});
+              }, 80);
+            },
+            { passive: true },
+          );
+        });
+      }
+
+      sanitizeVideosOnce() {
+        if (this._sanitized) return;
+        this._sanitized = true;
+        this.querySelectorAll("video").forEach((video) => {
           video.pause();
+          video.muted = true;
+          video.removeAttribute("autoplay");
+          video.autoplay = false;
+          video.setAttribute("playsinline", "");
+          video.setAttribute("webkit-playsinline", "");
+          video.preload = "metadata";
         });
       }
 
@@ -83,8 +133,16 @@ if (!customElements.get("video-reels")) {
         const activeSlideVideo =
           this.findActiveSlide(swiper)?.querySelector("video");
         if (activeSlideVideo) {
-          activeSlideVideo.play();
-          activeSlideVideo.muted = sound !== "on";
+          activeSlideVideo.muted = sound !== "on"; // if sound !== "on", keep it muted
+
+          if (this._playTimeout) clearTimeout(this._playTimeout);
+          this._playTimeout = setTimeout(() => {
+            this._playTimeout = null;
+            if (!this.isConnected) return;
+            activeSlideVideo.play().catch((err) => {
+              console.warn("Autoplay was prevented:", err);
+            });
+          }, 100);
         }
       }
 
@@ -105,34 +163,67 @@ if (!customElements.get("video-reels")) {
       }
 
       handleSlideChange(swiper) {
-        this.pasueAllVideos();
+        this.hardStopAllExceptActive(swiper);
         this.toggleActiveClass(swiper);
         this.playVideoInActiveSlide(swiper);
       }
 
       addVideoEventHandlers(swiper) {
-        const that = this;
-        swiper.on("slideChange", (swp) => that.handleSlideChange(swp));
+        this.removeVideoEventHandlers();
+
+        this._boundSwiper = swiper;
+        this._onSlideChange = () => this.handleSlideChange(swiper);
+        this._onSoundToggleSync = () => this.handleSoundToggle(swiper);
+
+        swiper.on("slideChange", this._onSlideChange);
+        swiper.on("slidesLengthChange", this._onSoundToggleSync);
+        swiper.on("update", this._onSoundToggleSync);
       }
 
-      checkSwiperInitialization() {
-        const swiperContainer = this.swiper;
-        const mySwiperInstance = swiperContainer.swiper;
+      removeVideoEventHandlers() {
+        const swiper = this._boundSwiper;
 
-        if (swiperContainer.classList.contains("swiper-initialized")) {
-          this.addVideoEventHandlers(mySwiperInstance);
-          this.handleSlideChange(mySwiperInstance);
-          this.handleSoundToggle(mySwiperInstance);
-          this.observeSection();
-          clearInterval(this.checkInterval);
+        // Swiper's off() wipes all listeners for an event when handler is undefined.
+        if (swiper && !swiper.destroyed && this._onSlideChange) {
+          swiper.off("slideChange", this._onSlideChange);
+          swiper.off("slidesLengthChange", this._onSoundToggleSync);
+          swiper.off("update", this._onSoundToggleSync);
         }
+
+        this._boundSwiper = null;
+        this._onSlideChange = null;
+        this._onSoundToggleSync = null;
       }
 
+      setUpSwiper(swiperContainer, swiperInstance) {
+        if (!swiperContainer.dataset.sound) {
+          swiperContainer.dataset.sound = "off";
+        }
+        this.sanitizeVideosOnce();
+        this.addVideoEventHandlers(swiperInstance);
+        this.handleSlideChange(swiperInstance);
+        this.handleSoundToggle(swiperInstance);
+        this.observeSection();
+      }
+
+      // slider.js strips .wt-slider__container on destroy; [data-swiper] survives.
       init() {
-        this.checkInterval = setInterval(
-          this.checkSwiperInitialization.bind(this),
-          500,
-        );
+        const swiperContainer = this.querySelector("[data-swiper]");
+        if (!swiperContainer) return;
+
+        const sync = () => {
+          const swiperInstance = swiperContainer.swiper;
+          if (!swiperInstance || swiperInstance === this._boundSwiper) return;
+          this.setUpSwiper(swiperContainer, swiperInstance);
+        };
+
+        sync();
+
+        this._initObserver = new MutationObserver(sync);
+        this._initObserver.observe(swiperContainer, {
+          attributes: true,
+          attributeFilter: ["class"],
+        });
       }
     },
   );

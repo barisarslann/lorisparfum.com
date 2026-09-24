@@ -5,14 +5,17 @@ class DrawerSearchSection extends HTMLElement {
     this.isOpen = false;
     this.drawerClass = "wt-drawer-search";
     this.drawer = document.querySelector(`.${this.drawerClass}`);
+    this.drawerNav = document.querySelector('.wt-drawer--nav');
     this.classDrawerActive = `${this.drawerClass}--active`;
     this.pageOverlayClass = "search-overlay";
     this.activeOverlayBodyClass = `${this.pageOverlayClass}-on`;
+    this.drawerNavAnimationOffClass = 'wt-drawer--off-animations';
     this.body = document.body;
 
     this.triggerQuery = [
       ".wt-header__search-trigger",
       ".wt-header__search__close",
+      ".search-results__terms",
     ].join(", ");
     this.triggers = () => document.querySelectorAll(this.triggerQuery);
 
@@ -24,19 +27,30 @@ class DrawerSearchSection extends HTMLElement {
     this.predictiveSearchResults = this.querySelector(
       "[data-predictive-search]",
     );
+    this.searchProperties = this.dataset.searchProperties;
+
     this.mainTrigger = this.querySelector(".wt-header__search-trigger");
     this.emptyAnnouncement = this.querySelector(".search-empty");
+    this.searchResultTop = this.querySelector(".search-result-top");
 
     this.isVisibleClearButton = false;
 
     this.saveSuggestionMenuInDesignMode =
       this.saveSuggestionMenuInDesignMode.bind(this);
+
+    this.isPredictiveSearchAvailable = this.hidePredictiveSearch();
+    this.isPredictiveSearchEnabled = this.dataset.enablePredictiveSearch === 'true';
+    this.showSuggestOnNoResults = this.dataset.showSuggestOnNoResults === 'true';
+
     this.setupEventListeners();
 
     this.toggleTabindexElements = [this.input, this.closeButton];
 
+    this.suggestionMenuContent = this.querySelector(".search-result-top").cloneNode(true);
+    this.timeOut = null;
     this.init();
   }
+
 
   getFocusableElements() {
     const focusableElementsSelector =
@@ -77,22 +91,55 @@ class DrawerSearchSection extends HTMLElement {
       setTabindex([this.mainTrigger], "0");
       this.isOpen = false;
       setTimeout(() => {
-        this.mainTrigger.focus();
-      }, 0);
+          this.mainTrigger.focus();
+        }, 0);
     } else {
       this.setAttribute("open", "");
       setTabindex(this.toggleTabindexElements, "0");
       setTabindex([this.mainTrigger], "-1");
       this.input.focus();
+      this.input.setSelectionRange(
+        this.input.value.length,
+        this.input.value.length,
+      );
       this.isOpen = true;
     }
   }
 
   toggleDrawerClasses() {
+    const opening = !this.body.classList.contains(this.activeOverlayBodyClass);
+
     this.onToggle();
-    // this.fixOverlayIssue();
     this.drawer.classList.toggle(this.classDrawerActive);
+    this.drawerNav?.classList.toggle(this.drawerNavAnimationOffClass);
     this.body.classList.toggle(this.activeOverlayBodyClass);
+
+    if (opening) {
+      this.armCascade(this.drawer);
+    }
+  }
+
+  armCascade(root) {
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+
+    const items = root.querySelectorAll("[data-cascade] .scroll-trigger");
+    if (items.length === 0) return;
+
+    let idx = 0;
+    items.forEach((item) => {
+      if (item.classList.contains("search-result__title")) idx = 0;
+      item.classList.add("scroll-trigger--offscreen");
+      item.style.setProperty("--animation-order", idx);
+      idx += 1;
+    });
+
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        items.forEach((item) =>
+          item.classList.remove("scroll-trigger--offscreen"),
+        );
+      });
+    });
   }
 
   init() {
@@ -147,16 +194,30 @@ class DrawerSearchSection extends HTMLElement {
     });
   }
 
+  hidePredictiveSearch() {
+    // when predictive search is not available, we need to hide the predictive search results
+    const featuresTag = document.getElementById("shopify-features");
+    if (featuresTag) {
+      const featuresData = JSON.parse(featuresTag.textContent);
+      if (featuresData.predictiveSearch === false) {
+        return false;
+      }
+    }
+    return true;
+  }
+
   // search stuff
   setupEventListeners() {
     const form = this.querySelector("form.store-search-form");
     form.addEventListener("submit", this.onFormSubmit.bind(this));
-    this.input.addEventListener(
-      "input",
-      debounce((event) => {
-        this.onChange(event);
-      }, 300).bind(this),
-    );
+    if (this.isPredictiveSearchAvailable && this.isPredictiveSearchEnabled) {
+      this.input.addEventListener(
+        "input",
+        debounce((event) => {
+          this.onChange(event);
+        }, 300).bind(this),
+      );
+    }
 
     if (Shopify.designMode) {
       document.addEventListener(
@@ -204,7 +265,7 @@ class DrawerSearchSection extends HTMLElement {
     }
 
     fetch(
-      `${routes.predictive_search_url}?q=${encodeURIComponent(searchTerm)}&${encodeURIComponent("resources[type]")}=product,page,article,collection,query&${encodeURIComponent("resources[limit_scope]")}=each&${encodeURIComponent("resources[limit]")}=6&${encodeURIComponent("resources[options][fields]")}=title,variants.sku,product_type&section_id=predictive-search`,
+      `${routes.predictive_search_url}?q=${encodeURIComponent(searchTerm)}&${encodeURIComponent("resources[type]")}=product,page,article,collection,query&${encodeURIComponent("resources[limit_scope]")}=each&${encodeURIComponent("resources[limit]")}=6&${encodeURIComponent("resources[options][fields]")}=${encodeURIComponent(this.searchProperties)}&section_id=predictive-search`,
     )
       .then((response) => {
         if (!response.ok) {
@@ -239,7 +300,7 @@ class DrawerSearchSection extends HTMLElement {
     this.statusElement.setAttribute("aria-hidden", "false");
     this.statusElement.textContent = statusText;
 
-    setTimeout(() => {
+    this.timeOut = setTimeout(() => {
       this.statusElement.setAttribute("aria-hidden", "true");
     }, 1000);
   }
@@ -247,9 +308,22 @@ class DrawerSearchSection extends HTMLElement {
   renderSearchResults(resultsMarkup) {
     this.predictiveSearchResults.innerHTML = resultsMarkup;
 
+    if (this.showSuggestOnNoResults) {
+      const hasResults = this.predictiveSearchResults.querySelector(
+        ".search-result-products, .search-result-pages",
+      );
+      if (!hasResults) {
+        this.predictiveSearchResults.appendChild(
+          this.suggestionMenuContent.cloneNode(true),
+        );
+      }
+    }
+
     this.setAttribute("results", true);
 
     this.setLiveRegionResults();
+
+    this.armCascade(this.predictiveSearchResults);
   }
 
   setLiveRegionResults() {
@@ -264,6 +338,13 @@ class DrawerSearchSection extends HTMLElement {
     this.input.value = "";
     this.removeAttribute("results");
     this.setAttribute("empty", true);
+    this.statusElement.innerHTML = this.suggestionMenuContent.innerHTML || '';
+
+    clearTimeout(this.timeOut);
+    setTimeout(() => {
+      this.statusElement.removeAttribute("aria-hidden");
+      this.armCascade(this.statusElement);
+    }, 300);
   }
 }
 

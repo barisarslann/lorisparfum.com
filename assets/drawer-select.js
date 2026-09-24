@@ -178,7 +178,6 @@ if (!customElements.get("drawer-select")) {
 
       setCheckboxOption(event) {
         const target = event.currentTarget || event;
-        console.log(target);
         const value = target.checked ? target.value : "";
         this.updateHiddenInput(value);
       }

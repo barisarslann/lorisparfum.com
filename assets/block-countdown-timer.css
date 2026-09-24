@@ -3,7 +3,12 @@
   font-family: var(--font-timer);
   font-size: min(var(--font-timer-size) * var(--font-timer-scale, 1), var(--font-timer-size) + 13.5vw);
 }
-@media (min-width: 900px) {
+@media (min-width: 900px) and (max-width: 1199px) {
+  .wt-countdown-timer__display {
+    font-size: min(var(--font-timer-size) * var(--font-timer-scale-desk, 1) * 0.8, var(--font-timer-size) + 13.5vw);
+  }
+}
+@media (min-width: 1200px) {
   .wt-countdown-timer__display {
     font-size: min(var(--font-timer-size) * var(--font-timer-scale-desk, 1), var(--font-timer-size) + 13.5vw);
   }
@@ -38,11 +43,24 @@
 .hero__overlay__content--right [data-long-labels] .wt-countdown-timer__display {
   justify-content: flex-end;
 }
+@media (max-width: 899px) {
+  .hero__overlay__content--mobile--left [data-long-labels] .wt-countdown-timer__display {
+    justify-content: flex-start;
+  }
+  .hero__overlay__content--mobile--right [data-long-labels] .wt-countdown-timer__display {
+    justify-content: flex-end;
+  }
+}
 .hero__overlay__content--left [data-long-labels] .wt-countdown-timer__display .wt-counter__item, .hero__overlay__content--right [data-long-labels] .wt-countdown-timer__display .wt-counter__item {
   flex-shrink: 1;
   flex-grow: 0;
 }
-@media (min-width: 900px) {
+@media (min-width: 900px) and (max-width: 1199px) {
+  [data-long-labels] .wt-countdown-timer__display {
+    gap: calc(var(--gap, 8px) * 3);
+  }
+}
+@media (min-width: 1200px) {
   [data-long-labels] .wt-countdown-timer__display {
     gap: calc(var(--gap, 8px) * 4);
   }
@@ -67,7 +85,13 @@
   margin-left: calc(var(--gap, 8px) * -2);
   display: block;
 }
-@media (min-width: 900px) {
+@media (min-width: 900px) and (max-width: 1199px) {
+  [data-long-labels] .wt-counter__item:not(:first-child) .wt-counter__item__value::before {
+    width: calc(var(--gap, 8px) * 3);
+    margin-left: calc(var(--gap, 8px) * -3);
+  }
+}
+@media (min-width: 1200px) {
   [data-long-labels] .wt-counter__item:not(:first-child) .wt-counter__item__value::before {
     width: calc(var(--gap, 8px) * 4);
     margin-left: calc(var(--gap, 8px) * -4);
@@ -84,3 +108,14 @@
   font-family: var(--font-base);
   font-size: 25%;
 }
+
+[data-long-labels][data-custom-item-width] .wt-counter__item {
+  flex-basis: auto;
+  width: min(var(--countdown-counter-item-width, 55px), 100%);
+}
+@media (max-width: 899px) {
+  [data-long-labels][data-custom-item-width] .wt-counter__item {
+    width: min(var(--countdown-counter-item-width-mobile, 40px), 100%);
+  }
+}
+/*# sourceMappingURL=block-countdown-timer.css.map */

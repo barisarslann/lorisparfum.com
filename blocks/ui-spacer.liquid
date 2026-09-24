@@ -1,0 +1,40 @@
+{{ 'simple-block.css' | asset_url | stylesheet_tag }}
+
+{% render 'ui-spacer',
+  block_id: block.id,
+  spacer_mobile_height: block.settings.spacer_mobile_height,
+  spacer_desktop_height: block.settings.spacer_desktop_height
+%}
+
+{% schema %}
+{
+  "name": "t:blocks.ui_spacer.name",
+  "settings": [
+    {
+      "type": "range",
+      "id": "spacer_desktop_height",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "default": 32,
+      "label": "t:blocks.ui_spacer.settings.spacer_desktop_height.label",
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "spacer_mobile_height",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "default": 16,
+      "label": "t:blocks.ui_spacer.settings.spacer_mobile_height.label",
+      "unit": "px"
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:blocks.ui_spacer.name"
+    }
+  ]
+}
+{% endschema %}

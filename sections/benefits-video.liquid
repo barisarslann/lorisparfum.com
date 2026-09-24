@@ -6,8 +6,9 @@
 <script src="{{ 'video-controls.js' | asset_url }}" defer="defer"></script>
 <script src="{{ 'video-reels.js' | asset_url }}" defer="defer"></script>
 <script src="{{ 'quick-add.js' | asset_url }}" defer="defer"></script>
+<script src="{{ 'subscription-widget.js' | asset_url }}" defer="defer"></script>
 
-{% assign background_rgb = section.settings['color-overlay'] | color_to_rgb %}
+{% assign background_rgb = section.settings.background_color | color_to_rgb %}
 {% assign text_rgb = section.settings['color-body-text'] | color_to_rgb %}
 
 <style>
@@ -22,7 +23,15 @@
       --section-gap-bottom: {{ section.settings.margin-bottom }}px;
   {% endif %}
 
-  {% if background_rgb != 'rgba(0, 0, 0, 0.0)' %}
+      {%- if section.settings.show_mobile_spacing -%}
+          --section-gap-top-mobile: {{ section.settings.margin-top-mobile }}px;
+      {%- endif -%}
+
+      {%- if section.settings.show_mobile_spacing -%}
+          --section-gap-bottom-mobile: {{ section.settings.margin-bottom-mobile }}px;
+      {%- endif -%}
+
+  {% if section.settings.background_color != blank and section.settings.background_color != 'transparent' and background_rgb != 'rgba(0, 0, 0, 0.0)' %}
       --color-background: {{ section.settings.background_color }};
   {% endif %}
 
@@ -30,7 +39,7 @@
 
   [data-section-id="{{ section.id }}"]
   {
-  {% if text_rgb != 'rgba(0, 0, 0, 0.0)' %}
+  {% if section.settings['color-body-text'] != blank and section.settings['color-body-text'] != 'transparent' and text_rgb != 'rgba(0, 0, 0, 0.0)' %}
       --color-custom-text: {{ section.settings.color-body-text }};
       --color-price: {{ section.settings.color-body-text }};
   {% endif %}
@@ -42,7 +51,19 @@
   data-section-id="{{ section.id }}"
   class="section-content video-reels video-reels--benefits wt-slider--wrapper {% if settings.animations %} scroll-trigger animate--slide-in {% endif %} {% if settings.disabled_animations_on_mobile %} disabled-on-mobile {% endif %}"
 >
-  {% render 'headline', title: section.settings.heading %}
+  {% if section.settings.advanced_heading %}
+    {% if section.settings.heading_richtext != blank %}
+        <div class="headline headline--rich {% if settings.animations %} scroll-trigger animate--slide-in {% endif %} {% if settings.disabled_animations_on_mobile %} disabled-on-mobile {% endif %}">
+            {{ section.settings.heading_richtext }}
+        </div>
+    {% endif %}
+  {% else %}
+    {% if section.settings.heading != blank %}
+        {% render 'headline', title: section.settings.heading %}
+    {% endif %}
+  {% endif %}
+
+  <script type="module" src="{{ 'slider.js' | asset_url }}" defer="defer"></script>
 
   <slideshow-section class="wt-slider {% if settings.animations %}scroll-trigger animate--slide-in {% if settings.disabled_animations_on_mobile %} disabled-on-mobile {% endif %}{% endif %}">
     <div data-swiper class="wt-slider__container wt-slider__container--video-carousel" data-sound="off">
@@ -80,14 +101,16 @@
                     {% endif %}
                   </div>
                 </video-controls>
-                <button
-                  aria-label="{{ 'aria-label.video-reels-toggle-sound' | t }}"
-                  class="wt-video__sound-toggle"
-                  data-sound="off"
-                >
-                  {% render 'icons', id: 'volume' %}
-                  {% render 'icons', id: 'volume-muted' %}
-                </button>
+                {% if section.settings.video_custom_mute_controls %}
+                  <button
+                    aria-label="{{ 'aria-label.video-reels-toggle-sound' | t }}"
+                    class="wt-video__sound-toggle"
+                    data-sound="off"
+                  >
+                    {% render 'icons', id: 'volume' %}
+                    {% render 'icons', id: 'volume-muted' %}
+                  </button>
+                {% endif %}
               </low-power-video>
             </div>
             <article class="video-reels__text rte">
@@ -125,6 +148,10 @@
             "slidesPerView": 2.5
           },
           "1200": {
+            "slidesPerView": 3.5,
+            "spaceBetween": 24
+          },
+          "1600": {
             "slidesPerView": 4.5,
             "spaceBetween": 24
           }
@@ -151,16 +178,40 @@
       "info": "t:sections.shoppable-video-reels.settings.important-information.info"
     },
     {
+      "type": "checkbox",
+      "id": "advanced_heading",
+      "label": "t:sections.global.advanced_heading.label",
+      "info": "t:sections.global.advanced_heading.info"
+    },
+    {
       "type": "textarea",
       "id": "heading",
       "label": "t:sections.settings.settings.heading.label",
-      "default": "Shoppable video reels"
+      "default": "Benefits video reels",
+      "visible_if": "{{ section.settings.advanced_heading == false }}"
+    },
+    {
+      "type": "richtext",
+      "id": "heading_richtext",
+      "label": "t:sections.logo-banner.settings.content.headline.label",
+      "default": "<h2>Benefits video reels</h2>",
+      "visible_if": "{{ section.settings.advanced_heading == true }}"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.global.video_controls_header"
     },
     {
       "type": "checkbox",
       "id": "video_button",
       "label": "t:sections.shoppable-video.settings.video-button.label",
       "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "video_custom_mute_controls",
+      "label": "t:sections.background-video.settings.video_custom_mute_controls.label",
+      "default": true
     },
     {
       "type": "header",
@@ -210,13 +261,11 @@
     {
       "type": "color",
       "id": "color-body-text",
-      "default": "transparent",
       "label": "t:sections.settings.settings.text-color.label"
     },
     {
       "type": "color",
       "id": "background_color",
-      "default": "transparent",
       "label": "t:sections.settings.settings.background-color.label"
     },
     {
@@ -243,6 +292,33 @@
       "unit": "px",
       "label": "t:sections.settings.settings.distance-bottom.label",
       "info": "t:sections.settings.settings.distance-bottom.info"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_mobile_spacing",
+      "label": "t:sections.settings.settings.show-mobile-spacing.label"
+    },
+    {
+      "type": "range",
+      "id": "margin-top-mobile",
+      "min": 0,
+      "max": 100,
+      "step": 2,
+      "default": 20,
+      "unit": "px",
+      "label": "t:sections.settings.settings.distance-top-mobile.label",
+      "visible_if": "{{ section.settings.show_mobile_spacing }}"
+    },
+    {
+      "type": "range",
+      "id": "margin-bottom-mobile",
+      "min": 0,
+      "max": 100,
+      "step": 2,
+      "default": 20,
+      "unit": "px",
+      "label": "t:sections.settings.settings.distance-bottom-mobile.label",
+      "visible_if": "{{ section.settings.show_mobile_spacing }}"
     }
   ],
   "blocks": [
@@ -268,6 +344,7 @@
   "presets": [
     {
       "name": "t:sections.benefits-video.name",
+      "category": "t:sections.categories.video",
       "blocks": [
         {
           "type": "video"

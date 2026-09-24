@@ -1,16 +1,20 @@
+{%- capture star_attrs -%}class="svg-icon" aria-hidden="true" focusable="false" role="presentation" xmlns="http://www.w3.org/2000/svg"{%- endcapture -%}
+{%- assign stars = percent | times: 0.05 -%}
+{%- assign gap_px = stars | ceil | minus: 1 | at_least: 0 | times: 2 -%}
+{%- assign fill_pct = stars | times: 12 | plus: gap_px | divided_by: 68.0 | times: 100 -%}
 <div class="wt-rating__stars">
   <div class="wt-rating__base">
-    <div class="wt-rating__star"></div>
-    <div class="wt-rating__star"></div>
-    <div class="wt-rating__star"></div>
-    <div class="wt-rating__star"></div>
-    <div class="wt-rating__star"></div>
+    {% render 'icon-common', id: 'star2', shared_svg_attrs: star_attrs %}
+    {% render 'icon-common', id: 'star2', shared_svg_attrs: star_attrs %}
+    {% render 'icon-common', id: 'star2', shared_svg_attrs: star_attrs %}
+    {% render 'icon-common', id: 'star2', shared_svg_attrs: star_attrs %}
+    {% render 'icon-common', id: 'star2', shared_svg_attrs: star_attrs %}
   </div>
-  <div class="wt-rating__value" style="width: {{ percent }}%;">
-    <div class="wt-rating__star-fill"></div>
-    <div class="wt-rating__star-fill"></div>
-    <div class="wt-rating__star-fill"></div>
-    <div class="wt-rating__star-fill"></div>
-    <div class="wt-rating__star-fill"></div>
+  <div class="wt-rating__value" style="--fill-pct: {{ fill_pct }}%;">
+    {% render 'icon-common', id: 'star2-solid', shared_svg_attrs: star_attrs %}
+    {% render 'icon-common', id: 'star2-solid', shared_svg_attrs: star_attrs %}
+    {% render 'icon-common', id: 'star2-solid', shared_svg_attrs: star_attrs %}
+    {% render 'icon-common', id: 'star2-solid', shared_svg_attrs: star_attrs %}
+    {% render 'icon-common', id: 'star2-solid', shared_svg_attrs: star_attrs %}
   </div>
 </div>

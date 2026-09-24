@@ -1,0 +1,41 @@
+{% comment %}
+  Params: block, section
+{% endcomment %}
+<div
+  data-block-id="{{ block.id }}"
+  not-quick-add
+  class="wt-featured-icon wt-keys__item{% if settings.animations %} scroll-trigger animate--slide-in{% endif %}{% if settings.disabled_animations_on_mobile %} disabled-on-mobile{% endif %}{% if section.settings.icon_layout == 'center' %} wt-keys__item--center{% endif %}"
+>
+  {%- if block.settings.link.url != blank -%}
+    <a href="{{ block.settings.link.url }}" class="wt-featured-icon__link-button">
+  {%- endif -%}
+  <div class="wt-keys__image-container">
+    {%- if block.settings.desktop_image == blank -%}
+      {% render 'icons',
+        id: block.settings.select_icon,
+        url: block.settings.image.url,
+        icon_class: 'wt-keys__icon'
+      %}
+    {% else %}
+      {{
+        block.settings.desktop_image
+        | image_url: width: 750
+        | image_tag:
+          loading: 'lazy',
+          sizes: '(min-width: 750px) 750px, 100vw',
+          widths: '750, 1500, 2250, 3000',
+          class: 'wt-keys__image'
+      }}
+    {% endif %}
+  </div>
+  <div
+    class="wt-featured-icon__content{% if section.settings.icon_layout == 'left' %} wt-keys__content--left{% endif %}"
+    style="--font-headline-scale-desk: {{ block.settings.size_heading | divided_by: 100.0 }};--font-headline-scale: {{ block.settings.size_heading_mobile | divided_by: 100.0 }};"
+  >
+    {% if block.settings.heading != blank %}
+      <div class="wt-featured-icon__title">{{ block.settings.heading }}</div>
+    {% endif %}
+    <div class="wt-featured-icon__text rte">{{ block.settings.text }}</div>
+  </div>
+  {%- if block.settings.link.url != blank -%}</a>{%- endif -%}
+</div>

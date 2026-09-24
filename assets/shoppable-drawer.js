@@ -4,6 +4,7 @@ if (!customElements.get("shoppable-drawer")) {
     class ShoppableDrawer extends HTMLElement {
       constructor() {
         super();
+        this.eventsAdded = false;
         this.initilize();
       }
 
@@ -16,15 +17,18 @@ if (!customElements.get("shoppable-drawer")) {
         this.body = document.querySelector("body");
         this.container = document.querySelector(".wt__shoppable-image");
         this.wrapper = document.querySelector(".wt__shoppable-image--wrapper");
-        this.shoppableBody = document.getElementById("shoppable-image__body");
         this.shoppableImagesBody = document.querySelectorAll(
           ".shoppable-image__body",
         );
         this.pageOverlay = document.querySelector(
           ".wt__shoppable-image--page-overlay",
         );
-        this.productContent = this.querySelector(".wt-dot__tooltip a");
+        this.productContent = this.querySelector(
+          ".wt-dot__tooltip .wt-dot__link",
+        );
         this.tooltip = this.querySelector(".wt-dot__tooltip");
+        this.tooltipActiveClass = "wt-dot__tooltip--active";
+        this.hotspotActiveClass = "wt-dot--active";
 
         this.button = this.querySelector(".wt-dot__circle");
         this.closeButton = document.querySelector(".wt-options__title svg");
@@ -44,15 +48,31 @@ if (!customElements.get("shoppable-drawer")) {
       }
 
       addDotEventListeners() {
-        document.querySelectorAll(".wt-dot").forEach((link) => {
+        if (this.eventsAdded) return;
+
+        this.querySelectorAll(".wt-dot").forEach((link) => {
           link.addEventListener("click", this.handleDotClick);
           link.addEventListener("keydown", this.handleDotKeydown);
         });
+
+        this.eventsAdded = true;
       }
 
       handleDotClick = (event) => {
         event.preventDefault();
-        this.toggleTooltip(event.srcElement.parentElement.nextElementSibling);
+
+        const dotElement = event.target.closest(".wt-dot");
+        if (!dotElement) return;
+
+        const tooltipElement = dotElement.nextElementSibling;
+        if (
+          !tooltipElement ||
+          !tooltipElement.classList.contains("wt-dot__tooltip")
+        ) {
+          return;
+        }
+
+        this.toggleTooltip(tooltipElement);
       };
 
       handleDotKeydown = (event) => {
@@ -63,11 +83,11 @@ if (!customElements.get("shoppable-drawer")) {
       };
 
       toggleTooltip(tooltip) {
+        const wasActive = tooltip.classList.contains(this.tooltipActiveClass);
+
         this.hideAllTooltips();
-        if (
-          window.getComputedStyle(tooltip).getPropertyValue("visibility") ===
-          "hidden"
-        ) {
+
+        if (!wasActive) {
           this.showTooltip(tooltip);
         }
       }
@@ -75,14 +95,26 @@ if (!customElements.get("shoppable-drawer")) {
       hideAllTooltips() {
         const tooltips = document.getElementsByClassName("wt-dot__tooltip");
         Array.from(tooltips).forEach((tooltip) => {
-          tooltip.style.visibility = "hidden";
-          tooltip.style.opacity = 0;
+          tooltip.classList.remove(this.tooltipActiveClass);
+
+          const closestHotspot = tooltip
+            .closest("[data-block-id]")
+            ?.querySelector(".wt-dot");
+          if (closestHotspot) {
+            closestHotspot.classList.remove(this.hotspotActiveClass);
+          }
         });
       }
 
       showTooltip(tooltip) {
-        tooltip.style.visibility = "visible";
-        tooltip.style.opacity = 1;
+        tooltip.classList.add(this.tooltipActiveClass);
+
+        const closestHotspot = tooltip
+          .closest("[data-block-id]")
+          ?.querySelector(".wt-dot");
+        if (closestHotspot) {
+          closestHotspot.classList.add(this.hotspotActiveClass);
+        }
       }
 
       handleResize = () => {
@@ -121,8 +153,15 @@ if (!customElements.get("shoppable-drawer")) {
         } else {
           var tooltips = document.getElementsByClassName("wt-dot__tooltip");
           for (let i = 0; i < tooltips.length; i++) {
-            tooltips[i].style.visibility = "hidden";
-            tooltips[i].style.opacity = 0;
+            tooltips[i].classList.remove(this.tooltipActiveClass);
+
+            const closestHotspot = tooltips[i]
+              ?.closest("[data-block-id]")
+              ?.querySelector(".wt-dot");
+
+            if (closestHotspot) {
+              closestHotspot.classList.remove(this.hotspotActiveClass);
+            }
           }
         }
       }
@@ -190,6 +229,8 @@ if (!customElements.get("shoppable-drawer")) {
           this.pageOverlay.classList.add("hidden");
         if (this.wrapper.classList.contains("open"))
           this.wrapper.classList.remove("open");
+
+        this.hideAllTooltips();
       }
 
       matchResolution() {

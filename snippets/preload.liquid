@@ -1,0 +1,31 @@
+{%- if template.name == 'product' -%}
+  {%- liquid
+    assign preload_variant = product.selected_variant
+    if preload_variant == blank
+      assign preload_variant = product.selected_or_first_available_variant
+    endif
+    assign preload_media = preload_variant.featured_media
+    if preload_media == blank
+      assign preload_media = product.media.first
+    endif
+    assign preload_image = preload_media.preview_image
+  -%}
+  {%- if preload_image != blank -%}
+    <link
+      rel="preload"
+      as="image"
+      media="(max-width: 899px)"
+      imagesrcset="
+        {%- if preload_image.width >= 500 -%}{{ preload_image | image_url: width: 500 }} 500w,{%- endif -%}
+        {%- if preload_image.width >= 750 -%}{{ preload_image | image_url: width: 750 }} 750w,{%- endif -%}
+        {%- if preload_image.width >= 1000 -%}{{ preload_image | image_url: width: 1000 }} 1000w,{%- endif -%}
+        {%- if preload_image.width >= 1200 -%}{{ preload_image | image_url: width: 1200 }} 1200w,{%- endif -%}
+        {%- if preload_image.width >= 1680 -%}{{ preload_image | image_url: width: 1680 }} 1680w,{%- endif -%}
+        {%- if preload_image.width >= 2048 -%}{{ preload_image | image_url: width: 2048 }} 2048w,{%- endif -%}
+        {%- if preload_image.width >= 4096 -%}{{ preload_image | image_url: width: 4096 }} 4096w{%- endif -%}
+      "
+      imagesizes="100vw"
+      fetchpriority="high"
+    >
+  {%- endif -%}
+{%- endif -%}

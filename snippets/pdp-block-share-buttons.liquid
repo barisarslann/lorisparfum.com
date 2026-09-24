@@ -1,0 +1,92 @@
+{% comment %}
+  Params: block, product
+{% endcomment %}
+<div class="share-icons__container{% if block.settings.heading == empty %} share-icons__container--noheading{% endif %}{% if settings.animations %} scroll-trigger animate--slide-in{% endif %}{% if settings.disabled_animations_on_mobile %} disabled-on-mobile{% endif %}">
+  {% if block.settings.heading != empty %}
+    <div class="wt-product__upsell__headline">{{ block.settings.heading }}</div>
+  {% endif %}
+  <ul>
+    {% if block.settings.social_facebook_link %}
+      <li class="share-icons__item">
+        <a
+          href="https://www.facebook.com/sharer/sharer.php?u={{ shop.url }}{{ product.url }}"
+          class="social-link"
+          aria-label="Facebook"
+          target="_blank"
+          rel="nofollow"
+        >
+          {% render 'icons', id: 'soc-fb' %}
+        </a>
+      </li>
+    {% endif %}
+
+    {% if block.settings.social_twitter_link %}
+      <li class="share-icons__item">
+        <a
+          href="https://twitter.com/intent/tweet?url={{ shop.url }}{{ product.url }}"
+          class="social-link"
+          aria-label="Twitter"
+          target="_blank"
+          rel="nofollow"
+        >
+          {% render 'icons', id: 'soc-twitter' %}
+        </a>
+      </li>
+    {% endif %}
+
+    {% if block.settings.social_pinterest_link %}
+      <script async defer src="//assets.pinterest.com/js/pinit.js"></script>
+      <li class="share-icons__item">
+        <a
+          href="https://www.pinterest.com/pin/create/button/?url={{ shop.url }}{{ product.url }}&description={{ product.title }}"
+          aria-label="Pinterest"
+          data-pin-do="buttonPin"
+          data-pin-custom="true"
+          target="_blank"
+          rel="nofollow"
+          style="cursor:pointer;"
+        >
+          {% render 'icons', id: 'soc-pint' %}
+        </a>
+      </li>
+    {% endif %}
+
+    {% if block.settings.social_whatsapp_link %}
+      <li class="share-icons__item">
+        <a
+          href="https://wa.me/?text={{ shop.url }}{{ product.url }}"
+          aria-label="WhatsApp"
+          target="_blank"
+          rel="nofollow"
+        >
+          {% render 'icons', id: 'soc-whatsapp' %}
+        </a>
+      </li>
+    {% endif %}
+
+    {% if block.settings.social_tumblr_link %}
+      <li class="share-icons__item">
+        <a
+          href="https://www.tumblr.com/widgets/share/tool?canonicalUrl={{ shop.url }}{{ product.url }}"
+          class="social-link"
+          aria-label="Tumblr"
+          target="_blank"
+          rel="nofollow"
+        >
+          {% render 'icons', id: 'soc-tumblr' %}
+        </a>
+      </li>
+    {% endif %}
+
+    {% if block.settings.mail_link %}
+      <li class="share-icons__item">
+        <a
+          href="mailto:?subject={{ product.title }}?body={{ shop.url }}{{ product.url }}"
+          aria-label="Email"
+        >
+          {% render 'icon-mail' %}
+        </a>
+      </li>
+    {% endif %}
+  </ul>
+</div>

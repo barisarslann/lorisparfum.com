@@ -1,0 +1,595 @@
+{{ 'section-video.css' | asset_url | stylesheet_tag }}
+{% assign background_rgb = section.settings.background_color | color_to_rgb %}
+{% assign text_rgb = section.settings['color-body-text'] | color_to_rgb %}
+
+{%- liquid
+  if section.settings['full-width-enabled']
+    assign customwrapperclass = 'hero__wrapper--full'
+  else
+    assign customwrapperclass = 'hero__wrapper'
+  endif
+-%}
+
+<style>
+    [data-section-id="{{ section.id }}"]
+    {
+        {% if section.settings.background_color != blank and section.settings.background_color != 'transparent' and background_rgb != 'rgba(0, 0, 0, 0.0)' %}
+          --color-background: {{ section.settings.background_color }};
+        {% endif %}
+
+        {% if section.settings['full-width-enabled'] %}
+          --border-radius: 0;
+        {% endif %}
+
+        {% if section.settings.margin-top %}
+            --section-gap-top: {{ section.settings.margin-top }}px;
+        {% endif %}
+
+        {% if section.settings.margin-bottom %}
+            --section-gap-bottom: {{ section.settings.margin-bottom }}px;
+        {% endif %}
+
+      {%- if section.settings.show_mobile_spacing -%}
+          --section-gap-top-mobile: {{ section.settings.margin-top-mobile }}px;
+      {%- endif -%}
+
+      {%- if section.settings.show_mobile_spacing -%}
+          --section-gap-bottom-mobile: {{ section.settings.margin-bottom-mobile }}px;
+      {%- endif -%}
+
+        {% if section.settings.image_height == 'fixed_height' %}
+          --section-height: {{ section.settings.mobile_fixed_height }}px;
+          --section-height-desk: {{ section.settings.desktop_fixed_height }}px;
+        {% endif %}
+
+    }
+
+    {% if settings['button-radius'] > 0 %}
+    [data-section-id="{{ section.id }}"] .form__field__input:not(:placeholder-shown)+.form__field__label {
+      border-radius: 6px;
+    }
+    {% endif %}
+
+    [data-section-id="{{ section.id }}"] .headline__title,
+    [data-section-id="{{ section.id }}"] .hero__text
+      {
+          {% if section.settings['color-body-text'] != blank and section.settings['color-body-text'] != 'transparent' and text_rgb != 'rgba(0, 0, 0, 0.0)' %}
+            --color-custom-text: {{ section.settings.color-body-text }};
+          {% endif %}
+      }
+
+    {%- for block in section.blocks -%}
+      [data-block-id="{{ block.id }}"]
+      {
+
+          --font-headline-scale-desk: {{ block.settings.size_heading | divided_by: 100.0 }};
+
+          --font-headline-scale: {{ block.settings.size_heading_mobile | divided_by: 100.0 }};
+
+      }
+  {%- endfor -%}
+
+  {% if section.settings.background_color == blank or section.settings.background_color == 'transparent' or background_rgb == 'rgba(0, 0, 0, 0.0)' %}
+    [data-section-id="{{ section.id }}"] .wt-contact__form-image__media,
+    [data-section-id="{{ section.id }}"] .wt-video__movie {
+      border-radius: var(--border-radius);
+      overflow: hidden;
+    }
+  {% endif %}
+</style>
+
+<div data-section-id="{{ section.id }}" class="{{ customwrapperclass }} wt-contact__form form__full wt-contact__form--has-image{% if section.settings.layout == 'text_first' %} wt-contact__form--has-image--rev{% endif %}">
+  {%- liquid
+    assign has_desktop_video = false
+    if section.settings.video_hosted != blank
+      assign has_desktop_video = true
+    endif
+
+    assign has_mobile_video = false
+    if section.settings.video_hosted_mobile != blank
+      assign has_mobile_video = true
+    endif
+
+    assign has_desktop_image = false
+    if section.settings.image != blank
+      assign has_desktop_image = true
+    endif
+
+    assign has_mobile_image = false
+    if section.settings.mobile_image != blank
+      assign has_mobile_image = true
+    endif
+
+    assign video_class = ''
+    assign mobile_video_class = ''
+    assign video_visibility_class = ''
+    assign picture_visibility_class = ''
+
+    assign play_pause_button = false
+    assign unmute_button = false
+    if section.settings.video_custom_play_controls
+      assign play_pause_button = true
+    endif
+    if section.settings.video_custom_mute_controls
+      assign unmute_button = true
+    endif
+
+    if has_desktop_video and has_mobile_video == false and has_mobile_image
+      assign video_class = 'wt-mobile-hidden'
+      assign video_visibility_class = 'wt-mobile-hidden'
+      assign picture_visibility_class = 'wt-desktop-hidden'
+    elsif has_mobile_video and has_desktop_video == false and has_desktop_image
+      assign mobile_video_class = 'wt-desktop-hidden'
+      assign video_visibility_class = 'wt-desktop-hidden'
+      assign picture_visibility_class = 'wt-mobile-hidden'
+    elsif has_desktop_video and has_mobile_video
+      assign video_class = 'wt-mobile-hidden'
+      assign mobile_video_class = 'wt-desktop-hidden'
+      assign picture_visibility_class = 'wt-hidden'
+    elsif has_desktop_video and has_desktop_image and has_mobile_video == false and has_mobile_image == false
+      assign picture_visibility_class = 'wt-hidden'
+    elsif has_mobile_video and has_desktop_video == false and has_desktop_image == false and has_mobile_image == false
+      assign picture_visibility_class = 'wt-hidden'
+    endif
+  -%}
+  <div class="wt-contact__form-image" data-height="{{ section.settings.image_height }}">
+    {% if has_desktop_video or has_mobile_video %}
+      <div class="wt-video__movie wt-video__movie--shopify-video wt-video__item {{ video_visibility_class }}">
+        {% if section.settings.video_hosted_mobile %}
+          {% if play_pause_button or unmute_button %}<video-controls>{% endif %}
+          {% if play_pause_button %}{% render 'play-pause-button', classname: '' %}{% endif %}
+          {% if unmute_button %}{% render 'unmute-button' %}{% endif %}
+          {{
+            section.settings.video_hosted_mobile
+            | video_tag:
+              autoplay: true,
+              loop: true,
+              muted: true,
+              controls: false,
+              image_size: '600x',
+              class: mobile_video_class
+          }}
+          {% if play_pause_button or unmute_button %}</video-controls>{% endif %}
+        {% endif %}
+        {% if section.settings.video_hosted %}
+          {% if play_pause_button or unmute_button %}<video-controls>{% endif %}
+          {% if play_pause_button %}{% render 'play-pause-button', classname: '' %}{% endif %}
+          {% if unmute_button %}{% render 'unmute-button' %}{% endif %}
+          {{
+            section.settings.video_hosted
+            | video_tag:
+              autoplay: true,
+              loop: true,
+              muted: true,
+              controls: false,
+              image_size: '600x',
+              class: video_class
+          }}
+          {% if play_pause_button or unmute_button %}</video-controls>{% endif %}
+        {% endif %}
+      </div>
+    {% endif %}
+
+    {% if has_desktop_image or has_mobile_image or has_desktop_video == false and has_mobile_video == false %}
+      <div class="wt-contact__form-image__media {{ picture_visibility_class }}">
+        {% render 'picture',
+          desktop_image: section.settings.image,
+          mobile_image: section.settings.mobile_image,
+          placeholder: 'detailed-apparel-1'
+        %}
+      </div>
+    {% endif %}
+  </div>
+  <div class="wt-contact__form-content">
+    {%- for block in section.blocks -%}
+      {%- case block.type -%}
+        {%- when 'heading' -%}
+          <div
+            data-block-id="{{ block.id }}"
+            class="hero__title {% if settings.animations %} scroll-trigger animate--slide-in {% endif %} {% if settings.disabled_animations_on_mobile %} disabled-on-mobile {% endif %} {% if block.settings.heading_disable_on_mobile == true %} hero__title--mobile{% endif %}"
+          >
+            {% render 'headline', title: block.settings.heading, custom_class: 'headline--hero_title' %}
+          </div>
+        {%- when 'paragraph' -%}
+          <div class="hero__text form__text{% if block.settings.text_disable_on_mobile == true %} hero__text--mobile{% endif %} rte">
+            {{ block.settings.paragraph }}
+          </div>
+        {%- when 'email_form' -%}
+          <div class="form__container {% if settings.animations %} scroll-trigger animate--slide-in {% endif %} {% if settings.disabled_animations_on_mobile %} disabled-on-mobile {% endif %}">
+            <div class="contact-form">
+              {%- form 'contact', id: 'ContactForm', class: 'isolate' -%}
+                {%- if form.posted_successfully? -%}
+                  <div class="form__message">
+                    <div class="form__success-field" tabindex="-1" autofocus>
+                      <p>{{ 'templates.contact.form.post_success' | t }}</p>
+                    </div>
+                  </div>
+                {%- elsif form.errors -%}
+                  <div class="form__message">
+                    <div class="form__error-field">
+                      {{ form.errors.translated_fields.email | capitalize }}
+                      {{ form.errors.messages.email }}
+                    </div>
+                  </div>
+                {%- endif -%}
+                <div class="form__fieldset">
+                  <label
+                    class="form__field form__field--name"
+                    for="ContactFormName-{{ section.id }}"
+                  >
+                    <input
+                      type="text"
+                      name="contact[name]"
+                      id="ContactFormName-{{ section.id }}"
+                      class="form__field__input"
+                      placeholder=" "
+                      value="{% if form.name %}{{ form.name }}{% elsif customer %}{{ customer.name }}{% endif %}"
+                    >
+                    <span class="form__field__label">{{ 'templates.contact.form.name' | t }}</span>
+                  </label>
+
+                  <label
+                    class="form__field form__field--phone"
+                    for="ContactFormPhone-{{ section.id }}"
+                  >
+                    <input
+                      type="text"
+                      name="contact[phone]"
+                      id="ContactFormPhone-{{ section.id }}"
+                      class="form__field__input"
+                      placeholder=" "
+                      value="{% if form.phone %}{{ form.phone }}{% elsif customer %}{{ customer.phone }}{% endif %}"
+                    >
+                    <span class="form__field__label">{{ 'templates.contact.form.phone' | t }}</span>
+                  </label>
+                </div>
+
+                <label
+                  class="form__field form__field--email"
+                  for="ContactFormEmail-{{ section.id }}"
+                >
+                  <input
+                    type="text"
+                    name="contact[email]"
+                    id="ContactFormEmail-{{ section.id }}"
+                    class="form__field__input"
+                    placeholder=" "
+                    value="{% if form.email %}{{ form.email }}{% elsif customer %}{{ customer.email }}{% endif %}"
+                  >
+                  <span class="form__field__label">{{ 'templates.contact.form.email' | t }}* </span>
+                </label>
+
+                <label
+                  class="form__field"
+                  for="ContactFormComment-{{ section.id }}"
+                >
+                  <textarea
+                    class="form__field__textarea"
+                    name="contact[comment]"
+                    id="ContactFormComment-{{ section.id }}"
+                    placeholder=" "
+                    rows="6"
+                    value="{% if form[comment] %}{{ form[comment] }}{% elsif customer %}{{ customer.comment }}{% endif %}"
+                  >{{- form.body -}}</textarea>
+                  <span class="form__field__label">{{- 'templates.contact.form.comment' | t -}}</span>
+                </label>
+                <button
+                  aria-label="{{ block.settings.button_label }}"
+                  class="hero__button--primary {% if block.settings.button_select != 'primary' %} hero__button--secondary {% endif %}{% if block.settings.button_select == 'link' %} hero__button--link {% endif %} block__button block{% if block.settings.disable_on_mobile %}__button--mobile{% endif %}"
+                >
+                  <span> {{ block.settings.button_label }}</span>
+                </button>
+              {% endform %}
+            </div>
+          </div>
+      {%- endcase -%}
+    {%- endfor -%}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "t:sections.contact-form-with-image.name",
+  "tag": "section",
+  "class": "section-contact-form-with-image wt-shopify-section",
+  "settings": [
+    {
+      "type": "paragraph",
+      "content": "t:sections.contact-form-with-image.settings.support_info.content"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.global.general"
+    },
+    {
+      "type": "checkbox",
+      "id": "full-width-enabled",
+      "label": "t:sections.settings.settings.section-full-width.label",
+      "default": false
+    },
+    {
+      "type": "select",
+      "id": "layout",
+      "options": [
+        {
+          "value": "image_first",
+          "label": "t:sections.image-with-text.settings.layout.options__1.label"
+        },
+        {
+          "value": "text_first",
+          "label": "t:sections.image-with-text.settings.layout.options__2.label"
+        }
+      ],
+      "default": "image_first",
+      "label": "t:sections.image-with-text.settings.layout.label",
+      "info": "t:sections.image-with-text.settings.layout.info"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.global.desktop_version"
+    },
+    {
+      "type": "video",
+      "id": "video_hosted",
+      "label": "t:sections.contact-form-with-image.settings.video_hosted.label"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "t:sections.contact-form-with-image.settings.image.label"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.global.mobile_version"
+    },
+    {
+      "type": "video",
+      "id": "video_hosted_mobile",
+      "label": "t:sections.contact-form-with-image.settings.video_hosted.label"
+    },
+    {
+      "type": "image_picker",
+      "id": "mobile_image",
+      "label": "t:sections.contact-form-with-image.settings.image.label"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.contact-form-with-image.settings.image_height_header.content"
+    },
+    {
+      "type": "radio",
+      "id": "image_height",
+      "label": "t:sections.contact-form-with-image.settings.image_height.label",
+      "options": [
+        {
+          "value": "adapt_to_image",
+          "label": "t:sections.contact-form-with-image.settings.image_height.adapt_to_image.label"
+        },
+        {
+          "value": "fixed_height",
+          "label": "t:sections.contact-form-with-image.settings.image_height.fixed_height.label"
+        }
+      ],
+      "default": "adapt_to_image"
+    },
+    {
+      "type": "range",
+      "id": "desktop_fixed_height",
+      "min": 200,
+      "max": 1000,
+      "unit": "px",
+      "step": 20,
+      "default": 320,
+      "label": "t:sections.contact-form-with-image.settings.desktop_fixed_height.label",
+      "info": "t:sections.contact-form-with-image.settings.desktop_fixed_height.info"
+    },
+    {
+      "type": "range",
+      "id": "mobile_fixed_height",
+      "min": 200,
+      "max": 1000,
+      "unit": "px",
+      "step": 20,
+      "default": 460,
+      "label": "t:sections.contact-form-with-image.settings.mobile_fixed_height.label",
+      "info": "t:sections.contact-form-with-image.settings.mobile_fixed_height.info"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.global.video_controls_header"
+    },
+    {
+      "type": "checkbox",
+      "id": "video_custom_play_controls",
+      "label": "t:sections.background-video.settings.video_custom_play_controls.label",
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "video_custom_mute_controls",
+      "label": "t:sections.background-video.settings.video_custom_mute_controls.label",
+      "default": false
+    },
+    {
+      "type": "header",
+      "content": "t:sections.global.colors",
+      "info": "t:sections.global.colors-info"
+    },
+    {
+      "type": "color",
+      "id": "color-body-text",
+      "label": "t:sections.settings.settings.text-color.label"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "t:sections.settings.settings.background-color.label"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.global.section_spacing"
+    },
+    {
+      "type": "range",
+      "id": "margin-top",
+      "min": 0,
+      "max": 100,
+      "unit": "px",
+      "step": 4,
+      "default": 20,
+      "label": "t:sections.settings.settings.distance-top.label"
+    },
+    {
+      "type": "range",
+      "id": "margin-bottom",
+      "min": 0,
+      "max": 100,
+      "unit": "px",
+      "step": 4,
+      "default": 20,
+      "label": "t:sections.settings.settings.distance-bottom.label",
+      "info": "t:sections.settings.settings.distance-bottom.info"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_mobile_spacing",
+      "label": "t:sections.settings.settings.show-mobile-spacing.label"
+    },
+    {
+      "type": "range",
+      "id": "margin-top-mobile",
+      "min": 0,
+      "max": 100,
+      "step": 2,
+      "default": 20,
+      "unit": "px",
+      "label": "t:sections.settings.settings.distance-top-mobile.label",
+      "visible_if": "{{ section.settings.show_mobile_spacing }}"
+    },
+    {
+      "type": "range",
+      "id": "margin-bottom-mobile",
+      "min": 0,
+      "max": 100,
+      "step": 2,
+      "default": 20,
+      "unit": "px",
+      "label": "t:sections.settings.settings.distance-bottom-mobile.label",
+      "visible_if": "{{ section.settings.show_mobile_spacing }}"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "heading",
+      "name": "t:sections.newsletter.blocks.heading.name",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "textarea",
+          "id": "heading",
+          "default": "Contact form",
+          "label": "t:sections.settings.settings.heading.label"
+        },
+        {
+          "type": "checkbox",
+          "id": "heading_disable_on_mobile",
+          "label": "t:sections.global.heading_disable_on_mobile",
+          "default": false
+        },
+        {
+          "type": "range",
+          "id": "size_heading",
+          "min": 50,
+          "max": 500,
+          "step": 10,
+          "default": 100,
+          "label": "t:sections.settings.settings.size-heading.label",
+          "unit": "%"
+        },
+        {
+          "type": "range",
+          "id": "size_heading_mobile",
+          "min": 80,
+          "max": 300,
+          "step": 10,
+          "default": 100,
+          "label": "t:sections.settings.settings.size-heading-mobile.label",
+          "unit": "%"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "name": "t:sections.newsletter.blocks.paragraph.name",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "richtext",
+          "id": "paragraph",
+          "default": "<p>Be the first to know about new collections and exclusive offers.</p>",
+          "label": "t:sections.settings.settings.text.label"
+        },
+        {
+          "type": "checkbox",
+          "id": "text_disable_on_mobile",
+          "label": "t:sections.global.disable_on_mobile",
+          "default": false
+        }
+      ]
+    },
+    {
+      "type": "email_form",
+      "name": "t:sections.newsletter.blocks.email_form.name",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "text",
+          "id": "button_label",
+          "default": "Send",
+          "label": "t:sections.settings.settings.button_label.label"
+        },
+        {
+          "type": "select",
+          "id": "button_select",
+          "options": [
+            {
+              "value": "primary",
+              "label": "t:sections.settings.settings.button_select.primary.label"
+            },
+            {
+              "value": "secondary",
+              "label": "t:sections.settings.settings.button_select.secondary.label"
+            },
+            {
+              "value": "link",
+              "label": "t:sections.settings.settings.button_select.link.label"
+            }
+          ],
+          "default": "primary",
+          "label": "t:sections.settings.settings.button_select.default.label"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:sections.contact-form-with-image.name",
+      "category": "t:sections.categories.forms",
+      "blocks": [
+        {
+          "type": "heading"
+        },
+        {
+          "type": "paragraph"
+        },
+        {
+          "type": "email_form"
+        }
+      ]
+    }
+  ],
+  "disabled_on": {
+    "groups": ["header", "footer"]
+  }
+}
+{% endschema %}

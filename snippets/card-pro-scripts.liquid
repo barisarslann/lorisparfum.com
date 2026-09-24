@@ -1,0 +1,11 @@
+<script src="{{ 'card-gallery.js' | asset_url }}" defer="defer"></script>
+{% if settings.enable_product_variations %}
+  <script src="{{ 'card-product-siblings.js' | asset_url }}" defer="defer"></script>
+{% endif %}
+{% if section.settings.enable_quick_buy_picker %}
+  <script src="{{ 'quick-add.js' | asset_url }}" defer="defer"></script>
+  <script src="{{ 'subscription-widget.js' | asset_url }}" defer="defer"></script>
+  <script src="{{ 'product-form.js' | asset_url }}" defer="defer"></script>
+  <script src="{{ 'variant-dropdown.js' | asset_url }}" defer="defer"></script>
+  <script src="{{ 'quick-size-picker.js' | asset_url }}" defer="defer"></script>
+{% endif %}

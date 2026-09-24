@@ -1,0 +1,332 @@
+{%- comment -%}
+  Cart Additional Features
+  Three features rendered as a row of triggers (drawer / mobile cart-page) or
+  a stacked accordion (cart-page desktop, ≥900px):
+    - Order Note
+    - Estimate Shipping
+    - Discount Code
+
+  Each feature is wrapped in `.wt-cart-features__item` so the trigger and its
+  drawer panel sit side-by-side in the DOM. That lets the desktop cart-page
+  accordion lay them out inline (`position: static`) without restructuring
+  the markup, while the cart-drawer slide-up still works because the panel
+  is `position: absolute` and ignores the wrapper.
+
+  Accepts:
+    context: 'drawer' | 'page' (optional, default 'page') — suffixes DOM ids
+{%- endcomment -%}
+
+{%- liquid
+  assign show_note = settings.cart_show_order_note
+  assign show_shipping = settings.cart_features_enable_estimate_shipping
+  assign show_discount = settings.cart_features_enable_discount_code
+  assign show_icons = settings.cart_features_enable_icons
+
+  assign any_enabled = false
+  if show_note or show_shipping or show_discount
+    assign any_enabled = true
+  endif
+
+  assign ctx = context | default: 'page'
+
+  assign discount_codes_list = ''
+  for discount_app in cart.discount_applications
+    if discount_app.type == 'discount_code'
+      if discount_codes_list != ''
+        assign discount_codes_list = discount_codes_list | append: ','
+      endif
+      assign discount_codes_list = discount_codes_list | append: discount_app.title
+    endif
+  endfor
+-%}
+
+{%- if any_enabled -%}
+  {%- comment -%}
+    Translation strings for the JS layer (assets/cart-additional-features.js)
+    are passed via `data-i18n-*` attributes — Liquid is the only place that
+    can resolve `t:` keys, so we render them once here and the web component
+    reads them off `this.dataset` at runtime. New keys added under
+    `sections.cart.features.*` in all 5 core locales.
+  {%- endcomment -%}
+  <cart-additional-features
+    class="wt-cart-features{% if ctx == 'page' %} wt-cart-features--page{% endif %}"
+    data-context="{{ ctx }}"
+    data-discount-codes="{{ discount_codes_list | escape }}"
+    {%- comment -%}
+      Settlement (base) currency — needed by JS to format
+      /cart/shipping_rates.json prices, which are returned in base
+      currency regardless of the customer's presentment currency.
+    {%- endcomment -%}
+    data-shop-currency="{{ shop.currency }}"
+    data-i18n-shipping-select="{{ 'sections.cart.features.shipping_select_country_zip' | t | escape }}"
+    data-i18n-shipping-calculating="{{ 'sections.cart.features.shipping_calculating' | t | escape }}"
+    data-i18n-shipping-no-rate="{{ 'sections.cart.features.shipping_no_rate' | t | escape }}"
+    data-i18n-shipping-one-rate="{{ 'sections.cart.features.shipping_one_rate' | t | escape }}"
+    data-i18n-shipping-n-rates="{{ 'sections.cart.features.shipping_n_rates' | t: count: '__COUNT__' | escape }}"
+    data-i18n-shipping-free="{{ 'sections.cart.features.shipping_free' | t | escape }}"
+    data-i18n-discount-enter="{{ 'sections.cart.features.discount_enter_code' | t | escape }}"
+    data-i18n-discount-applying="{{ 'sections.cart.features.discount_applying' | t | escape }}"
+    data-i18n-discount-applied="{{ 'sections.cart.features.discount_applied' | t | escape }}"
+    data-i18n-discount-invalid="{{ 'sections.cart.features.discount_invalid' | t | escape }}"
+    data-i18n-discount-error="{{ 'sections.cart.features.discount_error' | t | escape }}"
+  >
+    <div class="wt-cart-features__triggers">
+      {%- if show_note -%}
+        <div class="wt-cart-features__item" data-feature-item="note">
+          <button
+            type="button"
+            id="CartFeaturesTrigger-note-{{ ctx }}"
+            class="wt-cart-features__trigger"
+            data-feature="note"
+            aria-expanded="false"
+            aria-controls="CartFeaturesDrawer-note-{{ ctx }}"
+            {% if ctx == 'drawer' %}aria-haspopup="dialog"{% endif %}
+          >
+            {%- if show_icons -%}
+              <span class="wt-cart-features__icon" aria-hidden="true">
+                {% render 'icons', id: 'clipboard' %}
+              </span>
+            {%- endif -%}
+            <span class="wt-cart-features__label">{{ 'sections.cart.order_note' | t }}</span>
+            {%- if ctx == 'page' -%}
+              <span class="wt-cart-features__indicator wt-cart-features__indicator--plus" aria-hidden="true">
+                {% render 'icons', id: 'plus' %}
+              </span>
+              <span class="wt-cart-features__indicator wt-cart-features__indicator--minus" aria-hidden="true">
+                {% render 'icons', id: 'minus' %}
+              </span>
+            {%- endif -%}
+          </button>
+
+          <div
+            class="wt-cart-features__drawer"
+            id="CartFeaturesDrawer-note-{{ ctx }}"
+            data-drawer="note"
+            {%- if ctx == 'drawer' -%}
+              role="dialog"
+              aria-modal="true"
+              aria-label="{{ 'sections.cart.note' | t }}"
+            {%- else -%}
+              role="region"
+              aria-labelledby="CartFeaturesTrigger-note-{{ ctx }}"
+            {%- endif -%}
+          >
+            <header class="wt-cart-features__drawer-header">
+              <h3 class="wt-cart-features__drawer-title">{{ 'sections.cart.note' | t }}</h3>
+              <button
+                type="button"
+                class="wt-cart-features__drawer-close"
+                data-close
+                aria-label="{{ 'accessibility.close' | t }}"
+              >
+                {% render 'icons', id: 'close' %}
+              </button>
+            </header>
+            <div class="wt-cart-features__drawer-body">
+              <textarea
+                class="wt-cart-features__textarea"
+                name="note"
+                form="cart"
+                data-note-textarea
+                id="CartFeatures-Note-{{ ctx }}"
+                placeholder="{{ 'sections.cart.note_placeholder' | t }}"
+                rows="4"
+              >{{ cart.note }}</textarea>
+              <button type="button" class="wt-cart-features__action wt-button wt-button--primary" data-note-save>
+                {{ 'save' | t }}
+              </button>
+            </div>
+          </div>
+        </div>
+      {%- endif -%}
+
+      {%- if show_discount -%}
+        <div class="wt-cart-features__item" data-feature-item="discount">
+          <button
+            type="button"
+            id="CartFeaturesTrigger-discount-{{ ctx }}"
+            class="wt-cart-features__trigger"
+            data-feature="discount"
+            aria-expanded="false"
+            aria-controls="CartFeaturesDrawer-discount-{{ ctx }}"
+            {% if ctx == 'drawer' %}aria-haspopup="dialog"{% endif %}
+          >
+            {%- if show_icons -%}
+              <span class="wt-cart-features__icon" aria-hidden="true">
+                {% render 'icons', id: 'price_tag' %}
+              </span>
+            {%- endif -%}
+            <span class="wt-cart-features__label">{{ 'sections.cart.discount_code' | t }}</span>
+            {%- if ctx == 'page' -%}
+              <span class="wt-cart-features__indicator wt-cart-features__indicator--plus" aria-hidden="true">
+                {% render 'icons', id: 'plus' %}
+              </span>
+              <span class="wt-cart-features__indicator wt-cart-features__indicator--minus" aria-hidden="true">
+                {% render 'icons', id: 'minus' %}
+              </span>
+            {%- endif -%}
+          </button>
+
+          <div
+            class="wt-cart-features__drawer"
+            id="CartFeaturesDrawer-discount-{{ ctx }}"
+            data-drawer="discount"
+            {%- if ctx == 'drawer' -%}
+              role="dialog"
+              aria-modal="true"
+              aria-label="{{ 'sections.cart.discount_code' | t }}"
+            {%- else -%}
+              role="region"
+              aria-labelledby="CartFeaturesTrigger-discount-{{ ctx }}"
+            {%- endif -%}
+          >
+            <header class="wt-cart-features__drawer-header">
+              <h3 class="wt-cart-features__drawer-title">{{ 'sections.cart.discount_code' | t }}</h3>
+              <button
+                type="button"
+                class="wt-cart-features__drawer-close"
+                data-close
+                aria-label="{{ 'accessibility.close' | t }}"
+              >
+                {% render 'icons', id: 'close' %}
+              </button>
+            </header>
+            <div class="wt-cart-features__drawer-body">
+              {%- if discount_codes_list != '' -%}
+                <ul class="wt-cart-features__discount-list">
+                  {%- for discount_app in cart.discount_applications -%}
+                    {%- if discount_app.type == 'discount_code' -%}
+                      <li class="wt-cart-features__discount-item">
+                        <span class="wt-cart-features__discount-code">
+                          {{- discount_app.title -}}
+                          {%- if discount_app.total_allocated_amount > 0 -%}
+                            <span class="wt-cart-features__discount-savings">
+                              (-{{ discount_app.total_allocated_amount | money }})
+                            </span>
+                          {%- endif -%}
+                        </span>
+                        <button
+                          type="button"
+                          class="wt-cart-features__discount-remove"
+                          data-discount-remove-code="{{ discount_app.title | escape }}"
+                          aria-label="{{ 'sections.cart.remove_title' | t: title: discount_app.title }}"
+                        >
+                          {%- render 'icons', id: 'close' -%}
+                          {%- render 'button-loading-indicator', hidden: false -%}
+                        </button>
+                      </li>
+                    {%- endif -%}
+                  {%- endfor -%}
+                </ul>
+              {%- endif -%}
+              <label class="wt-cart-features__field" for="CartFeatures-DiscountCode-{{ ctx }}">
+                <input
+                  type="text"
+                  class="wt-cart-features__input"
+                  id="CartFeatures-DiscountCode-{{ ctx }}"
+                  data-discount-input
+                  placeholder="{{ 'sections.cart.features.discount_placeholder' | t }}"
+                  autocomplete="off"
+                >
+              </label>
+              <div class="wt-cart-features__result" data-discount-result role="status" aria-live="polite"></div>
+              <div class="wt-cart-features__actions">
+                <button type="button" class="wt-cart-features__action wt-button wt-button--primary" data-discount-apply>
+                  {{ 'sections.cart.features.apply' | t }}
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      {%- endif -%}
+
+      {%- if show_shipping -%}
+        <div class="wt-cart-features__item" data-feature-item="shipping">
+          <button
+            type="button"
+            id="CartFeaturesTrigger-shipping-{{ ctx }}"
+            class="wt-cart-features__trigger"
+            data-feature="shipping"
+            aria-expanded="false"
+            aria-controls="CartFeaturesDrawer-shipping-{{ ctx }}"
+            {% if ctx == 'drawer' %}aria-haspopup="dialog"{% endif %}
+          >
+            {%- if show_icons -%}
+              <span class="wt-cart-features__icon" aria-hidden="true">
+                {% render 'icons', id: 'box' %}
+              </span>
+            {%- endif -%}
+            <span class="wt-cart-features__label">{{ 'sections.cart.estimate_shipping' | t }}</span>
+            {%- if ctx == 'page' -%}
+              <span class="wt-cart-features__indicator wt-cart-features__indicator--plus" aria-hidden="true">
+                {% render 'icons', id: 'plus' %}
+              </span>
+              <span class="wt-cart-features__indicator wt-cart-features__indicator--minus" aria-hidden="true">
+                {% render 'icons', id: 'minus' %}
+              </span>
+            {%- endif -%}
+          </button>
+
+          <div
+            class="wt-cart-features__drawer"
+            id="CartFeaturesDrawer-shipping-{{ ctx }}"
+            data-drawer="shipping"
+            {%- if ctx == 'drawer' -%}
+              role="dialog"
+              aria-modal="true"
+              aria-label="{{ 'sections.cart.estimate_shipping' | t }}"
+            {%- else -%}
+              role="region"
+              aria-labelledby="CartFeaturesTrigger-shipping-{{ ctx }}"
+            {%- endif -%}
+          >
+            <header class="wt-cart-features__drawer-header">
+              <h3 class="wt-cart-features__drawer-title">{{ 'sections.cart.estimate_shipping' | t }}</h3>
+              <button
+                type="button"
+                class="wt-cart-features__drawer-close"
+                data-close
+                aria-label="{{ 'accessibility.close' | t }}"
+              >
+                {% render 'icons', id: 'close' %}
+              </button>
+            </header>
+            <div class="wt-cart-features__drawer-body">
+              <div class="wt-cart-features__result" data-shipping-result role="status" aria-live="polite"></div>
+              <label class="wt-cart-features__field" for="CartFeatures-ShippingCountry-{{ ctx }}">
+                <span class="wt-cart-features__field-label">{{ 'sections.cart.features.country_region' | t }}</span>
+                <div class="wt-cart-features__select-wrapper">
+                  <select
+                    class="wt-cart-features__select"
+                    id="CartFeatures-ShippingCountry-{{ ctx }}"
+                    data-shipping-country
+                  >
+                    {{ all_country_option_tags }}
+                  </select>
+                  <span class="wt-cart-features__select-icon" aria-hidden="true">
+                    {%- render 'icons', id: 'arrow-down' -%}
+                  </span>
+                </div>
+              </label>
+              <label class="wt-cart-features__field" for="CartFeatures-ShippingZip-{{ ctx }}">
+                <span class="wt-cart-features__field-label">{{ 'sections.cart.features.postal_zip' | t }}</span>
+                <input
+                  type="text"
+                  class="wt-cart-features__input"
+                  id="CartFeatures-ShippingZip-{{ ctx }}"
+                  data-shipping-zip
+                  autocomplete="postal-code"
+                >
+              </label>
+              <button type="button" class="wt-cart-features__action wt-button wt-button--primary" data-shipping-submit>
+                {{ 'sections.cart.features.calculate' | t }}
+              </button>
+            </div>
+          </div>
+        </div>
+      {%- endif -%}
+    </div>
+
+    <div class="wt-cart-features__overlay" data-overlay></div>
+  </cart-additional-features>
+{%- endif -%}

@@ -40,6 +40,11 @@
     },
     "continue_shopping": "继续购物",
     "pagination": {
+      "previous_label": "上一页",
+      "next_label": "下一页",
+      "load_more": "加载更多",
+      "load_previous": "加载上一页",
+      "showing": "显示 {{ total }} 件中的 {{ count }} 件",
       "label": "分页",
       "page": "第 {{ number }} 页",
       "next": "下一页",
@@ -52,6 +57,8 @@
       "view": "查看我的购物车 ({{ count }})",
       "item_added": "商品已加入购物车"
     },
+    "copy": "复制",
+    "copied": "已复制",
     "share": {
       "copy_to_clipboard": "复制链接",
       "share_url": "链接",
@@ -60,9 +67,6 @@
     },
     "quick_add": {
       "view_all_details": "查看所有详情"
-    },
-    "icons": {
-      "icon_title": ""
     },
     "slider": {
       "of": "的",
@@ -74,7 +78,9 @@
   "newsletter": {
     "label": "您的邮箱",
     "success": "感谢您订阅",
-    "button_label": "订阅"
+    "button_label": "订阅",
+    "close": "关闭弹窗",
+    "consent_checkbox_label": "我想订阅时事通讯（有关促销、折扣、新品首发和抽奖活动的信息）。"
   },
   "accessibility": {
     "skip_to_text": "跳到内容",
@@ -95,7 +101,10 @@
     "star_reviews_info": "{{ rating_value }} 星，满分 {{ rating_max }} 星",
     "collapsible_content_title": "可折叠内容",
     "complementary_products": "互补产品",
-    "searching": "搜索进行中..."
+    "searching": "搜索进行中...",
+    "scroll_to_top": "Scroll to top",
+    "open": "打开",
+    "subscription_widget__selling_plan_select": "{{ plan_group }} 的配送频率"
   },
   "blogs": {
     "article": {
@@ -115,7 +124,10 @@
       "back_to_blog": "返回博客",
       "share": "分享此文章",
       "success": "您的评论已成功发布！谢谢！",
-      "success_moderated": "您的评论已成功发布。由于我们的博客要经过审核，我们会在稍后将其发布。"
+      "success_moderated": "您的评论已成功发布。由于我们的博客要经过审核，我们会在稍后将其发布。",
+      "date_format": "%Y年%m月%d日",
+      "published_on": "{{ date }}",
+      "posted_by": "作者：{{ author }}"
     }
   },
   "onboarding": {
@@ -125,6 +137,7 @@
   "products": {
     "product": {
       "add_to_cart": "添加到购物车",
+      "pick_size": "选择 {{ option }}",
       "description": "描述",
       "on_sale": "销售额",
       "product_variants": "产品多属性",
@@ -138,7 +151,8 @@
         "from_price_html": "来自 {{ price }}",
         "regular_price": "常规价格",
         "sale_price": "促销价",
-        "unit_price": "单价"
+        "unit_price": "单价",
+        "free": "免费"
       },
       "share": "分享此产品",
       "sold_out": "售罄",
@@ -185,7 +199,9 @@
       "volume_pricing": {
         "note": "TODO",
         "price_range": "TODO"
-      }
+      },
+      "select_option": "选择选项",
+      "select_options": "选择选项"
     },
     "modal": {
       "label": "媒体图库"
@@ -222,6 +238,10 @@
     }
   },
   "templates": {
+    "404": {
+      "title": "找不到页面",
+      "subtext": "404"
+    },
     "search": {
       "no_results": "未找到“{{ terms }}”的结果。请检查拼写或使用其他词或短语。",
       "results_with_count": {
@@ -242,7 +262,9 @@
         "products": "产品",
         "pages": "页面",
         "articles": "文章",
-        "suggestions": "建议"
+        "suggestions": "建议",
+        "popular_searches": "热门搜索",
+        "useful_links": "实用链接"
       },
       "search_for": "查看所有“{{ terms }}”的结果"
     },
@@ -260,13 +282,12 @@
         "error_heading": "请调整以下内容：",
         "title": "联系表单"
       }
-    },
-    "404": {
-      "title": "找不到页面",
-      "subtext": "404"
     }
   },
   "sections": {
+    "shoppable_buy_all": {
+      "add_all_to_cart": "全部加入购物车"
+    },
     "header": {
       "announcement": "公告",
       "menu": "菜单",
@@ -305,7 +326,29 @@
         "title": "已有账户？",
         "paragraph_html": "<a href=\"{{ link }}\" tabindex=\"-1\" class=\"link underlined-link\">登录</a>以更快完成结账。"
       },
-      "view_cart": "查看购物车"
+      "view_cart": "查看购物车",
+      "checkbox": "作为礼物包装",
+      "order_note": "订单备注",
+      "estimate_shipping": "运费",
+      "discount_code": "折扣码",
+      "features": {
+        "country_region": "国家/地区",
+        "postal_zip": "邮政编码",
+        "apply": "应用",
+        "calculate": "计算",
+        "discount_placeholder": "请输入折扣码",
+        "shipping_select_country_zip": "请选择国家并输入邮政编码。",
+        "shipping_calculating": "计算中…",
+        "shipping_no_rate": "该目的地没有可用的运费。请检查地址。",
+        "shipping_one_rate": "该目的地有一种运费方式：",
+        "shipping_n_rates": "该目的地有 {{ count }} 种运费方式：",
+        "shipping_free": "免费",
+        "discount_enter_code": "请输入折扣码。",
+        "discount_applying": "应用中…",
+        "discount_applied": "折扣已应用！",
+        "discount_invalid": "折扣码无效或不适用于当前购物车。",
+        "discount_error": "出错了，请重试。"
+      }
     },
     "footer": {
       "payment": "付款方式",
@@ -369,6 +412,54 @@
       },
       "error": {
         "invalid_format": "日期格式无效。请按照 YYYY-MM-DD HH:MM 的格式输入日期和时间。"
+      }
+    },
+    "localization_drawer": {
+      "title": "本地化",
+      "country_label": "国家/地区",
+      "language_label": "语言",
+      "drawer_title": "本地化选项",
+      "current_country_info": "您目前的航运目的地为{{ countryName }}，订单将以{{ currencyIso }} {{ currencySymbol }}进行结算。",
+      "search_location": {
+        "label": "搜索位置",
+        "placeholder": "搜索地点..."
+      }
+    },
+    "bundle-builder": {
+      "add_to_bundle": "添加到套装",
+      "status": {
+        "discount": "🎉 您获得了折扣。",
+        "add_more": "您还可以继续添加更多。"
+      },
+      "toggle": "切换套装面板",
+      "remove_item": "移除商品",
+      "error_message": "发生错误，请重试。"
+    },
+    "quiz": {
+      "back": "返回",
+      "prev_question": "上一个",
+      "next_question": "下一个",
+      "see_results": "查看结果"
+    },
+    "blog_posts": {
+      "tags_all": "全部文章"
+    },
+    "compare_products": {
+      "name": "产品对比",
+      "badge": {
+        "compare": "VS"
+      },
+      "placeholders": {
+        "left_text": "左侧",
+        "right_text": "右侧"
+      },
+      "aria": {
+        "table": "对比表"
+      },
+      "blocks": {
+        "table_row": {
+          "center_text_default": "输入一些文字..."
+        }
       }
     }
   },
@@ -534,7 +625,7 @@
   },
   "aria-label": {
     "announcement-bar": "关闭公告栏",
-    "contact-form": "发送表格",
+    "contact-form": "发送",
     "featured-collection": "查看全部",
     "featured-product-3d-model": "查看3D模型",
     "main-product-video": "播放视频",
@@ -572,6 +663,15 @@
     "price-from": "价格从",
     "price-to": "价格至",
     "remove-price-range": "移除价格范围过滤器",
-    "sort-options": "排序选项"
+    "sort-options": "排序选项",
+    "lookbook-button": "查看详情",
+    "pills-navigation": "胶囊导航",
+    "collection-tabs": "系列标签"
+  },
+  "placeholder": {
+    "select_option": "选择一个选项"
+  },
+  "cross_sell": {
+    "empty_msg": "没有可显示的产品。此区块在店面前台将不对客户可见。"
   }
 }

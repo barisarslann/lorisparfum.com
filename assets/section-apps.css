@@ -70,7 +70,7 @@
   font-size: max( 1.6rem , var(--font-base-size) );
   height: var(--input-height);
   border: 1px solid var(--color-input-border);
-  border-radius: var(--border-radius);
+  border-radius: var(--border-radius-button);
   background: var(--color-input-bg);
   padding: calc(var(--gap, 8px) * 1) calc(var(--gap, 8px) * 1.5);
   line-height: var(--font-base-line-height, normal);
@@ -115,3 +115,4 @@
 .wt-apps__wrapper--compact {
   max-width: var(--post-max-width);
 }
+/*# sourceMappingURL=section-apps.css.map */

@@ -1,0 +1,91 @@
+{% comment %}
+  Params: block, product
+{% endcomment %}
+{% if block.settings.display == 'collapsible' %}
+  <collapsible-section
+    class="wt-collapse wt-collapse--always{% if settings.animations %} scroll-trigger animate--slide-in{% endif %}{% if settings.disabled_animations_on_mobile %} disabled-on-mobile{% endif %}"
+    data-toggle-tabindex="button, [href], input, select"
+    not-quick-add
+    data-block-id="{{ block.id }}"
+  >
+    <div
+      role="button"
+      tabindex="0"
+      class="wt-collapse__trigger{% if block.settings.is_open %} wt-collapse__trigger--active{% endif %}"
+      {% if block.settings.is_open %}
+        data-open="true"
+      {% endif %}
+      aria-expanded="{% if block.settings.is_open %}true{% else %}false{% endif %}"
+      aria-controls="Description-{{ block.id }}"
+    >
+      <div class="wt-collapse__trigger__text">
+        {% if block.settings.icon_image != blank %}
+          <div class="wt-collapse__trigger__icon">
+            {% render 'responsive-icon-image',
+              image: block.settings.icon_image,
+              height_desktop: block.settings.icon_height_desktop,
+              height_mobile: block.settings.icon_height,
+              class: 'hero__icon'
+            %}
+          </div>
+        {% elsif block.settings.icon != 'none' %}
+          <div class="wt-collapse__trigger__icon">
+            {% render 'icons', id: block.settings.icon, icon_class: 'hero__icon' %}
+          </div>
+        {% endif %}
+        <div class="wt-collapse__trigger__title">{{ 'products.product.description' | t }}</div>
+      </div>
+      <div class="wt-icon" aria-hidden="true">
+        {% render 'icons', id: 'plus' %}
+      </div>
+    </div>
+    <div class="wt-collapse__target" id="Description-{{ block.id }}">
+      <div class="wt-collapse__target--text rte">
+        {%- if product == blank -%}
+          Showcase your star product in style! Our Featured Product section is designed to put your best
+          merchandise front and center, captivating customers the moment they visit your store. This
+          section offers a sleek and customizable layout, allowing you to highlight the product's best
+          features, imagery, and unique selling points with ease. Choose this section to create a stunning
+          focal point on your homepage, driving attention and boosting sales of your most loved or newest
+          item. Its responsive design ensures a seamless display across all devices, making your star
+          product shine on every screen.
+        {%- else -%}
+          {{ product.description }}
+        {%- endif -%}
+      </div>
+    </div>
+  </collapsible-section>
+{% else %}
+  <div class="wt-product__text-block__wrapper wt-description" data-block-id="{{ block.id }}">
+    <div class="wt-product__text-block__title{% if settings.animations %} scroll-trigger animate--slide-in{% endif %}{% if settings.disabled_animations_on_mobile %} disabled-on-mobile{% endif %}">
+      {% if block.settings.icon_image != blank %}
+        <div class="wt-collapse__trigger__icon">
+          {% render 'responsive-icon-image',
+            image: block.settings.icon_image,
+            height_desktop: block.settings.icon_height_desktop,
+            height_mobile: block.settings.icon_height,
+            class: 'hero__icon'
+          %}
+        </div>
+      {% elsif block.settings.icon != 'none' %}
+        <div class="wt-collapse__trigger__icon">
+          {% render 'icons', id: block.settings.icon, icon_class: 'hero__icon' %}
+        </div>
+      {% endif %}
+      <div class="wt-collapse__trigger__title">{{ 'products.product.description' | t }}</div>
+    </div>
+    <div class="wt-product__text-block rte" id="Description-{{ block.id }}">
+      {%- if product == blank -%}
+        Showcase your star product in style! Our Featured Product section is designed to put your best
+        merchandise front and center, captivating customers the moment they visit your store. This
+        section offers a sleek and customizable layout, allowing you to highlight the product's best
+        features, imagery, and unique selling points with ease. Choose this section to create a stunning
+        focal point on your homepage, driving attention and boosting sales of your most loved or newest
+        item. Its responsive design ensures a seamless display across all devices, making your star
+        product shine on every screen.
+      {%- else -%}
+        {{ product.description }}
+      {%- endif -%}
+    </div>
+  </div>
+{% endif %}

@@ -1,5 +1,6 @@
 {% if template == 'index' %}
   <script src="{{ 'page-header-logo-banner.js' | asset_url }}" defer="defer"></script>
+  <script src="{{ 'video-controls.js' | asset_url }}" defer="defer"></script>
 
   {{ 'section-video.css' | asset_url | stylesheet_tag }}
   {{ 'section-logo-banner.css' | asset_url | stylesheet_tag }}
@@ -12,20 +13,23 @@
       --image-overlay-opacity: {{ section.settings.image_hosted_opacity | divided_by: 100.0 }};
       --image-overlay-mobile-opacity: {{ section.settings.image_hosted_mobile_opacity | divided_by: 100.0 }};
 
-    {% if text_rgb != 'rgba(0, 0, 0, 0.0)' %}
+    {% if section.settings['color-body-text'] != blank and section.settings['color-body-text'] != 'transparent' and text_rgb != 'rgba(0, 0, 0, 0.0)' %}
       --color-custom-text: {{ section.settings.color-body-text }};
     {% endif %}
-    {% if background_rgb != 'rgba(0, 0, 0, 0.0)' %}
+    {% if section.settings['color-overlay'] != blank and section.settings['color-overlay'] != 'transparent' and background_rgb != 'rgba(0, 0, 0, 0.0)' %}
       --color-overlay-rgb: {{ section.settings.color-overlay | color_to_rgb | remove: 'rgb(' | remove: ')' }};
       --color-overlay-opacity: {{ section.settings.color-overlay-opacity | divided_by: 100.0 }};
     {% endif %}
     }
+
   </style>
 
   {% assign width_line = 'wt-section__wrapper' %}
 
   {%- liquid
     assign video_id = section.settings.video.id | default: section.settings.video_url.id
+    assign play_pause_button = section.settings.video_custom_play_controls
+    assign unmute_button = section.settings.video_custom_mute_controls
   -%}
 
   <script src="{{ 'low-power-video.js' | asset_url }}" defer="defer"></script>
@@ -45,7 +49,6 @@
     <low-power-video>
       <div
         class="wt-video {{ class_name }}"
-        data-section-id="{{ section.id }}"
         data-mobile="{{ section.settings.layout_mobile }}"
         data-height="{{ section.settings.slide_height }}"
       >
@@ -64,8 +67,8 @@
               <img
                 srcset="{{ section.settings.logo_image | image_url: width: logo_image_size }} 1x, {{ section.settings.logo_image | image_url: width: logo_image_size_double }} 2x"
                 src="{{ section.settings.logo_image | image_url: width: logo_image_size }}"
-                data-custom="- CUSTOM -"
-                data-loading="lazy"
+                loading="eager"
+                fetchpriority="high"
                 width="{{ section.settings.logo_image.width}}"
                 height="{{ section.settings.logo_image.height }}"
                 class="wt-logo-banner__logo"
@@ -109,19 +112,41 @@
 
         {%- if section.settings.video_hosted_mobile -%}
           <div class="wt-video__movie wt-video__movie--shopify-video wt-video__item wt-video__item--mobile-only">
+            <img
+              src="{{ section.settings.video_hosted_mobile.preview_image | image_url: width: 1200 }}"
+              fetchpriority="high"
+              loading="eager"
+              alt="{{ section.settings.video_hosted_mobile.alt | escape }}"
+              class="wt-video__poster-img"
+            >
+            {% if play_pause_button or unmute_button %}<video-controls>{% endif %}
+            {% if play_pause_button %}{% render 'play-pause-button', classname: '' %}{% endif %}
+            {% if unmute_button %}{% render 'unmute-button' %}{% endif %}
             {{
               section.settings.video_hosted_mobile
               | video_tag: autoplay: true, loop: true, muted: true, controls: false, image_size: '2400x'
             }}
+            {% if play_pause_button or unmute_button %}</video-controls>{% endif %}
           </div>
         {%- endif -%}
 
         {%- if section.settings.video_hosted -%}
           <div class="wt-video__movie wt-video__movie--shopify-video wt-video__item">
+            <img
+              src="{{ section.settings.video_hosted.preview_image | image_url: width: 2400 }}"
+              fetchpriority="high"
+              loading="eager"
+              alt="{{ section.settings.video_hosted.alt | escape }}"
+              class="wt-video__poster-img"
+            >
+            {% if play_pause_button or unmute_button %}<video-controls>{% endif %}
+            {% if play_pause_button %}{% render 'play-pause-button', classname: '' %}{% endif %}
+            {% if unmute_button %}{% render 'unmute-button' %}{% endif %}
             {{
               section.settings.video_hosted
               | video_tag: autoplay: true, loop: true, muted: true, controls: false, image_size: '2400x'
             }}
+            {% if play_pause_button or unmute_button %}</video-controls>{% endif %}
           </div>
         {%- endif -%}
 
@@ -135,11 +160,11 @@
                 | image_url: width: '2000x'
                 | image_tag: width: null, class: 'wt-video__image-mobile'
               }}
-              {{ section.settings.image_hosted | image_url: width: '2000x' | image_tag: width: null }}
+              {{ section.settings.image_hosted | image_url: width: '2000x' | image_tag: width: null, class: 'wt-video__image-desktop' }}
             {% elsif section.settings.image_hosted and section.settings.image_hosted_mobile == null %}
               {{ section.settings.image_hosted | image_url: width: '2000x' | image_tag: width: null }}
             {% else %}
-              {{ 'collection-apparel-1' | placeholder_svg_tag: 'wt-logo-banner__img-placeholder' }}
+              {{ 'hero-apparel-1' | placeholder_svg_tag: 'wt-logo-banner__img-placeholder' }}
             {% endif %}
           </div>
         {%- endif -%}
@@ -192,7 +217,7 @@
 
 {% schema %}
 {
-  "name": "Logo banner (Homepage)",
+  "name": "t:sections.page-header-logo-banner.name",
   "tag": "section",
   "class": "wt-video__section wt-logo-banner",
   "limit": 1,
@@ -226,6 +251,22 @@
       "type": "video",
       "id": "video_hosted_mobile",
       "label": "t:sections.logo-banner.settings.video-hosted.label"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.global.video_controls_header"
+    },
+    {
+      "type": "checkbox",
+      "id": "video_custom_play_controls",
+      "label": "t:sections.background-video.settings.video_custom_play_controls.label",
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "video_custom_mute_controls",
+      "label": "t:sections.background-video.settings.video_custom_mute_controls.label",
+      "default": false
     },
     {
       "type": "header",
@@ -312,13 +353,11 @@
     {
       "type": "color",
       "id": "color-body-text",
-      "default": "transparent",
       "label": "t:sections.settings.settings.text-color.label"
     },
     {
       "type": "color",
       "id": "color-overlay",
-      "default": "transparent",
       "label": "t:sections.settings.settings.background-color.label"
     },
     {
@@ -334,7 +373,7 @@
   ],
   "presets": [
     {
-      "name": "Logo banner for transparent header"
+      "name": "t:sections.page-header-logo-banner.name"
     }
   ],
   "enabled_on": {

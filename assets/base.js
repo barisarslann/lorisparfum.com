@@ -121,6 +121,12 @@ class DrawerNavSection extends HTMLElement {
       "a.wt-page-nav-mega__aside-list__link",
     );
 
+    const localizationTriggers = this.querySelectorAll(
+      ".wt-localization-trigger",
+    );
+
+    toggleTabindex(localizationTriggers);
+
     toggleTabindex(linksLvl1);
     toggleTabindex(menuMobileFooterLinks);
     this.toggleMenuButtonAttr();
@@ -248,10 +254,24 @@ class MegaMenuSection extends HTMLElement {
       window.matchMedia(`(min-width: ${this.desktopBreakpoint}px)`).matches;
 
     this.currentlyActiveSubmenu = null;
+    this.enableSubmenuLinkInDrawer =
+      this.dataset.enableSubmenuLinkInDrawer === "";
   }
 
   connectedCallback() {
     this.init();
+  }
+
+  anchorScrollDuringToggle(el) {
+    const oldTop = el.getBoundingClientRect().top;
+    const endTime = performance.now() + 450;
+
+    const step = () => {
+      const delta = el.getBoundingClientRect().top - oldTop;
+      if (delta) this.scrollTop += delta;
+      if (performance.now() < endTime) requestAnimationFrame(step);
+    };
+    requestAnimationFrame(step);
   }
 
   toggleParentMob(el) {
@@ -262,6 +282,7 @@ class MegaMenuSection extends HTMLElement {
     );
 
     toggleTabindex(subMenuLinksLevel2);
+    this.anchorScrollDuringToggle(el);
 
     menuParentLinks.forEach((link) => {
       if (link !== el) {
@@ -306,6 +327,7 @@ class MegaMenuSection extends HTMLElement {
     );
 
     toggleTabindex(subMenuLinksLevel3);
+    this.anchorScrollDuringToggle(el);
 
     menuSubmenuParentLinks.forEach((link) => {
       if (link !== el) {
@@ -352,26 +374,28 @@ class MegaMenuSection extends HTMLElement {
 
     menuParentLinks.forEach((link) => {
       link.addEventListener("click", (e) => {
-        if (this.isMobileMenu()) {
-          /* - CUSTOM - */
-          // pointer-events: none;
-          if(e.target.nodeName == "svg" || e.target.nodeName == "g" || e.target.nodeName == "rect"){
-            e.preventDefault();
-            this.toggleParentMob(link);
-          }
+        if (
+          (this.isMobileMenu() && !this.enableSubmenuLinkInDrawer) ||
+          (this.isMobileMenu() &&
+            e.target.tagName !== "SPAN" &&
+            this.enableSubmenuLinkInDrawer)
+        ) {
+          e.preventDefault();
+          this.toggleParentMob(link);
         }
       });
     });
 
     menuSubmenuParentLinks.forEach((link) => {
       link.addEventListener("click", (e) => {
-        if (this.isMobileMenu()) {
-          /* - CUSTOM - */
-          // pointer-events: none;
-          if(e.target.nodeName == "svg" || e.target.nodeName == "g" || e.target.nodeName == "rect"){
-            e.preventDefault();
-            this.toggleSubmenuMob(link);
-          }
+        if (
+          (this.isMobileMenu() && !this.enableSubmenuLinkInDrawer) ||
+          (this.isMobileMenu() &&
+            e.target.tagName !== "SPAN" &&
+            this.enableSubmenuLinkInDrawer)
+        ) {
+          e.preventDefault();
+          this.toggleSubmenuMob(link);
         }
       });
     });
@@ -513,8 +537,6 @@ class CollapsibleSection extends HTMLElement {
   }
 
   updateTabContent(e) {
-    let newContent = null;
-
     const isProperlySection = this.closest(
       `[data-section-id="${e.target.dataset.section}"]`,
     );
@@ -526,16 +548,17 @@ class CollapsibleSection extends HTMLElement {
     );
 
     if (this.hasVariantMetafields) {
-      // update variant variable metafields
-      newContent = this.variantJson?.content;
+      if (!currentVariantInfo) return;
 
       for (const metafield of currentVariantInfo.metafields) {
         const { placeholder_name, value } = metafield;
-        newContent = newContent.replaceAll(placeholder_name, value);
+        const els = this.querySelectorAll(
+          `[data-variant-metafield="${placeholder_name}"]`,
+        );
+        els.forEach((el) => {
+          el.innerHTML = value || "";
+        });
       }
-
-      const contentEl = this.querySelector(".wt-collapse__target__content");
-      if (contentEl) contentEl.innerHTML = newContent;
     } else if (this.hasVariantFileMetafields) {
       // update variant file metafields
 
@@ -779,6 +802,7 @@ class JsLink extends HTMLElement {
 
   handleClickOrEnter(e) {
     if (this.worksOnlyForMobile && window.innerWidth > 600) return;
+    if (e.target.closest('a')) return;
     const href = this.getAttribute("href");
     const target = this.getAttribute("target");
     if (e.type === "click") {
@@ -1176,25 +1200,12 @@ document.body.addEventListener("keydown", function (e) {
 
 document.addEventListener("DOMContentLoaded", () => {
   document.body.classList.add("drawers-animated");
+  // reInitialize Swiper instances becouse of issue with rendering for selected shoipfy fonts.
+  document.querySelectorAll(".swiper").forEach((swiperEl) => {
+    const swiperInstance = swiperEl.swiper;
+    if (swiperInstance) {
+      swiperInstance.update();
+    }
+  });
 });
 
-// for debug only TODO: remove this in final version
-// document.addEventListener("focusin", function (event) {
-//   console.log(`Current focused element: [${event.target.textContent}]`);
-//   console.log(event.target);
-// });
-
-// document.addEventListener("shopify:section:load", (event) => {
-//   console.log("Shopify section load:");
-//   console.log(event);
-// });
-//
-// document.addEventListener("shopify:section:select", (event) => {
-//   console.log("Shopify section select:");
-//   console.log(event);
-// });
-//
-// document.addEventListener("shopify:section:reorder", (event) => {
-//   console.log("Shopify section reorder:");
-//   console.log(event);
-// });

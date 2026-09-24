@@ -10,10 +10,15 @@ if (!customElements.get("product-form")) {
         if (this.formInput) this.formInput.disabled = false;
         this.form?.addEventListener("submit", this.onSubmitHandler.bind(this));
         this.cart = document.querySelector("cart-drawer");
-        this.cartType = this.cart?.dataset.cartType;
+        this.cartType = this.cart?.dataset.cartType || "page";
 
         this.submitButton = this.querySelector('[type="submit"]');
         this.body = document.querySelector("body");
+
+        this.submitButton?.addEventListener("click", (e) => {
+          e.preventDefault();
+          this.form?.requestSubmit();
+        });
 
         if (document.querySelector("cart-drawer"))
           this.submitButton?.setAttribute("aria-haspopup", "dialog");
@@ -59,10 +64,15 @@ if (!customElements.get("product-form")) {
         delete config.headers["Content-Type"];
 
         const formData = new FormData(this.form);
-        formData.append(
-          "sections",
-          this.cart.getSectionsToRender().map((section) => section.id),
-        );
+        if (this.cart && typeof this.cart.getSectionsToRender === "function") {
+          formData.append(
+            "sections",
+            this.cart.getSectionsToRender().map((section) => section.id),
+          );
+        } else {
+          formData.append("sections", []);
+        }
+
         formData.append("sections_url", window.location.pathname);
         config.body = formData;
 
@@ -82,11 +92,13 @@ if (!customElements.get("product-form")) {
               const soldOutMessage =
                 this.submitButton.querySelector(".sold-out-message");
 
-                this.dispatchEvent(new CustomEvent('cart-drawer:refresh', {
-                  detail: { 'response': response },
+              this.dispatchEvent(
+                new CustomEvent("cart-drawer:refresh", {
+                  detail: { response: response },
                   bubbles: true,
-                  composed: true
-                }));
+                  composed: true,
+                }),
+              );
 
               if (!soldOutMessage) return;
               this.submitButton.setAttribute("aria-disabled", true);
@@ -145,14 +157,14 @@ if (!customElements.get("product-form")) {
               ".wt__quick-buy--page-overlay",
             );
             this.quick_add_product =
-            this.quick_add_container.querySelector(".wt-product");
+              this.quick_add_container.querySelector(".wt-product");
             this.loader = this.quick_add_container.querySelector(
               ".wt__quick-buy-loader",
             );
-            
+
             if (!this.quick_add_container.classList.contains("hidden")) {
               // use handle and quickbuy closeCart()
-              
+
               this.quick_add_product?.remove();
               this.quick_add_container.classList.remove(
                 "wt__quick-buy__container--open",
@@ -167,16 +179,21 @@ if (!customElements.get("product-form")) {
             // delay button loading
             setTimeout(() => {
               this.disableLoadingInButton();
-            }, 200)
-          })
-        }
-        
-        disableLoadingInButton() {
+            }, 200);
+          });
+      }
+
+      disableLoadingInButton() {
         this.submitButton.classList.remove("loading");
         this.querySelector(".loading-overlay__spinner").classList.add("hidden");
       }
 
       redirectAfterSubmit(response, isClosedCart = true) {
+        if (this.dataset.instantCheckout === 'true') {
+          window.location = '/checkout';
+          return;
+        }
+
         const body = document.body;
         const isCartPage = body.classList.contains("template-cart");
 

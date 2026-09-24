@@ -6,6 +6,14 @@
     <div class="wt-cart__subtotal__value">
       {{ cart.total_price | money_with_currency }}
     </div>
+    {%- if settings.cart_show_savings and cart.total_discount > 0 -%}
+      {%- assign savings_formatted = cart.total_discount | money -%}
+      {%- assign savings_label = settings.cart_savings_label | replace: '||savings||', savings_formatted -%}
+      <div class="wt-cart__savings">
+        <span class="wt-cart__savings__label">{{ savings_label }}</span>
+        <span class="wt-cart__savings__original">{{ cart.original_total_price | money }}</span>
+      </div>
+    {%- endif -%}
   </div>
   {%- if cart.cart_level_discount_applications.size > 0 -%}
     <div>
@@ -14,7 +22,7 @@
           <li>
             {%- render 'icon-discount' -%}
             {{ discount.title }}
-            (-{{ discount.total_allocated_amount | money_with_currency }})
+            (-{{ discount.total_allocated_amount | money }})
           </li>
         {%- endfor -%}
       </ul>
@@ -95,4 +103,5 @@
       </button>
     </div>
   {% endif %}
+  {%- render 'cart-payment-badge' -%}
 </div>

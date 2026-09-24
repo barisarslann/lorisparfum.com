@@ -10,6 +10,14 @@
     {% if section.settings.margin-bottom %}
       --section-gap-bottom: {{ section.settings.margin-bottom }}px;
     {% endif %}
+
+      {%- if section.settings.show_mobile_spacing -%}
+          --section-gap-top-mobile: {{ section.settings.margin-top-mobile }}px;
+      {%- endif -%}
+
+      {%- if section.settings.show_mobile_spacing -%}
+          --section-gap-bottom-mobile: {{ section.settings.margin-bottom-mobile }}px;
+      {%- endif -%}
   }
 
   {%- for block in section.blocks -%}
@@ -20,7 +28,7 @@
           --font-headline-scale-desk: {{ block.settings.size_heading | divided_by: 100.0 }};
           --font-headline-scale: {{ block.settings.size_heading_mobile | divided_by: 100.0 }};
 
-          {% if text_rgb != 'rgba(0, 0, 0, 0.0)' %}
+          {% if block.settings['color-body-text'] != blank and block.settings['color-body-text'] != 'transparent' and text_rgb != 'rgba(0, 0, 0, 0.0)' %}
             --color-body-text: {{ block.settings.color-body-text }};
           {% endif %}
         }
@@ -44,8 +52,10 @@
   {% endfor %}
 </style>
 
+{% render 'structured-data-article', article: article, blog: blog %}
+
 <div data-section-id="{{ section.id }}">
-  <article class="main-article" itemscope>
+  <article class="main-article">
     {%- for block in section.blocks -%}
       {%- case block.type -%}
         {%- when '@app' -%}
@@ -54,7 +64,7 @@
           {{ block.settings.custom_liquid }}
         {%- when 'featured_image' -%}
           {%- if article.image -%}
-            <div class="main-article__pic main-article__pic--larger {% if block.settings.full_width_enabled %}main-article__pic--full-width{% endif %}">
+            <div class="main-article__pic main-article__pic--larger {% if block.settings.slide_width == 'full_width' %}main-article__pic--full-width{% elsif block.settings.slide_width == 'image_width_to_content' %}main-article__pic--post-width{% endif %}">
               {% assign image_src = article.image %}
               {% assign image_src = image_src | remove_first: 'articles/' %}
               <img
@@ -84,14 +94,14 @@
             <header {{ block.shopify_attributes }}>
               <div class="main-article__header">
                 {%- if block.settings.blog_show_author -%}
-                  <span itemprop="author">
-                    <span itemprop="name">Posted by {{ article.author }} </span>
-                  </span>
+                  <span>{{ 'blogs.article.posted_by' | t: author: article.author }} </span>
                 {%- endif -%}
                 {%- if block.settings.blog_show_date -%}
-                  <span itemprop="dateCreated pubdate datePublished"
-                    >on {{ article.published_at | date: '%B %d, %Y' -}}
-                  </span>
+                  {%- assign date_format = 'blogs.article.date_format' | t -%}
+                  {%- assign formatted_date = article.published_at | date: date_format -%}
+                  <time datetime="{{ article.published_at | date: '%Y-%m-%d' }}"
+                    >{{ 'blogs.article.published_on' | t: date: formatted_date -}}
+                  </time>
                 {%- endif -%}
               </div>
               {%- if block.settings.blog_show_author or block.settings.blog_show_date -%}
@@ -99,13 +109,13 @@
               {% else %}
                 {% assign header_class = 'main-article__title' %}
               {% endif %}
-              <h1 class="{{ header_class }}" itemprop="headline">
+              <h1 class="{{ header_class }}">
                 {{ article.title | escape }}
               </h1>
             </header>
 
           {%- when 'content' -%}
-            <div class="main-article__body" itemprop="articleBody" {{ block.shopify_attributes }}>
+            <div class="main-article__body" {{ block.shopify_attributes }}>
               {{ article.content }}
             </div>
 
@@ -118,17 +128,17 @@
               <p>{{ block.settings.share_text | escape }}</p>
 
               {% if block.settings.share_facebook %}
-                <a href="//www.facebook.com/sharer/sharer.php?u={{ share_url }}" class="main-article__share__button">
+                <a href="//www.facebook.com/sharer/sharer.php?u={{ share_url }}" class="main-article__share__button" aria-label="Share on Facebook">
                   {% render 'icons', id: 'soc-fb' %}
                 </a>
               {% endif %}
               {% if block.settings.share_twitter %}
-                <a href="//twitter.com/intent/tweet?&url={{ share_url }}" class="main-article__share__button">
+                <a href="//twitter.com/intent/tweet?&url={{ share_url }}" class="main-article__share__button" aria-label="Share on X (Twitter)">
                   {% render 'icons', id: 'soc-twitter' %}
                 </a>
               {% endif %}
               {% if block.settings.share_pinterest %}
-                <a href="//pinterest.com/pin/create/button/?url={{ share_url }}" class="main-article__share__button">
+                <a href="//pinterest.com/pin/create/button/?url={{ share_url }}" class="main-article__share__button" aria-label="Share on Pinterest">
                   {% render 'icons', id: 'soc-pint' %}
                 </a>
               {% endif %}
@@ -158,7 +168,7 @@
                 {%- if comment.status == 'pending' and comment.content -%}
                   <article id="{{ comment.id }}" class="article-template__comments-comment">
                     {{ comment.content }}
-                    <footer class="right">
+                    <footer>
                       <span class="circle-divider caption-with-letter-spacing">{{ comment.author }}</span>
                     </footer>
                   </article>
@@ -167,7 +177,7 @@
                 {%- for comment in article.comments -%}
                   <article id="{{ comment.id }}" class="article-template__comments-comment">
                     {{ comment.content }}
-                    <footer class="right">
+                    <footer>
                       <span class="circle-divider caption-with-letter-spacing">{{ comment.author }}, </span
                       ><span class="caption-with-letter-spacing">
                         {{- comment.created_at | time_tag: format: 'date' -}}
@@ -219,11 +229,7 @@
               </div>
             {%- endif -%}
 
-            <div
-              {% if blog.moderated? == false %}
-                class="article-template__comments-fields"
-              {% endif %}
-            >
+            <div class="article-template__comments-fields">
               <div class="article-template__comment-fields">
                 <div class="field field--with-error ">
                   <label
@@ -329,7 +335,7 @@
             {%- if blog.moderated? -%}
               <p class="article-template__comment-warning caption">{{ 'blogs.article.moderated' | t }}</p>
             {%- endif -%}
-            <input type="submit" class="button" value="{{ 'blogs.article.post' | t }}">
+            <button type="submit" class="wt-button wt-button--primary">{{ 'blogs.article.post' | t }}</button>
           {% endform %}
         </div>
       </div>
@@ -366,6 +372,33 @@
       "unit": "px",
       "label": "t:sections.global.margin-bottom",
       "info": "t:sections.separator.settings.separator-bottom.info"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_mobile_spacing",
+      "label": "t:sections.settings.settings.show-mobile-spacing.label"
+    },
+    {
+      "type": "range",
+      "id": "margin-top-mobile",
+      "min": 0,
+      "max": 100,
+      "step": 2,
+      "default": 20,
+      "unit": "px",
+      "label": "t:sections.settings.settings.distance-top-mobile.label",
+      "visible_if": "{{ section.settings.show_mobile_spacing }}"
+    },
+    {
+      "type": "range",
+      "id": "margin-bottom-mobile",
+      "min": 0,
+      "max": 100,
+      "step": 2,
+      "default": 20,
+      "unit": "px",
+      "label": "t:sections.settings.settings.distance-bottom-mobile.label",
+      "visible_if": "{{ section.settings.show_mobile_spacing }}"
     }
   ],
   "blocks": [
@@ -390,14 +423,24 @@
       "limit": 1,
       "settings": [
         {
-          "type": "header",
-          "content": "t:sections.global.section-height"
-        },
-        {
-          "type": "checkbox",
-          "id": "full_width_enabled",
-          "label": "t:sections.settings.settings.section-full-width.label",
-          "default": false
+          "type": "radio",
+          "id": "slide_width",
+          "label": "t:sections.main-article.blocks.featured_image.settings.image_width.label",
+          "options": [
+            {
+              "value": "image_width_to_content",
+              "label": "t:sections.main-article.blocks.featured_image.settings.image_width.options.adapt_to_content.label"
+            },
+            {
+              "value": "full_width",
+              "label": "t:sections.main-article.blocks.featured_image.settings.image_width.options.full_width.label"
+            },
+            {
+              "value": "standard",
+              "label": "t:sections.main-article.blocks.featured_image.settings.image_width.options.standard.label"
+            }
+          ],
+          "default": "standard"
         },
         {
           "type": "radio",
@@ -495,12 +538,12 @@
     },
     {
       "type": "social_sharing",
-      "name": "Social Sharing",
+      "name": "t:sections.main-article.blocks.social_sharing.name",
       "settings": [
         {
           "id": "share_text",
           "type": "text",
-          "label": "Share Text",
+          "label": "t:sections.main-article.blocks.social_sharing.settings.share_text.label",
           "default": "Share this article"
         },
         {

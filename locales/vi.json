@@ -40,6 +40,11 @@
     },
     "continue_shopping": "Tiếp tục mua sắm",
     "pagination": {
+      "previous_label": "Trước",
+      "next_label": "Tiếp",
+      "load_more": "Tải thêm",
+      "load_previous": "Tải trước đó",
+      "showing": "Hiển thị {{ count }} trong {{ total }} sản phẩm",
       "label": "Phân trang",
       "page": "Trang {{ number }}",
       "next": "Trang sau",
@@ -52,6 +57,8 @@
       "view": "Xem giỏ hàng của tôi ({{ count }})",
       "item_added": "Mặt hàng đã thêm vào giỏ hàng"
     },
+    "copy": "Sao chép",
+    "copied": "Đã sao chép",
     "share": {
       "copy_to_clipboard": "Sao chép liên kết",
       "share_url": "Liên kết",
@@ -60,9 +67,6 @@
     },
     "quick_add": {
       "view_all_details": "Xem tất cả chi tiết"
-    },
-    "icons": {
-      "icon_title": ""
     },
     "slider": {
       "of": "của",
@@ -74,7 +78,9 @@
   "newsletter": {
     "label": "Email",
     "success": "Cảm ơn bạn đã đăng ký",
-    "button_label": "Đăng ký"
+    "button_label": "Đăng ký",
+    "close": "Đóng cửa sổ bật lên",
+    "consent_checkbox_label": "Tôi muốn đăng ký nhận Bản tin (thông tin về khuyến mãi, giảm giá, ra mắt sản phẩm, cuộc thi)."
   },
   "accessibility": {
     "skip_to_text": "Chuyển đến nội dung",
@@ -95,7 +101,10 @@
     "star_reviews_info": "{{ rating_value }} trên {{ rating_max }} sao",
     "collapsible_content_title": "Nội dung có thể thu gọn",
     "complementary_products": "Sản phẩm bổ sung",
-    "searching": "Đang tìm kiếm..."
+    "searching": "Đang tìm kiếm...",
+    "scroll_to_top": "Scroll to top",
+    "open": "Mở",
+    "subscription_widget__selling_plan_select": "Tần suất giao hàng cho {{ plan_group }}"
   },
   "blogs": {
     "article": {
@@ -115,7 +124,10 @@
       "back_to_blog": "Quay lại blog",
       "share": "Chia sẻ bài viết này",
       "success": "Bạn đã gửi bình luận thành công! Xin cảm ơn!",
-      "success_moderated": "Bạn đã gửi bình luận thành công. Chúng tôi sẽ đăng bình luận sau chốc lát, khi blog của chúng tôi được kiểm duyệt."
+      "success_moderated": "Bạn đã gửi bình luận thành công. Chúng tôi sẽ đăng bình luận sau chốc lát, khi blog của chúng tôi được kiểm duyệt.",
+      "date_format": "%d/%m/%Y",
+      "published_on": "{{ date }}",
+      "posted_by": "Đăng bởi {{ author }}"
     }
   },
   "onboarding": {
@@ -125,6 +137,7 @@
   "products": {
     "product": {
       "add_to_cart": "Thêm vào giỏ hàng",
+      "pick_size": "Chọn {{ option }}",
       "description": "Mô tả",
       "on_sale": "Giảm giá",
       "product_variants": "Mẫu mã sản phẩm",
@@ -138,7 +151,8 @@
         "from_price_html": "Từ {{ price }}",
         "regular_price": "Giá thông thường",
         "sale_price": "Giá bán",
-        "unit_price": "Đơn giá"
+        "unit_price": "Đơn giá",
+        "free": "Miễn phí"
       },
       "share": "Chia sẻ sản phẩm này",
       "sold_out": "Đã bán hết",
@@ -185,7 +199,9 @@
       "volume_pricing": {
         "note": "TODO",
         "price_range": "TODO"
-      }
+      },
+      "select_option": "Chọn tùy chọn",
+      "select_options": "Chọn tùy chọn"
     },
     "modal": {
       "label": "Thư viện phương tiện"
@@ -222,6 +238,10 @@
     }
   },
   "templates": {
+    "404": {
+      "title": "Không tìm thấy trang",
+      "subtext": "404"
+    },
     "search": {
       "no_results": "Không tìm thấy kết quả cho \"{{ terms }}\". Kiểm tra chính tả hoặc sử dụng một từ hoặc cụm từ khác.",
       "results_with_count": {
@@ -242,7 +262,9 @@
         "products": "Sản phẩm",
         "pages": "Trang",
         "articles": "Bài viết",
-        "suggestions": "Gợi ý"
+        "suggestions": "Gợi ý",
+        "popular_searches": "Tìm kiếm phổ biến",
+        "useful_links": "Liên kết hữu ích"
       },
       "search_for": "Xem tất cả cho “{{ terms }}”"
     },
@@ -260,13 +282,12 @@
         "error_heading": "Vui lòng điều chỉnh các mục sau:",
         "title": "Biểu mẫu liên hệ"
       }
-    },
-    "404": {
-      "title": "Không tìm thấy trang",
-      "subtext": "404"
     }
   },
   "sections": {
+    "shoppable_buy_all": {
+      "add_all_to_cart": "Thêm tất cả vào giỏ hàng"
+    },
     "header": {
       "announcement": "Thông báo",
       "menu": "Menu",
@@ -305,7 +326,29 @@
         "title": "Bạn đã có tài khoản?",
         "paragraph_html": "<a href=\"{{ link }}\" tabindex=\"-1\" class=\"link underlined-link\">Đăng nhập</a> để thanh toán nhanh hơn."
       },
-      "view_cart": "Xem giỏ hàng"
+      "view_cart": "Xem giỏ hàng",
+      "checkbox": "Gói quà",
+      "order_note": "Ghi chú đơn hàng",
+      "estimate_shipping": "Vận chuyển",
+      "discount_code": "Mã giảm giá",
+      "features": {
+        "country_region": "Quốc gia/Khu vực",
+        "postal_zip": "Mã bưu điện",
+        "apply": "Áp dụng",
+        "calculate": "Tính toán",
+        "discount_placeholder": "Vui lòng nhập mã giảm giá",
+        "shipping_select_country_zip": "Vui lòng chọn quốc gia và nhập mã bưu điện.",
+        "shipping_calculating": "Đang tính toán…",
+        "shipping_no_rate": "Không có mức phí vận chuyển cho địa điểm này. Hãy thử kiểm tra lại địa chỉ.",
+        "shipping_one_rate": "Có một mức phí vận chuyển cho địa điểm này:",
+        "shipping_n_rates": "Có {{ count }} mức phí vận chuyển cho địa điểm này:",
+        "shipping_free": "Miễn phí",
+        "discount_enter_code": "Vui lòng nhập mã giảm giá.",
+        "discount_applying": "Đang áp dụng…",
+        "discount_applied": "Đã áp dụng mã giảm giá!",
+        "discount_invalid": "Mã giảm giá không hợp lệ hoặc không áp dụng cho giỏ hàng hiện tại.",
+        "discount_error": "Đã xảy ra lỗi. Vui lòng thử lại."
+      }
     },
     "footer": {
       "payment": "Phương thức thanh toán",
@@ -369,6 +412,54 @@
       },
       "error": {
         "invalid_format": "Định dạng ngày không hợp lệ. Vui lòng nhập ngày và giờ theo định dạng YYYY-MM-DD HH:MM."
+      }
+    },
+    "localization_drawer": {
+      "title": "Định vị",
+      "country_label": "Quốc gia/khu vực",
+      "language_label": "Ngôn ngữ",
+      "drawer_title": "Tùy chọn địa phương hóa",
+      "current_country_info": "Bạn đang gửi hàng đến {{ countryName }} và đơn hàng của bạn sẽ được thanh toán bằng {{ currencyIso }} {{ currencySymbol }}.",
+      "search_location": {
+        "label": "Tìm kiếm vị trí",
+        "placeholder": "Tìm kiếm địa điểm..."
+      }
+    },
+    "bundle-builder": {
+      "add_to_bundle": "Thêm vào bundle",
+      "status": {
+        "discount": "🎉 Bạn đã nhận được giảm giá.",
+        "add_more": "Bạn vẫn có thể thêm nhiều hơn."
+      },
+      "toggle": "Bật/tắt bảng combo",
+      "remove_item": "Xóa sản phẩm",
+      "error_message": "Đã xảy ra lỗi. Vui lòng thử lại."
+    },
+    "quiz": {
+      "back": "Quay lại",
+      "prev_question": "Trước",
+      "next_question": "Tiếp theo",
+      "see_results": "Xem kết quả"
+    },
+    "blog_posts": {
+      "tags_all": "Tất cả bài viết"
+    },
+    "compare_products": {
+      "name": "So sánh sản phẩm",
+      "badge": {
+        "compare": "VS"
+      },
+      "placeholders": {
+        "left_text": "Trái",
+        "right_text": "Phải"
+      },
+      "aria": {
+        "table": "Bảng so sánh"
+      },
+      "blocks": {
+        "table_row": {
+          "center_text_default": "Nhập văn bản..."
+        }
       }
     }
   },
@@ -534,7 +625,7 @@
   },
   "aria-label": {
     "announcement-bar": "Đóng thanh thông báo",
-    "contact-form": "Gửi một mẫu",
+    "contact-form": "Gửi",
     "featured-collection": "Xem tất cả",
     "featured-product-3d-model": "Xem mô hình 3D",
     "main-product-video": "Phát video",
@@ -572,6 +663,15 @@
     "price-from": "Giá từ",
     "price-to": "Giá đến",
     "remove-price-range": "Gỡ bỏ bộ lọc khoảng giá",
-    "sort-options": "Tùy chọn sắp xếp"
+    "sort-options": "Tùy chọn sắp xếp",
+    "lookbook-button": "Xem chi tiết",
+    "pills-navigation": "Điều hướng dạng thẻ",
+    "collection-tabs": "Tab bộ sưu tập"
+  },
+  "placeholder": {
+    "select_option": "Chọn một tùy chọn"
+  },
+  "cross_sell": {
+    "empty_msg": "Không có sản phẩm nào để hiển thị. Khối này sẽ không được hiển thị với khách hàng trên cửa hàng."
   }
 }

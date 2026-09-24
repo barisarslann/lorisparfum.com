@@ -66,11 +66,11 @@
     "product-grid": {
       "type": "main-collection-product-grid",
       "settings": {
+        "full-width-enabled": false,
         "products_per_page": 120,
-        "columns_mobile": "2",
         "columns_desktop": "4",
         "spacing_desktop": "16",
-        "full-width-enabled": false,
+        "columns_mobile": "2",
         "spacing_mobile": "16",
         "image_ratio": "square",
         "show_video": false,
@@ -244,7 +244,7 @@
     },
     "custom_liquid_LB9H4L": {
       "type": "custom-liquid",
-      "name": "t:sections.custom-liquid.presets.name",
+      "name": "Custom Liquid",
       "settings": {
         "custom_liquid": "<style>\n/* .wt-options__list li[value=\"created-descending\"], */\n.wt-options__list li[value=\"created-ascending\"] {\n  display: none;\n}\n</style>\n\n<style>\n.hero .hero__pic .hero__img {\n  margin: 20px auto 0;\n}\n\n.collection-banner .hero__overlay {\n  padding-left: 0;\n  padding-right: 0;\n}\n.collection-banner .hero__overlay .hero__overlay__content {\n  width: 100%;\n}\n\n@media (min-width: 1200px) {\n.hero .hero__pic .hero__img,\n.collection-banner .hero__overlay .hero__overlay__content {\n  padding-left: calc(calc(var(--gap, 8px) * 2) + calc(var(--gap, 8px) * 2));\n  padding-right: calc(calc(var(--gap, 8px) * 2) + calc(var(--gap, 8px) * 2));\n  max-width: var(--site-max-width);\n  margin: 0 auto 25px !important;\n}\n}\n</style>"
       }

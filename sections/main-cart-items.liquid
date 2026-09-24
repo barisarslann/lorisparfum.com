@@ -10,11 +10,19 @@
             --section-gap-bottom: {{ section.settings.margin-bottom }}px;
         {% endif %}
 
+      {%- if section.settings.show_mobile_spacing -%}
+          --section-gap-top-mobile: {{ section.settings.margin-top-mobile }}px;
+      {%- endif -%}
+
+      {%- if section.settings.show_mobile_spacing -%}
+          --section-gap-bottom-mobile: {{ section.settings.margin-bottom-mobile }}px;
+      {%- endif -%}
+
     }
 </style>
 <div data-section-id="{{ section.id }}">
   <cart-items class="cart-page">
-    <form action="{{ routes.cart_url }}" class="cart__contents critical-hidden" method="post" id="cart-form">
+    <form action="{{ routes.cart_url }}" class="cart__contents critical-hidden" method="post" id="cart">
       <div class="wt-cart__wrapper cart-page" id="main-cart-items" data-id="{{ section.id }}">
         <div class="wt-cart js-contents">
           <header class="wt-cart__header {% if settings.animations %} scroll-trigger animate--slide-in {% endif %} {% if settings.disabled_animations_on_mobile %} disabled-on-mobile {% endif %}">
@@ -28,9 +36,23 @@
                 </h2>
               </div>
 
-              {% if settings.enable_free_shipping_bar %}
-                {% render 'cart-free-shipping-bar' %}
-              {% endif %}
+              {%- comment -%}
+                Free-shipping + discount-progress bars wrapped together so the
+                cart-page desktop layout (≥900px) can place them as one column
+                on the right of the cart title. On mobile they stack below the
+                title as before — the cart drawer doesn't use this wrapper.
+              {%- endcomment -%}
+              {%- if settings.enable_free_shipping_bar or settings.enable_discount_progress_bar -%}
+                <div class="wt-cart__header__progress">
+                  {% if settings.enable_free_shipping_bar %}
+                    {% render 'cart-free-shipping-bar' %}
+                  {% endif %}
+
+                  {% if settings.enable_discount_progress_bar %}
+                    {% render 'discount-progress-bar' %}
+                  {% endif %}
+                </div>
+              {%- endif -%}
 
             {%- else -%}
               {% render 'cart-empty' %}
@@ -97,6 +119,33 @@
       "default": 0,
       "label": "t:sections.settings.settings.distance-bottom.label",
       "info": "t:sections.settings.settings.distance-bottom.info"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_mobile_spacing",
+      "label": "t:sections.settings.settings.show-mobile-spacing.label"
+    },
+    {
+      "type": "range",
+      "id": "margin-top-mobile",
+      "min": 0,
+      "max": 100,
+      "step": 2,
+      "default": 20,
+      "unit": "px",
+      "label": "t:sections.settings.settings.distance-top-mobile.label",
+      "visible_if": "{{ section.settings.show_mobile_spacing }}"
+    },
+    {
+      "type": "range",
+      "id": "margin-bottom-mobile",
+      "min": 0,
+      "max": 100,
+      "step": 2,
+      "default": 20,
+      "unit": "px",
+      "label": "t:sections.settings.settings.distance-bottom-mobile.label",
+      "visible_if": "{{ section.settings.show_mobile_spacing }}"
     }
   ],
   "disabled_on": {

@@ -1,0 +1,5 @@
+{% if heading != blank %}
+  <div class="headline headline--rich {% if settings.animations %} scroll-trigger animate--slide-in {% endif %} {% if settings.disabled_animations_on_mobile %} disabled-on-mobile {% endif %}">
+    {{ heading }}
+  </div>
+{% endif %}

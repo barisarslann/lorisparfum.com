@@ -1,0 +1,38 @@
+{% assign metafield = block.settings.metafield | strip | split: '.' %}
+{% assign metafield_namespace = metafield | first | strip %}
+{% assign metafield_key = metafield | last | strip %}
+{% assign bulletpoints = product.metafields[metafield_namespace][metafield_key] %}
+
+{% if bulletpoints.value == blank %}
+  {% assign bulletpoints = block.settings.default_text | strip_html | newline_to_br | split: '<br />' %}
+{% else %}
+  {% if bulletpoints.type == 'multi_line_text_field' %}
+    {% assign bulletpoints = bulletpoints.value | strip_html | newline_to_br | split: '<br />' %}
+  {% else %}
+    {% assign bulletpoints = bulletpoints.value %}
+  {% endif %}
+{% endif %}
+
+<div
+  class="wt-product__features wt-product__bulletpoints{% if settings.animations %} scroll-trigger animate--slide-in{% endif %}{% if settings.disabled_animations_on_mobile %} disabled-on-mobile{% endif %}"
+  data-block-id="{{ block.id }}"
+  {{ block.shopify_attributes }}
+  not-quick-add
+>
+  <ul class="wt-product__features__list{% if block.settings.enable_custom_icon %} wt-product__features--custom-icon{% endif %}">
+    {% for bulletpoint in bulletpoints %}
+      <li class="wt-product__features__item">
+        {% if block.settings.enable_custom_icon %}
+          <span class="wt-product__features__icon">
+            {% if block.settings.bullet_icon_image != blank %}
+              {{ block.settings.bullet_icon_image | image_url: width: 64 | image_tag: loading: 'lazy', class: 'wt-product__features__icon-img' }}
+            {% else %}
+              {% render 'icons', id: block.settings.bullet_icon_select, icon_class: 'wt-product__features__icon-svg' %}
+            {% endif %}
+          </span>
+        {% endif %}
+        {{ bulletpoint }}
+      </li>
+    {% endfor %}
+  </ul>
+</div>

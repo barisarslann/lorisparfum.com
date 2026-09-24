@@ -1,35 +1,69 @@
-<div class="wt-cart__checkbox">
-  {% assign checkbox_label = settings.cart_additional_service_name %}
-  {% assign chcebkox_name = 'attributes["' | append: checkbox_label | append: '"]' %}
-  {% assign chcekbox_checked = cart.attributes[checkbox_label] %}
-  {% if chcekbox_checked == 'true' %}
-    {% assign chcekbox_checked_value = true %}
-  {% else %}
-    {% assign chcekbox_checked_value = '' %}
-  {% endif %}
+{%- liquid
+  assign service_product = settings.cart_additional_service_product
+  assign checkbox_label = settings.cart_additional_service_name
 
-  {% render 'form-checkbox',
-    name: chcebkox_name,
-    checked: chcekbox_checked_value,
-    label: checkbox_label,
-    label_class: 'label',
-    id: 'cart_additional_checkbox'
-  %}
-</div>
-<script>
-  (() => {
-    const checkbox = document.getElementById('cart_additional_checkbox');
+  # Detect whether the configured service product can actually be added.
+  # `service_product.available` is true if at least one variant is purchasable
+  # (in stock, or out-of-stock-purchase allowed). When the product is
+  # archived / draft / sold out, hide the checkbox entirely — the offer
+  # simply doesn't apply. The line item rendering (cart-item.liquid)
+  # handles the case where a service product is already in cart but later
+  # became unavailable.
+  assign service_available = false
+  if service_product != blank and service_product.available
+    assign service_available = true
+  endif
+-%}
 
-    checkbox.addEventListener('change', (e) => {
-      const isChecked = e.target.checked;
-      const label = e.target.dataset.label;
-      const body = JSON.stringify({
-        attributes: {
-          [label]: isChecked,
-        },
-      });
+{%- if service_product != blank -%}
+  {%- if service_available -%}
+    {%- comment -%}Product-based mode: checkbox adds/removes a product via AJAX{%- endcomment -%}
+    {%- assign is_in_cart = false -%}
+    {%- for item in cart.items -%}
+      {%- if item.product_id == service_product.id -%}
+        {%- assign is_in_cart = true -%}
+        {%- break -%}
+      {%- endif -%}
+    {%- endfor -%}
 
-      fetch(routes.cart_update_url, { ...fetchConfig(), ...{ body } });
-    });
-  })();
-</script>
+    <cart-service-checkbox
+      class="wt-cart__checkbox"
+      data-product-id="{{ service_product.variants.first.id }}"
+    >
+      {% render 'form-checkbox',
+        name: 'cart_additional_service',
+        checked: is_in_cart,
+        label: checkbox_label,
+        label_class: 'label',
+        id: 'cart_additional_checkbox'
+      %}
+      <div class="wt-cart__checkbox__loader hidden">
+        {% render 'button-loading-indicator', hidden: false %}
+      </div>
+    </cart-service-checkbox>
+  {%- comment -%}
+    else: a product is configured but currently unavailable
+    (sold out / archived / draft) → render nothing per design.
+    Admins can re-enable the product in the Shopify admin.
+  {%- endcomment -%}
+  {%- endif -%}
+{%- else -%}
+  {%- comment -%}Attribute-based mode (legacy): no product selected, store as cart attribute{%- endcomment -%}
+  {%- assign chcebkox_name = 'attributes[' | append: checkbox_label | append: ']' -%}
+  {%- assign chcekbox_checked = cart.attributes[checkbox_label] -%}
+  {%- if chcekbox_checked == 'true' -%}
+    {%- assign chcekbox_checked_value = true -%}
+  {%- else -%}
+    {%- assign chcekbox_checked_value = '' -%}
+  {%- endif -%}
+
+  <div class="wt-cart__checkbox">
+    {% render 'form-checkbox',
+      name: chcebkox_name,
+      checked: chcekbox_checked_value,
+      label: checkbox_label,
+      label_class: 'label',
+      id: 'cart_additional_checkbox'
+    %}
+  </div>
+{%- endif -%}

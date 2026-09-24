@@ -26,6 +26,10 @@
 .wt-pagination__list > li:not(:last-child) {
   margin-right: 1rem;
 }
+.wt-pagination__list > li.wt-pagination__arrow {
+  flex: 0 0 auto;
+  max-width: none;
+}
 
 .wt-pagination__item {
   color: rgb(var(--color-foreground));
@@ -46,6 +50,10 @@
 }
 .wt-pagination__item .icon-caret {
   height: 9px;
+}
+.wt-pagination__item-label {
+  margin: 0 calc(var(--gap, 8px) * 1);
+  white-space: nowrap;
 }
 .wt-pagination__item--current {
   font-weight: 600;
@@ -96,3 +104,4 @@
 .wt-pagination__item-arrow:hover::after {
   display: none;
 }
+/*# sourceMappingURL=module-pagination.css.map */

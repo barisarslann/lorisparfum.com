@@ -1,0 +1,101 @@
+{% render 'countdown-timer', block: block %}
+
+{% schema %}
+{
+  "name": "t:blocks.countdown_timer.name",
+  "settings": [
+    {
+      "id": "end_datetime",
+      "type": "text",
+      "label": "t:blocks.countdown_timer.settings.end_date.label",
+      "default": "2026-12-31 23:59",
+      "placeholder": "t:blocks.counter-timer.settings.end_datetime.placeholder",
+      "info": "t:blocks.countdown_timer.settings.end_date.info"
+    },
+    {
+      "id": "expired_message",
+      "type": "text",
+      "label": "t:blocks.countdown_timer.settings.expired_message.label"
+    },
+    {
+      "type": "checkbox",
+      "id": "labels_below",
+      "label": "t:blocks.countdown_timer.settings.labels.below.label",
+      "default": true
+    },
+    {
+      "type": "select",
+      "id": "timer_style",
+      "label": "t:blocks.countdown_timer.settings.style.label",
+      "options": [
+        {
+          "value": "headline",
+          "label": "t:blocks.countdown_timer.settings.style.headline"
+        },
+        {
+          "value": "text",
+          "label": "t:blocks.countdown_timer.settings.style.text"
+        }
+      ]
+    },
+    {
+      "type": "range",
+      "id": "scale_timer",
+      "min": 100,
+      "max": 500,
+      "step": 10,
+      "default": 100,
+      "label": "t:blocks.countdown_timer.settings.scale.desktop.label",
+      "unit": "%"
+    },
+    {
+      "type": "range",
+      "id": "scale_timer_mobile",
+      "min": 80,
+      "max": 300,
+      "step": 10,
+      "default": 100,
+      "label": "t:blocks.countdown_timer.settings.scale.mobile.label",
+      "unit": "%"
+    },
+    {
+      "type": "checkbox",
+      "id": "custom_item_width_enabled",
+      "label": "t:blocks.countdown_timer.settings.custom_item_width_enabled.label",
+      "default": false,
+      "visible_if": "{{ block.settings.labels_below }}"
+    },
+    {
+      "type": "range",
+      "id": "counter_item_width",
+      "min": 30,
+      "max": 80,
+      "step": 5,
+      "default": 55,
+      "unit": "px",
+      "label": "t:blocks.countdown_timer.settings.counter_item_width.label",
+      "visible_if": "{{ block.settings.custom_item_width_enabled and block.settings.labels_below }}"
+    },
+    {
+      "type": "range",
+      "id": "counter_item_width_mobile",
+      "min": 20,
+      "max": 80,
+      "step": 5,
+      "default": 40,
+      "unit": "px",
+      "label": "t:blocks.countdown_timer.settings.counter_item_width_mobile.label",
+      "visible_if": "{{ block.settings.custom_item_width_enabled and block.settings.labels_below }}"
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:blocks.counter-timer.name",
+      "settings": {
+        "end_datetime": "2026-12-31 23:59",
+        "expired_message": "The countdown has expired"
+      }
+    }
+  ]
+}
+{% endschema %}

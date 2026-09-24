@@ -6,12 +6,12 @@
 <style>
   [data-section-id="{{ section.id }}"]
   {
-    {% if background_rgb != 'rgba(0, 0, 0, 0.0)' %}
+    {% if section.settings['color-overlay'] != blank and section.settings['color-overlay'] != 'transparent' and background_rgb != 'rgba(0, 0, 0, 0.0)' %}
       --color-overlay-rgb: {{ section.settings.color-overlay | color_to_rgb | remove: 'rgb(' | remove: ')' }};
       --color-overlay-opacity: {{ section.settings.color-overlay-opacity | divided_by: 100.0 }};
     {% endif %}
 
-    {% if text_rgb != 'rgba(0, 0, 0, 0.0)' %}
+    {% if section.settings['color-body-text'] != blank and section.settings['color-body-text'] != 'transparent' and text_rgb != 'rgba(0, 0, 0, 0.0)' %}
       --color-custom-text: {{ section.settings.color-body-text }};
     {% endif %}
 
@@ -26,6 +26,14 @@
     {% if section.settings.margin-bottom %}
         --section-gap-bottom: {{ section.settings.margin-bottom }}px;
     {% endif %}
+
+      {%- if section.settings.show_mobile_spacing -%}
+          --section-gap-top-mobile: {{ section.settings.margin-top-mobile }}px;
+      {%- endif -%}
+
+      {%- if section.settings.show_mobile_spacing -%}
+          --section-gap-bottom-mobile: {{ section.settings.margin-bottom-mobile }}px;
+      {%- endif -%}
 
     {% if section.settings.slide_height == 'fixed_height' %}
         --section-height: {{ section.settings.mobile_fixed_height }}px;
@@ -58,12 +66,17 @@
   {% assign customwrapperclass = 'hero__wrapper' %}
 {% endif %}
 
-{% if section.settings.show_collection_description %}
+{% if  section.settings.show_placeholder_image %}
+  {% assign placeholder_image = 'collection-apparel-1' %}
 {% else %}
-
+  {% assign placeholder_image = null %}
 {% endif %}
 
-<div data-section-id="{{ section.id }}" class="{{ customwrapperclass }}">
+<div
+  data-section-id="{{ section.id }}"
+  class="{{ customwrapperclass }} {% if collection.image == blank and placeholder_image == null %}hero--hidden-placeholder{% endif %}"
+  data-adapt="{% if section.settings.slide_height == 'adapt_to_first_image' %}image{% else %}fixed{% endif %}"
+>
   <div class="{% if settings.animations %} scroll-trigger animate--slide-in {% endif %} {% if settings.disabled_animations_on_mobile %} disabled-on-mobile {% endif %}">
     {% render 'hero',
       type: 'blocks',
@@ -73,7 +86,7 @@
       mobile_text_horizontal_position: section.settings.mobile_text_horizontal_position,
       desktop_image: collection.image,
       mobile_image: collection.image,
-      placeholder: 'collection-apparel-1',
+      placeholder: placeholder_image,
       heading_h1: collection.title,
       text: collection.description,
       loader: true,
@@ -97,6 +110,12 @@
       "id": "show_collection_description",
       "default": false,
       "label": "t:sections.main-collection-banner.settings.show_collection_description.label"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_placeholder_image",
+      "default": true,
+      "label": "t:sections.main-collection-banner.settings.show_placeholder_image.label"
     },
     {
       "type": "header",
@@ -273,13 +292,11 @@
     {
       "type": "color",
       "id": "color-body-text",
-      "default": "transparent",
       "label": "t:sections.settings.settings.text-color.label"
     },
     {
       "type": "color",
       "id": "color-overlay",
-      "default": "transparent",
       "label": "t:sections.settings.settings.background-color.label"
     },
     {
@@ -316,6 +333,33 @@
       "default": 0,
       "label": "t:sections.settings.settings.distance-bottom.label",
       "info": "t:sections.settings.settings.distance-bottom.info"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_mobile_spacing",
+      "label": "t:sections.settings.settings.show-mobile-spacing.label"
+    },
+    {
+      "type": "range",
+      "id": "margin-top-mobile",
+      "min": 0,
+      "max": 100,
+      "step": 2,
+      "default": 20,
+      "unit": "px",
+      "label": "t:sections.settings.settings.distance-top-mobile.label",
+      "visible_if": "{{ section.settings.show_mobile_spacing }}"
+    },
+    {
+      "type": "range",
+      "id": "margin-bottom-mobile",
+      "min": 0,
+      "max": 100,
+      "step": 2,
+      "default": 20,
+      "unit": "px",
+      "label": "t:sections.settings.settings.distance-bottom-mobile.label",
+      "visible_if": "{{ section.settings.show_mobile_spacing }}"
     }
   ],
   "disabled_on": {
