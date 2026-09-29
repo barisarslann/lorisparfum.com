@@ -1,0 +1,29 @@
+{% comment %}Live image badges and the collection-only campaign badge, shared by both card designs and PDPs.{% endcomment %}
+{% render 'three-for-two-badge', product: product %}
+{% for tag in product.tags %}
+  {% assign normalized_tag = tag | downcase %}
+  {% for index in (1..6) %}
+    {% if index == 5 %}{% continue %}{% endif %}
+    {% liquid
+      assign prefix = 'custom-badge-' | append: index
+      assign tag_key = prefix | append: '-input'
+      assign image_key = prefix | append: '-input_image'
+      assign label_key = prefix | append: '-label'
+      assign badge_tag = settings[tag_key] | downcase
+      assign badge_label = settings[label_key] | default: settings[tag_key]
+    %}
+    {% if badge_tag != blank and normalized_tag == badge_tag %}
+      <div class="card__badges--item{% if settings[image_key] != blank and settings['badges-uppercase'] != 'uppercase' %} loris-image-badge{% if large %} loris-image-badge--large{% endif %}{% endif %}" data-custom-badge="{{ settings[tag_key] | escape }}">
+        {% if settings['badges-uppercase'] == 'uppercase' %}
+          {{ badge_label | upcase | escape }}
+        {% elsif settings[image_key] != blank %}
+          {% assign image_width = 150 %}
+          {% if large %}{% assign image_width = 240 %}{% endif %}
+          {{ settings[image_key] | image_url: width: image_width | image_tag: width: image_width, loading: 'lazy', alt: badge_label }}
+        {% else %}
+          {{ badge_label | escape }}
+        {% endif %}
+      </div>
+    {% endif %}
+  {% endfor %}
+{% endfor %}

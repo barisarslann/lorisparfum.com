@@ -1,2 +1,25 @@
+.card__badges .card__badges--three-for-two {
+  order: -1;
+  align-self: start;
+  justify-self: start;
+  z-index: 1;
+  margin: 8px;
+  padding: 3px 6px;
+  border-radius: 0;
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 1.25;
+  pointer-events: none;
+}
 
-    
+.wt-page-nav-mega__link__text { margin-inline-start: 15px; margin-inline-end: auto; }
+.mega-menu__gallery { flex-wrap: wrap; }
+.mega-menu__gallery:not(.mega-menu__gallery--stack) > .mega-menu__gallery__item { width: 46%; margin-right: 0; }
+.loris-menu-image { width: 20%; height: auto; }
+.giftProducts { display: block; margin-bottom: 8px; border: 1px solid #0002; padding: 5px 10px; }
+.giftProducts fieldset { border: 0; padding: 0; margin: 0; }
+.loris-gift-options__choices { display: flex; gap: 30px; margin-top: 15px; }
+.loris-gift-options__choice { display: flex; align-items: center; gap: 10px; }
+.loris-gift-options__choice > span { display: grid; justify-items: center; text-align: center; }
+.loris-gift-options__choice img { height: 50px; width: auto; }
+cart-drawer[aria-busy="true"] .wt-cart__drawer__footer { opacity: .6; }

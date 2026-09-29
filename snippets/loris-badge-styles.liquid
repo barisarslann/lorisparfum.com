@@ -1,0 +1,13 @@
+<style>
+  .card__badges--three-for-two {
+    background-color: {{ settings.custom-badge-5-background }};
+    color: {{ settings.custom-badge-5-text }};
+  }
+  [data-custom-badge="{{ settings.custom-badge-6-input | escape }}"] {
+    background-color: {{ settings.custom-badge-6-background }};
+    color: {{ settings.custom-badge-6-text }};
+  }
+  .card__badges .loris-image-badge { z-index: 1; background: none; padding: 0; }
+  .loris-image-badge img { width: 75px; height: auto; }
+  .loris-image-badge--large img { width: auto; max-width: 120px; max-height: 120px; }
+</style>

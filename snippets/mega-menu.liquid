@@ -60,6 +60,7 @@
           data-menu-level="1"
           class="wt-page-nav-mega__link wt-page-nav-mega__link--parent {% if link.current %}wt-page-nav-mega__link--active{% endif %} {{ link_highlight_class }}"
         >
+          {% render 'loris-menu-image', link: link %}
           <span class="wt-page-nav-mega__link__text wt-page-nav-mega__link__text--underline">
             {{- link.title | escape -}}
           </span>
@@ -220,6 +221,7 @@
             aria-current="page"
           {% endif %}
         >
+          {% render 'loris-menu-image', link: link %}
           <span class="wt-page-nav-mega__link__text wt-page-nav-mega__link__text--underline">
             {{- link.title | escape -}}
           </span>

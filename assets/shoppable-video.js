@@ -21,12 +21,17 @@ if (!customElements.get("shoppable-video")) {
           this.handleScrollAndUpdateVideoPosition.bind(this);
         this.handleTouchEnd = this.handleTouchEnd.bind(this);
         this.handleTouchStart = this.handleTouchStart.bind(this);
+        this.selectVisibleVideo = this.selectVisibleVideo.bind(this);
       }
 
       setupElements() {
         this.productsInfo = JSON.parse(this.dataset.products);
         this.productsInfoArr = Object.entries(this.productsInfo);
-        this.video = this.querySelector("video");
+        this.videoMediaQuery = window.matchMedia("(min-width: 900px)");
+        this.video = this.getVisibleVideo();
+        this.querySelectorAll("video").forEach(video => {
+          if (video !== this.video) video.pause();
+        });
         this.productsContainer = this.querySelector(
           ".shoppable-video__products",
         );
@@ -59,7 +64,8 @@ if (!customElements.get("shoppable-video")) {
       }
 
       addEventListeners() {
-        this.controlButton.addEventListener("click", this.togglePlayPause);
+        this.controlButton?.addEventListener("click", this.togglePlayPause);
+        this.videoMediaQuery.addEventListener("change", this.selectVisibleVideo);
 
         this.video?.addEventListener("timeupdate", this.throttleUpdateScroll);
         this.video?.addEventListener("play", this.toggleVideoIcon);
@@ -191,7 +197,30 @@ if (!customElements.get("shoppable-video")) {
         this.productsContainer.style.marginTop = `-${maxHeight + marginValue}px`;
       }
 
+      getVisibleVideo() {
+        const hiddenClass = this.videoMediaQuery.matches ? "wt-desktop-hidden" : "wt-mobile-hidden";
+        return [...this.querySelectorAll("video")].find(video => !video.classList.contains(hiddenClass)) || this.querySelector("video");
+      }
+
+      selectVisibleVideo() {
+        const next = this.getVisibleVideo();
+        if (!next || next === this.video) return;
+        const wasPlaying = this.video && !this.video.paused;
+        this.video?.removeEventListener("timeupdate", this.throttleUpdateScroll);
+        this.video?.removeEventListener("play", this.toggleVideoIcon);
+        this.video?.removeEventListener("pause", this.toggleVideoIcon);
+        this.video?.pause();
+        this.video = next;
+        this.video.addEventListener("timeupdate", this.throttleUpdateScroll);
+        this.video.addEventListener("play", this.toggleVideoIcon);
+        this.video.addEventListener("pause", this.toggleVideoIcon);
+        this.lastScrolledToProductIndex = null;
+        if (wasPlaying) this.video.play().catch(() => {});
+        this.toggleVideoIcon();
+      }
+
       toggleVideoIcon() {
+        if (!this.video || !this.controlButton) return;
         const isPlaying = !this.video.paused;
         this.controlButton.classList.toggle(
           "shoppable-video__control-button--play",
@@ -204,7 +233,8 @@ if (!customElements.get("shoppable-video")) {
       }
 
       removeEventListeners() {
-        this.controlButton.removeEventListener("click", this.togglePlayPause);
+        this.controlButton?.removeEventListener("click", this.togglePlayPause);
+        this.videoMediaQuery.removeEventListener("change", this.selectVisibleVideo);
 
         this.video?.removeEventListener("click", this.togglePlayPause);
         this.video?.removeEventListener(

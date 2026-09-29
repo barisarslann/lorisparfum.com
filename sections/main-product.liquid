@@ -1,3 +1,4 @@
+{{ 'component-product-fragrance-family.css' | asset_url | stylesheet_tag }}
 {{ 'photoswipe.css' | asset_url | stylesheet_tag }}
 {{ 'module-product-gallery.css' | asset_url | stylesheet_tag }}
 {{ 'swiper.css' | asset_url | stylesheet_tag }}
@@ -308,82 +309,7 @@
 
       <div data-gallery class="{% if section.settings.enable-image-zoom %}photoswipe{% endif %}">
         <div class="card__badges card__badges--product">
-          {% assign custom-badge-1-input = settings['custom-badge-1-input'] | downcase %}
-          {% assign custom-badge-2-input = settings['custom-badge-2-input'] | downcase %}
-          {% assign custom-badge-3-input = settings['custom-badge-3-input'] | downcase %}
-          {% assign custom-badge-4-input = settings['custom-badge-4-input'] | downcase %}
-
-          {% for tag in product.tags %}
-                {% assign downcase_tag = tag | downcase %}
-                {% if downcase_tag == custom-badge-1-input %}
-                <div class="card__badges--item" data-custom-badge="{{ settings.custom-badge-1-input }}">
-                  {% if settings['badges-uppercase'] == 'uppercase' %}
-                    {% if settings['custom-badge-1-label'] != blank %}
-                      {{ settings['custom-badge-1-label'] | upcase }}
-                    {% else %}
-                      {{ settings['custom-badge-1-input'] | upcase }}
-                    {% endif %}
-                  {% else %}
-                    {% if settings['custom-badge-1-label'] != blank %}
-                      {{ settings['custom-badge-1-label'] }}
-                    {% else %}
-                      {{ settings['custom-badge-1-input'] }}
-                    {% endif %}
-                  {% endif %}
-                </div>
-              {% endif %}
-              {% if downcase_tag == custom-badge-2-input %}
-                <div class="card__badges--item" data-custom-badge="{{ settings.custom-badge-2-input }}">
-                  {% if settings['badges-uppercase'] == 'uppercase' %}
-                    {% if settings['custom-badge-2-label'] != blank %}
-                      {{ settings['custom-badge-2-label'] | upcase }}
-                    {% else %}
-                      {{ settings['custom-badge-2-input'] | upcase }}
-                    {% endif %}
-                  {% else %}
-                    {% if settings['custom-badge-2-label'] != blank %}
-                      {{ settings['custom-badge-2-label'] }}
-                    {% else %}
-                      {{ settings['custom-badge-2-input'] }}
-                    {% endif %}
-                  {% endif %}
-                </div>
-              {% endif %}
-              {% if downcase_tag == custom-badge-3-input %}
-                <div class="card__badges--item" data-custom-badge="{{ settings.custom-badge-3-input }}">
-                  {% if settings['badges-uppercase'] == 'uppercase' %}
-                    {% if settings['custom-badge-3-label'] != blank %}
-                      {{ settings['custom-badge-3-label'] | upcase }}
-                    {% else %}
-                      {{ settings['custom-badge-3-input'] | upcase }}
-                    {% endif %}
-                  {% else %}
-                    {% if settings['custom-badge-3-label'] != blank %}
-                      {{ settings['custom-badge-3-label'] }}
-                    {% else %}
-                      {{ settings['custom-badge-3-input'] }}
-                    {% endif %}
-                  {% endif %}
-                </div>
-              {% endif %}
-              {% if downcase_tag == custom-badge-4-input %}
-                <div class="card__badges--item" data-custom-badge="{{ settings.custom-badge-4-input }}">
-                  {% if settings['badges-uppercase'] == 'uppercase' %}
-                    {% if settings['custom-badge-4-label'] != blank %}
-                      {{ settings['custom-badge-4-label'] | upcase }}
-                    {% else %}
-                      {{ settings['custom-badge-4-input'] | upcase }}
-                    {% endif %}
-                  {% else %}
-                    {% if settings['custom-badge-4-label'] != blank %}
-                      {{ settings['custom-badge-4-label'] }}
-                    {% else %}
-                      {{ settings['custom-badge-4-input'] }}
-                    {% endif %}
-                  {% endif %}
-                </div>
-              {% endif %}
-            {% endfor %}
+          {% render 'loris-product-badges', product: product, large: true %}
         </div>
         <ul
           data-swiper-container
@@ -928,6 +854,8 @@
               {{ block.settings.custom_liquid }}
             {%- when 'custom_option' -%}
               {% render 'pdp-block-custom-option', block: block, product: product %}
+            {%- when 'fragrance_family' -%}
+              {% render 'product-fragrance-family', product: product, block: block %}
             {%- when 'description' -%}
               {% render 'pdp-block-description', block: block, product: product %}
             {%- when 'estimated_delivery' -%}
@@ -982,7 +910,14 @@
       </div>
     </section>
 
-    {% if section.settings.enable_sticky_buy_button %}
+    {% if section.settings.loris_mobile_sticky_enabled and product.available %}
+      {% assign buy_block = section.blocks | where: 'type', 'buy_buttons' | first %}
+      {% if buy_block != blank %}
+        {{ 'loris-sticky-cart.css' | asset_url | stylesheet_tag }}
+        <script src="{{ 'loris-sticky-cart.js' | asset_url }}" defer></script>
+        {% render 'loris-sticky-cart', product: product, section: section, product_form_id: product_form_id %}
+      {% endif %}
+    {% elsif section.settings.enable_sticky_buy_button %}
       <sticky-buy-button class="wt-product__sticky-buy 
         {% if section.settings.sticky_button_type == 'floating' %} wt-product__floating-buy {% endif %} 
         {% if section.settings.sticky_button_visibility == 'desktop' or section.settings.sticky_button_visibility == 'both' %} wt-product__sticky-buy--desktop {% endif %}
@@ -1099,6 +1034,13 @@
   "tag": "section",
   "class": "product-section",
   "settings": [
+    {
+      "type": "checkbox",
+      "id": "loris_mobile_sticky_enabled",
+      "label": "Loris mobil sabit sepet",
+      "info": "Canlı temadaki küçültülebilir mobil sepet tasarımı.",
+      "default": false
+    },
     {
       "type": "header",
       "content": "t:sections.main-product.settings.sticky_buy_button.header"
@@ -1471,6 +1413,17 @@
     }
   ],
   "blocks": [
+    {
+      "type": "fragrance_family",
+      "name": "Koku ailesi",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "paragraph",
+          "content": "Ürünün Koku Ailesi meta alanını gösterir. Alan boşsa bu satır görünmez."
+        }
+      ]
+    },
     {
       "type": "@app"
     },

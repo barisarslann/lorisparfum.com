@@ -1,0 +1,16 @@
+{% liquid
+  assign menu_image = blank
+  for index in (1..15)
+    assign text_key = 'menu_image_text_' | append: index
+    assign image_key = 'menu_image_' | append: index
+    if settings[text_key] != blank and link.title contains settings[text_key]
+      assign menu_image = settings[image_key]
+      break
+    endif
+  endfor
+%}
+{% if menu_image != blank %}
+  {{ menu_image | image_url: width: 150 | image_tag: width: 200, loading: 'lazy', class: 'loris-menu-image', alt: '' }}
+{% else %}
+  <img src="{{ 'GUNCEL_LORIS_LOGO-01.png' | file_img_url: '150x' }}" class="loris-menu-image" width="200" height="200" loading="lazy" alt="">
+{% endif %}

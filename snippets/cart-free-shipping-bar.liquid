@@ -32,14 +32,25 @@
 
 {% assign remaining_amount_with_currency = remaining_amount | times: 100 | money %}
 
-{% assign custom_text = settings.free_shipping_bar_text | replace: '||amount||', remaining_amount_with_currency %}
+{% liquid
+  assign shipping_text = settings.free_shipping_bar_text
+  assign shipping_success = settings.free_shipping_bar_text_success
+  assign language = request.locale.iso_code | split: '-' | first
+  if language == 'en' or language == 'ar'
+    assign text_key = 'free_shipping_bar_text_' | append: language
+    assign success_key = 'free_shipping_bar_text_success_' | append: language
+    assign shipping_text = settings[text_key] | default: shipping_text
+    assign shipping_success = settings[success_key] | default: shipping_success
+  endif
+  assign custom_text = shipping_text | replace: '||amount||', remaining_amount_with_currency
+%}
 
 <div class="wt-free-shipping-bar">
   <p class="wt-free-shipping-bar__text">
     {% if remaining_amount > 0 %}
       {{ custom_text }}
     {% else %}
-      {{ settings.free_shipping_bar_text_success }}
+      {{ shipping_success }}
     {% endif %}
   </p>
   <div class="wt-progress-bar">

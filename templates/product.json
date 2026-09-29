@@ -294,6 +294,10 @@
           "settings": {
             "custom_liquid": "{% if product.metafields.custom.ikon_gorseller.value %}\n<div class=\"tagImageList\" style=\"position: absolute;width: 100%;height: 100%;\">\n  {% for image_file in product.metafields.custom.ikon_gorseller.value %}\n    <img class=\"tagImage\" src=\"{{ image_file | image_url: width: 600 }}\" alt=\"{{ product.title }} - {{ forloop.index }}\">\n  {% endfor %}\n</div>\n{% endif %}"
           }
+        },
+        "fragrance_family": {
+          "type": "fragrance_family",
+          "settings": {}
         }
       },
       "block_order": [
@@ -321,6 +325,7 @@
         "a05fcf3e-8e1a-4f1f-8d97-2055eb17138d",
         "collapsible_tab_RfgVzn",
         "custom_liquid_qzYiee",
+        "fragrance_family",
         "separator_HEwhhT",
         "custom_liquid_KnpjgN",
         "separator_MKMqEa",
@@ -347,7 +352,8 @@
         "text_color": "rgba(0,0,0,0)",
         "background_color": "rgba(0,0,0,0)",
         "margin-top": 12,
-        "margin-bottom": 0
+        "margin-bottom": 0,
+        "loris_mobile_sticky_enabled": true
       }
     },
     "custom_liquid_dC8Kcx": {

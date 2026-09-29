@@ -32,7 +32,7 @@
  endif
 %}
 
-<li id="CartDrawer-Item-{{ item.index | plus: 1 }}" class="cart-item wt-cart__item{% if is_service_unavailable %} wt-cart__item--unavailable{% endif %}">
+<li id="CartDrawer-Item-{{ item.index | plus: 1 }}" data-loris-variant-id="{{ item.variant_id }}" class="cart-item wt-cart__item{% if is_service_unavailable %} wt-cart__item--unavailable{% endif %}">
   <picture class="wt-cart__item__thumb">
     <a href="{{ item.url }}" aria-label="{{ item.title }}" tabindex="{{ tab_index }}" class="wt-cart__item__link">
       {% if item.image %}

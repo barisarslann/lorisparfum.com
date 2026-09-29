@@ -529,7 +529,7 @@
         {%- endif -%}
       </div>
       {%- if request.page_type == 'index' -%}
-        <h1 itemscope itemtype="http://schema.org/Organization" class="wt-header__logo">
+        <span itemscope itemtype="http://schema.org/Organization" class="wt-header__logo">
       {% else %}
         <div itemscope itemtype="http://schema.org/Organization" class="wt-header__logo">
       {% endif %}
@@ -593,7 +593,7 @@
       </a>
 
       {%- if request.page_type == 'index' -%}
-        </h1>
+        </span>
       {% else %}
         </div>
       {% endif %}

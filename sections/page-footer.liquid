@@ -268,6 +268,16 @@
   </div>
 
   <div class="wt-footer__aside">
+      <a href="https://etbis.ticaret.gov.tr/tr/Anasayfa/SiteAra?url=loris+kozmetik&cityId=&districtId=&sector=&isItCrossBorder=" target="_blank" rel="noopener"
+        style="max-width: var(--site-max-width);padding-left: calc(calc(var(--gap, 8px) * 2) + calc(var(--gap, 8px) * 2));padding-right: calc(calc(var(--gap, 8px) * 2) + calc(var(--gap, 8px) * 2));width: 100%;margin: 0 auto;white-space: collapse;">
+        {% if request.locale.iso_code == "tr" %}
+        Şirketimize ait ETBIS kaydını görüntülemek için <b>tıklayınız</b>
+        {% elsif request.locale.iso_code == "ar" %}
+        لعرض تسجيل ETBIS الخاص بشركتنا <b>انقر هنا</b>
+        {% else %}
+        To view the ETBIS registration of our company, <b>click here</b>
+        {% endif %}
+      </a>
     <div class="wt-footer__aside__wrapper">
       {% if section.settings.show_country_selector
         or section.settings.show_language_selector

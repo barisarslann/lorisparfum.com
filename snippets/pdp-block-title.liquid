@@ -17,6 +17,7 @@
       </a>
     {% endif %}
   </div>
+  {% render 'loris-product-gender', product: product %}
   <{{ heading_tag }} class="wt-product__name">
     {%- if product == blank -%}
       Example product title

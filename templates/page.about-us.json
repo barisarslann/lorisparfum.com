@@ -765,7 +765,8 @@
         "color-body-text": "rgba(0,0,0,0)",
         "background_color": "rgba(0,0,0,0)",
         "margin-top": 20,
-        "margin-bottom": 20
+        "margin-bottom": 20,
+        "enable_stack_products": true
       }
     },
     "map_address_CgFhaF": {

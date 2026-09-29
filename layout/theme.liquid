@@ -25,6 +25,10 @@
   {%- endif -%}"
 >
   <head>
+    {% render 'avada-seo' %}
+    {%- render 'ecom_header' -%}
+    <meta name="color-scheme" content="light only">
+    <meta name="google-site-verification" content="7kuSYIGFPjVuluOSaCQsBxCJB4lpgn1or4X3CavBKGo" />
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -64,6 +68,8 @@
     <link rel="preload" href="{{ 'main.css' | asset_url }}" as="style" onload="this.onload=null;this.rel='stylesheet'">
     <noscript><link rel="stylesheet" href="{{ 'main.css' | asset_url }}"></noscript>
     {{ 'custom.css' | asset_url | stylesheet_tag }}
+    {% render 'loris-badge-styles' %}
+    <script src="{{ 'loris-gift-options.js' | asset_url }}" defer></script>
 
     <script src="{{ 'constants.js' | asset_url }}" defer="defer"></script>
     <script src="{{ 'pubsub.js' | asset_url }}" defer="defer"></script>
@@ -335,6 +341,20 @@
     {%- endif -%}
     {%- render 'scroll-to-top' -%}
     <script src="{{ 'custom.js' | asset_url }}" defer="defer"></script>
+    <script>
+      var _pproject = _pproject || [];
+      _pproject.push(['_project_token', '17d51fdd-f36f-4bd7-9311-c215d8e623ec']);
+
+      (function () {
+        var pp = document.createElement('script');
+        pp.type = 'text/javascript';
+        pp.defer = true;
+        pp.src = 'https://public.palmate.ai/iframe/popup.js';
+        var s = document.getElementsByTagName('script')[0];
+        s.parentNode.insertBefore(pp, s);
+      })();
+    </script>
+    {%- render 'ecom_footer' -%}
     <!-- Wonder Theme v2.5.1 -->
   </body>
 </html>

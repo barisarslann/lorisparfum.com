@@ -1,0 +1,7 @@
+{% if product.metafields.custom.ikon_gorseller.value != blank %}
+  <div class="tagImageList hidden">
+    {% for icon_image in product.metafields.custom.ikon_gorseller.value %}
+      {{ icon_image | image_url: width: 600 | image_tag: class: 'tagImage', loading: 'lazy', alt: product.title }}
+    {% endfor %}
+  </div>
+{% endif %}

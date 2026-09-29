@@ -1,0 +1,59 @@
+<loris-sticky-cart data-section-id="{{ section.id }}" data-form-id="{{ product_form_id }}" data-currency="{{ cart.currency.iso_code }}" data-shipping-threshold="{{ settings.free_shipping_bar_amount | escape }}" id="wt-sticky-wrapper" class="mobile-sticky-bar-wrapper" style="padding: 12px !important; box-sizing: border-box !important; position: relative; transition: opacity 0.3s ease, visibility 0.3s ease, transform 0.4s cubic-bezier(0.25, 0.8, 0.25, 1) !important; z-index: 99 !important; overflow: visible !important;">
+
+  <button id="wt-sticky-expand-btn" type="button" data-action="expand" title="Büyüt">
+    <span class="expand-icon">⤢</span>
+    <span class="expand-text">Büyült</span>
+  </button>
+
+  <div id="wt-sticky-top" style="margin-bottom: 10px !important; text-align: center !important; position: relative;">
+
+    <button type="button" data-action="minimize" style="position: absolute; right: -5px; top: -5px; background: none; border: none; font-size: 16px; color: #888; cursor: pointer; padding: 5px; line-height: 1; z-index: 10;" title="Küçült">✕</button>
+
+    {% assign show_campaign = false %}
+    {% assign campaign_url = '' %}
+    {% assign campaign_title = '' %}
+    {% for collection in product.collections %}
+      {% assign tc = collection.title | upcase %}
+      {% if tc contains 'İNDIRIM' or tc contains 'KAMPANYA' or tc contains '3 AL' or tc contains '2 AL' or tc contains 'BEDAVA' or tc contains 'HEDIYE' or tc contains 'FIRSAT' or tc contains 'ÜCRETSIZ' %}
+        {% assign show_campaign = true %}
+        {% assign campaign_url = collection.url %}
+        {% assign campaign_title = collection.title %}
+        {% break %}
+      {% endif %}
+    {% endfor %}
+
+    {% if show_campaign %}
+      <div style="margin-bottom: 4px !important; padding-right: 15px;">
+        <a href="{{ campaign_url }}" style="color: #ff4d4d; text-decoration: none; font-size: 12px; font-weight: bold; display: block;">
+          🔥 {{ campaign_title | escape }} >
+        </a>
+      </div>
+    {% endif %}
+
+    <div class="wt-sticky-ship-info" hidden style="font-size: 11px; font-weight: 500; color: #333;">Yükleniyor...</div>
+  </div>
+
+  <div id="wt-sticky-bottom" style="display: flex !important; flex-wrap: wrap; gap: 12px !important; justify-content: center; position: relative;">
+
+    <div style="display: flex !important; align-items: center !important; justify-content: space-between !important; width: 100% !important;">
+
+      <div id="wt-sticky-price-wrapper" style="flex: 1 !important; text-align: left !important; padding-left: 5px !important;">
+        <span class="wt-sticky-price-display" style="font-size: 19px !important; font-weight: 900 !important; color: #000 !important; white-space: nowrap !important; display: inline-block !important;">
+          {{ product.selected_or_first_available_variant.price | money }}
+        </span>
+      </div>
+
+      <div style="display: flex !important; align-items: center !important; border: 1.5px solid #eee !important; border-radius: 10px !important; background: #fff !important; width: 125px !important; height: 44px !important; overflow: hidden !important; flex-shrink: 0 !important;">
+        <button type="button" style="width: 40px !important; height: 100% !important; border:none !important; background:none !important; font-size:22px !important; font-weight:bold !important; color:#000 !important; cursor:pointer !important; padding:0 !important;" data-action="decrease" aria-label="{{ 'aria-label.component-counter-counter-decrease' | t }}">-</button>
+        <input type="number" class="wt-sticky-qty-val" value="1" readonly aria-label="{{ 'aria-label.component-counter-counter-quantity' | t }}" style="flex:1 !important; width: 35px !important; border:none !important; text-align:center !important; font-size:16px !important; font-weight:bold !important; background:transparent !important; color:#000 !important; padding:0 !important; -moz-appearance: textfield;">
+        <button type="button" style="width: 40px !important; height: 100% !important; border:none !important; background:none !important; font-size:22px !important; font-weight:bold !important; color:#000 !important; padding:0 !important; cursor:pointer !important;" data-action="increase" aria-label="{{ 'aria-label.component-counter-counter-increase' | t }}">+</button>
+      </div>
+
+    </div>
+
+    <button id="wt-sticky-add-btn" type="button" data-action="submit" style="width: 100% !important; background: rgb(6, 6, 6) !important; color: #fff !important; border: none !important; padding: 14px !important; border-radius: 10px !important; font-size: 15px !important; font-weight: bold !important; text-transform: uppercase !important; letter-spacing: 1px !important; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2) !important;">
+      {{ 'products.product.add_to_cart' | t }}
+    </button>
+  </div>
+  <p class="loris-sticky-error" role="alert" hidden></p>
+</loris-sticky-cart>
