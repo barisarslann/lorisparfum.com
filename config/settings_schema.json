@@ -2128,6 +2128,11 @@
         "info": "t:settings_schema.product-badges.settings.info"
       },
       {
+        "type": "image_picker",
+        "id": "custom-badge-1-input_image",
+        "label": "Image"
+      },
+      {
         "type": "header",
         "content": "t:settings_schema.product-badges.settings.badge__2.content"
       },
@@ -2153,6 +2158,11 @@
         "id": "custom-badge-2-label",
         "label": "t:settings_schema.product-badges.settings.label",
         "info": "t:settings_schema.product-badges.settings.info"
+      },
+      {
+        "type": "image_picker",
+        "id": "custom-badge-2-input_image",
+        "label": "Image"
       },
       {
         "type": "header",
@@ -2182,6 +2192,11 @@
         "info": "t:settings_schema.product-badges.settings.info"
       },
       {
+        "type": "image_picker",
+        "id": "custom-badge-3-input_image",
+        "label": "Image"
+      },
+      {
         "type": "header",
         "content": "t:settings_schema.product-badges.settings.badge__4.content"
       },
@@ -2209,28 +2224,13 @@
         "info": "t:settings_schema.product-badges.settings.info"
       },
       {
-        "type": "header",
-        "content": "Loris"
-      },
-      {
-        "type": "image_picker",
-        "id": "custom-badge-1-input_image",
-        "label": "Image"
-      },
-      {
-        "type": "image_picker",
-        "id": "custom-badge-2-input_image",
-        "label": "Image"
-      },
-      {
-        "type": "image_picker",
-        "id": "custom-badge-3-input_image",
-        "label": "Image"
-      },
-      {
         "type": "image_picker",
         "id": "custom-badge-4-input_image",
         "label": "Image"
+      },
+      {
+        "type": "header",
+        "content": "Badge 5 — Kampanya"
       },
       {
         "type": "select",
@@ -2272,6 +2272,10 @@
         "id": "custom-badge-5-label",
         "label": "Etiket yazısı",
         "default": "3 Al 2 Öde"
+      },
+      {
+        "type": "header",
+        "content": "Badge 6"
       },
       {
         "type": "color",
