@@ -23,6 +23,7 @@
 @media (max-width: 899px) {
   .wt-brands-many-items.swiper {
     gap: 0;
+    overflow: visible;
   }
 }
 @media (min-width: 1200px) {
@@ -51,10 +52,15 @@
   max-width: 100%;
   overflow: hidden;
 }
-.wt-brands__marquee:hover {
-  animation-play-state: paused;
+@media (hover: hover) and (pointer: fine) {
+  .wt-brands__marquee:hover {
+    animation-play-state: paused;
+  }
+  .wt-brands__marquee:hover .wt-brands__marquee__content {
+    animation-play-state: paused;
+  }
 }
-.wt-brands__marquee:hover .wt-brands__marquee__content {
+.wt-brands__marquee--paused, .wt-brands__marquee--paused .wt-brands__marquee__content {
   animation-play-state: paused;
 }
 .wt-brands__marquee__content {
@@ -76,6 +82,12 @@
   .wt-brands__marquee__content {
     --mgap: 100px;
   }
+}
+.wt-brands__marquee--right .wt-brands__marquee__content {
+  animation-direction: reverse;
+}
+.wt-brands__marquee--right .wt-brands__marquee__content--2 {
+  animation-direction: reverse;
 }
 .wt-brands__marquee__content .wt-brands__item {
   flex-shrink: 0;
@@ -132,3 +144,20 @@
     transform: translateX(-200%);
   }
 }
+@keyframes scroll-right {
+  0% {
+    transform: translateX(100%);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
+}
+@keyframes scroll2-right {
+  0% {
+    transform: translateX(-200%);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+/*# sourceMappingURL=section-brands.css.map */

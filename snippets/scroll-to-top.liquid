@@ -1,0 +1,18 @@
+{%- if settings.scroll_to_top_enabled -%}
+  {%- assign stt_style = settings.scroll_to_top_button_style -%}
+
+  <scroll-to-top
+    class="wt-scroll-to-top{% if settings.scroll_to_top_align_left %} wt-scroll-to-top--left{% endif %}"
+    style="--stt-offset: {{ settings.scroll_to_top_offset }}px;"
+  >
+    <button
+      type="button"
+      class="wt-scroll-to-top__button wt-scroll-to-top__button--{{ stt_style }}"
+      aria-label="{{ 'accessibility.scroll_to_top' | t }}"
+    >
+      <span class="wt-scroll-to-top__icon">
+        {%- render 'icons', id: 'arrow-right' -%}
+      </span>
+    </button>
+  </scroll-to-top>
+{%- endif -%}

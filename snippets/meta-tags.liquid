@@ -39,3 +39,22 @@
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="{{ og_title | escape }}">
 <meta name="twitter:description" content="{{ og_description | escape }}">
+
+{%- comment -%} AI agent discovery meta tags (UCP / GEO) {%- endcomment -%}
+<meta name="ai-content-declaration" content="commerce">
+{%- if request.page_type == 'product' -%}
+  <meta name="ai-product" content="available">
+  <meta name="commerce:type" content="product">
+  <meta name="product:availability" content="{% if product.available %}in stock{% else %}out of stock{% endif %}">
+  <meta name="product:price:amount" content="{{ product.price | money_without_currency | strip_html }}">
+  <meta name="product:price:currency" content="{{ cart.currency.iso_code }}">
+  <meta name="product:brand" content="{{ product.vendor | escape }}">
+  {%- if product.selected_or_first_available_variant.sku != blank -%}
+    <meta name="product:sku" content="{{ product.selected_or_first_available_variant.sku | escape }}">
+  {%- endif -%}
+{%- elsif request.page_type == 'collection' -%}
+  <meta name="commerce:type" content="collection">
+  <meta name="collection:products_count" content="{{ collection.products_count }}">
+{%- elsif request.page_type == 'index' -%}
+  <meta name="commerce:type" content="storefront">
+{%- endif -%}

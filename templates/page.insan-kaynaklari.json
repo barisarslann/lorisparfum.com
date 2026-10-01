@@ -442,7 +442,7 @@
         ".wt-contact__form {padding: 0 0 56px;}",
         ".wt-contact__form .hero__text {max-width: 50%;}"
       ],
-      "name": "t:sections.contact-form.presets.name",
+      "name": "Contact form",
       "settings": {
         "color-body-text": "rgba(0,0,0,0)",
         "background_color": "rgba(0,0,0,0)",

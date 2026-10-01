@@ -1,0 +1,48 @@
+{%- comment -%}
+  Cart payment badge — shared between the cart drawer footer
+  (snippets/cart-footer.liquid) and the cart page footer
+  (sections/main-cart-footer.liquid).
+
+  Two modes (selected in theme settings):
+    - 'image':   custom badge image (separate desktop / mobile assets)
+    - default:   list of payment-method icons enabled in the shop
+{%- endcomment -%}
+{%- if settings.cart_show_payment_badge -%}
+  <div class="wt-cart__payment-badge">
+    {%- if settings.cart_payment_badge_type == 'image' -%}
+      {%- liquid
+        assign _desktop = settings.cart_payment_badge_desktop_image
+        assign _mobile = settings.cart_payment_badge_mobile_image
+        if _desktop == blank
+          assign _desktop = _mobile
+        endif
+        if _mobile == blank
+          assign _mobile = _desktop
+        endif
+      -%}
+      {%- if _mobile != blank or _desktop != blank -%}
+        <picture>
+          {%- if _desktop != blank -%}
+            <source
+              media="(min-width: 750px)"
+              srcset="{{ _desktop | image_url: width: 400 }} 1x, {{ _desktop | image_url: width: 800 }} 2x"
+            >
+          {%- endif -%}
+          <img
+            src="{{ _mobile | image_url: width: 400 }}"
+            srcset="{{ _mobile | image_url: width: 400 }} 1x, {{ _mobile | image_url: width: 800 }} 2x"
+            loading="lazy"
+            alt="{{ _mobile.alt | escape }}"
+            class="wt-cart__payment-badge__img"
+          >
+        </picture>
+      {%- endif -%}
+    {%- else -%}
+      <ul class="wt-cart__payment-icons" role="list">
+        {%- for type in shop.enabled_payment_types -%}
+          <li>{{ type | payment_type_svg_tag: class: 'icon icon--full-color' }}</li>
+        {%- endfor -%}
+      </ul>
+    {%- endif -%}
+  </div>
+{%- endif -%}

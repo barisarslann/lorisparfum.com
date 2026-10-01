@@ -11,7 +11,7 @@
   "sections": {
     "custom_liquid_9PNgRC": {
       "type": "custom-liquid",
-      "name": "t:sections.custom-liquid.presets.name",
+      "name": "Custom Liquid",
       "settings": {
         "custom_liquid": "<script>\nfunction storeList () {\n  return `{{ page.metafields.custom.magaza_liste }}`;\n}\n</script>"
       }
@@ -220,10 +220,9 @@
         "column_aGGfGz",
         "column_fdBDGK"
       ],
-      "name": "t:sections.multicolumn.presets.name",
+      "name": "Multicolumn",
       "settings": {
         "heading": "Dünyaca Ünlü Yayınlarda Loris",
-        "swipe_on_mobile": true,
         "full-width-enabled": false,
         "image_ratio": "adapt",
         "column_alignment": "left",
@@ -232,7 +231,8 @@
         "color-body-text": "rgba(0,0,0,0)",
         "background_color": "rgba(0,0,0,0)",
         "margin-top": 0,
-        "margin-bottom": 0
+        "margin-bottom": 0,
+        "enable_stack_products": false
       }
     },
     "background_video_ngHHfC": {

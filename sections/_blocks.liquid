@@ -1,0 +1,24 @@
+{% content_for 'blocks' %}
+
+{% schema %}
+{
+  "name": "t:sections._blocks.name",
+  "blocks": [{ "type": "@theme" }, { "type": "@app" }],
+  "settings": [
+    {
+      "type": "range",
+      "id": "section-margin",
+      "label": "t:sections._blocks.settings.section-margin.label",
+      "min": 0,
+      "max": 50,
+      "default": 0,
+      "unit": "px"
+    },
+  ],
+  "presets": [
+    {
+      "name": "t:sections._blocks.name"
+    }
+  ]
+}
+{% endschema %}

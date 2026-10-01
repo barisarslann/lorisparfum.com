@@ -1,0 +1,65 @@
+<div class="wt-quiz__newsletter" data-block-type="newsletter">
+  {%- if block.settings.heading != blank -%}
+    <h3 class="hero__title">{{ block.settings.heading }}</h3>
+  {%- endif -%}
+  {%- if block.settings.body_text != blank -%}
+    <div class="wt-quiz__newsletter-body">{{ block.settings.body_text }}</div>
+  {%- endif -%}
+  {%- assign quiz_newsletter_form_id = 'QuizNewsletterForm-' | append: block.id -%}
+  {%- form 'customer', class: 'wt-quiz__newsletter-form', id: quiz_newsletter_form_id, novalidate: '' -%}
+    <input type="hidden" name="contact[tags]" value="newsletter">
+    <div class="wt-newsletter__fieldset">
+      <input
+        type="email"
+        name="contact[email]"
+        class="wt-newsletter__field"
+        placeholder="{{ 'newsletter.label' | t }}"
+        required
+        autocomplete="email"
+      >
+      <button type="submit" class="wt-newsletter__send wt-newsletter__send--primary" name="commit">
+        <span class="wt-newsletter__send__text">
+          {%- if block.settings.cta_label != blank -%}{{ block.settings.cta_label }}{%- else -%}{{ 'newsletter.button_label' | t }}{%- endif -%}
+        </span>
+      </button>
+    </div>
+  {%- endform -%}
+<button class="wt-quiz__newsletter-skip hero__button hero__button--link" type="button">
+    <span>{{ block.settings.skip_label | default: 'No thanks' }}</span>
+  </button>
+</div>
+
+{% schema %}
+{
+  "name": "t:sections.quiz.blocks.newsletter.name",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "t:sections.quiz.blocks.newsletter.settings.heading.label"
+    },
+    {
+      "type": "richtext",
+      "id": "body_text",
+      "label": "t:sections.quiz.blocks.newsletter.settings.body_text.label"
+    },
+    {
+      "type": "text",
+      "id": "cta_label",
+      "label": "t:sections.quiz.blocks.newsletter.settings.cta_label.label",
+      "default": "Subscribe"
+    },
+    {
+      "type": "text",
+      "id": "skip_label",
+      "label": "t:sections.quiz.blocks.newsletter.settings.skip_label.label",
+      "default": "No thanks"
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:sections.quiz.blocks.newsletter.name"
+    }
+  ]
+}
+{% endschema %}

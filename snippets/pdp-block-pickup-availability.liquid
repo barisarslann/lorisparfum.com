@@ -1,0 +1,37 @@
+{% comment %}
+  Params: block, section, product
+{% endcomment %}
+{{ 'component-pickup-availability.css' | asset_url | stylesheet_tag }}
+
+{%- assign pick_up_availabilities = product.selected_or_first_available_variant.store_availabilities
+  | where: 'pick_up_enabled', true
+-%}
+
+<pickup-availability
+  class="product__pickup-availabilities no-js-hidden quick-add-hidden{% if settings.animations %} scroll-trigger animate--slide-in{% endif %}{% if settings.disabled_animations_on_mobile %} disabled-on-mobile{% endif %}"
+  data-block-id="{{ block.id }}"
+  {% if product.selected_or_first_available_variant.available and pick_up_availabilities.size > 0 %}
+    available
+  {% endif %}
+  data-root-url="{{ routes.root_url }}"
+  data-variant-id="{{ product.selected_or_first_available_variant.id }}"
+  data-has-only-default-variant="{{ product.has_only_default_variant }}"
+  data-product-url="{{ product.url }}"
+>
+  <template>
+    <pickup-availability-preview class="pickup-availability-preview">
+      {% render 'icon-unavailable' %}
+      <div class="pickup-availability-info">
+        <p class="caption-large">{{ 'products.product.pickup_availability.unavailable' | t }}</p>
+        <button
+          aria-label="{{ 'products.product.pickup_availability.refresh' | t }}"
+          class="pickup-availability-button hero__button--link"
+        >
+          {{ 'products.product.pickup_availability.refresh' | t }}
+        </button>
+      </div>
+    </pickup-availability-preview>
+  </template>
+</pickup-availability>
+
+<script src="{{ 'pickup-availability.js' | asset_url }}" defer="defer"></script>

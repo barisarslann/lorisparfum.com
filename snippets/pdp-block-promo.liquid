@@ -1,0 +1,11 @@
+{% comment %}
+  Params: block
+{% endcomment %}
+<div
+  data-block-id="{{ block.id }}"
+  class="{% if settings.animations %} scroll-trigger animate--slide-in{% endif %}{% if settings.disabled_animations_on_mobile %} disabled-on-mobile{% endif %}"
+>
+  <div class="wt-product__promo rte">
+    {{ block.settings.content }}
+  </div>
+</div>

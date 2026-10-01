@@ -1,0 +1,62 @@
+{% comment %}
+  Params: block, section, product
+{% endcomment %}
+<wt-drawer-content data-block-id="{{ block.id }}" not-quick-add>
+  {%- assign has_variant_metafields = false -%}
+  {%- if block.settings.metafield_variables.size > 0 -%}
+    {%- assign has_variant_metafields = true -%}
+  {%- endif -%}
+  {% if block.settings.heading != blank or block.settings.content != blank or request.design_mode %}
+    {%- assign drawer_title = block.settings.heading | default: block.settings.page.title -%}
+
+    <div
+      class="wt-collapse wt-collapse--always{% if settings.animations %} scroll-trigger animate--slide-in{% endif %}{% if settings.disabled_animations_on_mobile %} disabled-on-mobile{% endif %}"
+      {%- if has_variant_metafields -%}data-has-variant-metafields{%- endif -%}
+      {{ block.shopify_attributes }}
+    >
+      <div
+        class="pdp-drawer--trigger wt-drawer-content__trigger wt-collapse__trigger"
+        role="button"
+        tabindex="0"
+        aria-expanded="false"
+        aria-haspopup="dialog"
+        data-drawer-id="{{ block.id }}"
+      >
+        <div class="wt-collapse__trigger__text">
+          {% if block.settings.icon_image != blank %}
+            <div class="wt-collapse__trigger__icon">
+              {% render 'responsive-icon-image',
+                image: block.settings.icon_image,
+                height_desktop: block.settings.icon_height_desktop,
+                height_mobile: block.settings.icon_height,
+                class: 'hero__icon'
+              %}
+            </div>
+          {% elsif block.settings.icon != 'none' %}
+            <div class="wt-collapse__trigger__icon">
+              {% render 'icons', id: block.settings.icon, icon_class: 'hero__icon' %}
+            </div>
+          {% endif %}
+          <div class="wt-collapse__trigger__title">{{ drawer_title }}</div>
+        </div>
+        <div class="wt-icon" aria-hidden="true">
+          {% render 'icons', id: 'plus' %}
+        </div>
+      </div>
+    </div>
+
+    {% render 'drawer-content',
+      drawer_id: block.id,
+      drawer_title: drawer_title,
+      drawer_image: block.settings.drawer_image,
+      drawer_video: block.settings.video,
+      video_custom_play_controls: block.settings.video_custom_play_controls,
+      video_custom_mute_controls: block.settings.video_custom_mute_controls,
+      drawer_content: block.settings.content,
+      drawer_page_content: block.settings.page.content,
+      has_variant_metafields: has_variant_metafields,
+      metafield_variables: block.settings.metafield_variables,
+      product: product
+    %}
+  {% endif %}
+</wt-drawer-content>

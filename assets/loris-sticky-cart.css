@@ -1,0 +1,111 @@
+.wt-sticky-price-display br:first-of-type {display: none;}
+
+  /* 1. GENEL AYAR: Masaüstünde Sticky Bar'ı GİZLE */
+  .mobile-sticky-bar-wrapper {
+    display: none !important;
+  }
+
+  /* 2. MOBİL AYARLARI */
+  @media screen and (max-width: 900px) {
+
+    /* STICKY BAR AÇIK (BÜYÜK) HALİ */
+    body.template-product .mobile-sticky-bar-wrapper[data-ready] {
+      display: block !important;
+      position: fixed !important;
+      bottom: 95px !important;
+      left: 50% !important;
+      transform: translateX(-50%) !important;
+      width: 92% !important;
+      max-width: 400px !important;
+      background-color: #ffffff !important;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.2) !important;
+      z-index: 10 !important;
+      border-radius: 15px !important;
+      overflow: hidden !important;
+      border: 1px solid #f0f0f0 !important;
+      transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1) !important;
+    }
+
+    /* ÇARPIYA BASILDIĞINDA ÇALIŞACAK KOD (KÜÇÜK HALİ) */
+    body.template-product .mobile-sticky-bar-wrapper[data-ready].sticky-minimized {
+      bottom: 15px !important;
+      width: 325px !important; /* DÜZELTME: İçerik biraz daha daraltıldı */
+      transform: translateX(-50%) scale(0.57) !important; /* DÜZELTME: İkonlara hiç değmemesi için biraz daha fazla küçültüldü */
+      transform-origin: center bottom !important;
+      z-index: 9999 !important;
+      box-shadow: 0 5px 20px rgba(0,0,0,0.15) !important;
+    }
+
+    /* Orijinal Sepete Ekle Butonunu Gizle */
+    body.template-product form.loris-sticky-source .product-form__submit {
+      position: absolute !important;
+      visibility: hidden !important;
+      opacity: 0 !important;
+      height: 0 !important;
+      width: 0 !important;
+      margin: 0 !important;
+      padding: 0 !important;
+      overflow: hidden !important;
+      border: none !important;
+      z-index: -1 !important;
+    }
+
+    /* Orijinal Hemen Satın Al Butonunu GÖSTER */
+    body.template-product main .shopify-payment-button {
+      display: block !important;
+      visibility: visible !important;
+      margin: 10px 0 !important;
+    }
+
+    /* Sayfanın en altındaki boşluk */
+    body.template-product:has(loris-sticky-cart[data-ready]) {
+      padding-bottom: 240px !important;
+    }
+  }
+
+  /* BÜYÜLTME BUTONU YENİ TASARIMI (Yüzer Sekme / Tab) */
+  #wt-sticky-expand-btn {
+    display: none !important;
+    position: absolute !important;
+    background: #ffffff !important;
+    border: 1.5px solid #eaeaea !important;
+    border-radius: 20px !important;
+    cursor: pointer !important;
+    color: #ee1c00 !important;
+    padding: 6px 12px !important;
+    z-index: 999 !important;
+    box-shadow: 0 -4px 12px rgba(0,0,0,0.08) !important;
+    text-transform: none !important; /* TEMANIN BÜYÜK HARF ZORLAMASINI EZER */
+  }
+
+  /* BAR KÜÇÜLDÜĞÜNDE OKUN VE YAZININ DURACAĞI YER (SAĞ ÜST - DIŞ KISIM) */
+  .mobile-sticky-bar-wrapper.sticky-minimized #wt-sticky-expand-btn {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 5px !important;
+    right: 15px !important;
+    top: -40px !important;
+    bottom: auto !important;
+    left: auto !important;
+    transform: none !important;
+  }
+
+  /* Ok İkonu Stili */
+  #wt-sticky-expand-btn .expand-icon {
+    font-size: 18px !important;
+    font-weight: bold !important;
+    line-height: 1 !important;
+  }
+
+  /* Büyült Yazısı Stili */
+  #wt-sticky-expand-btn .expand-text {
+    font-size: 18px !important;
+    font-weight: 800 !important;
+    line-height: 1 !important;
+    letter-spacing: 0.5px !important;
+    text-transform: none !important; /* GARANTİ OLMASI İÇİN BURAYA DA EKLENDİ */
+  }
+
+loris-sticky-cart [hidden] { display: none !important; }
+loris-sticky-cart button:disabled { opacity: .5; cursor: not-allowed !important; }

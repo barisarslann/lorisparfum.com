@@ -2,12 +2,28 @@
 
 <script src="{{ 'customer.js' | asset_url }}" defer></script>
 
+<div class="customer__container customer account">
+  <div class="customer__account-details">
+    <div class="customer__account">
+      <h2 class="customer__title">{{ 'customer.account.title' | t }}</h2>
+      <a class="wt-customer__link-details" href="{{ routes.account_url }}">
+        {{ 'customer.account.return' | t }}
+      </a>
+      <a class="customer__account__link" href="{{ routes.account_logout_url }}" data-no-instant>
+        {% render 'icons', id: 'user' %}
+        {{ 'customer.log_out' | t }}
+      </a>
+    </div>
+
+    <div class="customer__details">
+      <h2>{{ 'customer.account.details' | t }}</h2>
+      {{ customer.default_address | format_address }}
+    </div>
+  </div>
+
 {%- paginate customer.addresses by 5 -%}
   <div class="wt-customer wt-customer__addresses" data-customer-addresses>
-    <h2 class="hero__title">{{ 'customer.addresses.title' | t }}</h2>
-    <a class="wt-customer__link-details" href="{{ routes.account_url }}">
-      {{ 'customer.account.return' | t }}
-    </a>
+    <h2>{{ 'customer.addresses.title' | t }}</h2>
     <div data-address>
       <button
         aria-label="{{ 'customer.addresses.add_new' | t }}"
@@ -432,6 +448,7 @@
     {%- endif -%}
   </div>
 {%- endpaginate -%}
+</div>
 
 <script>
   window.onload = () => {

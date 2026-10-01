@@ -1,0 +1,28 @@
+{% comment %}
+  Params: block
+{% endcomment %}
+<div
+  data-block-id="{{ block.id }}"
+  class="hero__icon-with-text{% if block.settings.align_icon_top %} hero__icon-with-text--align-top{% endif %}{% if settings.animations %} scroll-trigger animate--slide-in{% endif %}{% if settings.disabled_animations_on_mobile %} disabled-on-mobile{% endif %}"
+  {{ block.shopify_attributes }}
+>
+  <div class="hero__icon-container">
+    {%- if block.settings.icon == blank -%}
+      {% render 'icons',
+        id: block.settings.select_icon,
+        url: block.settings.image.url,
+        icon_class: 'hero__icon'
+      %}
+    {% else %}
+      {% render 'responsive-icon-image',
+        image: block.settings.icon,
+        height_desktop: block.settings.icon_height_desktop,
+        height_mobile: block.settings.icon_height,
+        class: 'hero__icon'
+      %}
+    {% endif %}
+  </div>
+  <div class="hero__icon-text">
+    {{ block.settings.text }}
+  </div>
+</div>

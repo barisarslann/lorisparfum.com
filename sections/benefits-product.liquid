@@ -1,4 +1,5 @@
 <script src="{{ 'quick-add.js' | asset_url }}" defer="defer"></script>
+<script src="{{ 'subscription-widget.js' | asset_url }}" defer="defer"></script>
 
 {% assign heading_rgb = section.settings['color-body-heading'] | color_to_rgb %}
 {% assign background_rgb = section.settings['color-overlay'] | color_to_rgb %}
@@ -8,6 +9,8 @@
   section[id="shopify-section-{{ section.id }}"]{
       --desktop-width: {{ section.settings.desktop_width }}%;
       --desktop-max-width: {{ section.settings.desktop_max_width }}px;
+      --desktop-section-height: {{ section.settings.desktop_section_height }}vh;
+      --desktop-section-max-height: {{ section.settings.desktop_section_max_height }}px;
       --font-icon-headline-scale-desk: {{ section.settings.size_heading | divided_by: 100.0 }};
       --font-icon-headline-scale: {{ section.settings.size_heading_mobile | divided_by: 100.0 }};
 
@@ -19,22 +22,31 @@
           --section-gap-bottom: {{ section.settings.margin-bottom }}px;
       {% endif %}
 
-      {% if background_rgb != 'rgba(0, 0, 0, 0.0)' %}
+      {%- if section.settings.show_mobile_spacing -%}
+          --section-gap-top-mobile: {{ section.settings.margin-top-mobile }}px;
+      {%- endif -%}
+
+      {%- if section.settings.show_mobile_spacing -%}
+          --section-gap-bottom-mobile: {{ section.settings.margin-bottom-mobile }}px;
+      {%- endif -%}
+
+      {% if section.settings['color-overlay'] != blank and section.settings['color-overlay'] != 'transparent' and background_rgb != 'rgba(0, 0, 0, 0.0)' %}
         --color-overlay-rgb: {{ section.settings.color-overlay | color_to_rgb | remove: 'rgb(' | remove: ')' }};
           --color-overlay-opacity: {{ section.settings.color-overlay-opacity | divided_by: 100.0 }};
       {% endif %}
 
     }
 
-  {% if heading_rgb != 'rgba(0, 0, 0, 0.0)' %}
-    section[id="shopify-section-{{ section.id }}"] .headline__title{
+  {% if section.settings['color-body-heading'] != blank and section.settings['color-body-heading'] != 'transparent' and heading_rgb != 'rgba(0, 0, 0, 0.0)' %}
+    section[id="shopify-section-{{ section.id }}"] .headline__title,
+    section[id="shopify-section-{{ section.id }}"] div.headline--rich{
       --color-custom-text: {{ section.settings.color-body-heading }};
     }
   {% endif %}
 
   [data-section-id="{{ section.id }}"]
   {
-      {% if text_rgb != 'rgba(0, 0, 0, 0.0)' %}
+      {% if section.settings['color-body-text'] != blank and section.settings['color-body-text'] != 'transparent' and text_rgb != 'rgba(0, 0, 0, 0.0)' %}
           --color-custom-text: {{ section.settings.color-body-text }};
       {% endif %}
   }
@@ -49,9 +61,23 @@
 {% assign quick_buy_product = section.settings.quick_buy_product %}
 {% assign button_label = section.settings.button_label %}
 
-<div class="{{ width_line }} wt-benefits-product" data-section-id="{{ section.id }}">
+<div
+    data-section-height-mode="{{ section.settings.section_height_mode }}"
+    data-section-id="{{ section.id }}"
+    class="{{ width_line }} wt-benefits-product"
+    >
   <div>
-    {% render 'headline', title: section.settings.heading %}
+    {% if section.settings.advanced_heading %}
+      {% if section.settings.heading_richtext != blank %}
+          <div class="headline headline--rich {% if settings.animations %} scroll-trigger animate--slide-in {% endif %} {% if settings.disabled_animations_on_mobile %} disabled-on-mobile {% endif %}">
+              {{ section.settings.heading_richtext }}
+          </div>
+      {% endif %}
+    {% else %}
+      {% if section.settings.heading != blank %}
+          {% render 'headline', title: section.settings.heading %}
+      {% endif %}
+    {% endif %}
 
     <div class="wt-benefits-product__wrapper {% if settings.animations %}scroll-trigger animate--slide-in {% if settings.disabled_animations_on_mobile %} disabled-on-mobile {% endif %}{% endif %}">
       <div class="wt-benefits-product__img{% if section.settings.video_hosted %} wt-benefits-product__img--video{% endif %}">
@@ -63,6 +89,9 @@
         {% endif %}
 
         {% if section.settings.video_hosted %}
+          {% if section.settings.video_custom_play_controls or section.settings.video_custom_mute_controls %}<video-controls>{% endif %}
+          {% if section.settings.video_custom_play_controls %}{% render 'play-pause-button', classname: '' %}{% endif %}
+          {% if section.settings.video_custom_mute_controls %}{% render 'unmute-button' %}{% endif %}
           {{
             section.settings.video_hosted
             | video_tag:
@@ -73,6 +102,7 @@
               image_size: '600x',
               class: video_class
           }}
+          {% if section.settings.video_custom_play_controls or section.settings.video_custom_mute_controls %}</video-controls>{% endif %}
 
         {% else %}
           {% if mobile_image or desktop_image %}
@@ -119,6 +149,7 @@
               <a
                 class="wt-benefits-product__btn hero__button--primary {% if section.settings.button_select != 'primary' %} hero__button--secondary {% endif %}{% if section.settings.button_select == 'link' %} hero__button--link {% endif %}"
                 href="{{ section.settings.button_link }}"
+                {% if section.settings.button_link_in_new_window %}target="_blank" rel="noreferrer noopener"{% endif %}
               >
                 <span>
                   {{ section.settings.button_label }}
@@ -141,7 +172,7 @@
                       </div>
                     {% endif %}
                     <div class="wt-benefits-product__icon-texts">
-                      {% if block.settings.item_heading %}
+                      {% if block.settings.item_heading != empty %}
                         <h3 class="wt-benefits-product__icon-item-heading">{{ block.settings.item_heading }}</h3>
                       {% endif %}
                       {% if block.settings.text %}
@@ -174,7 +205,7 @@
                 </span>
               </button>
             </quick-add>
-          {% elsif section.settings.button_link %}
+          {% else %}
             <a
               class="wt-benefits-product__btn hero__button--primary {% if section.settings.button_select != 'primary' %} hero__button--secondary {% endif %}{% if section.settings.button_select == 'link' %} hero__button--link {% endif %}"
               href="{{ section.settings.button_link }}"
@@ -209,10 +240,24 @@
       "content": "t:sections.global.general"
     },
     {
+      "type": "checkbox",
+      "id": "advanced_heading",
+      "label": "t:sections.global.advanced_heading.label",
+      "info": "t:sections.global.advanced_heading.info"
+    },
+    {
       "type": "textarea",
       "id": "heading",
       "label": "t:sections.settings.settings.heading.label",
-      "default": "Product Benefits"
+      "default": "Product Benefits",
+      "visible_if": "{{ section.settings.advanced_heading == false }}"
+    },
+    {
+      "type": "richtext",
+      "id": "heading_richtext",
+      "label": "t:sections.logo-banner.settings.content.headline.label",
+      "default": "<h2>Product Benefits</h2>",
+      "visible_if": "{{ section.settings.advanced_heading == true }}"
     },
     {
       "type": "checkbox",
@@ -237,6 +282,45 @@
       "info": "t:sections.benefits_product.settings.video.info"
     },
     {
+      "type": "select",
+      "id": "section_height_mode",
+      "info": "t:sections.benefits_product.settings.section_height_mode.info",
+      "label": "t:sections.benefits_product.settings.section_height_mode.label",
+      "default": "auto",
+        "options": [
+          {
+            "value": "auto",
+            "label": "t:sections.benefits_product.settings.section_height_mode.options.auto.label"
+          },
+          {
+            "value": "fixed_height",
+            "label": "t:sections.benefits_product.settings.section_height_mode.options.fixed_height.label"
+          }
+        ]
+    },
+    {
+      "type": "range",
+      "id": "desktop_section_height",
+      "min": 20,
+      "max": 100,
+      "unit": "%",
+      "step": 1,
+      "default": 60,
+      "label": "t:sections.benefits_product.settings.desktop_section_height.label",
+      "visible_if": "{{ section.settings.section_height_mode == 'fixed_height' }}"
+    },
+    {
+      "type": "range",
+      "id": "desktop_section_max_height",
+      "min": 480,
+      "max": 2000,
+      "unit": "px",
+      "step": 40,
+      "default": 680,
+      "label": "t:sections.benefits_product.settings.desktop_section_max_height.label",
+      "visible_if": "{{ section.settings.section_height_mode == 'fixed_height' }}"
+    },
+    {
       "type": "range",
       "id": "desktop_width",
       "min": 20,
@@ -244,7 +328,8 @@
       "unit": "%",
       "step": 1,
       "default": 60,
-      "label": "t:sections.benefits_product.settings.desktop_width.label"
+      "label": "t:sections.benefits_product.settings.desktop_width.label",
+      "visible_if": "{{ section.settings.section_height_mode == 'fixed_height' }}"
     },
     {
       "type": "range",
@@ -254,7 +339,24 @@
       "unit": "px",
       "step": 40,
       "default": 680,
-      "label": "t:sections.benefits_product.settings.desktop_max_width.label"
+      "label": "t:sections.benefits_product.settings.desktop_max_width.label",
+      "visible_if": "{{ section.settings.section_height_mode == 'fixed_height' }}"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.global.video_controls_header"
+    },
+    {
+      "type": "checkbox",
+      "id": "video_custom_play_controls",
+      "label": "t:sections.background-video.settings.video_custom_play_controls.label",
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "video_custom_mute_controls",
+      "label": "t:sections.background-video.settings.video_custom_mute_controls.label",
+      "default": false
     },
     {
       "type": "header",
@@ -269,6 +371,12 @@
       "type": "url",
       "id": "button_link",
       "label": "t:sections.benefits_product.settings.button_link.label"
+    },
+    {
+      "type": "checkbox",
+      "id": "button_link_in_new_window",
+      "label": "t:sections.global.button_link_in_new_window",
+      "default": false
     },
     {
       "type": "product",
@@ -328,13 +436,11 @@
     {
       "type": "color",
       "id": "color-body-heading",
-      "default": "transparent",
       "label": "t:sections.settings.settings.heading-color.label"
     },
     {
       "type": "color",
       "id": "color-overlay",
-      "default": "transparent",
       "label": "t:sections.settings.settings.background-color.label"
     },
     {
@@ -350,7 +456,6 @@
     {
       "type": "color",
       "id": "color-body-text",
-      "default": "transparent",
       "label": "t:sections.settings.settings.text-color.label"
     },
     {
@@ -377,6 +482,33 @@
       "unit": "px",
       "label": "t:sections.settings.settings.distance-bottom.label",
       "info": "t:sections.settings.settings.distance-bottom.info"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_mobile_spacing",
+      "label": "t:sections.settings.settings.show-mobile-spacing.label"
+    },
+    {
+      "type": "range",
+      "id": "margin-top-mobile",
+      "min": 0,
+      "max": 100,
+      "step": 2,
+      "default": 20,
+      "unit": "px",
+      "label": "t:sections.settings.settings.distance-top-mobile.label",
+      "visible_if": "{{ section.settings.show_mobile_spacing }}"
+    },
+    {
+      "type": "range",
+      "id": "margin-bottom-mobile",
+      "min": 0,
+      "max": 100,
+      "step": 2,
+      "default": 20,
+      "unit": "px",
+      "label": "t:sections.settings.settings.distance-bottom-mobile.label",
+      "visible_if": "{{ section.settings.show_mobile_spacing }}"
     }
   ],
   "blocks": [
@@ -408,6 +540,7 @@
   "presets": [
     {
       "name": "t:sections.benefits_product.name",
+      "category": "t:sections.categories.products",
       "blocks": [
         {
           "type": "benefit",

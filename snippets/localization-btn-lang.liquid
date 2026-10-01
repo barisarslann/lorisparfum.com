@@ -1,6 +1,9 @@
+{% assign tab_index = tabindex | default: '0' %}
+
 <button
   class="wt-localization-trigger wt-localization-trigger--lang {{ custom_class }}"
   data-open-drawer="language"
+  tabindex="{{ tab_index }}"
 >
   <span class="wt-localization-trigger__label">
     {{ localization.language.iso_code | upcase }}

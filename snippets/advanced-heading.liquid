@@ -1,0 +1,9 @@
+{% if is_richheading %}
+  <div class="headline headline--rich {% if settings.animations %} scroll-trigger animate--slide-in {% endif %} {% if settings.disabled_animations_on_mobile %} disabled-on-mobile {% endif %}">
+    {{ heading_richtext }}
+  </div>
+{% else %}
+  {% if heading != blank %}
+    {% render 'headline', title: heading %}
+  {% endif %}
+{% endif %}

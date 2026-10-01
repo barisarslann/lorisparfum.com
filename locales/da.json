@@ -40,6 +40,11 @@
     },
     "continue_shopping": "Tilbage til butikken",
     "pagination": {
+      "previous_label": "Forrige",
+      "next_label": "Næste",
+      "load_more": "Indlæs flere",
+      "load_previous": "Indlæs forrige",
+      "showing": "Viser {{ count }} af {{ total }} varer",
       "label": "Sidenummerering",
       "page": "Side {{ number }}",
       "next": "Næste side",
@@ -52,6 +57,8 @@
       "view": "Se min indkøbskurv ({{ count }})",
       "item_added": "Varen er lagt i indkøbskurven"
     },
+    "copy": "Kopiér",
+    "copied": "Kopieret",
     "share": {
       "copy_to_clipboard": "Kopiér link",
       "share_url": "Link",
@@ -60,9 +67,6 @@
     },
     "quick_add": {
       "view_all_details": "Se alle detaljer"
-    },
-    "icons": {
-      "icon_title": ""
     },
     "slider": {
       "of": "af",
@@ -74,7 +78,9 @@
   "newsletter": {
     "label": "Din mail",
     "success": "Tak, fordi du har tegnet et abonnement",
-    "button_label": "Abonner"
+    "button_label": "Abonner",
+    "close": "Luk pop op",
+    "consent_checkbox_label": "Jeg vil gerne tilmelde mig nyhedsbrevet (information om tilbud, rabatter, lanceringer, konkurrencer)."
   },
   "accessibility": {
     "skip_to_text": "Gå til indhold",
@@ -95,7 +101,10 @@
     "star_reviews_info": "{{ rating_value }} ud af {{ rating_max }} stjerner",
     "collapsible_content_title": "Sammenklappeligt indhold",
     "complementary_products": "Supplerende produkter",
-    "searching": "Søgning i gang..."
+    "searching": "Søgning i gang...",
+    "scroll_to_top": "Scroll to top",
+    "open": "Åbn",
+    "subscription_widget__selling_plan_select": "Leveringsfrekvens for {{ plan_group }}"
   },
   "blogs": {
     "article": {
@@ -115,7 +124,10 @@
       "back_to_blog": "Tilbage til blog",
       "share": "Del denne artikel",
       "success": "Din kommentar er blevet offentliggjort! Tak!",
-      "success_moderated": "Din kommentar er blevet offentliggjort. Den bliver offentliggjort om lidt, da vores blog er under opsyn."
+      "success_moderated": "Din kommentar er blevet offentliggjort. Den bliver offentliggjort om lidt, da vores blog er under opsyn.",
+      "date_format": "%d.%m.%Y",
+      "published_on": "den {{ date }}",
+      "posted_by": "Skrevet af {{ author }}"
     }
   },
   "onboarding": {
@@ -125,6 +137,7 @@
   "products": {
     "product": {
       "add_to_cart": "Læg i indkøbskurv",
+      "pick_size": "Vælg {{ option }}",
       "description": "Beskrivelse",
       "on_sale": "Udsalg",
       "product_variants": "Produktvarianter",
@@ -138,7 +151,8 @@
         "from_price_html": "Fra {{ price }}",
         "regular_price": "Normalpris",
         "sale_price": "Udsalgspris",
-        "unit_price": "Stykpris"
+        "unit_price": "Stykpris",
+        "free": "Gratis"
       },
       "share": "Del dette produkt",
       "sold_out": "Udsolgt",
@@ -185,7 +199,9 @@
       "volume_pricing": {
         "note": "TODO",
         "price_range": "TODO"
-      }
+      },
+      "select_option": "Vælg mulighed",
+      "select_options": "Vælg muligheder"
     },
     "modal": {
       "label": "Mediegalleri"
@@ -222,6 +238,10 @@
     }
   },
   "templates": {
+    "404": {
+      "title": "Siden blev ikke fundet",
+      "subtext": "404"
+    },
     "search": {
       "no_results": "Der blev ikke fundet nogen resultater for \"{{ terms }}\". Kontrollér stavemåden, eller brug et andet ord eller udtryk.",
       "results_with_count": {
@@ -242,7 +262,9 @@
         "products": "Produkter",
         "pages": "Sider",
         "articles": "Artikler",
-        "suggestions": "Forslag"
+        "suggestions": "Forslag",
+        "popular_searches": "Populære søgninger",
+        "useful_links": "Nyttige links"
       },
       "search_for": "Se alt for “{{ terms }}”"
     },
@@ -260,13 +282,12 @@
         "error_heading": "Juster følgende:",
         "title": "Kontaktformular"
       }
-    },
-    "404": {
-      "title": "Siden blev ikke fundet",
-      "subtext": "404"
     }
   },
   "sections": {
+    "shoppable_buy_all": {
+      "add_all_to_cart": "Tilføj alle til kurv"
+    },
     "header": {
       "announcement": "Meddelelse",
       "menu": "Menu",
@@ -305,7 +326,29 @@
         "title": "Har du en konto?",
         "paragraph_html": "<a href=\"{{ link }}\" tabindex=\"-1\" class=\"link underlined-link\">Log ind</a> for at gennemføre købet hurtigere."
       },
-      "view_cart": "Vis kurv"
+      "view_cart": "Vis kurv",
+      "checkbox": "Pak ind som gave",
+      "order_note": "Bemærkning til ordre",
+      "estimate_shipping": "Fragt",
+      "discount_code": "Rabatkode",
+      "features": {
+        "country_region": "Land/region",
+        "postal_zip": "Postnummer",
+        "apply": "Anvend",
+        "calculate": "Beregn",
+        "discount_placeholder": "Indtast venligst rabatkode",
+        "shipping_select_country_zip": "Vælg venligst et land, og indtast et postnummer.",
+        "shipping_calculating": "Beregner…",
+        "shipping_no_rate": "Der er ingen fragtpris for denne destination. Prøv at tjekke adressen.",
+        "shipping_one_rate": "Der er én fragtpris for denne destination:",
+        "shipping_n_rates": "Der er {{ count }} fragtpriser for denne destination:",
+        "shipping_free": "Gratis",
+        "discount_enter_code": "Indtast venligst en rabatkode.",
+        "discount_applying": "Anvender…",
+        "discount_applied": "Rabat anvendt!",
+        "discount_invalid": "Rabatkoden er ugyldig eller gælder ikke for den aktuelle kurv.",
+        "discount_error": "Noget gik galt. Prøv venligst igen."
+      }
     },
     "footer": {
       "payment": "Betalingsmetoder",
@@ -369,6 +412,54 @@
       },
       "error": {
         "invalid_format": "Ugyldigt datoformat. Indtast venligst datoen og klokkeslættet i formatet YYYY-MM-DD HH:MM."
+      }
+    },
+    "localization_drawer": {
+      "title": "Lokalisering",
+      "country_label": "Land/region",
+      "language_label": "Sprog",
+      "drawer_title": "Lokaliseringsindstillinger",
+      "current_country_info": "Du sender i øjeblikket til {{ countryName }} og din ordre vil blive faktureret i {{ currencyIso }} {{ currencySymbol }}.",
+      "search_location": {
+        "label": "Søg placering",
+        "placeholder": "Søg placering..."
+      }
+    },
+    "bundle-builder": {
+      "add_to_bundle": "Tilføj til bundle",
+      "status": {
+        "discount": "🎉 Du fik en rabat.",
+        "add_more": "Du kan stadig tilføje mere."
+      },
+      "toggle": "Slå bundlepanel til/fra",
+      "remove_item": "Fjern vare",
+      "error_message": "Der opstod en fejl. Prøv venligst igen."
+    },
+    "quiz": {
+      "back": "Gå tilbage",
+      "prev_question": "Forrige",
+      "next_question": "Næste",
+      "see_results": "Se resultater"
+    },
+    "blog_posts": {
+      "tags_all": "Alle indlæg"
+    },
+    "compare_products": {
+      "name": "Sammenlign produkter",
+      "badge": {
+        "compare": "VS"
+      },
+      "placeholders": {
+        "left_text": "Venstre",
+        "right_text": "Højre"
+      },
+      "aria": {
+        "table": "Sammenligningstabel"
+      },
+      "blocks": {
+        "table_row": {
+          "center_text_default": "Skriv noget tekst..."
+        }
       }
     }
   },
@@ -534,7 +625,7 @@
   },
   "aria-label": {
     "announcement-bar": "Luk annonceringslinjen",
-    "contact-form": "Send en formular",
+    "contact-form": "Send",
     "featured-collection": "Se alle",
     "featured-product-3d-model": "Se 3D-model",
     "main-product-video": "Afspil video",
@@ -572,6 +663,15 @@
     "price-from": "Pris fra",
     "price-to": "Pris til",
     "remove-price-range": "Fjern prisinterval-filter",
-    "sort-options": "Sorteringsmuligheder"
+    "sort-options": "Sorteringsmuligheder",
+    "lookbook-button": "Se detaljer",
+    "pills-navigation": "Pille-navigation",
+    "collection-tabs": "Kollektionsfaner"
+  },
+  "placeholder": {
+    "select_option": "Vælg en mulighed"
+  },
+  "cross_sell": {
+    "empty_msg": "Ingen produkter tilgængelige til visning. Denne blok vil ikke være synlig for kunderne på butiksfronten."
   }
 }

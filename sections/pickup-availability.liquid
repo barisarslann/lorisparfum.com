@@ -5,7 +5,7 @@
       assign closest_location = pick_up_availabilities.first
 
       if closest_location.available
-        render 'icon-tick'
+        render 'icons', id: 'check'
       endif
     -%}
 
@@ -113,7 +113,7 @@
           <h3 class="h4">{{ availability.location.name | escape }}</h3>
           <p class="pickup-availability-preview caption-large">
             {%- if availability.available -%}
-              {% render 'icon-tick' %}
+              {% render 'icons', id: 'check' %}
               {{ 'products.product.pickup_availability.pick_up_available' | t }},
               {{ availability.pick_up_time | downcase }}
             {%- endif -%}

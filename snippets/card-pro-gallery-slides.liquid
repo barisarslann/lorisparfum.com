@@ -1,0 +1,54 @@
+{%- comment -%}
+  card-pro-gallery-slides.liquid — slajdy galerii card-pro (zawartość tracku, bez wrappera).
+{%- endcomment -%}
+{%- liquid
+  assign slides_limit = gallery_limit | default: 5
+  assign slides_loading = loading | default: 'lazy'
+  if card_alt != blank
+    assign slide_alt = card_alt
+  else
+    assign slide_alt = gallery_product.title | escape
+  endif
+-%}
+{% for m in gallery_product.media limit: slides_limit %}
+  {% if m.media_type == 'image' %}
+    <div class="card-pro__gallery-slide">
+      <img
+        class="card__img"
+        srcset="
+          {% if m.width >= 375 %}{{ m | image_url: width: 375 }} 375w, {% endif %}
+          {% if m.width >= 750 %}{{ m | image_url: width: 750 }} 750w, {% endif %}
+          {% if m.width >= 1000 %}{{ m | image_url: width: 1000 }} 1000w, {% endif %}
+          {% if m.width >= 1440 %}{{ m | image_url: width: 1440 }} 1440w, {% endif %}
+          {{ m | image_url: width: 1000 }} 1000w
+        "
+        sizes="(min-width: 1000px) 620px, 100vw"
+        src="{{ m | image_url: width: 1000 }}"
+        alt="{{ slide_alt }}"
+        loading="{% if forloop.first %}{{ slides_loading }}{% else %}lazy{% endif %}"
+        width="{{ m.width }}"
+        height="{{ m.height }}"
+      >
+    </div>
+  {% elsif m.media_type == 'video' %}
+    <div class="card-pro__gallery-slide">
+      <video
+        class="card__video"
+        playsinline
+        autoplay="autoplay"
+        loop="loop"
+        muted="muted"
+        preload="metadata"
+        poster="{{ m.preview_image.src | image_url: width: 1000 }}"
+        width="{{ m.preview_image.width }}"
+        height="{{ m.preview_image.height }}"
+        alt="{{ slide_alt }}"
+        tabindex="-1"
+      >
+        {% for vid in m.sources %}
+          <source src="{{ vid.url }}" type="{{ vid.mime_type }}">
+        {% endfor %}
+      </video>
+    </div>
+  {% endif %}
+{% endfor %}

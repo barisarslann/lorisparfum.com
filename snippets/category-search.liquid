@@ -1,7 +1,7 @@
 {% for product in search.results %}
-  {% assign lazy_load = false %}
+  {% assign eager_load = true %}
   {% if forloop.index > 3 %}
-    {% assign lazy_load = true %}
+    {% assign eager_load = false %}
   {% endif %}
 
   {% assign url = product.url | within: collection %}
@@ -9,8 +9,9 @@
   {% assign alt = product.featured_image.alt | escape %}
   {% assign uri = product.handle | escape %}
 
+  {%  assign image_hover = null %}
   {% if section.settings.show_secondary_image and product.images[1] %}
-    {% assign image_hover = product.images[1].src %}
+    {% assign image_hover = product.images[1] %}
   {% endif %}
 
   {% assign url = product.url | within: collection %}
@@ -30,15 +31,20 @@
         style="--animation-order: {{ forloop.index }};"
       {% endif %}
     >
-      {% render 'card',
-        img: product.featured_image,
+      {% render 'card-render',
+        card_style: section.settings.card_style,
+        img: product.featured_media,
         image_ratio: section.settings.image_ratio,
         media_aspect_ratio: section.settings.image_ratio,
+        enable_quick_add_button: section.settings.enable_quick_add_button,
+        quick_add_mode: section.settings.quick_add_mode,
         img_hover: image_hover,
         alt: alt,
         subtitle: product.vendor,
-        rating: section.settings.show_product_rating,
+        rating: settings.show_product_rating,
+        show_review_count: settings.show_review_count,
         reviews: product.metafields.reviews,
+        hide_rating_no_reviews: settings.hide_rating_no_reviews,
         title: product.title,
         title_tag: 'h2',
         url: url,
@@ -47,7 +53,9 @@
         product_options: product.options,
         product: product,
         card_product: product,
-        lazy_load: lazy_load
+        eager_load: eager_load,
+        enable_vendor_link: section.settings.enable_vendor_link,
+        are_filters_active: are_filters_active
       %}
     </div>
   {% elsif product.object_type == 'article' %}
@@ -69,7 +77,6 @@
         show_author: section.settings.article_show_date,
         show_badge: true,
         media_aspect_ratio: section.settings.image_ratio,
-        lazy_load: lazy_load,
         search: true
       %}
     </div>

@@ -1,0 +1,11 @@
+<div role="table" class="compare-products__table-wrapper">
+  {% content_for "blocks" %}
+</div>
+
+{% schema %}
+{
+  "name": "t:blocks.compare-group.name",
+  "class": "compare-products__table",
+  "blocks": [{ "type": "compare-row" }]
+}
+{% endschema %}

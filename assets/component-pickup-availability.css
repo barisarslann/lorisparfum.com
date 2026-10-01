@@ -2,10 +2,6 @@ pickup-availability {
   display: block;
 }
 
-pickup-availability[available] {
-  min-height: 8rem;
-}
-
 .pickup-availability-preview {
   align-items: flex-start;
   display: flex;

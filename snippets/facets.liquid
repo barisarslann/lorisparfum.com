@@ -68,19 +68,27 @@
         {%- endif -%}
 
         {%- for filter in results.filters -%}
+
+            {%- assign is_first_open = false -%}
+            {%- if open_first_section and forloop.first -%}
+                {%- assign is_first_open = true -%}
+            {%- endif -%}
+
           {% case filter.type %}
             {% when 'boolean', 'list' %}
               {% render 'filter-type-list',
                 filter: filter,
                 index: forloop.index,
                 filter_position: section.settings.filter_position,
-                options_as_color_swatches: options_as_color_swatches
+                options_as_color_swatches: options_as_color_swatches,
+                is_open: is_first_open
               %}
             {% when 'price_range' %}
               {% render 'filter-price',
                 filter: filter,
                 results: results,
-                filter_position: section.settings.filter_position
+                filter_position: section.settings.filter_position,
+                is_open: is_first_open
               %}
           {% endcase %}
         {%- endfor -%}
@@ -91,7 +99,7 @@
     <div class="wt-filter__footer__body {% if filter_position == 'always' %}always-visible{% endif %}">
       <button
         aria-label="{{ 'products.facets.apply' | t }}"
-        class="btn-checkout wt-cart__cta"
+        class="wt-cart__cta"
         onclick="document.querySelector('collection-section').toggleDrawer()"
         tabindex="-1"
       >

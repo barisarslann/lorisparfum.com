@@ -21,9 +21,14 @@
         </div>
       {% endif %}
 
-      {% if rating %}
-        {% assign rating_percent = rating.rating | times: 100.0 | divided_by: 5.0 %}
-        {% render 'rating-stars', percent: rating_percent %}
+      {% if rating and reviews %}
+        {% if hide_rating_no_reviews %}
+          {% if reviews.rating.value != blank %}
+            {% render 'rating', reviews: reviews, show_review_count: show_review_count %}
+          {% endif %}
+        {% else %}
+          {% render 'rating', reviews: reviews, show_review_count: show_review_count %}
+        {% endif %}
       {% endif %}
     </div>
   </div>

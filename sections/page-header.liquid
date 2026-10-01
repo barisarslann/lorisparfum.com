@@ -7,9 +7,11 @@
     --logo-width: {{ section.settings.mobile_screen_logo_width }}px;
     --logo-width-mobile: {{ section.settings.mobile_screen_logo_width }}px;
     --logo-width-desk: {{ section.settings.large_screen_logo_width }}px;
+    --logo-aspect-ratio: {{ section.settings.logo.aspect_ratio | default: section.settings.transparent_logo.aspect_ratio }};
+    --logo-aspect-ratio-transparent: {{ section.settings.transparent_logo.aspect_ratio | default: section.settings.logo.aspect_ratio }};
   }
 
-  {% if transparent_header_rgb != 'rgba(0, 0, 0, 0.0)' %}
+  {% if section.settings.transparent_header_color != blank and section.settings.transparent_header_color != 'transparent' and transparent_header_rgb != 'rgba(0, 0, 0, 0.0)' %}
   header[id="shopify-section-{{ section.id }}"]{
     --color-transparent-header: {{ section.settings.transparent_header_color }};
   }
@@ -26,7 +28,55 @@
     --header-bg-blur: {{ section.settings.header_bg_blur }}px;
   }
   {% endif %}
+
+  {%- for block in section.blocks -%}
+  [data-block-id="{{ block.id }}"]
+  {
+    {% if block.settings.image_ratio == 'square' %}
+      --mega-menu-image-ratio: 1/1;
+    {% elsif block.settings.image_ratio == 'portrait' %}
+      --mega-menu-image-ratio: var(--aspect-ratio-portait);
+    {% else %}
+      --mega-menu-image-ratio: auto;
+    {% endif %}
+  }
+  {% endfor %}
+
+  {%- for block in section.blocks -%}
+    {%- if block.type == 'menu_highlight' -%}
+      .highlight-{{ block.id }} {
+        {%- if block.settings.highlight_color != blank -%}
+          --highlight-color: {{ block.settings.highlight_color }};
+        {%- endif -%}
+        {%- if block.settings.highlight_icon != blank -%}
+          --highlight-icon-url: url('{{ block.settings.highlight_icon | image_url: width: 32 }}');
+          --highlight-icon-content: '';
+        {%- endif -%}
+      }
+    {%- endif -%}
+  {%- endfor -%}
 </style>
+
+
+{% assign highlight_names = '' %}
+{% assign highlight_block_ids = '' %}
+{%- for block in section.blocks -%}
+  {%- if block.type == 'menu_highlight' and block.settings.menu_items != blank -%}
+    {%- assign items = block.settings.menu_items | split: ',' -%}
+    {%- for item in items -%}
+      {%- assign cleaned = item | strip | downcase -%}
+      {%- if cleaned != '' -%}
+        {%- if highlight_names != '' -%}
+          {%- assign highlight_names = highlight_names | append: '|||' | append: cleaned -%}
+          {%- assign highlight_block_ids = highlight_block_ids | append: '|||' | append: block.id -%}
+        {%- else -%}
+          {%- assign highlight_names = cleaned -%}
+          {%- assign highlight_block_ids = block.id -%}
+        {%- endif -%}
+      {%- endif -%}
+    {%- endfor -%}
+  {%- endif -%}
+{%- endfor -%}
 
 {% assign layout_options = 'option_3,option_4' | split: ',' %}
 <script>
@@ -42,15 +92,17 @@
 <page-header
   role="banner"
   id="header"
+  data-hide-over-selector=".collection__grid"
   class="
     wt-header
     {% if settings.always_mobile_navigation or section.settings.layout == 'option_3' or section.settings.layout == 'option_4' %}mobile-nav{% endif %}
     {% if section.settings.layout == 'option_1' %} wt-header--v1 wt-header--search{% endif %}
     {% if section.settings.layout == 'option_2' %} wt-header--v2{% endif %}
     {% if section.settings.layout == 'option_3' or section.settings.layout == 'option_4' %} wt-header--v3 wt-header--fashion{% endif %}
-    {% if section.settings.layout == 'option_4' or section.settings.layout == 'option_5'  %} wt-header--transparent {% endif %}
+    {% if section.settings.layout == 'option_4' or section.settings.layout == 'option_5' or section.settings.layout == 'option_6' %} wt-header--transparent {% endif %}
     {% if section.settings.transparent_logo != blank %} wt-header--transparent-logo {% endif %}
     {% if section.settings.layout == 'option_5' %}  wt-header--v3 wt-header--fashion wt-header--v5{% endif %}
+    {% if section.settings.layout == 'option_6' %}  wt-header--v3 wt-header--fashion wt-header--v6{% endif %}
     {% if section.settings.show_shadow %} wt-header--shadow{% endif %}
     {% if section.settings.show_line_separator %} wt-header--separator{% endif %}
     {% if section.settings.sticky_header %} wt-header--sticky{% endif %}
@@ -60,7 +112,7 @@
   {% if section.settings.layout == 'option_3' or section.settings.layout == 'option_4' %}
     data-always-mobile-menu="true"
   {% endif %}
-  {% if section.settings.layout == 'option_4' or section.settings.layout == 'option_5' %}
+  {% if section.settings.layout == 'option_4' or section.settings.layout == 'option_5' or section.settings.layout == 'option_6' %}
     data-transparent="true"
   {% endif %}
   {% if section.settings.sticky_header %}
@@ -74,9 +126,13 @@
     class="
       {%- if section.settings.layout == 'option_1' -%}
           wt-header__body wt-header__body--search
+          {%- if section.settings.show_search_without_button %} wt-header__body--search-no-button{% endif -%}
       {%- else -%}
           wt-header__body
       {%- endif -%}
+      {% if section.settings.show_search == false %}
+          wt-header__body--search-disabled
+      {% endif %}
     "
   >
     {% if section.settings.layout == 'option_3' or section.settings.layout == 'option_4' %}
@@ -93,21 +149,38 @@
           tabindex="0"
         >
           {% if settings.menu_icon %}
-            {{ settings.menu_icon | image_url: width: settings.menu_icon.width | image_tag: class: 'svg-icon svg-icon--bars' }}
+            {{
+              settings.menu_icon
+              | image_url: width: settings.menu_icon.width
+              | image_tag: class: 'svg-icon svg-icon--bars'
+            }}
           {% else %}
             {% render 'icons', id: 'bars' %}
           {% endif %}
-
         </a>
 
         {%- if section.settings.teaser_menu != blank -%}
+          {% assign highlight_names_arr = highlight_names | split: '|||' %}
+          {% assign highlight_ids_arr = highlight_block_ids | split: '|||' %}
           <ul class="wt-header__nav-teaser__list" tabindex="-1">
-            {%- for link in section.settings.teaser_menu.links -%}
-              {% if forloop.index <= 3 %}
+            {% assign teaser_menu_limit = section.settings.teaser_menu_limit %}
+            {%- for link in section.settings.teaser_menu.links limit: teaser_menu_limit -%}
+              {% if forloop.index <= 5 %}
                 {% assign is_parent = false %}
                 {% if link.links != blank %}
                   {% assign is_parent = true %}
                 {% endif %}
+
+                {%- liquid
+                  assign teaser_highlight_class = ''
+                  assign teaser_dc = link.title | strip | downcase
+                  for highlight_name in highlight_names_arr
+                    if teaser_dc == highlight_name
+                      assign teaser_highlight_class = 'highlight-' | append: highlight_ids_arr[forloop.index0]
+                      break
+                    endif
+                  endfor
+                -%}
 
                 <li class="wt-header__nav-teaser__item {% if is_parent %}wt-header__nav-teaser__item--parent{% endif %}">
                   <a
@@ -117,7 +190,7 @@
                       aria-current="page"
                     {% endif %}
                   >
-                    <span class="wt-header__nav-teaser__link-text wt-page-nav-mega__decorated">
+                    <span class="wt-header__nav-teaser__link-text wt-page-nav-mega__decorated {{ teaser_highlight_class }}">
                       {{- link.title | escape -}}
                     </span>
                   </a>
@@ -129,12 +202,17 @@
       </div>
     {% endif %}
 
-    {% if section.settings.layout == 'option_5' %}
+    {% if section.settings.layout == 'option_5' or section.settings.layout == 'option_6' %}
       <div class="wt-header__nav-teaser wt-header__nav-teaser--full-menu">
-        <mega-menu-section class="mega-menu">
+        <mega-menu-section
+          class="mega-menu"
+          {% if section.settings.enable_submenu_link_in_drawer %}
+            data-enable-submenu-link-in-drawer
+          {% endif %}
+        >
           <nav class="wt-page-nav-mega {% if section.settings.show_shadow %} wt-page-nav-mega--shadow{% endif %}">
             {%- if section.settings.menu != blank -%}
-              {% render 'mega-menu', menu: section.settings.menu, blocks: section.blocks %}
+              {% render 'mega-menu', menu: section.settings.menu, blocks: section.blocks, highlight_names: highlight_names, highlight_block_ids: highlight_block_ids %}
             {%- endif -%}
           </nav>
         </mega-menu-section>
@@ -156,7 +234,7 @@
       </div>
     {% endif %}
 
-    <div class="wt-header__aside">
+    <div class="wt-header__aside {% if section.settings.show_search == false %}wt-header__aside--no-search{% endif %}">
       {%- if section.settings.layout != 'option_1' -%}
         <a
           href="#"
@@ -168,10 +246,14 @@
           role="button"
         >
           {% if settings.menu_icon %}
-            {{ settings.menu_icon | image_url: width: settings.menu_icon.width | image_tag: class: 'svg-icon svg-icon--bars' }}
+            {{
+              settings.menu_icon
+              | image_url: width: settings.menu_icon.width
+              | image_tag: class: 'svg-icon svg-icon--bars'
+            }}
           {% else %}
             {% render 'icons', id: 'bars' %}
-          {% endif %}        
+          {% endif %}
         </a>
       {% endif %}
       {%- if section.settings.layout == 'option_2' and section.settings.sticky_header -%}
@@ -182,7 +264,11 @@
           aria-label="{{ 'aria-label.page-header-toggle-menu' | t }}"
         >
           {% if settings.menu_icon %}
-            {{ settings.menu_icon | image_url: width: settings.menu_icon.width | image_tag: class: 'svg-icon svg-icon--bars' }}
+            {{
+              settings.menu_icon
+              | image_url: width: settings.menu_icon.width
+              | image_tag: class: 'svg-icon svg-icon--bars'
+            }}
           {% else %}
             {% render 'icons', id: 'bars' %}
           {% endif %}
@@ -190,9 +276,56 @@
           {% render 'icons', id: 'close' %}
         </a>
       {% endif %}
+
+      {% liquid
+        assign search_properties = ''
+
+        if settings.include_author
+          assign search_properties = search_properties | append: 'author,'
+        endif
+
+        if settings.include_body
+          assign search_properties = search_properties | append: 'body,'
+        endif
+
+        if settings.include_product_type
+          assign search_properties = search_properties | append: 'product_type,'
+        endif
+
+        if settings.include_tag
+          assign search_properties = search_properties | append: 'tag,'
+        endif
+
+        if settings.include_title
+          assign search_properties = search_properties | append: 'title,'
+        endif
+
+        if settings.include_variants_barcode
+          assign search_properties = search_properties | append: 'variants.barcode,'
+        endif
+
+        if settings.include_variants_sku
+          assign search_properties = search_properties | append: 'variants.sku,'
+        endif
+
+        if settings.include_variants_title
+          assign search_properties = search_properties | append: 'variants.title,'
+        endif
+
+        if settings.include_vendor
+          assign search_properties = search_properties | append: 'vendor,'
+        endif
+
+        assign search_properties = search_properties | remove_last: ','
+      %}
+      {% if section.settings.show_search %}
       <search-drawer
         class="wt-header__search wt-drawer-search"
         data-loading-text="{{ 'accessibility.searching' | t }}"
+        data-search-page-url="{{ routes.search_url }}"
+        data-search-properties="{{ search_properties }}"
+        data-enable-predictive-search="{{ settings.enable_predictive_search }}"
+        data-show-suggest-on-no-results="{{ section.settings.show_suggest_on_no_results }}"
       >
         <div
           {% comment %}for="search-shop"{% endcomment %}
@@ -203,12 +336,15 @@
           aria-label="{{ 'aria-label.page-header-open-search' | t }}"
         >
           {% if settings.search_icon %}
-            {{ settings.search_icon | image_url: width: settings.search_icon.width | image_tag: class: 'svg-icon svg-icon--search' }}
+            {{
+              settings.search_icon
+              | image_url: width: settings.search_icon.width
+              | image_tag: class: 'svg-icon svg-icon--search'
+            }}
           {% else %}
             {% render 'icons', id: 'search' %}
           {% endif %}
         </div>
-
         <form
           class="wt-header__search__body store-search-form"
           action="{{ routes.search_url }}"
@@ -220,13 +356,20 @@
           <div class="wt-header__search__form">
             <label class="wt-header__icon wt-header__search__label" for="search-shop">
               {% if settings.search_icon %}
-                {{ settings.search_icon | image_url: width: settings.search_icon.width | image_tag: class: 'svg-icon svg-icon--search' }}
+                {{
+                  settings.search_icon
+                  | image_url: width: settings.search_icon.width
+                  | image_tag: class: 'svg-icon svg-icon--search'
+                }}
               {% else %}
                 {% render 'icons', id: 'search' %}
               {% endif %}
               <span class="visually-hidden">{{ 'aria-label.page-header-search' | t }}</span>
             </label>
             <input
+              {% if search.performed %}
+                value="{{ search.terms | escape  }}"
+              {% endif %}
               type="text"
               placeholder="{{ section.settings.typing_search }}"
               id="search-shop"
@@ -253,7 +396,7 @@
                 aria-label="{{ 'aria-label.page-header-remove-all' | t }}"
                 tabindex="-1"
               >
-                  {% render 'icons', id: 'close' -%}
+                {% render 'icons', id: 'close' -%}
                 <span class="text">{{ 'aria-label.page-header-toggle-menu' | t }}</span>
               </div>
             </div>
@@ -263,7 +406,11 @@
               tabindex="-1"
             >
               {% if settings.search_icon %}
-                {{ settings.search_icon | image_url: width: settings.search_icon.width | image_tag: class: 'svg-icon svg-icon--search' }}
+                {{
+                  settings.search_icon
+                  | image_url: width: settings.search_icon.width
+                  | image_tag: class: 'svg-icon svg-icon--search'
+                }}
               {% else %}
                 {% render 'icons', id: 'search' %}
               {% endif %}
@@ -274,12 +421,13 @@
               class="wt-header__search__close"
               tabindex="-1"
             >
-                {% render 'icons', id: 'close' %}
+              {% render 'icons', id: 'close' %}
             </button>
           </div>
           <div class="wt-header__search__results">
             <div class="predictive-search-status">
               {% render 'search-top' %}
+              <div class="predictive-search-status__text"></div>
             </div>
 
             {% render 'loader' %}
@@ -288,6 +436,7 @@
           </div>
         </form>
       </search-drawer>
+    {% endif %}
     </div>
 
     {%- if section.settings.layout == 'option_1' and section.settings.sticky_header -%}
@@ -301,7 +450,11 @@
         aria-expanded="false"
       >
         {% if settings.menu_icon %}
-          {{ settings.menu_icon | image_url: width: settings.menu_icon.width | image_tag: class: 'svg-icon svg-icon--bars' }}
+          {{
+            settings.menu_icon
+            | image_url: width: settings.menu_icon.width
+            | image_tag: class: 'svg-icon svg-icon--bars'
+          }}
         {% else %}
           {% render 'icons', id: 'bars' %}
         {% endif %}
@@ -319,16 +472,64 @@
           aria-label="{{ 'aria-label.page-header-toggle-menu' | t }}"
         >
           {% if settings.menu_icon %}
-            {{ settings.menu_icon | image_url: width: settings.menu_icon.width | image_tag: class: 'svg-icon svg-icon--bars' }}
+            {{
+              settings.menu_icon
+              | image_url: width: settings.menu_icon.width
+              | image_tag: class: 'svg-icon svg-icon--bars'
+            }}
           {% else %}
             {% render 'icons', id: 'bars' %}
           {% endif %}
         </a>
       {%- endif -%}
 
+      <div class="wt-header__logo__placeholder">
+        {%- if section.settings.logo != blank or section.settings.transparent_logo != blank -%}
+          {% if section.settings.logo != blank %}
+            {%- assign large_image_size = section.settings.large_screen_logo_width -%}
+            {%- assign large_image_size_double = large_image_size | times: 2 -%}
+
+            <img
+              srcset="{{ section.settings.logo | image_url: width: large_image_size }} 1x, {{ section.settings.logo | image_url: width: large_image_size_double }} 2x"
+              src="{{ section.settings.logo | image_url: width: large_image_size }}"
+              loading="lazy"
+              width="{{ section.settings.logo.width }}"
+              height="{{ section.settings.logo.height }}"
+              class="wt-header__logo__img"
+              alt="{{ section.settings.logo.alt | default: shop.name | escape }}"
+            >
+
+            {%- assign mobile_image_size = section.settings.mobile_screen_logo_width -%}
+            {%- assign mobile_image_size_double = mobile_image_size | times: 2 -%}
+            <img
+              srcset="{{ section.settings.logo | image_url: width: mobile_image_size }} 1x, {{ section.settings.logo | image_url: width: mobile_image_size_double }} 2x"
+              src="{{ section.settings.logo | image_url: width: mobile_image_size }}"
+              loading="lazy"
+              width="{{ section.settings.logo.width }}"
+              height="{{ section.settings.logo.height }}"
+              class="wt-header__logo__img wt-header__logo__img--mobile"
+              alt="{{ section.settings.logo.alt | default: shop.name | escape }}"
+            >
+          {% endif %}
+
+          {% assign transp_logo = section.settings.transparent_logo %}
+          {% if transp_logo != blank %}
+            <img
+              srcset="{{ transp_logo | image_url: width: large_image_size }} 1x, {{ transp_logo | image_url: width: large_image_size_double }} 2x"
+              src="{{ transp_logo | image_url: width: large_image_size }}"
+              loading="lazy"
+              width="{{ transp_logo.width }}"
+              height="{{ transp_logo.height }}"
+              class="wt-header__logo__img wt-header__logo__img--transparent"
+              alt="{{ section.settings.logo.alt | default: shop.name | escape }}"
+            >
+          {% endif %}
+        {%- else -%}
+          {{ shop.name }}
+        {%- endif -%}
+      </div>
       {%- if request.page_type == 'index' -%}
-        <!-- CUSTOM -->
-        <!-- <h1 --><span itemscope itemtype="http://schema.org/Organization" class="wt-header__logo">
+        <span itemscope itemtype="http://schema.org/Organization" class="wt-header__logo">
       {% else %}
         <div itemscope itemtype="http://schema.org/Organization" class="wt-header__logo">
       {% endif %}
@@ -354,8 +555,7 @@
             <img
               srcset="{{ section.settings.logo | image_url: width: large_image_size }} 1x, {{ section.settings.logo | image_url: width: large_image_size_double }} 2x"
               src="{{ section.settings.logo | image_url: width: large_image_size }}"
-              data-custom="- CUSTOM -"
-              data-loading="lazy"
+              loading="lazy"
               width="{{ section.settings.logo.width }}"
               height="{{ section.settings.logo.height }}"
               class="wt-header__logo__img"
@@ -367,8 +567,7 @@
             <img
               srcset="{{ section.settings.logo | image_url: width: mobile_image_size }} 1x, {{ section.settings.logo | image_url: width: mobile_image_size_double }} 2x"
               src="{{ section.settings.logo | image_url: width: mobile_image_size }}"
-              data-custom="- CUSTOM -"
-              data-loading="lazy"
+              loading="lazy"
               width="{{ section.settings.logo.width }}"
               height="{{ section.settings.logo.height }}"
               class="wt-header__logo__img wt-header__logo__img--mobile"
@@ -381,10 +580,9 @@
             <img
               srcset="{{ transp_logo | image_url: width: large_image_size }} 1x, {{ transp_logo | image_url: width: large_image_size_double }} 2x"
               src="{{ transp_logo | image_url: width: large_image_size }}"
-              data-custom="- CUSTOM -"
-              data-loading="lazy"
-              width="{{ section.settings.logo.width }}"
-              height="{{ section.settings.logo.height }}"
+              loading="lazy"
+              width="{{ transp_logo.width }}"
+              height="{{ transp_logo.height }}"
               class="wt-header__logo__img wt-header__logo__img--transparent"
               alt="{{ section.settings.logo.alt | default: shop.name | escape }}"
             >
@@ -395,31 +593,55 @@
       </a>
 
       {%- if request.page_type == 'index' -%}
-        <!-- CUSTOM -->
-        <!-- </h1> --></span>
+        </span>
       {% else %}
         </div>
       {% endif %}
     </div>
 
     <ul class="wt-header__panel wt-header__panel--no-labels">
+      {%- if section.settings.layout == 'option_1' and section.settings.show_search -%}
+        <li class="wt-header__panel__item wt-header__panel__item--search">
+          <div
+            class="wt-header__panel__link wt-icon wt-header__search-trigger wt-header__search-trigger--compact"
+            rel="toggle-search"
+            tabindex="-1"
+            role="button"
+            aria-label="{{ 'aria-label.page-header-open-search' | t }}"
+          >
+            {% if settings.search_icon %}
+              {{
+                settings.search_icon
+                | image_url: width: settings.search_icon.width
+                | image_tag: class: 'svg-icon svg-icon--search'
+              }}
+            {% else %}
+              {% render 'icons', id: 'search' %}
+            {% endif %}
+          </div>
+        </li>
+      {%- endif -%}
       {%- if shop.customer_accounts_enabled -%}
         <li class="wt-header__panel__item wt-header__panel__item--account">
-          <a href="{{ routes.account_url }}" class="wt-header__panel__link wt-icon">
-            {% if settings.account_icon %}
-              {{ settings.account_icon | image_url: width: settings.account_icon.width | image_tag: class: 'svg-icon svg-icon--user' }}
-            {% else %}
-              {% render 'icons', id: 'user' %}
-            {% endif %}
-            <span class="wt-header__panel__label">{{ 'customer.account.title' | t }}</span>
-          </a>
+          <shopify-account menu="{{ section.settings.customer_account_menu }}">
+            <div slot="signed-out-avatar">
+              {% if settings.account_icon %}
+                {{ settings.account_icon | image_url: width: settings.account_icon.width | image_tag: class: 'svg-icon svg-icon--user' }}
+              {% else %}
+                {% render 'icons', id: 'user' %}
+              {% endif %}
+            </div>
+          </shopify-account>
         </li>
       {%- endif -%}
       <li class="wt-header__panel__item wt-header__panel__item--cart">
-        <!-- CUSTOM -->
-        <a href="{{ routes.cart_url }}" class="wt-header__panel__link wt-icon wt-cart__trigger" id="cart-icon-bubble" data-custom onclick="event.preventDefault(); // return false;">
+        <a href="{{ routes.cart_url }}" class="wt-header__panel__link wt-icon wt-cart__trigger" id="cart-icon-bubble">
           {% if settings.bag_icon %}
-            {{ settings.bag_icon | image_url: width: settings.bag_icon.width | image_tag: class: 'svg-icon svg-icon--bag' }}
+            {{
+              settings.bag_icon
+              | image_url: width: settings.bag_icon.width
+              | image_tag: class: 'svg-icon svg-icon--bag'
+            }}
           {% else %}
             {% render 'icons', id: 'bag' %}
           {% endif %}
@@ -442,7 +664,7 @@
 {%- endif -%}
 
 <drawer-nav
-  class="wt-drawer wt-drawer--nav{% if settings.always_mobile_navigation or section.settings.layout == 'option_3' or section.settings.layout == 'option_4' %} wt-drawer--mobile-nav{% endif %}{% if section.settings.layout == 'option_5' %} wt-drawer--v5{% endif %}"
+  class="wt-drawer wt-drawer--nav{% if settings.always_mobile_navigation or section.settings.layout == 'option_3' or section.settings.layout == 'option_4' %} wt-drawer--mobile-nav{% endif %}{% if section.settings.layout == 'option_5' or section.settings.layout == 'option_6' %} wt-drawer--v5{% endif %}"
   id="wt-drawer-nav"
 >
   <div class="wt-drawer__content">
@@ -456,37 +678,40 @@
         aria-controls="wt-drawer-nav"
         aria-expanded="false"
       >
-          {% render 'icons', id: 'close' %}
+        {% render 'icons', id: 'close' %}
       </div>
     </div>
 
-    <mega-menu-section class="mega-menu">
+    <mega-menu-section
+      class="mega-menu"
+      {% if section.settings.enable_submenu_link_in_drawer %}
+        data-enable-submenu-link-in-drawer
+      {% endif %}
+    >
       <nav class="wt-page-nav-mega {% if section.settings.show_shadow %} wt-page-nav-mega--shadow{% endif %}">
         {%- if section.settings.menu != blank -%}
-          {% render 'mega-menu', menu: section.settings.menu, blocks: section.blocks %}
+          {% render 'mega-menu', menu: section.settings.menu, blocks: section.blocks, highlight_names: highlight_names, highlight_block_ids: highlight_block_ids %}
         {%- endif -%}
       </nav>
 
-      {% if shop.customer_accounts_enabled or section.settings.mobile_footer_menu != null %}
+      {% liquid
+        assign show_menu_footer = false
+        if shop.customer_accounts_enabled
+          assign show_menu_footer = true
+        endif
+
+        if section.settings.mobile_footer_menu.size > 0
+          assign show_menu_footer = true
+        endif
+
+        if section.settings.show_country_selector or section.settings.show_language_selector
+          assign show_menu_footer = true
+        endif
+      %}
+
+      {% if show_menu_footer %}
         <aside class="wt-page-nav-mega__aside">
           <ul class="wt-page-nav-mega__aside-list">
-            {%- if shop.customer_accounts_enabled -%}
-              <li class="wt-page-nav-mega__aside-list__item">
-                <a
-                  href="{%- if customer -%}{{ routes.account_url }}{%- else -%}{{ routes.account_login_url }}{%- endif -%}"
-                  class="wt-page-nav-mega__aside-list__link"
-                  tabindex="-1"
-                >
-                  {%- liquid
-                    if customer
-                      echo 'customer.account_fallback' | t
-                    else
-                      echo 'customer.log_in' | t
-                    endif
-                  -%}
-                </a>
-              </li>
-            {%- endif -%}
             {%- for link in section.settings.mobile_footer_menu.links -%}
               <li class="wt-page-nav-mega__aside-list__item">
                 <a
@@ -498,6 +723,22 @@
                 </a>
               </li>
             {%- endfor -%}
+            {%- if shop.customer_accounts_enabled -%}
+              <li class="wt-page-nav-mega__aside-list__item wt-page-nav-mega__login">
+                <shopify-account menu="{{ section.settings.customer_account_menu }}">
+                  <div class="signed-out-avatar-menu" slot="signed-out-avatar">
+                    {% if settings.account_icon %}
+                      {{ settings.account_icon | image_url: width: settings.account_icon.width | image_tag: class: 'svg-icon svg-icon--user' }}
+                    {% else %}
+                      {% render 'icons', id: 'user' %}
+                    {% endif %}
+                  </div>
+                </shopify-account>
+                {%- unless customer -%}
+                  <span class="signed-out-text">{{ 'customer.log_in' | t }}</span>
+                {%- endunless -%}
+              </li>
+            {%- endif -%}
             {% if section.settings.show_country_selector or section.settings.show_language_selector %}
               <li class="wt-page-nav-mega__aside-list__item">
                 <div
@@ -506,10 +747,11 @@
                   {% if section.settings.show_country_selector -%}
                     {%- render 'localization-btn-local',
                       show_country_code: section.settings.show_country_selector_label,
-                      show_country_flag: section.settings.show_country_selector_flag
+                      show_country_flag: section.settings.show_country_selector_flag,
+                      tabindex: '-1'
                     -%}
                   {%- endif %}
-                  {% if section.settings.show_language_selector %}{% render 'localization-btn-lang' %}{% endif %}
+                  {% if section.settings.show_language_selector %}{% render 'localization-btn-lang', tabindex: '-1' %}{% endif %}
                 </div>
               </li>
             {% endif %}
@@ -530,6 +772,10 @@
   "tag": "header",
   "class": "page-header",
   "settings": [
+    {
+      "type": "paragraph",
+      "content": "t:sections.header.settings.support_info.content"
+    },
     {
       "type": "select",
       "id": "layout",
@@ -553,6 +799,10 @@
         {
           "value": "option_5",
           "label": "t:settings_schema.layout.settings.input_type__2_1.option_5.label"
+        },
+        {
+          "value": "option_6",
+          "label": "t:settings_schema.layout.settings.input_type__2_1.option_6.label"
         }
       ],
       "default": "option_3",
@@ -628,7 +878,7 @@
       "type": "range",
       "id": "large_screen_logo_width",
       "min": 50,
-      "max": 250,
+      "max": 300,
       "step": 10,
       "default": 120,
       "unit": "t:sections.header.settings.large_screen_logo_width.unit",
@@ -650,34 +900,58 @@
       "default": "main-menu",
       "label": "t:sections.header.settings.menu.label"
     },
-    {
-      "type": "link_list",
-      "id": "teaser_menu",
-      "default": "main-menu",
-      "label": "t:sections.header.settings.teaser_menu.label",
-      "info": "t:sections.header.settings.teaser_menu.info"
-    },
+
     {
       "type": "link_list",
       "id": "mobile_footer_menu",
       "label": "t:sections.header.settings.mobile_footer_menu.label"
     },
     {
+      "type": "link_list",
+      "id": "customer_account_menu",
+      "default": "customer-account-main-menu",
+      "label": "t:sections.header.settings.customer_account_menu.label",
+      "info": "t:sections.header.settings.customer_account_menu.info"
+    },
+    {
+    "type": "header",
+    "content": "t:sections.header.settings.teaser_menu.label",
+    "info": "t:sections.header.settings.teaser_menu.info"
+    },
+    {
+      "type": "link_list",
+      "id": "teaser_menu",
+      "default": "main-menu",
+      "label": "t:sections.header.settings.teaser_menu.label",
+    },
+    {
+      "type": "range",
+      "id": "teaser_menu_limit",
+      "min": 3,
+      "max": 5,
+      "step": 1,
+      "default": 3,
+      "label": "t:sections.header.settings.teaser_menu_limit.label",
+      "info": "t:sections.header.settings.teaser_menu_limit.info"
+    },
+    {
       "type": "header",
       "content": "t:sections.header.settings.transparent_header.label",
-      "info": "t:sections.header.settings.transparent_header.info"
+      "info": "t:sections.header.settings.transparent_header.info",
+      "visible_if": "{{ section.settings.layout == 'option_4' or section.settings.layout == 'option_5' or section.settings.layout == 'option_6' }}"
     },
     {
       "type": "image_picker",
       "id": "transparent_logo",
       "label": "t:sections.header.settings.transparent_logo.label",
-      "info": "t:sections.header.settings.transparent_logo.info"
+      "info": "t:sections.header.settings.transparent_logo.info",
+      "visible_if": "{{ section.settings.layout == 'option_4' or section.settings.layout == 'option_5' or section.settings.layout == 'option_6' }}"
     },
     {
       "type": "color",
       "id": "transparent_header_color",
       "label": "t:sections.header.settings.custom-color.label",
-      "default": "transparent"
+      "visible_if": "{{ section.settings.layout == 'option_4' or section.settings.layout == 'option_5' or section.settings.layout == 'option_6' }}"
     },
     {
       "type": "header",
@@ -725,33 +999,177 @@
       "default": "Shop by"
     },
     {
+      "type": "checkbox",
+      "id": "enable_submenu_link_in_drawer",
+      "default": false,
+      "label": "t:sections.header.settings.enable_submenu_link_in_drawer.label",
+      "info": "t:sections.header.settings.enable_submenu_link_in_drawer.info"
+    },
+    {
       "type": "header",
       "content": "t:sections.global.search"
     },
     {
+      "type": "checkbox",
+      "id": "show_search",
+      "default": true,
+      "label": "t:sections.header.settings.show_search.label"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_search_without_button",
+      "default": false,
+      "label": "t:sections.header.settings.show_search_without_button.label",
+      "info": "t:sections.header.settings.show_search_without_button.info",
+      "visible_if": "{{ section.settings.layout == 'option_1' and section.settings.show_search }}"
+    },
+    {
       "type": "text",
       "id": "typing_search",
-      "label": "t:sections.header.settings.typing_search.label"
+      "label": "t:sections.header.settings.typing_search.label",
+      "visible_if": "{{ section.settings.show_search }}"
     },
     {
       "type": "text",
       "id": "suggestions_title",
       "label": "t:sections.header.settings.suggestions_title.label",
-      "info": "t:sections.header.settings.suggestions_title.info"
+      "info": "t:sections.header.settings.suggestions_title.info",
+      "visible_if": "{{ section.settings.show_search }}"
+    },
+    {
+      "type": "select",
+      "id": "search_suggest_layout",
+      "default": "menu",
+      "label": "t:sections.header.settings.search_suggest_layout.label",
+      "info": "t:sections.header.settings.search_suggest_layout.info",
+      "options": [
+        {
+          "value": "menu",
+          "label": "t:sections.header.settings.search_suggest_layout.options__1.label"
+        },
+        {
+          "value": "results",
+          "label": "t:sections.header.settings.search_suggest_layout.options__2.label"
+        }
+      ],
+      "visible_if": "{{ section.settings.show_search }}"
     },
     {
       "type": "link_list",
       "id": "suggestions_menu",
       "default": "main-menu",
       "label": "t:sections.header.settings.suggestions_menu.label",
-      "info": "t:sections.header.settings.suggestions_menu.info"
+      "info": "t:sections.header.settings.suggestions_menu.info",
+      "visible_if": "{{ section.settings.show_search and section.settings.search_suggest_layout == 'menu' }}"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.header.settings.suggest_curated_header.content",
+      "info": "t:sections.header.settings.suggest_curated_header.info",
+      "visible_if": "{{ section.settings.show_search }}"
+    },
+    {
+      "type": "product_list",
+      "id": "suggest_products",
+      "limit": 8,
+      "label": "t:sections.header.settings.suggest_products.label",
+      "info": "t:sections.header.settings.suggest_products.info"
+    },
+    {
+      "type": "text",
+      "id": "suggest_products_title",
+      "label": "t:sections.header.settings.suggest_products_title.label",
+      "info": "t:sections.header.settings.suggest_products_title.info",
+      "visible_if": "{{ section.settings.show_search and section.settings.search_suggest_layout == 'results' }}"
+    },
+    {
+      "type": "collection_list",
+      "id": "suggest_collections",
+      "limit": 6,
+      "label": "t:sections.header.settings.suggest_collections.label",
+      "info": "t:sections.header.settings.suggest_collections.info"
+    },
+    {
+      "type": "text",
+      "id": "suggest_collections_title",
+      "label": "t:sections.header.settings.suggest_collections_title.label",
+      "info": "t:sections.header.settings.suggest_collections_title.info",
+      "visible_if": "{{ section.settings.show_search and section.settings.search_suggest_layout == 'results' }}"
+    },
+    {
+      "type": "link_list",
+      "id": "suggest_pages_menu",
+      "label": "t:sections.header.settings.suggest_pages_menu.label",
+      "info": "t:sections.header.settings.suggest_pages_menu.info",
+      "visible_if": "{{ section.settings.show_search and section.settings.search_suggest_layout == 'results' }}"
+    },
+    {
+      "type": "text",
+      "id": "suggest_pages_menu_title",
+      "label": "t:sections.header.settings.suggest_pages_menu_title.label",
+      "info": "t:sections.header.settings.suggest_pages_menu_title.info",
+      "visible_if": "{{ section.settings.show_search and section.settings.search_suggest_layout == 'results' }}"
+    },
+    {
+      "type": "textarea",
+      "id": "suggest_search_terms",
+      "label": "t:sections.header.settings.suggest_search_terms.label",
+      "info": "t:sections.header.settings.suggest_search_terms.info",
+      "visible_if": "{{ section.settings.show_search and section.settings.search_suggest_layout == 'results' }}"
+    },
+    {
+      "type": "text",
+      "id": "suggest_search_terms_title",
+      "label": "t:sections.header.settings.suggest_search_terms_title.label",
+      "info": "t:sections.header.settings.suggest_search_terms_title.info",
+      "visible_if": "{{ section.settings.show_search and section.settings.search_suggest_layout == 'results' }}"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_suggest_on_no_results",
+      "default": true,
+      "label": "t:sections.header.settings.show_suggest_on_no_results.label",
+      "info": "t:sections.header.settings.show_suggest_on_no_results.info",
+      "visible_if": "{{ section.settings.show_search }}"
     }
   ],
   "blocks": [
     {
+      "type": "menu_highlight",
+      "name": "t:sections.header.blocks.menu_highlight.name",
+      "settings": [
+        {
+          "type": "paragraph",
+          "content": "t:sections.header.blocks.menu_highlight.settings.support_info.content"
+        },
+        {
+          "id": "menu_items",
+          "type": "text",
+          "label": "t:sections.header.blocks.menu_highlight.settings.menu_items.label",
+          "info": "t:sections.header.blocks.menu_highlight.settings.menu_items.info"
+        },
+        {
+          "id": "highlight_color",
+          "type": "color",
+          "label": "t:sections.header.blocks.menu_highlight.settings.highlight_color.label",
+          "default": "#FF0000"
+        },
+        {
+          "id": "highlight_icon",
+          "type": "image_picker",
+          "label": "t:sections.header.blocks.menu_highlight.settings.icon.label",
+          "info": "t:sections.header.blocks.menu_highlight.settings.icon.info"
+        }
+      ]
+    },
+    {
       "type": "column",
       "name": "t:sections.header.blocks.column.name",
       "settings": [
+        {
+          "type": "paragraph",
+          "content": "t:sections.header.blocks.column.settings.support_info.content"
+        },
         {
           "id": "title",
           "type": "text",
@@ -766,6 +1184,32 @@
           "step": 1,
           "default": 4,
           "label": "t:sections.header.blocks.column.settings.reserved_columns.label"
+        },
+        {
+          "type": "checkbox",
+          "id": "stack_view",
+          "default": false,
+          "label": "t:sections.header.blocks.column.settings.stack_view_mobile.label"
+        },
+        {
+          "type": "select",
+          "id": "image_ratio",
+          "options": [
+            {
+              "value": "adapt",
+              "label": "t:sections.featured-collection.settings.image_ratio.options__1.label"
+            },
+            {
+              "value": "portrait",
+              "label": "t:sections.featured-collection.settings.image_ratio.options__2.label"
+            },
+            {
+              "value": "square",
+              "label": "t:sections.featured-collection.settings.image_ratio.options__3.label"
+            }
+          ],
+          "default": "adapt",
+          "label": "t:sections.featured-collection.settings.image_ratio.label"
         },
         {
           "type": "header",
@@ -793,6 +1237,12 @@
           "label": "t:sections.settings.settings.link.label"
         },
         {
+          "type": "checkbox",
+          "id": "link_1_new_window",
+          "label": "t:sections.global.button_link_in_new_window",
+          "default": false
+        },
+        {
           "type": "header",
           "content": "t:sections.global.image_2"
         },
@@ -816,6 +1266,12 @@
           "id": "link_2",
           "type": "url",
           "label": "t:sections.settings.settings.link.label"
+        },
+        {
+          "type": "checkbox",
+          "id": "link_2_new_window",
+          "label": "t:sections.global.button_link_in_new_window",
+          "default": false
         },
         {
           "type": "header",
@@ -843,6 +1299,12 @@
           "label": "t:sections.settings.settings.link.label"
         },
         {
+          "type": "checkbox",
+          "id": "link_3_new_window",
+          "label": "t:sections.global.button_link_in_new_window",
+          "default": false
+        },
+        {
           "type": "header",
           "content": "t:sections.global.image_4"
         },
@@ -866,6 +1328,12 @@
           "id": "link_4",
           "type": "url",
           "label": "t:sections.settings.settings.link.label"
+        },
+        {
+          "type": "checkbox",
+          "id": "link_4_new_window",
+          "label": "t:sections.global.button_link_in_new_window",
+          "default": false
         },
         {
           "type": "header",
@@ -893,6 +1361,12 @@
           "label": "t:sections.settings.settings.link.label"
         },
         {
+          "type": "checkbox",
+          "id": "link_5_new_window",
+          "label": "t:sections.global.button_link_in_new_window",
+          "default": false
+        },
+        {
           "type": "header",
           "content": "t:sections.global.image_6"
         },
@@ -916,6 +1390,12 @@
           "id": "link_6",
           "type": "url",
           "label": "t:sections.settings.settings.link.label"
+        },
+        {
+          "type": "checkbox",
+          "id": "link_6_new_window",
+          "label": "t:sections.global.button_link_in_new_window",
+          "default": false
         }
       ]
     }

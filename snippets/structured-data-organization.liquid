@@ -1,0 +1,74 @@
+{%- comment -%}
+  Organization + WebSite JSON-LD for UCP/AI agent discovery.
+  Rendered once in theme.liquid <head>.
+{%- endcomment -%}
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": {{ shop.name | json }},
+    "url": {{ shop.url | json }},
+    {%- if settings.ucp_business_email != blank %}
+    "contactPoint": {
+      "@type": "ContactPoint",
+      "email": {{ settings.ucp_business_email | json }},
+      "contactType": "customer service"
+      {%- if settings.ucp_business_phone != blank -%}
+      ,"telephone": {{ settings.ucp_business_phone | json }}
+      {%- endif %}
+    },
+    {%- endif %}
+    {%- assign social_links = '' -%}
+    {%- if settings.social_twitter_link != blank -%}
+      {%- assign social_links = social_links | append: settings.social_twitter_link | append: '|||' -%}
+    {%- endif -%}
+    {%- if settings.social_facebook_link != blank -%}
+      {%- assign social_links = social_links | append: settings.social_facebook_link | append: '|||' -%}
+    {%- endif -%}
+    {%- if settings.social_instagram_link != blank -%}
+      {%- assign social_links = social_links | append: settings.social_instagram_link | append: '|||' -%}
+    {%- endif -%}
+    {%- if settings.social_youtube_link != blank -%}
+      {%- assign social_links = social_links | append: settings.social_youtube_link | append: '|||' -%}
+    {%- endif -%}
+    {%- if settings.social_pinterest_link != blank -%}
+      {%- assign social_links = social_links | append: settings.social_pinterest_link | append: '|||' -%}
+    {%- endif -%}
+    {%- if settings.social_tiktok_link != blank -%}
+      {%- assign social_links = social_links | append: settings.social_tiktok_link | append: '|||' -%}
+    {%- endif -%}
+    {%- if social_links != blank -%}
+      {%- assign social_links_trimmed = social_links | remove_last: '|||' -%}
+      {%- assign social_array = social_links_trimmed | split: '|||' -%}
+    "sameAs": [
+      {%- for link in social_array -%}
+        {{ link | json }}{% unless forloop.last %},{% endunless %}
+      {%- endfor -%}
+    ],
+    {%- endif -%}
+    "logo": {
+      "@type": "ImageObject"
+      {%- if shop.brand.logo != blank -%}
+      ,"url": {{ shop.brand.logo | image_url: width: 600 | prepend: "https:" | json }}
+      {%- endif -%}
+    }
+  }
+</script>
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": {{ shop.name | json }},
+    "url": {{ shop.url | json }},
+    "potentialAction": {
+      "@type": "SearchAction",
+      "target": {
+        "@type": "EntryPoint",
+        "urlTemplate": "{{ shop.url }}/search?q={% raw %}{search_term_string}{% endraw %}"
+      },
+      "query-input": "required name=search_term_string"
+    }
+  }
+</script>

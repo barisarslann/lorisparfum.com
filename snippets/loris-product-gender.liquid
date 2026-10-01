@@ -1,0 +1,10 @@
+{% assign gender = product.metafields.custom.cinsiyet.value.first %}
+{% if gender == 'Kadın' or gender == 'Women' or gender == 'Erkek' or gender == 'Man' or gender == 'Unisex' %}
+  <div class="gender-symbol" style="font-size: 15px; color: #0005;">
+    {% case gender %}
+      {% when 'Kadın', 'Women' %}{% if request.locale.iso_code == 'tr' %}Kadın{% else %}Women{% endif %}
+      {% when 'Erkek', 'Man' %}{% if request.locale.iso_code == 'tr' %}Erkek{% else %}Men{% endif %}
+      {% when 'Unisex' %}Unisex
+    {% endcase %}
+  </div>
+{% endif %}

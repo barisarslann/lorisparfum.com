@@ -1,0 +1,90 @@
+{% comment %}
+  Params: block, section, product
+{% endcomment %}
+<script src="{{ 'quick-add.js' | asset_url }}" defer="defer"></script>
+<script src="{{ 'subscription-widget.js' | asset_url }}" defer="defer"></script>
+<div data-block-id="{{ block.id }}">
+  <product-recommendations
+    class="complementary-products quick-add-hidden no-js-hidden{% if settings.animations %} scroll-trigger animate--slide-in{% endif %}{% if settings.disabled_animations_on_mobile %} disabled-on-mobile{% endif %}{% if block.settings.make_collapsible_row %} is-accordion{% endif %}{% if block.settings.enable_quick_add %} complementary-products-contains-quick-add{% endif %}"
+    data-url="{{ routes.product_recommendations_url }}?section_id={{ section.id }}&product_id={{ product.id }}&intent=complementary"
+    not-quick-add
+  >
+    {%- if recommendations.performed and recommendations.products_count > 0 -%}
+      {% assign complementary_show = false %}
+      {% for complementary_product in recommendations.products %}
+        {% if complementary_product.available %}
+          {% assign complementary_show = true %}
+          {% break %}
+        {% endif %}
+      {% endfor %}
+
+      {% if complementary_show or request.design_mode %}
+        <div class="complementary-products__container">
+          <div class="summary__title">
+            <h2 class="summary__title--h3">{{ block.settings.block_heading }}</h2>
+          </div>
+          <ul class="list-unstyled" role="list">
+            {%- for product in recommendations.products limit: block.settings.product_list_limit -%}
+              {% if product.available == false %}
+                {% continue %}
+              {% endif %}
+              <li>
+                <div class="wt-product__upsell__content">
+                  {% if product.featured_image %}
+                    <a href="{{ product.url }}">
+                      <picture class="wt-product__upsell__picture">
+                        <img
+                          srcset="
+                            {% if product.featured_image.width >= 80 %}{{ product.featured_image | image_url: width: 80 }} 80w, {% endif %}
+                            {% if product.featured_image.width >= 160 %}{{ product.featured_image | image_url: width: 160 }} 160w, {% endif %}
+                            {% if product.featured_image.width >= 320 %}{{ product.featured_image | image_url: width: 320 }} 320w, {% endif %}
+                            {{ product.featured_image | image_url: width: 80 }} 80w
+                          "
+                          sizes="(max-width: 320px) 100vw, 240px"
+                          src="{{ product.featured_image | image_url: width: 240 }}"
+                          alt="{{ product.featured_image.alt | escape }}"
+                          class="wt-product__upsell__image"
+                          loading="lazy"
+                          width="120"
+                          height="120"
+                        >
+                      </picture>
+                    </a>
+                  {% endif %}
+
+                  <div class="wt-product__upsell__product">
+                    <div class="wt-product__upsell__info">
+                      {%- if block.settings.show_vendor -%}
+                        <div class="card__subtitle">{{ product.vendor }}</div>
+                      {%- endif -%}
+                      <div class="card__title">
+                        <a href="{{ product.url }}">{{ product.title }}</a>
+                      </div>
+                      {% render 'price', product: product, use_variant: true, show_compare_at_price: true, price_class: '' %}
+                    </div>
+                    <div class="wt-product__upsell__button">
+                      <quick-add data-product-handle="{{ product.handle }}">
+                        <button
+                          aria-label="{{ 'aria-label.main-product-add' | t }}"
+                          class="hero__button--primary{% if block.settings.button_select != 'primary' %} hero__button--secondary{% endif %}{% if block.settings.button_select == 'link' %} hero__button--link{% endif %} form__send__button wt-contact__form__send--{{ block.settings.button_select }}"
+                          type="submit"
+                          name="commit"
+                          data-product-url="{{ product.url }}"
+                        >
+                          <span class="wt-newsletter__send__text">
+                            {{- 'aria-label.main-product-add' | t -}}
+                          </span>
+                        </button>
+                      </quick-add>
+                    </div>
+                  </div>
+                </div>
+              </li>
+            {%- endfor -%}
+          </ul>
+        </div>
+      {% endif %}
+    {%- endif -%}
+    {{ 'component-complementary-products.css' | asset_url | stylesheet_tag }}
+  </product-recommendations>
+</div>

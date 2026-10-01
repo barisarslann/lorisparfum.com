@@ -1,0 +1,28 @@
+{% comment %}
+  Params: block, product, title_tag (default: 'h2')
+{% endcomment %}
+{%- assign heading_tag = title_tag | default: 'h2' -%}
+<div
+  data-block-id="{{ block.id }}"
+  class="{% if settings.animations %} scroll-trigger animate--slide-in {% endif %}{% if settings.disabled_animations_on_mobile %} disabled-on-mobile{% endif %}"
+>
+  <div class="wt-product__brand">
+    {% if block.settings.enable_vendor_link %}
+      <a class="vendor-link" href="/collections/vendors?q={{ product.vendor }}">
+    {% endif %}
+    <span class="wt-product__brand__name">
+      {{ block.settings.brand }}
+    </span>
+    {% if block.settings.enable_vendor_link %}
+      </a>
+    {% endif %}
+  </div>
+  {% render 'loris-product-gender', product: product %}
+  <{{ heading_tag }} class="wt-product__name">
+    {%- if product == blank -%}
+      Example product title
+    {%- else -%}
+      {{ product.title }}
+    {%- endif -%}
+  </{{ heading_tag }}>
+</div>

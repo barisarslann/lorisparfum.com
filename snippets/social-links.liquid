@@ -4,7 +4,7 @@
       <a
         href="{{ settings.social_facebook_link }}"
         class="social-link"
-        aria-label="Facebook"
+        aria-label="Facebook - opens in new tab"
         target="_blank"
         rel="nofollow"
       >
@@ -18,7 +18,7 @@
       <a
         href="{{ settings.social_twitter_link }}"
         class="social-link"
-        aria-label="Twitter"
+        aria-label="Twitter - opens in new tab"
         target="_blank"
         rel="nofollow"
       >
@@ -32,7 +32,7 @@
       <a
         href="{{ settings.social_instagram_link }}"
         class="social-link"
-        aria-label="Instagram"
+        aria-label="Instagram - opens in new tab"
         target="_blank"
         rel="nofollow"
       >
@@ -46,7 +46,7 @@
       <a
         href="{{ settings.social_pinterest_link }}"
         class="social-link"
-        aria-label="Pinterest"
+        aria-label="Pinterest - opens in new tab"
         target="_blank"
         rel="nofollow"
       >
@@ -60,7 +60,7 @@
       <a
         href="{{ settings.social_tiktok_link }}"
         class="social-link"
-        aria-label="TikTok"
+        aria-label="TikTok - opens in new tab"
         target="_blank"
         rel="nofollow"
       >
@@ -74,7 +74,7 @@
       <a
         href="{{ settings.social_tumblr_link }}"
         class="social-link"
-        aria-label="Tumblr"
+        aria-label="Tumblr - opens in new tab"
         target="_blank"
         rel="nofollow"
       >
@@ -88,7 +88,7 @@
       <a
         href="{{ settings.social_snapchat_link }}"
         class="social-link"
-        aria-label="Snapchat"
+        aria-label="Snapchat - opens in new tab"
         target="_blank"
         rel="nofollow"
       >
@@ -102,7 +102,7 @@
       <a
         href="{{ settings.social_youtube_link }}"
         class="social-link"
-        aria-label="Youtube"
+        aria-label="Youtube- opens in new tab"
         target="_blank"
         rel="nofollow"
       >
@@ -118,16 +118,14 @@
       </a>
     </li>
   {% endif %}
-
-  <!-- CUSTOM -->
-  {% if settings.social_spotify_link != empty %}
+{% if settings.social_spotify_link != blank %}
     <li class="social-links__item">
       <a
         href="{{ settings.social_spotify_link }}"
         class="social-link"
         aria-label="Spotify"
         target="_blank"
-        rel="nofollow"
+        rel="nofollow noopener"
       >
         {% comment %}{% render 'icons', id: 'soc-spotify' %}{% endcomment %}
         <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="currentColor" class="bi bi-spotify" viewBox="0 0 16 16">

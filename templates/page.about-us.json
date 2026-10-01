@@ -291,10 +291,10 @@
     },
     "button_LexB9a": {
       "type": "button",
-      "name": "t:sections.button.presets.name",
+      "name": "Button",
       "settings": {
-        "button_select": "primary",
         "button_horizontal_position": "center",
+        "button_select": "primary",
         "button_label": "Akademiyi Ziyeret Et",
         "button_link": "https://lorisakademi.com/",
         "margin-top": 20,
@@ -754,10 +754,9 @@
         "column_zNqbCW"
       ],
       "disabled": true,
-      "name": "t:sections.multicolumn.presets.name",
+      "name": "Multicolumn",
       "settings": {
         "heading": "Birim Yöneticileri",
-        "swipe_on_mobile": false,
         "full-width-enabled": false,
         "image_ratio": "adapt",
         "column_alignment": "left",
@@ -766,7 +765,8 @@
         "color-body-text": "rgba(0,0,0,0)",
         "background_color": "rgba(0,0,0,0)",
         "margin-top": 20,
-        "margin-bottom": 20
+        "margin-bottom": 20,
+        "enable_stack_products": true
       }
     },
     "map_address_CgFhaF": {

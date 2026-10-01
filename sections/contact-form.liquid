@@ -4,7 +4,7 @@
 <style>
     [data-section-id="{{ section.id }}"]
     {
-        {% if background_rgb != 'rgba(0, 0, 0, 0.0)' %}
+        {% if section.settings.background_color != blank and section.settings.background_color != 'transparent' and background_rgb != 'rgba(0, 0, 0, 0.0)' %}
           --color-background: {{ section.settings.background_color }};
         {% endif %}
 
@@ -16,12 +16,20 @@
             --section-gap-bottom: {{ section.settings.margin-bottom }}px;
         {% endif %}
 
+      {%- if section.settings.show_mobile_spacing -%}
+          --section-gap-top-mobile: {{ section.settings.margin-top-mobile }}px;
+      {%- endif -%}
+
+      {%- if section.settings.show_mobile_spacing -%}
+          --section-gap-bottom-mobile: {{ section.settings.margin-bottom-mobile }}px;
+      {%- endif -%}
+
     }
 
     [data-section-id="{{ section.id }}"] .headline__title,
     [data-section-id="{{ section.id }}"] .hero__text
       {
-          {% if text_rgb != 'rgba(0, 0, 0, 0.0)' %}
+          {% if section.settings['color-body-text'] != blank and section.settings['color-body-text'] != 'transparent' and text_rgb != 'rgba(0, 0, 0, 0.0)' %}
             --color-custom-text: {{ section.settings.color-body-text }};
           {% endif %}
       }
@@ -42,12 +50,12 @@
   {%- for block in section.blocks -%}
     {%- case block.type -%}
       {%- when 'heading' -%}
-        <h2
+        <div
           data-block-id="{{ block.id }}"
           class="hero__title {% if settings.animations %} scroll-trigger animate--slide-in {% endif %} {% if settings.disabled_animations_on_mobile %} disabled-on-mobile {% endif %} {% if block.settings.heading_disable_on_mobile == true %} hero__title--mobile{% endif %}"
         >
-          {% render 'headline', title: block.settings.heading %}
-        </h2>
+          {% render 'headline', title: block.settings.heading, custom_class: 'headline--hero_title' %}
+        </div>
       {%- when 'paragraph' -%}
         <div class="hero__text form__text{% if block.settings.text_disable_on_mobile == true %} hero__text--mobile{% endif %} rte">
           {{ block.settings.paragraph }}
@@ -154,6 +162,10 @@
   "class": "spaced-section",
   "settings": [
     {
+      "type": "paragraph",
+      "content": "t:sections.contact-form.settings.support_info.content"
+    },
+    {
       "type": "header",
       "content": "t:sections.global.colors",
       "info": "t:sections.global.colors-info"
@@ -161,13 +173,11 @@
     {
       "type": "color",
       "id": "color-body-text",
-      "default": "transparent",
       "label": "t:sections.settings.settings.text-color.label"
     },
     {
       "type": "color",
       "id": "background_color",
-      "default": "transparent",
       "label": "t:sections.settings.settings.background-color.label"
     },
     {
@@ -194,6 +204,33 @@
       "default": 20,
       "label": "t:sections.settings.settings.distance-bottom.label",
       "info": "t:sections.settings.settings.distance-bottom.info"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_mobile_spacing",
+      "label": "t:sections.settings.settings.show-mobile-spacing.label"
+    },
+    {
+      "type": "range",
+      "id": "margin-top-mobile",
+      "min": 0,
+      "max": 100,
+      "step": 2,
+      "default": 20,
+      "unit": "px",
+      "label": "t:sections.settings.settings.distance-top-mobile.label",
+      "visible_if": "{{ section.settings.show_mobile_spacing }}"
+    },
+    {
+      "type": "range",
+      "id": "margin-bottom-mobile",
+      "min": 0,
+      "max": 100,
+      "step": 2,
+      "default": 20,
+      "unit": "px",
+      "label": "t:sections.settings.settings.distance-bottom-mobile.label",
+      "visible_if": "{{ section.settings.show_mobile_spacing }}"
     }
   ],
   "blocks": [
@@ -211,7 +248,7 @@
         {
           "type": "checkbox",
           "id": "heading_disable_on_mobile",
-          "label": "t:sections.global.disable_on_mobile",
+          "label": "t:sections.global.heading_disable_on_mobile",
           "default": false
         },
         {
@@ -285,7 +322,8 @@
   ],
   "presets": [
     {
-      "name": "t:sections.contact-form.presets.name",
+      "name": "t:sections.contact-form.name",
+      "category": "t:sections.categories.forms",
       "blocks": [
         {
           "type": "heading"

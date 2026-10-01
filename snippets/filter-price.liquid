@@ -1,5 +1,8 @@
 {{ 'nouislider.css' | asset_url | stylesheet_tag }}
 
+
+{% assign open_section = is_open |  default: false %}
+
 {%- for filter in results.filters -%}
   {% if filter.type == 'price_range' %}
     {%- assign max_price_amount_raw = filter.range_max -%}
@@ -18,14 +21,15 @@
 <collapsible-section
   class="f-price-slider filter"
   data-toggle-tabindex=".noUi-handle, .f-price__input"
+  data-open="{{ open_section }}"
 >
   <div
     class="filter__header wt-collapse__trigger"
     role="button"
     tabindex="{% if filter_position == 'always' %}0{% else %}-1{% endif %}"
     data-toggle-tabindex=".form-checkbox"
-    data-open="false"
-    aria-expanded="false"
+    data-open="{{ open_section }}"
+    aria-expanded="{{ open_section }}"
     aria-controls="wt-filter-price"
   >
     {{ filter.label | escape }}
@@ -38,7 +42,7 @@
           class="f-price__slider"
           data-min="0"
           data-currency="{{ shop.currency }}"
-          data-max="{{ max_price_amount_raw | divided_by: 100 }}"
+          data-max="{{ max_price_amount_raw | divided_by: 100.0 | ceil }}"
           data-step="{{ step }}"
         ></div>
         <div class="f-price__inputs">
@@ -59,7 +63,7 @@
               id="price-to"
               class="f-price__input f-price__input--to"
               name="filter.v.price.lte"
-              value="{% if max_price_filter_raw %}{{ max_price_filter_raw | divided_by: 100 }}{% else %}{{ max_price_amount_raw | divided_by: 100 }}{% endif %}"
+              value="{% if max_price_filter_raw %}{{ max_price_filter_raw | divided_by: 100.0 | ceil }}{% else %}{{ max_price_amount_raw | divided_by: 100.0 | ceil }}{% endif %}"
               tabindex="-1"
             >
           </div>

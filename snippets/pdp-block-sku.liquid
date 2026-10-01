@@ -1,0 +1,12 @@
+{% comment %}
+  Params: block, section, product
+{% endcomment %}
+<p
+  class="wt-product__sku{% if settings.animations %} scroll-trigger animate--slide-in{% endif %}{% if settings.disabled_animations_on_mobile %} disabled-on-mobile{% endif %}"
+  id="Sku-{{ section.id }}"
+  role="status"
+  {{ block.shopify_attributes }}
+>
+  <span class="visually-hidden">{{ 'products.product.sku' | t }}:</span>
+  {{- product.selected_or_first_available_variant.sku -}}
+</p>

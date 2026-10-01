@@ -1,0 +1,64 @@
+<style>
+  [data-block-id="{{ block.id }}"] {
+    --icon-image-height-desk: {{ block.settings.icon_image_height_desk }}px;
+    --icon-image-height: {{ block.settings.icon_image_height }}px;
+  }
+</style>
+<div class="wt-brands__item wt-testimonials-marquee__item" data-block-id="{{ block.id }}">
+  <div class="wt-testimonials-marquee__content">
+    <h3 class="wt-testimonials-marquee__heading">{{ block.settings.heading }}</h3>
+    <div class="wt-testimonials-marquee__text">
+      {{ block.settings.text }}
+    </div>
+  </div>
+  <div class="wt-testimonials-marquee__author">
+    <div class="wt-testimonials-marquee__author-details">
+      {% assign img = block.settings.author_image %}
+
+      {% if img != blank %}
+        {% assign size_m = section.settings.icon_image_height | default: 50 | plus: 0 %}
+        {% assign size_d = section.settings.icon_image_height_desk | default: 40 | plus: 0 %}
+
+        {% assign w2 = size_d | times: 2 %}
+        {% assign w3 = size_d | times: 3 %}
+
+        {% assign srcset_widths = size_m
+          | append: ', '
+          | append: size_d
+          | append: ', '
+          | append: w2
+          | append: ', '
+          | append: w3
+        %}
+
+        {% assign alt_text = img.alt | default: '' %}
+        {% if alt_text == blank %}
+          {% assign alt_text = img %}
+        {% endif %}
+
+        {{
+          img
+          | image_url: width: w3
+          | image_tag:
+            class: 'wt-testimonials-marquee__icon',
+            loading: 'lazy',
+            width: size_d,
+            height: size_d,
+            alt: alt_text,
+            widths: srcset_widths,
+            sizes: '(min-width: 990px) '
+        }}
+      {% endif %}
+      <div class="wt-testimonials-marquee__author-wrapper">
+        <span class="wt-testimonials-marquee__author-text">{{ block.settings.author }}</span>
+        {% assign icon = block.settings.icon_select %}
+
+        {% if icon == 'quote' %}
+          {% render 'icons', id: icon, icon_class: icon_class %}
+        {% elsif icon == '80' or icon == '90' or icon == '100' %}
+          {% render 'rating-stars', percent: icon, icon_class: icon_class %}
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</div>

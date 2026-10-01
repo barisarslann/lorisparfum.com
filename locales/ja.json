@@ -40,6 +40,11 @@
     },
     "continue_shopping": "買い物を続ける",
     "pagination": {
+      "previous_label": "前へ",
+      "next_label": "次へ",
+      "load_more": "もっと見る",
+      "load_previous": "前を読み込む",
+      "showing": "{{ total }} 件中 {{ count }} 件を表示",
       "label": "ページネーション",
       "page": "{{ number }}ページ",
       "next": "次のページ",
@@ -52,6 +57,8 @@
       "view": "カートを見る ({{ count }})",
       "item_added": "カートにアイテムが追加されました"
     },
+    "copy": "コピー",
+    "copied": "コピーしました",
     "share": {
       "copy_to_clipboard": "リンクをコピー",
       "share_url": "リンク",
@@ -60,9 +67,6 @@
     },
     "quick_add": {
       "view_all_details": "すべての詳細を見る"
-    },
-    "icons": {
-      "icon_title": ""
     },
     "slider": {
       "of": "の",
@@ -74,7 +78,9 @@
   "newsletter": {
     "label": "メールアドレス",
     "success": "ご登録ありがとうございます",
-    "button_label": "登録"
+    "button_label": "登録",
+    "close": "ポップアップを閉じる",
+    "consent_checkbox_label": "ニュースレターに登録します(プロモーション、割引、新商品発売、コンテストに関する情報)。"
   },
   "accessibility": {
     "skip_to_text": "コンテンツに進む",
@@ -95,7 +101,10 @@
     "star_reviews_info": "{{ rating_value }} / {{ rating_max }} 星のうち",
     "collapsible_content_title": "折りたたみ可能なコンテンツ",
     "complementary_products": "関連商品",
-    "searching": "検索中..."
+    "searching": "検索中...",
+    "scroll_to_top": "Scroll to top",
+    "open": "開く",
+    "subscription_widget__selling_plan_select": "{{ plan_group }}の配送頻度"
   },
   "blogs": {
     "article": {
@@ -115,7 +124,10 @@
       "back_to_blog": "ブログに戻る",
       "share": "この記事を共有する",
       "success": "コメントが投稿されました。ありがとうございます。",
-      "success_moderated": "コメントが投稿されました。ブログが管理されているため、しばらくしてから公開されます。"
+      "success_moderated": "コメントが投稿されました。ブログが管理されているため、しばらくしてから公開されます。",
+      "date_format": "%Y年%m月%d日",
+      "published_on": "{{ date }}",
+      "posted_by": "{{ author }} 著"
     }
   },
   "onboarding": {
@@ -125,6 +137,7 @@
   "products": {
     "product": {
       "add_to_cart": "カートに追加する",
+      "pick_size": "{{ option }}を選択",
       "description": "説明",
       "on_sale": "Sale",
       "product_variants": "商品バリエーション",
@@ -138,7 +151,8 @@
         "from_price_html": "{{ price }}から",
         "regular_price": "通常価格",
         "sale_price": "セール価格",
-        "unit_price": "単価"
+        "unit_price": "単価",
+        "free": "無料"
       },
       "share": "この商品を共有する",
       "sold_out": "売り切れ",
@@ -185,7 +199,9 @@
       "volume_pricing": {
         "note": "TODO",
         "price_range": "TODO"
-      }
+      },
+      "select_option": "オプションを選択",
+      "select_options": "オプションを選択"
     },
     "modal": {
       "label": "メディアギャラリー"
@@ -222,6 +238,10 @@
     }
   },
   "templates": {
+    "404": {
+      "title": "ページが見つかりません",
+      "subtext": "404"
+    },
     "search": {
       "no_results": "「{{ terms }}」に一致する結果は見つかりませんでした。スペルを確認するか、別の単語やフレーズを使用してください。",
       "results_with_count": {
@@ -242,7 +262,9 @@
         "products": "製品",
         "pages": "ページ",
         "articles": "記事",
-        "suggestions": "提案"
+        "suggestions": "提案",
+        "popular_searches": "人気の検索",
+        "useful_links": "関連リンク"
       },
       "search_for": "「{{ terms }}」のすべてを見る"
     },
@@ -260,13 +282,12 @@
         "error_heading": "以下を確認してください。",
         "title": "お問い合わせフォーム"
       }
-    },
-    "404": {
-      "title": "ページが見つかりません",
-      "subtext": "404"
     }
   },
   "sections": {
+    "shoppable_buy_all": {
+      "add_all_to_cart": "すべてカートに追加"
+    },
     "header": {
       "announcement": "告知",
       "menu": "メニュー",
@@ -305,7 +326,29 @@
         "title": "アカウントをお持ちですか？",
         "paragraph_html": "<a href=\"{{ link }}\" tabindex=\"-1\" class=\"link underlined-link\">ログイン</a>して、より速くチェックアウトしてください。"
       },
-      "view_cart": "カートを見る"
+      "view_cart": "カートを見る",
+      "checkbox": "ギフトとして包む",
+      "order_note": "注文メモ",
+      "estimate_shipping": "配送",
+      "discount_code": "割引コード",
+      "features": {
+        "country_region": "国/地域",
+        "postal_zip": "郵便番号",
+        "apply": "適用",
+        "calculate": "計算",
+        "discount_placeholder": "割引コードを入力してください",
+        "shipping_select_country_zip": "国を選択し、郵便番号を入力してください。",
+        "shipping_calculating": "計算中…",
+        "shipping_no_rate": "この配送先には配送料金がありません。住所をご確認ください。",
+        "shipping_one_rate": "この配送先には1つの配送料金があります:",
+        "shipping_n_rates": "この配送先には{{ count }}件の配送料金があります:",
+        "shipping_free": "無料",
+        "discount_enter_code": "割引コードを入力してください。",
+        "discount_applying": "適用中…",
+        "discount_applied": "割引が適用されました!",
+        "discount_invalid": "割引コードが無効か、現在のカートには適用されません。",
+        "discount_error": "問題が発生しました。もう一度お試しください。"
+      }
     },
     "footer": {
       "payment": "決済方法",
@@ -369,6 +412,54 @@
       },
       "error": {
         "invalid_format": "無効な日付形式です。日付と時間をYYYY-MM-DD HH:MMの形式で入力してください。"
+      }
+    },
+    "localization_drawer": {
+      "title": "ローカライゼーション",
+      "country_label": "国/地域",
+      "language_label": "言語",
+      "drawer_title": "ローカライゼーションオプション",
+      "current_country_info": "現在、{{ countryName }}へ配送しており、ご注文は{{ currencyIso }} {{ currencySymbol }}で請求されます。",
+      "search_location": {
+        "label": "場所を検索",
+        "placeholder": "場所を検索..."
+      }
+    },
+    "bundle-builder": {
+      "add_to_bundle": "バンドルに追加",
+      "status": {
+        "discount": "🎉 割引が適用されました。",
+        "add_more": "まだ追加できます。"
+      },
+      "toggle": "バンドルパネルを切り替える",
+      "remove_item": "アイテムを削除",
+      "error_message": "エラーが発生しました。もう一度お試しください。"
+    },
+    "quiz": {
+      "back": "戻る",
+      "prev_question": "前へ",
+      "next_question": "次へ",
+      "see_results": "結果を見る"
+    },
+    "blog_posts": {
+      "tags_all": "すべての投稿"
+    },
+    "compare_products": {
+      "name": "商品比較",
+      "badge": {
+        "compare": "VS"
+      },
+      "placeholders": {
+        "left_text": "左",
+        "right_text": "右"
+      },
+      "aria": {
+        "table": "比較表"
+      },
+      "blocks": {
+        "table_row": {
+          "center_text_default": "テキストを入力してください..."
+        }
       }
     }
   },
@@ -534,7 +625,7 @@
   },
   "aria-label": {
     "announcement-bar": "アナウンスメントバーを閉じる",
-    "contact-form": "フォームを送信する",
+    "contact-form": "送信",
     "featured-collection": "すべてを見る",
     "featured-product-3d-model": "3Dモデルを見る",
     "main-product-video": "ビデオを再生",
@@ -572,6 +663,15 @@
     "price-from": "価格は {price} から",
     "price-to": "価格まで",
     "remove-price-range": "価格範囲フィルターを削除",
-    "sort-options": "ソートオプション"
+    "sort-options": "ソートオプション",
+    "lookbook-button": "詳細を見る",
+    "pills-navigation": "ピルナビゲーション",
+    "collection-tabs": "コレクションタブ"
+  },
+  "placeholder": {
+    "select_option": "オプションを選択"
+  },
+  "cross_sell": {
+    "empty_msg": "表示する製品がありません。このブロックはストアフロントのお客様には表示されません。"
   }
 }

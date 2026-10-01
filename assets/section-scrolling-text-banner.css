@@ -18,6 +18,15 @@
     margin-inline: calc(var(--gap, 8px) * 4);
   }
 }
+.wt-scrolling-text-banner .hero__overlay__content .scrolling-container {
+  max-width: unset;
+}
+.wt-scrolling-text-banner .hero__overlay .scrolling-outer {
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  max-width: unset;
+}
 .wt-scrolling-text-banner .hero__pic--no-img {
   height: var(--section-height, 100%);
   display: block !important;
@@ -57,6 +66,15 @@
 }
 .wt-scrolling-text-banner .scrolling-text {
   white-space: nowrap;
+  display: flex;
+  align-items: center;
+}
+.wt-scrolling-text-banner .scrolling-text svg circle {
+  fill: var(--color-custom-text, var(--color-text));
+  r: var(--dot-size);
+}
+.wt-scrolling-text-banner .scrolling-text .hero__icon-with-text {
+  width: auto;
 }
 @keyframes scroll-left {
   from {
@@ -66,3 +84,12 @@
     transform: translateX(-100%);
   }
 }
+
+.wt-scrolling-icon .scrolling-text {
+  display: flex;
+  align-items: center;
+}
+.wt-scrolling-icon .hero__overlay {
+  padding: 0;
+}
+/*# sourceMappingURL=section-scrolling-text-banner.css.map */

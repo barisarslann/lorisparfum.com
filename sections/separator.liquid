@@ -1,46 +1,115 @@
-{% assign separator_rgb = section.settings.background_color | color_to_rgb %}
+{% assign separator_rgb = section.settings['color-background'] | color_to_rgb %}
+{% assign background_rgb = section.settings['color-section-background'] | color_to_rgb %}
+{% assign text_rgb = section.settings['color-body-text'] | color_to_rgb %}
 
 <style>
-  [data-section-id="{{ section.id }}"]
-  {
-      {% if section.settings.margin-top %}
-          --section-gap-top: {{ section.settings.margin-top }}px;
-      {% endif %}
+    [data-section-id="{{ section.id }}"] {
+        {% if section.settings.margin-top %}
+            --section-gap-top: {{ section.settings.margin-top }}px;
+        {% endif %}
 
-      {% if section.settings.margin-bottom %}
-          --section-gap-bottom: {{ section.settings.margin-bottom }}px;
-      {% endif %}
+        {% if section.settings.margin-bottom %}
+            --section-gap-bottom: {{ section.settings.margin-bottom }}px;
+        {% endif %}
 
-  }
+      {%- if section.settings.show_mobile_spacing -%}
+          --section-gap-top-mobile: {{ section.settings.margin-top-mobile }}px;
+      {%- endif -%}
+
+      {%- if section.settings.show_mobile_spacing -%}
+          --section-gap-bottom-mobile: {{ section.settings.margin-bottom-mobile }}px;
+      {%- endif -%}
+
+        {% if section.settings['color-background'] != blank and section.settings['color-background'] != 'transparent' and separator_rgb != 'rgba(0, 0, 0, 0.0)' %}
+            --color-border: {{ section.settings['color-background']  }};
+        {% endif %}
+
+        {% if section.settings['color-section-background'] != blank and section.settings['color-section-background'] != 'transparent' and background_rgb != 'rgba(0, 0, 0, 0.0)' %}
+            --color-custom-background: {{ section.settings['color-section-background'] }};
+        {% endif %}
+
+        {% if section.settings['color-body-text'] != blank and section.settings['color-body-text'] != 'transparent' and text_rgb != 'rgba(0, 0, 0, 0.0)' %}
+            --color-custom-text: {{ section.settings.color-body-text }};
+        {% endif %}
+
+        --font-headline-scale-desk: {{ section.settings.size_heading | divided_by: 100.0 }};
+        --font-headline-scale: {{ section.settings.size_heading_mobile | divided_by: 100.0 }};
+    }
 </style>
 
 {% if section.settings['full-width-line'] %}
-  {% assign customwrapperclass = 'hero__wrapper--full' %}
+    {% assign customwrapperclass = 'hero__wrapper--full' %}
 {% else %}
-  {% assign customwrapperclass = 'hero__wrapper' %}
+    {% assign customwrapperclass = 'hero__wrapper' %}
 {% endif %}
 
-<div data-section-id="{{ section.id }}" class="wt-separator {{ customwrapperclass }}">
-  {% if section.settings['show-separator-line'] %}
-    <hr
-      class="wt-separator__line"
-      style="background-color: {{ section.settings.color-background }};"
-    >
-  {% endif %}
+<div data-section-id="{{ section.id }}" class="wt-separator {{ customwrapperclass }} {% if section.settings.advanced_heading == false %}wt-separator--raw-headline{% endif %}">
+    {% if section.settings['show-separator-line'] %}
+        <hr
+            class="wt-separator__line"
+            style="background-color: {{ section.settings.color-background }};"
+        >
+    {% endif %}
 
-  {% render 'headline', title: section.settings.heading %}
+    {% if section.settings.advanced_heading %}
+        {% if section.settings.heading_richtext != blank %}
+            <div class="headline headline--rich {% if settings.animations %} scroll-trigger animate--slide-in {% endif %} {% if settings.disabled_animations_on_mobile %} disabled-on-mobile {% endif %}">
+                {{ section.settings.heading_richtext }}
+            </div>
+        {% endif %}
+    {% else %}
+        {% if section.settings.heading != blank %}
+            {% render 'headline', title: section.settings.heading %}
+        {% endif %}
+    {% endif %}
 </div>
 
 {% schema %}
 {
   "name": "t:sections.separator.name",
   "tag": "section",
+  "class": "wt-shopify-section",
   "settings": [
+    {
+      "type": "checkbox",
+      "id": "advanced_heading",
+      "label": "t:sections.global.advanced_heading.label",
+      "info": "t:sections.global.advanced_heading.info",
+      "default": false
+    },
     {
       "type": "textarea",
       "id": "heading",
       "label": "t:sections.settings.settings.heading.label",
-      "default": "Separator"
+      "default": "Separator",
+      "visible_if": "{{ section.settings.advanced_heading == false }}"
+    },
+    {
+      "type": "richtext",
+      "id": "heading_richtext",
+      "label": "t:sections.settings.settings.heading.label",
+      "default": "<h2>Separator</h2>",
+      "visible_if": "{{ section.settings.advanced_heading == true }}"
+    },
+    {
+      "type": "range",
+      "id": "size_heading",
+      "min": 50,
+      "max": 500,
+      "step": 10,
+      "default": 100,
+      "label": "t:sections.settings.settings.size-heading.label",
+      "unit": "%"
+    },
+    {
+      "type": "range",
+      "id": "size_heading_mobile",
+      "min": 80,
+      "max": 300,
+      "step": 10,
+      "default": 100,
+      "label": "t:sections.settings.settings.size-heading-mobile.label",
+      "unit": "%"
     },
     {
       "type": "checkbox",
@@ -63,6 +132,16 @@
       "id": "color-background",
       "default": "#000000",
       "label": "t:sections.separator.settings.color-background.label"
+    },
+    {
+      "type": "color",
+      "id": "color-body-text",
+      "label": "t:sections.settings.settings.text-color.label"
+    },
+    {
+      "type": "color",
+      "id": "color-section-background",
+      "label": "t:sections.separator.settings.color-section-background.label"
     },
     {
       "type": "header",
@@ -88,15 +167,45 @@
       "unit": "px",
       "label": "t:sections.settings.settings.distance-bottom.label",
       "info": "t:sections.settings.settings.distance-bottom.info"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_mobile_spacing",
+      "label": "t:sections.settings.settings.show-mobile-spacing.label"
+    },
+    {
+      "type": "range",
+      "id": "margin-top-mobile",
+      "min": 0,
+      "max": 100,
+      "step": 2,
+      "default": 20,
+      "unit": "px",
+      "label": "t:sections.settings.settings.distance-top-mobile.label",
+      "visible_if": "{{ section.settings.show_mobile_spacing }}"
+    },
+    {
+      "type": "range",
+      "id": "margin-bottom-mobile",
+      "min": 0,
+      "max": 100,
+      "step": 2,
+      "default": 20,
+      "unit": "px",
+      "label": "t:sections.settings.settings.distance-bottom-mobile.label",
+      "visible_if": "{{ section.settings.show_mobile_spacing }}"
     }
   ],
   "presets": [
     {
-      "name": "t:sections.separator.presets.name"
+      "name": "t:sections.separator.name",
+      "category": "t:sections.categories.text",
     }
   ],
   "disabled_on": {
-    "groups": ["header", "footer"]
+    "groups": [
+      "header"
+    ]
   }
 }
 {% endschema %}

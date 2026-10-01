@@ -3,6 +3,10 @@
 <div class="wt-rating{% if text_alignment %} wt-rating--{{ text_alignment }}{% endif %} {% if settings.animations and main_product %} scroll-trigger animate--slide-in {% endif %} {% if settings.disabled_animations_on_mobile %} disabled-on-mobile {% endif %}">
   {% render 'rating-stars', percent: percent %}
 
+  {% if show_review_count and reviews.rating.value != blank %}
+    <div class="wt-rating__count">{{ reviews.rating.value.rating | round: 1 }}</div>
+  {% endif %}
+
   <div class="wt-rating__counter">
     {% if reviews.rating.value != blank and reviews.rating_count != 0 %}
       ({{ reviews.rating_count }}

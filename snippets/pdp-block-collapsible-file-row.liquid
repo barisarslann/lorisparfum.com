@@ -1,0 +1,168 @@
+{% comment %}
+  Params: block, section, product
+{% endcomment %}
+{% liquid
+  assign has_variant_file_metafields = false
+
+  assign file_metafield1 = block.settings.metafield1
+  assign file_metafield2 = block.settings.metafield2
+  assign file_metafield3 = block.settings.metafield3
+
+  assign file_label1 = block.settings.file_label1
+  assign file_label2 = block.settings.file_label2
+  assign file_label3 = block.settings.file_label3
+
+  if file_metafield1.size > 0
+    assign has_variant_file_metafields = true
+    assign variable_array1 = block.settings.metafield1 | split: '.'
+    assign metafield_namespace1 = variable_array1[0]
+    assign metafield_key1 = variable_array1[1]
+  endif
+
+  if file_metafield2.size > 0
+    assign has_variant_file_metafields = true
+    assign variable_array2 = block.settings.metafield2 | split: '.'
+    assign metafield_namespace2 = variable_array2[0]
+    assign metafield_key2 = variable_array2[1]
+  endif
+
+  if file_metafield3.size > 0
+    assign has_variant_file_metafields = true
+    assign variable_array3 = block.settings.metafield3 | split: '.'
+    assign metafield_namespace3 = variable_array3[0]
+    assign metafield_key3 = variable_array3[1]
+  endif
+
+  assign file1 = product.selected_or_first_available_variant.metafields[metafield_namespace1][metafield_key1].value
+  assign file2 = product.selected_or_first_available_variant.metafields[metafield_namespace2][metafield_key2].value
+  assign file3 = product.selected_or_first_available_variant.metafields[metafield_namespace3][metafield_key3].value
+
+  unless file1
+    assign file1 = product.metafields[metafield_namespace1][metafield_key1].value
+  endunless
+
+  unless file2
+    assign file2 = product.metafields[metafield_namespace2][metafield_key2].value
+  endunless
+
+  unless file3
+    assign file3 = product.metafields[metafield_namespace3][metafield_key3].value
+  endunless
+%}
+
+<collapsible-section
+  class="wt-collapse wt-collapse--always{% if settings.animations %} scroll-trigger animate--slide-in{% endif %}{% if settings.disabled_animations_on_mobile %} disabled-on-mobile{% endif %}"
+  data-accordion-set="pdp"
+  data-block-id="{{ block.id }}"
+  data-toggle-tabindex="button, [href], input, select"
+  {%- if has_variant_file_metafields -%}data-has-variant-file-metafields{%- endif -%}
+>
+  <div
+    class="wt-collapse__trigger{% if block.settings.open_by_default %} wt-collapse__trigger--active{% endif %}"
+    role="button"
+    tabindex="0"
+    data-open="{{ block.settings.open_by_default }}"
+    aria-expanded="{{ block.settings.open_by_default }}"
+    aria-controls="CollapsibleTab-{{ block.id }}"
+  >
+    <div class="wt-collapse__trigger__text{% if block.settings.icon_image != blank %} wt-collapse__trigger__text--has-icon-image{% endif %}">
+      {% if block.settings.icon_image != blank %}
+        <div class="wt-collapse__trigger__icon">
+          {% render 'responsive-icon-image',
+            image: block.settings.icon_image,
+            height_desktop: block.settings.icon_height_desktop,
+            height_mobile: block.settings.icon_height,
+            class: 'hero__icon'
+          %}
+        </div>
+      {% elsif block.settings.icon != 'none' %}
+        <div class="wt-collapse__trigger__icon">
+          {% render 'icons', id: block.settings.icon, icon_class: 'hero__icon' %}
+        </div>
+      {% endif %}
+      <span class="wt-collapse__trigger__title">
+        {{- block.settings.heading | default: block.settings.page.title -}}
+      </span>
+    </div>
+    <div class="wt-icon" aria-hidden="true">
+      {% render 'icons', id: 'plus' %}
+    </div>
+  </div>
+  <div class="wt-collapse__target" id="CollapsibleTab-{{ block.id }}">
+    {% if has_variant_file_metafields %}
+      <script type="application/json" data-variants-file-metafields>
+        {
+          "content": {{ block.settings.content | json }},
+          "fileUrl1": "{{ product.metafields[metafield_namespace1][metafield_key1].value.url }}",
+          "fileUrl2": "{{ product.metafields[metafield_namespace2][metafield_key2].value.url }}",
+          "fileUrl3": "{{ product.metafields[metafield_namespace3][metafield_key3].value.url }}",
+          "variants": [
+            {%- for variant in product.variants -%}
+              {
+                "id": "{{ variant.id }}",
+                "fileUrl1": "{{ variant.metafields[metafield_namespace1][metafield_key1].value.url }}",
+                "fileUrl2": "{{ variant.metafields[metafield_namespace2][metafield_key2].value.url }}",
+                "fileUrl3": "{{ variant.metafields[metafield_namespace3][metafield_key3].value.url }}"
+              }{%- unless forloop.last -%},{%- endunless -%}
+            {%- endfor -%}
+          ]
+        }
+      </script>
+    {% endif %}
+
+    <div class="wt-collapse__target--text rte" data-block-id-for-variant-metafield="{{ block.id }}">
+      <div class="wt-collapse__target__content wt-collapse__target__content--files">
+        <a
+          class="wt-collapse__file{% unless file_metafield1.size > 0 and file1 %} wt-collapse__file--hidden{% endunless %}"
+          href="{{ file1.url }}"
+          download
+          data-file-index="1"
+          {% if file_label1 != blank %}data-custom-name{% endif %}
+        >
+          {%- render 'icon-file' -%}
+          {%- if file_label1 != blank -%}
+            <span>{{ file_label1 }}</span>
+          {%- else -%}
+            {%- assign file_name = file1.url | split: '/' -%}
+            {%- assign file_name2 = file_name.last | split: '?' -%}
+            <span>{{ file_name2[0] }}</span>
+          {%- endif -%}
+        </a>
+
+        <a
+          class="wt-collapse__file{% unless file_metafield2.size > 0 and file2 %} wt-collapse__file--hidden{% endunless %}"
+          href="{{ file2.url }}"
+          download
+          data-file-index="2"
+          {% if file_label2 != blank %}data-custom-name{% endif %}
+        >
+          {%- render 'icon-file' -%}
+          {%- if file_label2 != blank -%}
+            <span>{{ file_label2 }}</span>
+          {%- else -%}
+            {%- assign file_name = file2.url | split: '/' -%}
+            {%- assign file_name2 = file_name.last | split: '?' -%}
+            <span>{{ file_name2[0] }}</span>
+          {%- endif -%}
+        </a>
+
+        <a
+          class="wt-collapse__file{% unless file_metafield3.size > 0 and file3 %} wt-collapse__file--hidden{% endunless %}"
+          href="{{ file3.url }}"
+          download
+          data-file-index="3"
+          {% if file_label3 != blank %}data-custom-name{% endif %}
+        >
+          {%- render 'icon-file' -%}
+          {%- if file_label3 != blank -%}
+            <span>{{ file_label3 }}</span>
+          {%- else -%}
+            {%- assign file_name = file3.url | split: '/' -%}
+            {%- assign file_name2 = file_name.last | split: '?' -%}
+            <span>{{ file_name2[0] }}</span>
+          {%- endif -%}
+        </a>
+      </div>
+    </div>
+  </div>
+</collapsible-section>

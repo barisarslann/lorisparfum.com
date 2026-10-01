@@ -1,0 +1,47 @@
+{% liquid
+  assign gift_one = settings.gift_select_test
+  assign gift_two = settings.gift_select_test_2
+%}
+{% if gift_one != blank or gift_two != blank %}
+  <loris-gift-options class="giftProducts" data-error="{{ 'sections.cart.cart_error' | t | escape }}">
+    <fieldset>
+      <legend>{% case request.locale.iso_code %}{% when 'tr' %}Hediye Seçenekleri:{% when 'ar' %}خيارات الهدية:{% else %}Gift Options:{% endcase %}</legend>
+      <div class="loris-gift-options__choices">
+        {% for index in (1..2) %}
+          {% liquid
+            assign gift = gift_one
+            if index == 2
+              assign gift = gift_two
+              if gift.id == gift_one.id
+                continue
+              endif
+            endif
+            if gift == blank
+              continue
+            endif
+            assign variant = gift.selected_or_first_available_variant
+            assign in_cart = false
+            for item in cart.items
+              if item.variant_id == variant.id
+                assign in_cart = true
+              endif
+            endfor
+          %}
+          <style>
+            cart-drawer:has(loris-gift-options[data-ready]) .cart-item[data-loris-variant-id="{{ variant.id }}"] { display: none; }
+          </style>
+          <label class="loris-gift-options__choice">
+            <input type="checkbox" value="{{ variant.id }}" {% if in_cart %}checked{% endif %} {% unless variant.available or in_cart %}disabled{% endunless %}>
+            <span>
+              {% if gift.featured_image %}
+                {{ gift.featured_image | image_url: width: 100 | image_tag: height: 50, loading: 'lazy', alt: gift.title }}
+              {% endif %}
+              {{ gift.title | escape }} <span>{{ variant.price | money }}</span>
+            </span>
+          </label>
+        {% endfor %}
+      </div>
+    </fieldset>
+    <p class="loris-gift-options__error" role="alert" hidden></p>
+  </loris-gift-options>
+{% endif %}

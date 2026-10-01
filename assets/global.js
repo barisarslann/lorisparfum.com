@@ -342,3 +342,64 @@ class ProductRecommendations extends HTMLElement {
 }
 
 customElements.define("product-recommendations", ProductRecommendations);
+
+// Safari detection
+const detectSafari = () => {
+  const ua = navigator.userAgent;
+
+  const isSafari =
+    ua.includes("Safari") &&
+    !ua.includes("Chrome") &&
+    !ua.includes("CriOS") &&
+    !ua.includes("FxiOS") &&
+    !ua.includes("Edg");
+
+  const isMacOS = ua.includes("Macintosh");
+
+  if (isSafari && isMacOS) {
+    document.documentElement.classList.add("is-safari-macos");
+  }
+};
+
+// Custom video controls
+document.addEventListener("DOMContentLoaded", () => {
+  detectSafari();
+
+  const BUTTON_SELECTOR = ".wt-hero-video__sound-toggle";
+  const BUTTON_TOGGLE_CLASS = "wt-hero-video__sound-toggle--unmuted";
+
+  document.querySelectorAll(BUTTON_SELECTOR).forEach((button) => {
+    button.addEventListener("click", () => {
+      if (button.closest("video-controls")) return;
+      const parent = button.parentElement;
+      if (!parent) return;
+
+      let video = null;
+
+      video = Array.from(parent.children).find((el) => el.tagName === "VIDEO");
+
+      if (!video) {
+        const heroVideoContainer = Array.from(parent.children).find(
+          (el) =>
+            el.classList && el.classList.contains("hero--video-background"),
+        );
+
+        if (heroVideoContainer) {
+          video = heroVideoContainer.querySelector("video");
+        }
+      }
+
+      if (!video) {
+        const grandparent = parent.closest("video-controls");
+        video = Array.from(grandparent.children).find(
+          (el) => el.tagName === "VIDEO",
+        );
+      }
+
+      if (!video) return;
+
+      video.muted = !video.muted;
+      button.classList.toggle(BUTTON_TOGGLE_CLASS, !video.muted);
+    });
+  });
+});

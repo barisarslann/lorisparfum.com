@@ -40,6 +40,11 @@
     },
     "continue_shopping": "Fortsett å handle",
     "pagination": {
+      "previous_label": "Forrige",
+      "next_label": "Neste",
+      "load_more": "Last inn flere",
+      "load_previous": "Last inn forrige",
+      "showing": "Viser {{ count }} av {{ total }} varer",
       "label": "Sideinndeling",
       "page": "Side {{ number }}",
       "next": "Neste side",
@@ -52,6 +57,8 @@
       "view": "Vis handlekurven ({{ count }})",
       "item_added": "Vare lagt i handlekurven"
     },
+    "copy": "Kopier",
+    "copied": "Kopiert",
     "share": {
       "copy_to_clipboard": "Kopier kobling",
       "share_url": "Kobling",
@@ -60,9 +67,6 @@
     },
     "quick_add": {
       "view_all_details": "Vis alle detaljer"
-    },
-    "icons": {
-      "icon_title": ""
     },
     "slider": {
       "of": "av",
@@ -74,7 +78,9 @@
   "newsletter": {
     "label": "Din e-postadresse",
     "success": "Takk for at du abonnerer",
-    "button_label": "Abonner"
+    "button_label": "Abonner",
+    "close": "Lukk popup",
+    "consent_checkbox_label": "Jeg ønsker å melde meg på nyhetsbrevet (informasjon om kampanjer, rabatter, premierer, konkurranser)."
   },
   "accessibility": {
     "skip_to_text": "Gå videre til innholdet",
@@ -95,7 +101,10 @@
     "star_reviews_info": "{{ rating_value }} av {{ rating_max }} stjerner",
     "collapsible_content_title": "Sammenslåbart innhold",
     "complementary_products": "Komplementære produkter",
-    "searching": "Søk pågår..."
+    "searching": "Søk pågår...",
+    "scroll_to_top": "Scroll to top",
+    "open": "Åpne",
+    "subscription_widget__selling_plan_select": "Leveringsfrekvens for {{ plan_group }}"
   },
   "blogs": {
     "article": {
@@ -115,7 +124,10 @@
       "back_to_blog": "Tilbake til bloggen",
       "share": "Del denne artikkelen",
       "success": "Kommentaren din ble delt! Takk!",
-      "success_moderated": "Kommentaren din ble delt. Vi publiserer den om en liten stund, siden bloggen din er moderert."
+      "success_moderated": "Kommentaren din ble delt. Vi publiserer den om en liten stund, siden bloggen din er moderert.",
+      "date_format": "%d.%m.%Y",
+      "published_on": "den {{ date }}",
+      "posted_by": "Skrevet av {{ author }}"
     }
   },
   "onboarding": {
@@ -125,6 +137,7 @@
   "products": {
     "product": {
       "add_to_cart": "Legg i handlekurv",
+      "pick_size": "Velg {{ option }}",
       "description": "Beskrivelse",
       "on_sale": "Salg",
       "product_variants": "Produktvarianter",
@@ -138,7 +151,8 @@
         "from_price_html": "Fra {{ price }}",
         "regular_price": "Vanlig pris",
         "sale_price": "Salgspris",
-        "unit_price": "Enhetspris"
+        "unit_price": "Enhetspris",
+        "free": "Gratis"
       },
       "share": "Del dette produktet",
       "sold_out": "Utsolgt",
@@ -185,7 +199,9 @@
       "volume_pricing": {
         "note": "TODO",
         "price_range": "TODO"
-      }
+      },
+      "select_option": "Velg alternativ",
+      "select_options": "Velg alternativer"
     },
     "modal": {
       "label": "Mediegalleri"
@@ -222,6 +238,10 @@
     }
   },
   "templates": {
+    "404": {
+      "title": "Siden finnes ikke",
+      "subtext": "404"
+    },
     "search": {
       "no_results": "Fant ingen resultater for «{{ terms }}». Kontroller stavemåten, eller bruk et annet ord.",
       "page": "Side",
@@ -242,7 +262,9 @@
         "products": "Produkter",
         "pages": "Sider",
         "articles": "Artikler",
-        "suggestions": "Forslag"
+        "suggestions": "Forslag",
+        "popular_searches": "Populære søk",
+        "useful_links": "Nyttige lenker"
       },
       "search_for": "Vis alle for \"{{ terms }}\""
     },
@@ -260,13 +282,12 @@
         "error_heading": "Juster følgende:",
         "title": "Kontaktskjema"
       }
-    },
-    "404": {
-      "title": "Siden finnes ikke",
-      "subtext": "404"
     }
   },
   "sections": {
+    "shoppable_buy_all": {
+      "add_all_to_cart": "Legg alle i handlekurven"
+    },
     "header": {
       "announcement": "Kunngjøring",
       "menu": "Meny",
@@ -305,7 +326,29 @@
         "title": "Har du en konto?",
         "paragraph_html": "<a href=\"{{ link }}\" tabindex=\"-1\" class=\"link underlined-link\">Logg inn</a> for å sjekke ut raskere."
       },
-      "view_cart": "Vis handlekurv"
+      "view_cart": "Vis handlekurv",
+      "checkbox": "Pakk inn som gave",
+      "order_note": "Bestillingsnotat",
+      "estimate_shipping": "Frakt",
+      "discount_code": "Rabattkode",
+      "features": {
+        "country_region": "Land/region",
+        "postal_zip": "Postnummer",
+        "apply": "Bruk",
+        "calculate": "Beregn",
+        "discount_placeholder": "Vennligst skriv inn rabattkode",
+        "shipping_select_country_zip": "Vennligst velg et land og skriv inn et postnummer.",
+        "shipping_calculating": "Beregner…",
+        "shipping_no_rate": "Det finnes ingen fraktpris for dette bestemmelsesstedet. Prøv å sjekke adressen.",
+        "shipping_one_rate": "Det finnes én fraktpris for dette bestemmelsesstedet:",
+        "shipping_n_rates": "Det finnes {{ count }} fraktpriser for dette bestemmelsesstedet:",
+        "shipping_free": "Gratis",
+        "discount_enter_code": "Vennligst skriv inn en rabattkode.",
+        "discount_applying": "Bruker…",
+        "discount_applied": "Rabatt lagt til!",
+        "discount_invalid": "Rabattkoden er ugyldig eller gjelder ikke for den nåværende handlekurven.",
+        "discount_error": "Noe gikk galt. Vennligst prøv igjen."
+      }
     },
     "footer": {
       "payment": "Betalingsmåter",
@@ -369,6 +412,54 @@
       },
       "error": {
         "invalid_format": "Ugyldig datoformat. Vennligst oppgi dato og tid i formatet ÅÅÅÅ-MM-DD TT:MM."
+      }
+    },
+    "localization_drawer": {
+      "title": "Lokalisering",
+      "country_label": "Land/region",
+      "language_label": "Språk",
+      "drawer_title": "Lokaliseringsvalg",
+      "current_country_info": "Du sender for øyeblikket til {{ countryName }} og bestillingen din blir fakturert i {{ currencyIso }} {{ currencySymbol }}.",
+      "search_location": {
+        "label": "Søk sted",
+        "placeholder": "Søk etter sted..."
+      }
+    },
+    "bundle-builder": {
+      "add_to_bundle": "Legg til i bundle",
+      "status": {
+        "discount": "🎉 Du fikk rabatt.",
+        "add_more": "Du kan fortsatt legge til mer."
+      },
+      "toggle": "Vis/skjul pakkepanel",
+      "remove_item": "Fjern vare",
+      "error_message": "Det oppstod en feil. Vennligst prøv igjen."
+    },
+    "quiz": {
+      "back": "Gå tilbake",
+      "prev_question": "Forrige",
+      "next_question": "Neste",
+      "see_results": "Se resultater"
+    },
+    "blog_posts": {
+      "tags_all": "Alle innlegg"
+    },
+    "compare_products": {
+      "name": "Sammenlign produkter",
+      "badge": {
+        "compare": "VS"
+      },
+      "placeholders": {
+        "left_text": "Venstre",
+        "right_text": "Høyre"
+      },
+      "aria": {
+        "table": "Sammenligningstabell"
+      },
+      "blocks": {
+        "table_row": {
+          "center_text_default": "Skriv inn tekst..."
+        }
       }
     }
   },
@@ -534,7 +625,7 @@
   },
   "aria-label": {
     "announcement-bar": "Lukk kunngjøringslinjen",
-    "contact-form": "Send inn et skjema",
+    "contact-form": "Send",
     "featured-collection": "Vis alle",
     "featured-product-3d-model": "Vis 3D-modell",
     "main-product-video": "Spill av video",
@@ -572,6 +663,15 @@
     "price-from": "Pris fra",
     "price-to": "Pris til",
     "remove-price-range": "Fjern prisintervallfilter",
-    "sort-options": "Sorteringsalternativer"
+    "sort-options": "Sorteringsalternativer",
+    "lookbook-button": "Se detaljer",
+    "pills-navigation": "Fanenavigasjon",
+    "collection-tabs": "Kolleksjonsfaner"
+  },
+  "placeholder": {
+    "select_option": "Velg et alternativ"
+  },
+  "cross_sell": {
+    "empty_msg": "Ingen produkter tilgjengelige for visning. Denne blokken vil ikke være synlig for kunder i butikkfronten."
   }
 }

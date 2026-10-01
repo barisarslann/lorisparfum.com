@@ -11,7 +11,7 @@
   "sections": {
     "custom_liquid_rYraar": {
       "type": "custom-liquid",
-      "name": "t:sections.custom-liquid.presets.name",
+      "name": "Custom Liquid",
       "settings": {
         "custom_liquid": "<style>\n.wt-page .wt-page__title {\n  display: none;\n}\n</style>"
       }
@@ -324,10 +324,10 @@
     "button_HBCJPg": {
       "type": "button",
       "disabled": true,
-      "name": "t:sections.button.presets.name",
+      "name": "Button",
       "settings": {
-        "button_select": "primary",
         "button_horizontal_position": "center",
+        "button_select": "primary",
         "button_label": "Kataloğu İncele",
         "button_link": "",
         "margin-top": 20,
@@ -530,10 +530,9 @@
         "column_XiVGND",
         "column_pq8RNP"
       ],
-      "name": "t:sections.multicolumn.presets.name",
+      "name": "Multicolumn",
       "settings": {
         "heading": "Minimum Atık, Maksimum Geri Dönüşüm:",
-        "swipe_on_mobile": false,
         "full-width-enabled": false,
         "image_ratio": "adapt",
         "column_alignment": "left",
@@ -542,7 +541,8 @@
         "color-body-text": "rgba(0,0,0,0)",
         "background_color": "rgba(0,0,0,0)",
         "margin-top": 20,
-        "margin-bottom": 20
+        "margin-bottom": 20,
+        "enable_stack_products": true
       }
     },
     "image_banner_T6cy7N": {
@@ -662,7 +662,7 @@
     "custom_liquid_3i7yJN": {
       "type": "custom-liquid",
       "disabled": true,
-      "name": "t:sections.custom-liquid.presets.name",
+      "name": "Custom Liquid",
       "settings": {
         "custom_liquid": "<iframe id=\"basvuru-form\" src=\"https://www.lorisbayilikbasvurusu.com/\" style=\"border:0px #ffffff none;width: 100%;height: 750px;/* 700px */max-width: 410px;margin: 0 auto;display: block;\" name=\"myiFrame\" scrolling=\"no\" frameborder=\"1\" marginheight=\"0px\" marginwidth=\"0px\" height=\"400px\" width=\"600px\" allowfullscreen></iframe>"
       }

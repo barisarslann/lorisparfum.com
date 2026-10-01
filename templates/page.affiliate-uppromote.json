@@ -25,19 +25,6 @@
     },
     "17563732349f92c2f2": {
       "type": "apps",
-      "blocks": {
-        "uppromote_affiliate_customer_referral_landing_akGzhj": {
-          "type": "shopify://apps/uppromote-affiliate/blocks/customer-referral-landing/64c32457-930d-4cb9-9641-e24c0d9cf1f4",
-          "settings": {
-            "section_corners": 0,
-            "section_top_margin": 20,
-            "section_bottom_margin": 20
-          }
-        }
-      },
-      "block_order": [
-        "uppromote_affiliate_customer_referral_landing_akGzhj"
-      ],
       "settings": {
         "include_margins": true
       }

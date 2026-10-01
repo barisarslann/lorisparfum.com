@@ -1,6 +1,3 @@
-{{ 'section-shoppable-video.css' | asset_url | stylesheet_tag }}
-{{ 'shoppable-image.css' | asset_url | stylesheet_tag }}
-
 {% assign line_items_ids = '' %}
 {% for line_item in cart.items %}
   {% assign line_items_ids = line_items_ids | append: line_item.product_id | append: ', ' %}
@@ -40,18 +37,19 @@
   {% endif %}
 {% else %}
   <div class="wt-cart__cross-sell {% if settings.cross_sells_collapsed %}wt-cart__cross-sell--collapsed{% endif %}">
-    <p class="wt-cart__cross-sell__heading">
+    <p
+      class="wt-cart__cross-sell__heading"
+      onclick="this.closest('.wt-cart__cross-sell').classList.toggle('wt-cart__cross-sell--collapsed')"
+    >
       {{ settings.heading_cross_sells }}
-      <span
-        class="wt-cart__cross-sell__toggle"
-        onclick="this.closest('.wt-cart__cross-sell').classList.toggle('wt-cart__cross-sell--collapsed')"
-      >
+      <span class="wt-cart__cross-sell__toggle">
         {% render 'icons', id: 'arrow-down' %}
       </span>
     </p>
 
     <div class="wt-cart__cross-sell__products">
       {% if cross_sell_size > 1 %}
+        <script type="module" src="{{ 'slider.js' | asset_url }}" defer="defer"></script>
         <slideshow-section class="wt-slider wt-slider--cross-sell" data-skip-center-nav-method="true">
           <div data-swiper class="wt-slider__container" data-sound="off">
             <div data-swiper-container class="video-reels__container">

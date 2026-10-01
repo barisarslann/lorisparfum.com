@@ -14,6 +14,12 @@ class CartRemoveButton extends HTMLElement {
 
 customElements.define("cart-remove-button", CartRemoveButton);
 
+const CART_ITEMS_SELF_REFRESH_SOURCES = new Set([
+  "cart-items",
+  "cart-service-checkbox",
+  "cart-additional-features",
+]);
+
 class CartItems extends HTMLElement {
   cartUpdateUnsubscriber = undefined;
   constructor() {
@@ -33,7 +39,7 @@ class CartItems extends HTMLElement {
     this.cartUpdateUnsubscriber = subscribe(
       PUB_SUB_EVENTS.cartUpdate,
       (event) => {
-        if (event.source === "cart-items") {
+        if (CART_ITEMS_SELF_REFRESH_SOURCES.has(event.source)) {
           return;
         }
         this.onCartUpdate();
@@ -284,3 +290,10 @@ if (!customElements.get("cart-note")) {
     },
   );
 }
+
+window.addEventListener("pageshow", (event) => {
+  const navEntry = performance.getEntriesByType("navigation")[0];
+  const isBackForward = event.persisted || navEntry?.type === "back_forward";
+  if (!isBackForward) return;
+  document.dispatchEvent(new CustomEvent("cart-drawer:refresh"));
+});

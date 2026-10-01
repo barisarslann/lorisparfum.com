@@ -18,22 +18,87 @@ class LocalizationDrawer extends HTMLElement {
     this.isOpen = false;
     this.mainTrigger =
       document.querySelector(".wt-header__localization-trigger") || null;
+
+    this.lastOpenerEl = null;
+
+    this.selectors = {
+      tabContent: ".wt-localization-drawer__tab__content",
+      activeTabContent: ".wt-localization-drawer__tab__content.is-active",
+      focusable:
+        'a[href], button:not([disabled]), input:not([disabled]):not([type="hidden"]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])',
+    };
   }
 
   connectedCallback() {
     this.init();
+    this.inert = true;
+    this.setAttribute("aria-hidden", "true");
   }
 
-  getFocusableElements() {
-    const focusableSelector = "button, [href], input, select, [tabindex]";
-    const focusableElements = Array.from(
-      this.querySelectorAll(focusableSelector),
-    ).filter((el) => !el.hasAttribute("disabled") && el.tabIndex >= 0);
+  // Save opener element (prefer clicked trigger, fallback to current focus)
+  storeOpenerElement(triggerEl) {
+    const candidate = triggerEl || document.activeElement;
 
-    return {
-      first: focusableElements[0],
-      last: focusableElements[focusableElements.length - 1],
-    };
+    if (candidate && candidate instanceof HTMLElement) {
+      this.lastOpenerEl = candidate;
+    } else {
+      this.lastOpenerEl = null;
+    }
+  }
+
+  // Restore focus to opener (if still in DOM + focusable)
+  restoreFocusToOpener() {
+    const el = this.lastOpenerEl;
+
+    if (!el) return false;
+    if (!document.contains(el)) return false;
+
+    // Avoid focusing disabled elements
+    if (el.hasAttribute("disabled")) return false;
+
+    // If element is hidden, focus may fail – still try safely
+    try {
+      el.focus();
+      this.lastOpenerEl = null;
+      return true;
+    } catch {
+      return false;
+    }
+  }
+
+  // Elements that are ALWAYS allowed (close btn, tab triggers, etc.)
+  // but NOT elements inside ANY tab content panels (so we can re-add only active tab panel later)
+  getGlobalFocusableElements() {
+    const all = Array.from(this.querySelectorAll(this.selectors.focusable));
+
+    return all.filter((el) => {
+      // Skip invisible elements
+      if (el.offsetParent === null) return false;
+
+      // Skip anything inside ANY tab content (we'll handle active tab separately)
+      const isInsideAnyTabPanel = el.closest(this.selectors.tabContent);
+      if (isInsideAnyTabPanel) return false;
+
+      return true;
+    });
+  }
+
+  // Focusables only inside active tab panel
+  getActiveTabFocusableElements() {
+    const activePanel = this.querySelector(this.selectors.activeTabContent);
+    if (!activePanel) return [];
+
+    return Array.from(
+      activePanel.querySelectorAll(this.selectors.focusable),
+    ).filter((el) => el.offsetParent !== null);
+  }
+
+  // Final "allowed" focusables for current state
+  getAllowedFocusableElements() {
+    return [
+      ...this.getGlobalFocusableElements(),
+      ...this.getActiveTabFocusableElements(),
+    ];
   }
 
   temporaryHideFocusVisible() {
@@ -47,10 +112,22 @@ class LocalizationDrawer extends HTMLElement {
     if (this.hasAttribute("open")) {
       this.removeAttribute("open");
       this.isOpen = false;
-      if (this.mainTrigger) this.mainTrigger.focus();
+
+      this.inert = true;
+      this.setAttribute("aria-hidden", "true");
+
+      // Restore focus AFTER DOM/classes update
+      requestAnimationFrame(() => {
+        const restored = this.restoreFocusToOpener();
+        if (!restored && this.mainTrigger) this.mainTrigger.focus();
+      });
     } else {
       this.setAttribute("open", "");
       this.isOpen = true;
+
+      this.inert = false;
+      this.setAttribute("aria-hidden", "false");
+
       const closeBtn = this.querySelector(".wt-localization-drawer__close");
       if (closeBtn) closeBtn.focus();
     }
@@ -95,7 +172,7 @@ class LocalizationDrawer extends HTMLElement {
     // Trap focus & close on Escape
     this.addEventListener("keydown", (e) => {
       if (!this.isOpen) return;
-      const { first, last } = this.getFocusableElements();
+
       const isTab = e.key === "Tab" || e.keyCode === 9 || e.code === "Tab";
       const isEsc =
         e.key === "Escape" || e.keyCode === 27 || e.code === "Escape";
@@ -103,15 +180,30 @@ class LocalizationDrawer extends HTMLElement {
       if (isEsc) {
         e.preventDefault();
         this.toggleDrawerClasses();
-      } else if (isTab) {
-        // Focus trap
-        if (e.shiftKey && document.activeElement === first) {
-          e.preventDefault();
-          last.focus();
-        } else if (!e.shiftKey && document.activeElement === last) {
-          e.preventDefault();
-          first.focus();
-        }
+      }
+
+      if (!isTab) return;
+
+      // Recompute each time (handles tab switching and live DOM updates)
+      const focusables = this.getAllowedFocusableElements();
+      if (!focusables.length) return;
+
+      const first = focusables[0];
+      const last = focusables[focusables.length - 1];
+
+      // If focus somehow is outside allowed set, pull it to the start
+      if (!focusables.includes(document.activeElement)) {
+        e.preventDefault();
+        first.focus();
+        return;
+      }
+
+      if (e.shiftKey && document.activeElement === first) {
+        e.preventDefault();
+        last.focus();
+      } else if (!e.shiftKey && document.activeElement === last) {
+        e.preventDefault();
+        first.focus();
       }
     });
 
@@ -119,13 +211,17 @@ class LocalizationDrawer extends HTMLElement {
       trigger.addEventListener("click", (e) => {
         e.preventDefault();
 
-        const openTab = trigger.dataset.openDrawer;
+        // IMPORTANT: remember what opened the drawer
+        // Use currentTarget (the element with the listener), not e.target
+        this.storeOpenerElement(e.currentTarget);
 
-        this.toggleDrawerClasses();
+        const openTab = trigger.dataset.openDrawer;
 
         if (openTab) {
           this.setActiveTab(openTab);
         }
+
+        this.toggleDrawerClasses();
       });
     });
 

@@ -1,0 +1,25 @@
+{% liquid
+  assign icon_aspect_ratio = image.aspect_ratio | default: 1.0
+  assign icon_h_desktop = height_desktop | default: 28
+  assign icon_h_mobile = height_mobile | default: 27
+  assign icon_w_desktop = icon_h_desktop | times: icon_aspect_ratio | ceil
+  assign icon_w_mobile = icon_h_mobile | times: icon_aspect_ratio | ceil
+  assign icon_w_2x_desktop = icon_w_desktop | times: 2
+  assign icon_w_2x_mobile = icon_w_mobile | times: 2
+  if icon_w_2x_desktop > icon_w_2x_mobile
+    assign icon_max_width = icon_w_2x_desktop
+  else
+    assign icon_max_width = icon_w_2x_mobile
+  endif
+  assign icon_sizes = '(min-width: 900px) ' | append: icon_w_desktop | append: 'px, ' | append: icon_w_mobile | append: 'px'
+  assign icon_widths = '' | append: icon_w_mobile | append: ', ' | append: icon_w_2x_mobile | append: ', ' | append: icon_w_desktop | append: ', ' | append: icon_w_2x_desktop
+%}
+{{
+  image
+  | image_url: width: icon_max_width
+  | image_tag:
+    loading: 'lazy',
+    sizes: icon_sizes,
+    widths: icon_widths,
+    class: class
+}}

@@ -1,15 +1,29 @@
+{% assign highlight_names_arr = highlight_names | split: '|||' %}
+{% assign highlight_ids_arr = highlight_block_ids | split: '|||' %}
+
 <ul
   class="wt-page-nav-mega__list wt-page-nav-mega__list--center"
 >
+{% assign column_blocks_count = 0 %}
+{%- for block in blocks -%}
+  {%- if block.type == 'column' -%}
+    {% assign column_blocks_count = column_blocks_count | plus: 1 %}
+  {%- endif -%}
+{%- endfor -%}
+
   {%- for link in section.settings.menu.links -%}
     {% assign menu_class = '--simple' %}
     {% assign show_mega = false %}
     {% assign promo_blocks = false %}
 
-    {% if blocks.size > 0 %}
+    {% if column_blocks_count > 0 %}
       {% for block in blocks %}
+        {% if block.type != 'column' %}{% continue %}{% endif %}
         {% assign megamenu_trigger = block.settings.title | handle | strip %}
-        {% if link.handle == megamenu_trigger %}
+        {% assign megamenu_trigger_name = block.settings.title | strip | downcase %}
+        {% assign link_name = link.title | strip | downcase %}
+
+        {% if link.handle == megamenu_trigger or link_name == megamenu_trigger_name %} {% comment %} keep handle matching for backwards compatibility {% endcomment %}
           {% assign show_mega = true %}
           {% assign mega_block = block %}
           {% assign menu_class = '--mega' %}
@@ -22,6 +36,7 @@
           %}
             {% assign promo_blocks = true %}
           {% endif %}
+          {% break %}
         {% endif %}
       {% endfor %}
     {% endif %}
@@ -29,51 +44,24 @@
       <li
         class="wt-page-nav-mega__item wt-page-nav-mega__item--parent wt-page-nav-mega__item{{ menu_class }}"
       >
+        {%- liquid
+          assign link_highlight_class = ''
+          assign link_dc = link.title | strip | downcase
+          for highlight_name in highlight_names_arr
+            if link_dc == highlight_name
+              assign link_highlight_class = 'highlight-' | append: highlight_ids_arr[forloop.index0]
+              break
+            endif
+          endfor
+        -%}
         <a
           href="{{ link.url }}"
           tabindex="-1"
           data-menu-level="1"
-          class="wt-page-nav-mega__link wt-page-nav-mega__link--parent {% if link.current %} wt-page-nav-mega__link--active{% endif %}"
+          class="wt-page-nav-mega__link wt-page-nav-mega__link--parent {% if link.current %}wt-page-nav-mega__link--active{% endif %} {{ link_highlight_class }}"
         >
-          <!-- CUSTOM -->
-          {% comment %}{{ link.url | remove: "/collections/" }}{% endcomment %}
-          {% assign title = link.title %}
-          {% if title contains settings.menu_image_text_1 %}
-            {% assign menu_img = settings.menu_image_1 %}
-          {% elsif title contains settings.menu_image_text_2 %}
-            {% assign menu_img = settings.menu_image_2 %}
-          {% elsif title contains settings.menu_image_text_3 %}
-            {% assign menu_img = settings.menu_image_3 %}
-          {% elsif title contains settings.menu_image_text_4 %}
-            {% assign menu_img = settings.menu_image_4 %}
-          {% elsif title contains settings.menu_image_text_5 %}
-            {% assign menu_img = settings.menu_image_5 %}
-          {% elsif title contains settings.menu_image_text_6 %}
-            {% assign menu_img = settings.menu_image_6 %}
-          {% elsif title contains settings.menu_image_text_7 %}
-            {% assign menu_img = settings.menu_image_7 %}
-          {% elsif title contains settings.menu_image_text_8 %}
-            {% assign menu_img = settings.menu_image_8 %}
-          {% elsif title contains settings.menu_image_text_9 %}
-            {% assign menu_img = settings.menu_image_9 %}
-          {% elsif title contains settings.menu_image_text_10 %}
-            {% assign menu_img = settings.menu_image_10 %}
-          {% elsif title contains settings.menu_image_text_11 %}
-            {% assign menu_img = settings.menu_image_11 %}
-          {% elsif title contains settings.menu_image_text_12 %}
-            {% assign menu_img = settings.menu_image_12 %}
-          {% elsif title contains settings.menu_image_text_13 %}
-            {% assign menu_img = settings.menu_image_13 %}
-          {% elsif title contains settings.menu_image_text_14 %}
-            {% assign menu_img = settings.menu_image_14 %}
-          {% elsif title contains settings.menu_image_text_15 %}
-            {% assign menu_img = settings.menu_image_15 %}
-          {% else %}
-            {% assign menu_img = "files/GUNCEL_LORIS_LOGO-01.png?width=200" %}
-          {% endif %}
-          <img src="/cdn/shop/{{ menu_img }}?width=150" style="width: 20%;/* position: absolute;left: 50%; *//* transform: translateX(-50%); */height: auto;" width="200" height="200" loading="lazy">
-
-          <span class="wt-page-nav-mega__link__text wt-page-nav-mega__link__text--underline" data-custom style="margin-right: auto;margin-left: 15px;">
+          {% render 'loris-menu-image', link: link %}
+          <span class="wt-page-nav-mega__link__text wt-page-nav-mega__link__text--underline">
             {{- link.title | escape -}}
           </span>
           {% render 'icons', id: 'plus' %}
@@ -82,14 +70,24 @@
         <div class="wt-page-nav-mega__sublist__wrapper wt-page-nav-mega__sublist__wrapper{{ menu_class }}">
           <ul class="wt-page-nav-mega__sublist">
             {%- for childlink in link.links -%}
+              {%- liquid
+                assign child_highlight_class = ''
+                assign child_dc = childlink.title | strip | downcase
+                for highlight_name in highlight_names_arr
+                  if child_dc == highlight_name
+                    assign child_highlight_class = 'highlight-' | append: highlight_ids_arr[forloop.index0]
+                    break
+                  endif
+                endfor
+              -%}
               {%- if childlink.links == blank -%}
                 <li class="wt-page-nav-mega__sublist__item wt-page-nav-mega__sublist__item--child">
                   <a
                     href="{{ childlink.url }}"
                     data-menu-level="2"
                     tabindex="-1"
-                    class="wt-page-nav-mega__sublist__link  {% if link.current %} wt-page-nav-mega__sublist__link--active{% endif %}"
-                    ><span class="wt-page-nav-mega__decorated">{{ childlink.title | escape }}</span></a
+                    class="wt-page-nav-mega__sublist__link {% if link.current %}wt-page-nav-mega__sublist__link--active{% endif %}"
+                    ><span class="wt-page-nav-mega__decorated {{ child_highlight_class }}">{{ childlink.title | escape }}</span></a
                   >
                 </li>
               {%- else -%}
@@ -100,14 +98,24 @@
                     href="{{ childlink.url }}"
                     data-menu-level="2"
                     tabindex="-1"
-                    class="wt-page-nav-mega__sublist__link wt-page-nav-mega__sublist__link--parent {% if childlink.current %} wt-page-nav-mega__sublist__link--active{% endif %}"
+                    class="wt-page-nav-mega__sublist__link wt-page-nav-mega__sublist__link--parent {% if childlink.current %}wt-page-nav-mega__sublist__link--active{% endif %}"
                   >
-                    <span class="wt-page-nav-mega__decorated">{{ childlink.title | escape }}</span>
+                    <span class="wt-page-nav-mega__decorated {{ child_highlight_class }}">{{ childlink.title | escape }}</span>
                     {% render 'icons', id: 'plus' %}
                     {% render 'icons', id: 'arrow-right' %}
                   </a>
                   <ul class="wt-page-nav-mega__sublist wt-page-nav-mega__sublist--nested">
                     {%- for grandchildlink in childlink.links -%}
+                      {%- liquid
+                        assign grandchildlink_highlight_class = ''
+                        assign grandchildlink_dc = grandchildlink.title | strip | downcase
+                        for highlight_name in highlight_names_arr
+                          if grandchildlink_dc == highlight_name
+                            assign grandchildlink_highlight_class = 'highlight-' | append: highlight_ids_arr[forloop.index0]
+                            break
+                          endif
+                        endfor
+                      -%}
                       <li
                         class="wt-page-nav-mega__sublist__item wt-page-nav-mega__sublist__item--grandchild"
                       >
@@ -117,7 +125,7 @@
                           class="wt-page-nav-mega__sublist__link"
                           tabindex="-1"
                         >
-                          <span class="wt-page-nav-mega__decorated">{{ grandchildlink.title | escape }}</span>
+                          <span class="wt-page-nav-mega__decorated {{ grandchildlink_highlight_class }}">{{ grandchildlink.title | escape }}</span>
                         </a>
                       </li>
                     {%- endfor -%}
@@ -130,22 +138,30 @@
                 data-block-id="{{ mega_block.id }}"
                 class="wt-page-nav-mega__sublist__item wt-page-nav-mega__sublist__item--gallery"
               >
-                <!-- CUSTOM -->
-                <ul class="mega-menu__gallery" data-custom style="flex-wrap: wrap;/* justify-content: end; */">
+                <ul class="mega-menu__gallery {% if mega_block.settings.stack_view %}mega-menu__gallery--stack{% endif %}">
                   {% assign promo_images_count = 0 %}
                   {% for i in (1..6) %}
                     {% assign key = 'desktop_image_' | append: i %}
+                    {% assign text_key = 'text_' | append: i %}
                     {% if mega_block.settings[key] %}
                       {% assign promo_images_count = promo_images_count | plus: 1 %}
-                      <li class="mega-menu__gallery__item" data-custom style="width: 46%;margin-right: 0;">
+                      <li class="mega-menu__gallery__item {% if mega_block.settings.stack_view %}mega-menu__gallery__item--stack{% endif %}">
                         {% assign link_key = 'link_' | append: i %}
+                        {% assign link_new_window_key = 'link_' | append: i | append: '_new_window' %}
                         <a
                           href="{{ mega_block.settings[link_key] | downcase }}"
                           class="mega-menu__gallery__link"
                           data-menu-level="2"
                           tabindex="-1"
+                          {% if mega_block.settings[link_new_window_key] %}target="_blank" rel="noreferrer noopener"{% endif %}
                         >
                           <picture class="mega-menu__gallery__picture">
+                              {% assign alt_escaped = mega_block.settings[key].alt | escape %}
+                              {% if alt_escaped != blank  %}
+                                {% assign alt_text = alt_escaped %}
+                              {% else %}
+                                {% assign alt_text = mega_block.settings[text_key] %}
+                              {% endif %}
                             <img
                               class="mega-menu__gallery__img"
                               srcset="
@@ -157,17 +173,13 @@
                               "
                               sizes="(min-width: 800px) 800px, 100vw"
                               src="{{ mega_block.settings[key] | image_url: width: 800 }}"
-                              alt="{{ mega_block.settings[key].alt | escape }}"
+                              alt="{{ alt_text }}"
                               loading="lazy"
-
-                              width="200"
-                              height="200"
                             >
                             {% assign heading_key = 'heading_' | append: i %}
                             <span class="mega-menu__gallery__heading wt-page-nav-mega__decorated">
                               {{- mega_block.settings[heading_key] -}}
                             </span>
-                            {% assign text_key = 'text_' | append: i %}
                             <p class="mega-menu__gallery__caption">{{ mega_block.settings[text_key] }}</p>
                           </picture>
                         </a>
@@ -189,55 +201,28 @@
       </li>
 
     {%- else -%}
+      {%- liquid
+        assign link_highlight_class = ''
+        assign link_dc = link.title | strip | downcase
+        for highlight_name in highlight_names_arr
+          if link_dc == highlight_name
+            assign link_highlight_class = 'highlight-' | append: highlight_ids_arr[forloop.index0]
+            break
+          endif
+        endfor
+      -%}
       <li class="wt-page-nav-mega__item">
         <a
           href="{{ link.url }}"
           data-menu-level="1"
           tabindex="-1"
-          class="wt-page-nav-mega__link {% if link.current %} wt-page-nav-mega__link--active{% endif %}"
+          class="wt-page-nav-mega__link {% if link.current %}wt-page-nav-mega__link--active{% endif %} {{ link_highlight_class }}"
           {% if link.current %}
             aria-current="page"
           {% endif %}
         >
-          <!-- CUSTOM -->
-          {% comment %}{{ link.url | remove: "/collections/" }}{% endcomment %}
-          {% assign title = link.title %}
-          {% if title contains settings.menu_image_text_1 %}
-            {% assign menu_img = settings.menu_image_1 %}
-          {% elsif title contains settings.menu_image_text_2 %}
-            {% assign menu_img = settings.menu_image_2 %}
-          {% elsif title contains settings.menu_image_text_3 %}
-            {% assign menu_img = settings.menu_image_3 %}
-          {% elsif title contains settings.menu_image_text_4 %}
-            {% assign menu_img = settings.menu_image_4 %}
-          {% elsif title contains settings.menu_image_text_5 %}
-            {% assign menu_img = settings.menu_image_5 %}
-          {% elsif title contains settings.menu_image_text_6 %}
-            {% assign menu_img = settings.menu_image_6 %}
-          {% elsif title contains settings.menu_image_text_7 %}
-            {% assign menu_img = settings.menu_image_7 %}
-          {% elsif title contains settings.menu_image_text_8 %}
-            {% assign menu_img = settings.menu_image_8 %}
-          {% elsif title contains settings.menu_image_text_9 %}
-            {% assign menu_img = settings.menu_image_9 %}
-          {% elsif title contains settings.menu_image_text_10 %}
-            {% assign menu_img = settings.menu_image_10 %}
-          {% elsif title contains settings.menu_image_text_11 %}
-            {% assign menu_img = settings.menu_image_11 %}
-          {% elsif title contains settings.menu_image_text_12 %}
-            {% assign menu_img = settings.menu_image_12 %}
-          {% elsif title contains settings.menu_image_text_13 %}
-            {% assign menu_img = settings.menu_image_13 %}
-          {% elsif title contains settings.menu_image_text_14 %}
-            {% assign menu_img = settings.menu_image_14 %}
-          {% elsif title contains settings.menu_image_text_15 %}
-            {% assign menu_img = settings.menu_image_15 %}
-          {% else %}
-            {% assign menu_img = "files/GUNCEL_LORIS_LOGO-01.png?width=200" %}
-          {% endif %}
-          <img src="/cdn/shop/{{ menu_img }}?width=150" style="width: 20%;/* position: absolute;left: 50%; *//* transform: translateX(-50%); */height: auto;" width="200" height="200" loading="lazy">
-
-          <span class="wt-page-nav-mega__link__text wt-page-nav-mega__link__text--underline" data-custom style="margin-right: auto;margin-left: 15px;">
+          {% render 'loris-menu-image', link: link %}
+          <span class="wt-page-nav-mega__link__text wt-page-nav-mega__link__text--underline">
             {{- link.title | escape -}}
           </span>
         </a>

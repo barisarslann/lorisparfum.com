@@ -3,7 +3,7 @@
 <style>
   [data-section-id="{{ section.id }}"]
   {
-    {% if background_rgb != 'rgba(0, 0, 0, 0.0)' %}
+    {% if section.settings.background_color != blank and section.settings.background_color != 'transparent' and background_rgb != 'rgba(0, 0, 0, 0.0)' %}
       --color-custom-background: {{ section.settings.background_color }};
     {% endif %}
 
@@ -14,21 +14,40 @@
     {% if section.settings.margin-bottom %}
         --section-gap-bottom: {{ section.settings.margin-bottom }}px;
     {% endif %}
+
+      {%- if section.settings.show_mobile_spacing -%}
+          --section-gap-top-mobile: {{ section.settings.margin-top-mobile }}px;
+      {%- endif -%}
+
+      {%- if section.settings.show_mobile_spacing -%}
+          --section-gap-bottom-mobile: {{ section.settings.margin-bottom-mobile }}px;
+      {%- endif -%}
   }
 </style>
 
-<div class="wt-button" data-section-id="{{ section.id }}">
-  <div class="wt-button__container {% if settings.animations %} scroll-trigger animate--slide-in {% endif %} {% if settings.disabled_animations_on_mobile %} disabled-on-mobile {% endif %} {% if section.settings.button_horizontal_position == 'left' %} wt-button__left {% endif %}{% if section.settings.button_horizontal_position == 'right' %} wt-button__right {% endif %}">
-    <a href="{{ section.settings.button_link }}" class="test-1" tabindex="-1">
-      <button
-        aria-label="{{ section.settings.button_label }}"
-        class="hero__button--primary {% if section.settings.button_select != 'primary' %} hero__button--secondary {% endif %}{% if section.settings.button_select == 'link' %} hero__button--link {% endif %} form__send__button wt-contact__form__send--{{ section.settings.button_select }}"
-        type="submit"
-        name="commit"
-      >
+<div class="wt-button-section" data-section-id="{{ section.id }}">
+  <div class="wt-button-section__container {% if settings.animations %} scroll-trigger animate--slide-in {% endif %} {% if settings.disabled_animations_on_mobile %} disabled-on-mobile {% endif %} {% if section.settings.button_horizontal_position == 'left' %} wt-button-section__left {% endif %}{% if section.settings.button_horizontal_position == 'right' %} wt-button-section__right {% endif %}">
+    <div class="hero__button--gap">
+      <a href="{{ section.settings.button_link }}"
+         role="button"
+         class="wt-button hero__button--primary {% if section.settings.button_select != 'primary' %} hero__button--secondary {% endif %}{% if section.settings.button_select == 'link' %} hero__button--link {% endif %} form__send__button wt-contact__form__send--{{ section.settings.button_select }}{% if section.settings.disable_on_mobile %} hero__button--mobile{% endif %}"
+         aria-label="{{ section.settings.button_label }}: {{ section.settings.button_link | split: '/' | last | replace: '-', ' ' | capitalize }}"
+         {% if section.settings.button_link_in_new_window %}target="_blank" rel="noreferrer noopener"{% endif %}>
         <span class="wt-newsletter__send__text">{{ section.settings.button_label }}</span>
-      </button>
-    </a>
+        <span class="visually-hidden">: {{ section.settings.button_link | split: '/' | last | replace: '-', ' ' | capitalize }}</span>
+      </a>
+
+      {% if section.settings.second_button_link and section.settings.second_button_label != blank %}
+        <a href="{{ section.settings.second_button_link }}"
+           role="button"
+           class="wt-button hero__button--primary {% if section.settings.second_button_select != 'primary' %} hero__button--secondary {% endif %}{% if section.settings.second_button_select == 'link' %} hero__button--link {% endif %} form__send__button wt-contact__form__send--{{ section.settings.second_button_select }}{% if section.settings.second_disable_on_mobile %} hero__button--mobile{% endif %}"
+           aria-label="{{ section.settings.second_button_label }}: {{ section.settings.second_button_link | split: '/' | last | replace: '-', ' ' | capitalize }}"
+           {% if section.settings.second_button_link_in_new_window %}target="_blank" rel="noreferrer noopener"{% endif %}>
+          <span class="wt-newsletter__send__text">{{ section.settings.second_button_label }}</span>
+          <span class="visually-hidden">: {{ section.settings.second_button_link | split: '/' | last | replace: '-', ' ' | capitalize }}</span>
+        </a>
+      {% endif %}
+    </div>
   </div>
 </div>
 
@@ -37,26 +56,6 @@
   "name": "t:sections.button.name",
   "tag": "section",
   "settings": [
-    {
-      "type": "select",
-      "id": "button_select",
-      "options": [
-        {
-          "value": "primary",
-          "label": "t:sections.settings.settings.button_select.primary.label"
-        },
-        {
-          "value": "secondary",
-          "label": "t:sections.settings.settings.button_select.secondary.label"
-        },
-        {
-          "value": "link",
-          "label": "t:sections.settings.settings.button_select.link.label"
-        }
-      ],
-      "default": "primary",
-      "label": "t:sections.settings.settings.button_select.default.label"
-    },
     {
       "type": "select",
       "id": "button_horizontal_position",
@@ -78,15 +77,98 @@
       "label": "t:sections.button.settings.button_horizontal_position.default.label"
     },
     {
+      "type": "header",
+      "content": "t:sections.global.button_1"
+    },
+    {
+      "type": "select",
+      "id": "button_select",
+      "options": [
+        {
+          "value": "primary",
+          "label": "t:sections.settings.settings.button_select.primary.label"
+        },
+        {
+          "value": "secondary",
+          "label": "t:sections.settings.settings.button_select.secondary.label"
+        },
+        {
+          "value": "link",
+          "label": "t:sections.settings.settings.button_select.link.label"
+        }
+      ],
+      "default": "primary",
+      "label": "t:sections.settings.settings.button_select.default.label"
+    },
+    {
       "id": "button_label",
       "type": "text",
       "default": "Button label",
       "label": "t:sections.settings.settings.button_label.label"
     },
     {
+      "type": "checkbox",
+      "id": "disable_on_mobile",
+      "label": "t:sections.global.disable_on_mobile",
+      "default": false
+    },
+    {
       "type": "url",
       "id": "button_link",
       "label": "t:sections.settings.settings.link.label"
+    },
+    {
+      "type": "checkbox",
+      "id": "button_link_in_new_window",
+      "label": "t:sections.global.button_link_in_new_window",
+      "default": false
+    },
+    {
+      "type": "header",
+      "content": "t:sections.global.button_2"
+    },
+    {
+      "type": "select",
+      "id": "second_button_select",
+      "options": [
+        {
+          "value": "primary",
+          "label": "t:sections.settings.settings.button_select.primary.label"
+        },
+        {
+          "value": "secondary",
+          "label": "t:sections.settings.settings.button_select.secondary.label"
+        },
+        {
+          "value": "link",
+          "label": "t:sections.settings.settings.button_select.link.label"
+        }
+      ],
+      "default": "primary",
+      "label": "t:sections.settings.settings.button_select.default.label"
+    },
+    {
+      "id": "second_button_label",
+      "type": "text",
+      "default": "Button label",
+      "label": "t:sections.settings.settings.button_label.label"
+    },
+    {
+      "type": "checkbox",
+      "id": "second_disable_on_mobile",
+      "label": "t:sections.global.disable_on_mobile",
+      "default": false
+    },
+    {
+      "type": "url",
+      "id": "second_button_link",
+      "label": "t:sections.settings.settings.link.label"
+    },
+    {
+      "type": "checkbox",
+      "id": "second_button_link_in_new_window",
+      "label": "t:sections.global.button_link_in_new_window",
+      "default": false
     },
     {
       "type": "header",
@@ -114,6 +196,33 @@
       "info": "t:sections.separator.settings.separator-bottom.info"
     },
     {
+      "type": "checkbox",
+      "id": "show_mobile_spacing",
+      "label": "t:sections.settings.settings.show-mobile-spacing.label"
+    },
+    {
+      "type": "range",
+      "id": "margin-top-mobile",
+      "min": 0,
+      "max": 100,
+      "step": 2,
+      "default": 20,
+      "unit": "px",
+      "label": "t:sections.settings.settings.distance-top-mobile.label",
+      "visible_if": "{{ section.settings.show_mobile_spacing }}"
+    },
+    {
+      "type": "range",
+      "id": "margin-bottom-mobile",
+      "min": 0,
+      "max": 100,
+      "step": 2,
+      "default": 20,
+      "unit": "px",
+      "label": "t:sections.settings.settings.distance-bottom-mobile.label",
+      "visible_if": "{{ section.settings.show_mobile_spacing }}"
+    },
+    {
       "type": "header",
       "content": "t:sections.global.colors",
       "info": "t:sections.global.colors-info"
@@ -121,13 +230,13 @@
     {
       "type": "color",
       "id": "background_color",
-      "default": "transparent",
       "label": "t:sections.settings.settings.background-color.label"
     }    
   ],
   "presets": [
     {
-      "name": "t:sections.button.presets.name"
+      "name": "t:sections.button.name",
+      "category": "t:sections.categories.other",
     }
   ],
   "disabled_on": {

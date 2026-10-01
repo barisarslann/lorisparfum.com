@@ -1,0 +1,269 @@
+{%- assign panel_text_rgb = block.settings.color_body_text | color_to_rgb -%}
+{%- assign panel_bg_rgb = block.settings.background_color | color_to_rgb -%}
+{%- assign panel_border_rgb = block.settings.border_color | color_to_rgb -%}
+{%- assign panel_placeholder_rgb = block.settings.placeholder_color | color_to_rgb -%}
+{%- if block.settings.border_color != blank and block.settings.border_color != 'transparent' and panel_border_rgb != 'rgba(0, 0, 0, 0.0)' -%}
+  {%- assign placeholder_fallback_rgb = block.settings.border_color | color_to_rgb | remove: 'rgb(' | remove: ')' -%}
+{%- else -%}
+  {%- assign placeholder_fallback_rgb = settings['color-border'] | color_to_rgb | remove: 'rgb(' | remove: ')' -%}
+{%- endif -%}
+<style>
+  [data-block-id="{{ block.id }}"] .headline__title {
+    --font-headline-scale-desk: {{ block.settings.size_heading | divided_by: 100.0 }};
+    --font-headline-scale: {{ block.settings.size_heading_mobile | divided_by: 100.0 }};
+  }
+  [data-block-id="{{ block.id }}"] .wt-bundle__header,
+  [data-block-id="{{ block.id }}"] .wt-bundle__collapsible-text,
+  [data-block-id="{{ block.id }}"] .wt-bundle__body-text {
+    text-align: {{ block.settings.header_alignment }};
+  }
+  [data-section-id="{{ section.id }}"] .wt-bundle__panel {
+    {% if block.settings.background_color != blank and block.settings.background_color != 'transparent' and panel_bg_rgb != 'rgba(0, 0, 0, 0.0)' %}
+      --bundle-panel-bg: {{ block.settings.background_color | color_to_rgb | remove: 'rgb(' | remove: ')' }};
+    {% else %}
+      --bundle-panel-bg: {{ settings['color-background'] | color_to_rgb | remove: 'rgb(' | remove: ')' }};
+    {% endif %}
+    --bundle-panel-bg-opacity: {{ block.settings.panel_bg_opacity | divided_by: 100.0 }};
+    --bundle-panel-bg-blur: {{ block.settings.panel_bg_blur }}px;
+  }
+  {% if block.settings.background_color != blank and block.settings.background_color != 'transparent' and panel_bg_rgb != 'rgba(0, 0, 0, 0.0)' %}
+  [data-section-id="{{ section.id }}"] .wt-bundle__panel {
+    --color-background: {{ block.settings.background_color }};
+  }
+  {% endif %}
+  {% if block.settings.color_body_text != blank and block.settings.color_body_text != 'transparent' and panel_text_rgb != 'rgba(0, 0, 0, 0.0)' %}
+  [data-section-id="{{ section.id }}"] .wt-bundle__panel {
+    --color-custom-text: {{ block.settings.color_body_text }};
+    color: {{ block.settings.color_body_text }};
+  }
+  {% endif %}
+  {% if block.settings.border_color != blank and block.settings.border_color != 'transparent' and panel_border_rgb != 'rgba(0, 0, 0, 0.0)' %}
+  [data-section-id="{{ section.id }}"] .wt-bundle__panel {
+    --bundle-border-color: {{ block.settings.border_color }};
+  }
+  {% endif %}
+  {% if block.settings.placeholder_color != blank and block.settings.placeholder_color != 'transparent' and panel_placeholder_rgb != 'rgba(0, 0, 0, 0.0)' %}
+  [data-section-id="{{ section.id }}"] .wt-bundle__panel {
+    --bundle-placeholder-color: {{ block.settings.placeholder_color }};
+  }
+  {% else %}
+  [data-section-id="{{ section.id }}"] .wt-bundle__panel {
+    --bundle-placeholder-color: rgba({{ placeholder_fallback_rgb }}, 0.6);
+  }
+  {% endif %}
+</style>
+
+<div
+    data-bundle-panel="{{ block.id }}"
+    data-block-id="{{ block.id }}"
+>
+<div class="wt-bundle__header">
+  <div class="wt-bundle__header-content">
+    <div class="wt-bundle__header-title">
+      {% if block.settings.heading != blank %}
+        <div class="headline__title">{{ block.settings.heading }}<span class="wt-bundle__count" data-bundle-count></span></div>
+      {% elsif block.settings.text != blank %}
+        {{ block.settings.text }}<span class="wt-bundle__count" data-bundle-count></span>
+      {% endif %}
+    </div>
+  </div>
+  <button class="wt-bundle__toggle" type="button" aria-expanded="false" aria-label="{{ 'sections.bundle-builder.toggle' | t }}">
+    {%- render 'icons', id: 'plus' -%}
+  </button>
+</div>
+
+<div class="wt-bundle__collapsible-text" data-bundle-info {% if block.settings.heading == blank or block.settings.text == blank %}hidden{% endif %}>
+  {% if block.settings.heading != blank and block.settings.text != blank %}
+    <div data-bundle-text>{{ block.settings.text }}</div>
+  {% endif %}
+  <span data-bundle-status-discount hidden>{{ 'sections.bundle-builder.status.discount' | t }}</span>
+  <span data-bundle-status-more hidden>{{ 'sections.bundle-builder.status.add_more' | t }}</span>
+</div>
+
+{% if block.settings.enable_progress_bar %}
+  <div class="wt-bundle__progress" data-bundle-progress>
+    <div class="wt-bundle__progress-bar">
+      <div class="wt-bundle__progress-fill" data-bundle-progress-fill></div>
+    </div>
+  </div>
+{% endif %}
+
+<div class="wt-bundle__collapsible">
+  <div class="wt-bundle__collapsible-inner">
+    <div class="wt-bundle__bundle" data-bundle-max="{{ section.settings.max_size }}" data-bundle-min="{{ section.settings.min_size }}">
+    {% for i in (1..section.settings.max_size) %}
+      <div class="wt-bundle__placeholder">
+            <div class="wt-bundle__placeholder--image"></div>
+            <div class="wt-bundle__placeholder--description">
+                <div class="wt-bundle__placeholder--title"></div>
+                <div class="wt-bundle__placeholder--options"></div>
+                <div class="wt-bundle__placeholder--discount wt-cart__item-discount"></div>
+                <div class="wt-bundle__placeholder--subtitle"></div>
+            </div>
+            <button class="wt-bundle__placeholder--remove" aria-label="{{ 'sections.bundle-builder.remove_item' | t }}" type="button">
+              {%- render 'icons', id: 'bin' -%}
+            </button>
+      </div>
+    {% endfor %}
+    </div>
+
+    <template id="bundle-discount-icon">{%- render 'icon-discount' -%}</template>
+
+    <div class="wt-bundle__footer">
+      <div class="wt-bundle__total">
+        <span>{{ 'sections.cart.headings.total' | t }}</span>
+        <span data-bundle-total></span>
+      </div>
+      <button
+        class="wt-bundle__cta wt-button hero__button hero__button--primary{% if block.settings.button_select == 'secondary' %} hero__button--secondary{% endif %}"
+        data-bundle-cta
+        type="button"
+        disabled
+      >
+        <span>{{ 'products.product.add_to_cart' | t }}</span>
+        {%- render 'button-loading-indicator' -%}
+      </button>
+      <div class="product-form__error-message-wrapper" data-bundle-error role="alert" hidden>
+        {% render 'icon-error' %}
+        <span class="product-form__error-message"></span>
+      </div>
+    </div>
+
+    {% if block.settings.body_text != blank %}
+      <div class="wt-bundle__body-text rte">
+        <div class="wt-bundle__body-text-inner">{{ block.settings.body_text }}</div>
+      </div>
+    {% endif %}
+  </div>
+</div>
+</div>
+
+{% schema %}
+{
+    "name": "t:sections.bundle-builder-panel.name",
+    "class": "wt-bundle__panel",
+    "settings": [
+        {
+            "type": "inline_richtext",
+            "id": "heading",
+            "label": "t:sections.settings.settings.heading.label",
+            "default": "Build your bundle"
+        },
+        {
+            "type": "range",
+            "id": "size_heading",
+            "min": 50,
+            "max": 300,
+            "step": 10,
+            "default": 100,
+            "unit": "%",
+            "label": "t:sections.settings.settings.size-heading.label"
+        },
+        {
+            "type": "range",
+            "id": "size_heading_mobile",
+            "min": 80,
+            "max": 300,
+            "step": 10,
+            "default": 100,
+            "unit": "%",
+            "label": "t:sections.settings.settings.size-heading-mobile.label"
+        },
+        {
+            "type": "richtext",
+            "id": "text",
+            "label": "t:blocks.bundle-builder-panel.settings.text.label",
+            "default": "<p>Buy min. 2 products and save 10%</p>"
+        },
+        {
+            "type": "checkbox",
+            "id": "enable_progress_bar",
+            "label": "t:sections.bundle-builder-panel.settings.enable_progress_bar.label",
+            "default": true
+        },
+        {
+            "type": "select",
+            "id": "button_select",
+            "options": [
+                {
+                    "value": "primary",
+                    "label": "t:sections.settings.settings.button_select.primary.label"
+                },
+                {
+                    "value": "secondary",
+                    "label": "t:sections.settings.settings.button_select.secondary.label"
+                }
+            ],
+            "default": "primary",
+            "label": "t:sections.bundle-builder-panel.settings.button_select.label"
+        },
+        {
+            "type": "richtext",
+            "id": "body_text",
+            "label": "t:sections.bundle-builder-panel.settings.body_text.label"
+        },
+        {
+            "type": "select",
+            "id": "header_alignment",
+            "options": [
+                {
+                    "value": "left",
+                    "label": "t:sections.multicolumn.settings.column_alignment.options__1.label"
+                },
+                {
+                    "value": "center",
+                    "label": "t:sections.multicolumn.settings.column_alignment.options__2.label"
+                }
+            ],
+            "default": "left",
+            "label": "t:sections.multicolumn.settings.column_alignment.label"
+        },
+        {
+            "type": "header",
+            "content": "t:sections.global.colors",
+        },
+        {
+            "type": "color",
+            "id": "color_body_text",
+            "label": "t:sections.settings.settings.text-color.label"
+        },
+        {
+            "type": "color",
+            "id": "background_color",
+            "label": "t:sections.settings.settings.background-color.label"
+        },
+        {
+            "type": "range",
+            "id": "panel_bg_opacity",
+            "label": "t:sections.bundle-builder-panel.settings.panel_bg_opacity.label",
+            "info": "t:sections.bundle-builder-panel.settings.panel_bg_opacity.info",
+            "min": 0,
+            "max": 100,
+            "step": 1,
+            "unit": "%",
+            "default": 100
+        },
+        {
+            "type": "range",
+            "id": "panel_bg_blur",
+            "label": "t:sections.bundle-builder-panel.settings.panel_bg_blur.label",
+            "info": "t:sections.bundle-builder-panel.settings.panel_bg_blur.info",
+            "min": 0,
+            "max": 35,
+            "step": 1,
+            "unit": "px",
+            "default": 0
+        },
+        {
+            "type": "color",
+            "id": "border_color",
+            "label": "t:sections.bundle-builder-panel.settings.border_color.label"
+        },
+        {
+            "type": "color",
+            "id": "placeholder_color",
+            "label": "t:sections.bundle-builder-panel.settings.placeholder_color.label"
+        },
+    ]
+}
+{% endschema %}

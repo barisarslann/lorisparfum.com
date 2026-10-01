@@ -7,6 +7,9 @@ class PageHeaderSection extends HTMLElement {
     this.isTransparent = this.dataset.transparent === "true";
     this.isAlwaysMobileMenu = this.dataset.alwaysMobileMenu === "true";
 
+    // Optional CSS selector for the section over which the header should hide
+    this.hideOverSelector = this.dataset.hideOverSelector || null;
+
     this.classBodyAlwaysMobileMenu = "mobile-nav";
 
     this.header = document.querySelector(".page-header");
@@ -21,14 +24,136 @@ class PageHeaderSection extends HTMLElement {
   }
 
   connectedCallback() {
+    this._onSignedOutTextClick = () => {
+      document.querySelector(".signed-out-avatar-menu")?.click();
+    };
+    document.querySelector(".signed-out-text")?.addEventListener("click", this._onSignedOutTextClick);
+
+    if (window.Shopify?.designMode) {
+      this._onSectionLoad = () => this.captureSearchGutter();
+      document.addEventListener("shopify:section:load", this._onSectionLoad);
+    }
+
     this.init();
   }
 
   disconnectedCallback() {
     this.disableStickyHeader();
+    document.querySelector(".signed-out-text")?.removeEventListener("click", this._onSignedOutTextClick);
+    if (this._onSectionLoad) {
+      document.removeEventListener("shopify:section:load", this._onSectionLoad);
+      this._onSectionLoad = null;
+    }
   }
 
-  enbleStickyHeader() {
+  getHeaderHeight() {
+    return this.header ? this.header.offsetHeight : 0;
+  }
+
+  /** Returns the target element for the hide-over behavior (if any). */
+  getHideOverTarget() {
+    if (!this.hideOverSelector) return null;
+    if (this._hideOverTarget && document.body.contains(this._hideOverTarget)) {
+      return this._hideOverTarget;
+    }
+    this._hideOverTarget =
+      document.querySelector(this.hideOverSelector) || null;
+    return this._hideOverTarget;
+  }
+
+  /**
+   * Should the sticky header be hidden because its bottom edge reached
+   * the target section's top edge?
+   *
+   * Geometry reference (viewport coordinates):
+   * - header top: usually 0 when sticky is shown
+   * - header bottom: header.offsetHeight
+   * - section top: target.getBoundingClientRect().top
+   *
+   * We hide when sectionTop <= headerBottom.
+   */
+  shouldHideOverSection() {
+    const target = this.getHideOverTarget();
+    if (!target || !this.header) return false;
+
+    const rect = target.getBoundingClientRect();
+    const headerH = this.getHeaderHeight();
+
+    // Small hysteresis to avoid flicker on exact boundary (in px)
+    const EPS = 1;
+
+    // True when the section intersects with the header band [0, headerH)
+    // i.e. sectionTop < headerBottom && sectionBottom > 0
+    const overlapsHeaderBand = rect.top < headerH - EPS && rect.bottom > EPS;
+
+    return overlapsHeaderBand;
+  }
+
+  /** Attach / detach a lightweight resize handler to keep things in sync. */
+  attachResizeHandler() {
+    // Re-run calculations on resize; cheap logic, no throttling needed here
+    this._onResize = () => {
+      // Re-capture the natural header height for option_1 mobile (no-op
+      // when sticky is already engaged so we don't grab the compact height).
+      this.setNaturalHeaderHeight();
+      // Force potential reflow-based checks in next scroll tick
+      // so currentScrollPos logic stays consistent.
+      this.scrollHandler?.();
+    };
+    window.addEventListener("resize", this._onResize, { passive: true });
+  }
+
+  detachResizeHandler() {
+    if (this._onResize) {
+      window.removeEventListener("resize", this._onResize);
+      this._onResize = null;
+    }
+  }
+
+  /**
+   * Capture the header's natural (non-sticky) offsetHeight into the
+   * --header-natural-height CSS variable on documentElement. Used by
+   * option_1 mobile to pad <main> when the header switches to
+   * position: fixed once sticky engages — the padding is the constant
+   * natural height, so content doesn't reflow when compact mode collapses
+   * the header inside the fixed area.
+   *
+   * Only writes when .sticky-enabled is NOT on the header, otherwise we'd
+   * capture the smaller compact height and content would shift.
+   */
+  setNaturalHeaderHeight() {
+    if (!this.header) return;
+    if (this.header.classList.contains(this.enabledClass)) return;
+    document.documentElement.style.setProperty(
+      "--header-natural-height",
+      `${this.header.offsetHeight}px`,
+    );
+
+    this.captureSearchGutter();
+  }
+
+
+  captureSearchGutter() {
+    if (!this.classList.contains("wt-header--v1")) return;
+    if (!window.matchMedia("(min-width: 1200px)").matches) return;
+
+    const headerSearchEl = document.querySelector(".wt-header__search");
+    if (!headerSearchEl) return;
+
+    document.documentElement.style.removeProperty("--header-search-margin-right");
+
+    requestAnimationFrame(() => {
+      const marginRight = window.getComputedStyle(headerSearchEl).marginRight;
+      if (marginRight && marginRight !== "0px") {
+        document.documentElement.style.setProperty(
+          "--header-search-margin-right",
+          marginRight,
+        );
+      }
+    });
+  }
+
+  enableStickyHeader() {
     if (!this.header) {
       console.error("Header element not found for enabling sticky header");
       return;
@@ -49,9 +174,12 @@ class PageHeaderSection extends HTMLElement {
       "a[data-menu-level='1']",
     );
 
+    const header = document.querySelector("#header");
+
     const calculateNavbarTopMargin = () => {
-      const header = document.querySelector("#header");
       const navbar = document.querySelector("#wt-drawer-nav");
+      if (!navbar || !header) return 0;
+
       let marginTop = 0;
 
       if (navbar.offsetHeight > header.offsetHeight) {
@@ -65,7 +193,21 @@ class PageHeaderSection extends HTMLElement {
       return marginTop;
     };
 
+    const calculateStickyFiltersTopOffset = (value = 0) => {
+      const stickyFilters = document.querySelector(
+        ".collection__sticky-header",
+      );
+      const plpWrapper = document.querySelector(".collection-grid-section");
+
+      if (stickyFilters && plpWrapper) {
+        const offset = value ?? `${this.header.offsetHeight}px`;
+        plpWrapper.style.setProperty("--filters-sticky-offset", offset);
+      }
+    };
+
     calculateNavbarTopMargin();
+    calculateStickyFiltersTopOffset();
+    this.setNaturalHeaderHeight();
 
     const stickyHeader = {
       show: () => {
@@ -73,11 +215,13 @@ class PageHeaderSection extends HTMLElement {
         stickyHeader.visible = true;
         stickyHeader.handleBehavior();
         calculateNavbarTopMargin();
+        calculateStickyFiltersTopOffset();
       },
       hide: () => {
         if (this.header) this.header.classList.remove(this.showClass);
         stickyHeader.visible = false;
         stickyHeader.handleBehavior();
+        calculateStickyFiltersTopOffset(0);
       },
       enable: () => {
         if (this.header) this.header.classList.add(this.enabledClass);
@@ -112,23 +256,31 @@ class PageHeaderSection extends HTMLElement {
       log: () => {},
     };
 
-    // Save the scroll handler for later removal
+    // --- Scroll handler with "hide-over-section" override ----------
     this.scrollHandler = () => {
       const currentScrollPos = window.pageYOffset;
-      if (!this.isStickyAlways) {
-        if (prevScrollpos > currentScrollPos) {
-          stickyHeader.show();
-        } else {
-          stickyHeader.hide();
-        }
+
+      // If we're over the target section, force-hide regardless of isStickyAlways.
+      if (this.shouldHideOverSection()) {
+        stickyHeader.hide();
       } else {
-        stickyHeader.show();
+        // Original behavior preserved
+        if (!this.isStickyAlways) {
+          if (prevScrollpos > currentScrollPos) {
+            stickyHeader.show();
+          } else {
+            stickyHeader.hide();
+          }
+        } else {
+          stickyHeader.show();
+        }
       }
 
       prevScrollpos = currentScrollPos;
     };
 
-    window.addEventListener("scroll", this.scrollHandler);
+    window.addEventListener("scroll", this.scrollHandler, { passive: true });
+    this.attachResizeHandler();
 
     this.desktopMenuTrigger?.addEventListener("click", (e) => {
       e.preventDefault();
@@ -156,7 +308,7 @@ class PageHeaderSection extends HTMLElement {
       rootMargin: `${this.isStickyAlways ? "-160" : "-100"}px 0px 0px 0px`,
       threshold: 0,
     });
-    this.stickyHeaderObserver.observe(sentinel);
+    if (sentinel) this.stickyHeaderObserver.observe(sentinel);
   }
 
   disableStickyHeader() {
@@ -180,6 +332,9 @@ class PageHeaderSection extends HTMLElement {
       this.scrollHandler = null;
     }
 
+    // Detach resize handler
+    this.detachResizeHandler();
+
     // Disconnect the IntersectionObserver
     if (this.stickyHeaderObserver) {
       this.stickyHeaderObserver.disconnect();
@@ -189,10 +344,11 @@ class PageHeaderSection extends HTMLElement {
 
   init() {
     if (this.isSticky) {
-      this.enbleStickyHeader();
+      this.enableStickyHeader();
     } else {
       this.disableStickyHeader();
     }
+
   }
 }
 

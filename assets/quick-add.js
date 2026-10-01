@@ -21,14 +21,13 @@ if (!customElements.get("quick-add")) {
         this.add_button = this.querySelector("button");
         this.isDrawerOpen = false;
         this.isMobile = window.innerWidth < 768;
-        if (this.add_button)
+          if (this.add_button)
+            this.add_button.addEventListener("click", (e) => {
+          const button = e.currentTarget;
+          const cardLink = button
+          .closest(".card__picture-container")
+          ?.querySelector("a.card");
           this.product_url = this.add_button.getAttribute("data-product-url");
-        if (this.add_button)
-          this.add_button.addEventListener("click", (e) => {
-            const button = e.currentTarget;
-            const cardLink = button
-              .closest(".card__picture-container")
-              ?.querySelector("a.card");
             this.currentTrigger = cardLink;
             this.fetchProduct(this.product_url);
           });
@@ -136,6 +135,10 @@ if (!customElements.get("quick-add")) {
               element.classList.remove("scroll-trigger", "animate--slide-in"),
             );
 
+            const productGallery =
+            this.productCard.querySelector("gallery-section");
+
+
             this.removeElements(
               this.productCard,
               "collapsible-section",
@@ -146,6 +149,7 @@ if (!customElements.get("quick-add")) {
               "pickup-availability",
               ".wt-product__sku",
               ".wt-product__feature-icons",
+              "gallery-section",
             );
 
             const newVariantId =
@@ -164,8 +168,7 @@ if (!customElements.get("quick-add")) {
               );
             }
 
-            const productGallery =
-              this.productCard.querySelector("gallery-section");
+          
 
             productGallery.style.display = "none";
 
@@ -254,13 +257,40 @@ if (!customElements.get("quick-add")) {
               `product-form-${newVariantId?.getAttribute("data-section")}`,
             );
 
+            const subWidget = this.productCard.querySelector('.wt-subscription-widget');
+            if (subWidget) {
+              const quickSectionId = newVariantId?.getAttribute("data-section");
+              const originalSectionId = newVariantId?.getAttribute("data-original-section");
+              subWidget.setAttribute('data-section-id', quickSectionId);
+              subWidget.setAttribute('data-original-section-id', originalSectionId);
+              subWidget.setAttribute('data-update-url-on-plan-change', 'false');
+
+              const hiddenInput = subWidget.querySelector('input[name="selling_plan"]');
+              if (hiddenInput) {
+                hiddenInput.setAttribute('form', `product-form-${quickSectionId}`);
+              }
+            }
+
             const viewAllDetailsContainer =
               this.quick_add_wrapper.querySelector(
                 ".wt__quick-buy__view-all-container",
               );
-            this.quick_add_wrapper.removeChild(viewAllDetailsContainer);
+            // Detach with .remove() (works whether it sits directly in the wrapper
+            // or was re-homed there after a previous close) instead of removeChild,
+            // which throws if the node isn't a direct child.
+            viewAllDetailsContainer?.remove();
             this.quick_add_wrapper.innerHTML += this.productCard.outerHTML;
-            this.quick_add_wrapper.append(viewAllDetailsContainer);
+
+            if (viewAllDetailsContainer) {
+              const insertedProductInfo = this.quick_add_wrapper.querySelector(
+                ".wt-product__info",
+              );
+              if (insertedProductInfo) {
+                insertedProductInfo.append(viewAllDetailsContainer);
+              } else {
+                this.quick_add_wrapper.append(viewAllDetailsContainer);
+              }
+            }
 
             const giftCardInput = this.quick_add_wrapper.querySelector(
               '[name="properties[__shopify_send_gift_card_to_recipient]"]',
@@ -269,6 +299,15 @@ if (!customElements.get("quick-add")) {
 
             this.addViewAllDetailsButton();
             this.isDrawerOpen = true;
+
+            // Fire the quick-buy drawer–open event
+            publish(PUB_SUB_EVENTS.quickBuyDrawerOpen, { source: "quick-add" });
+
+            // initialize the variant options
+            const variantOptions = this.quick_add_wrapper.querySelector("variant-options");
+            if (variantOptions && typeof variantOptions.initialize === 'function') {
+              variantOptions.initialize();
+            }
 
             this.close_button.setAttribute("tabindex", "0");
             this.close_button.focus();
@@ -285,20 +324,26 @@ if (!customElements.get("quick-add")) {
       }
 
       addViewAllDetailsButton() {
-        const viewAllDetailsContainer = this.quick_add_wrapper.querySelector(
+        const viewAllDetailsContainer = this.quick_add_wrapper?.querySelector(
           ".wt__quick-buy__view-all-container",
         );
-        const link = viewAllDetailsContainer.querySelector("a");
+        const link = viewAllDetailsContainer?.querySelector("a");
+        if (!link) return;
         link.href = this.product_url;
         link.setAttribute("tabindex", "0");
         viewAllDetailsContainer.classList.remove("hidden");
       }
 
       hideViewAllDetailsButton() {
-        const viewAllDetailsContainer = this.quick_add_wrapper.querySelector(
+        const viewAllDetailsContainer = this.quick_add_wrapper?.querySelector(
           ".wt__quick-buy__view-all-container",
         );
+        if (!viewAllDetailsContainer) return;
         viewAllDetailsContainer.classList.add("hidden");
+        // Re-home onto the wrapper before .wt-product is removed on close, so the
+        // container isn't destroyed with it (it gets appended inside .wt-product__info
+        // on open). Without this the next open/close throws on a null container.
+        this.quick_add_wrapper.appendChild(viewAllDetailsContainer);
       }
 
       galleryObserver() {
@@ -383,36 +428,31 @@ if (!customElements.get("quick-add")) {
       }
 
       handleInteractionOutside(event) {
-        // if (this.isDrawerOpen) {
-        //   const clickInsideDrawer = this.quick_add_wrapper.contains(
-        //     event.target,
-        //   );
-        //   const clickCloseBtn = document
-        //     .querySelector(".icon.icon-close")
-        //     .contains(event.target);
-        //     console.log(event.target, this.page_overlay)
-        //   if (!clickInsideDrawer || clickCloseBtn) {
-        //     this.closeCart();
-        //   }
-
-        // }
         if (this.isDrawerOpen && event.target === this.page_overlay) {
           this.closeCart();
         }
       }
 
       closeCart() {
+        // Fire the quick-buy drawer–close event
+        publish(PUB_SUB_EVENTS.quickBuyDrawerClose, { source: "quick-add" });
+
         const loader = this.quick_add.querySelector(".wt__quick-buy-loader");
         loader.classList.remove("hidden");
+        // Rescue the view-all container onto the wrapper BEFORE removing .wt-product,
+        // otherwise it is destroyed together with the product it was appended into
+        // (which then throws on this and the next open/close).
+        this.hideViewAllDetailsButton();
         const product = this.quick_add.querySelector(".wt-product");
+
         if (product) product.remove();
+
         this.body.classList.remove("quick-buy-page-overlay");
         this.page_overlay.classList.remove("wt__quick-buy--page-overlay--open");
         this.quick_add_container.classList.remove(
           "wt__quick-buy__container--open",
         );
         this.isDrawerOpen = false;
-        this.hideViewAllDetailsButton();
         document.removeEventListener("click", this.handleInteractionOutside);
         this.disconnectObserver();
         this.removeButtonEventListener();

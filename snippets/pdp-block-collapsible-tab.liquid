@@ -1,0 +1,70 @@
+{% comment %}
+  Params: block, section, product
+{% endcomment %}
+{%- assign has_variant_metafields = false -%}
+{%- if block.settings.metafield_variables.size > 0 -%}
+  {%- assign has_variant_metafields = true -%}
+{%- endif -%}
+
+{% if block.settings.heading != blank or block.settings.content != blank or request.design_mode %}
+  <collapsible-section
+    class="wt-collapse wt-collapse--always{% if settings.animations %} scroll-trigger animate--slide-in{% endif %}{% if settings.disabled_animations_on_mobile %} disabled-on-mobile{% endif %}"
+    data-block-id="{{ block.id }}"
+    data-toggle-tabindex="button, [href], input, select"
+    {%- if has_variant_metafields -%}data-has-variant-metafields{%- endif -%}
+  >
+    <div
+      class="wt-collapse__trigger{% if block.settings.open_by_default %} wt-collapse__trigger--active{% endif %}"
+      role="button"
+      tabindex="0"
+      data-open="{{ block.settings.open_by_default }}"
+      aria-expanded="{{ block.settings.open_by_default }}"
+      aria-controls="CollapsibleTab-{{ block.id }}"
+    >
+      <div class="wt-collapse__trigger__text{% if block.settings.icon_image != blank %} wt-collapse__trigger__text--has-icon-image{% endif %}">
+        {% if block.settings.icon_image != blank %}
+          <div class="wt-collapse__trigger__icon">
+            {% render 'responsive-icon-image',
+              image: block.settings.icon_image,
+              height_desktop: block.settings.icon_height_desktop,
+              height_mobile: block.settings.icon_height,
+              class: 'hero__icon'
+            %}
+          </div>
+        {% elsif block.settings.icon != 'none' %}
+          <div class="wt-collapse__trigger__icon">
+            {% render 'icons', id: block.settings.icon, icon_class: 'hero__icon' %}
+          </div>
+        {% endif %}
+        <span class="wt-collapse__trigger__title">
+          {{- block.settings.heading | default: block.settings.page.title -}}
+        </span>
+      </div>
+      <div class="wt-icon" aria-hidden="true">
+        {% render 'icons', id: 'plus' %}
+      </div>
+    </div>
+    <div class="wt-collapse__target" id="CollapsibleTab-{{ block.id }}">
+      <div class="wt-collapse__target--text" data-block-id-for-variant-metafield="{{ block.id }}">
+        <div class="wt-collapse__target__content rte">
+          {% if has_variant_metafields %}
+            {% assign variables = block.settings.metafield_variables
+              | downcase
+              | newline_to_br
+              | split: '<br />'
+            %}
+            {% render 'collapsible-data',
+              variables: variables,
+              content: block.settings.content,
+              product: product,
+              variant: product.selected_or_first_available_variant
+            %}
+          {% else %}
+            {{ block.settings.content }}
+          {% endif %}
+          {{ block.settings.page.content }}
+        </div>
+      </div>
+    </div>
+  </collapsible-section>
+{% endif %}

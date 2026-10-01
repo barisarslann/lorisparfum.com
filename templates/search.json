@@ -21,7 +21,6 @@
         "image_ratio": "square",
         "show_secondary_image": false,
         "show_vendor": true,
-        "show_product_rating": false,
         "enable_sorting": true,
         "enable_filtering": true,
         "filter_position": "drawer",

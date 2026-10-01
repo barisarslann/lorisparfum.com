@@ -1,0 +1,492 @@
+{{ 'section-timeline.css' | asset_url | stylesheet_tag }}
+
+{% assign background_rgb = section.settings['color-overlay'] | color_to_rgb %}
+{% assign text_rgb = section.settings['color-body-text'] | color_to_rgb %}
+{% assign heading_rgb = section.settings['color-body-heading'] | color_to_rgb %}
+{% assign progress_active_rgb = section.settings['color-progress-active'] | color_to_rgb %}
+{% assign progress_inactive_rgb = section.settings['color-progress-inactive'] | color_to_rgb %}
+
+<style>
+  section[id="shopify-section-{{ section.id }}"] {
+    {% if section.settings.margin-top %}
+      --section-margin-block-mobile: {{ section.settings.margin-top }}px;
+      --section-gap-top: {{ section.settings.margin-top }}px;
+    {% endif %}
+
+    {% if section.settings.margin-bottom %}
+      --section-margin-block-mobile: {{ section.settings.margin-bottom }}px;
+      --section-gap-bottom: {{ section.settings.margin-bottom }}px;
+    {% endif %}
+
+      {%- if section.settings.show_mobile_spacing -%}
+          --section-gap-top-mobile: {{ section.settings.margin-top-mobile }}px;
+      {%- endif -%}
+
+      {%- if section.settings.show_mobile_spacing -%}
+          --section-gap-bottom-mobile: {{ section.settings.margin-bottom-mobile }}px;
+      {%- endif -%}
+
+    {%- if section.settings['color-overlay'] != blank and section.settings['color-overlay'] != 'transparent' and background_rgb != 'rgba(0, 0, 0, 0.0)' -%}
+      --color-overlay-rgb: {{ section.settings['color-overlay'] | color_to_rgb | remove: 'rgb(' | remove: ')' }};
+      --color-overlay-opacity: {{ section.settings['color-overlay-opacity'] | divided_by: 100.0 }};
+    {%- endif -%}
+
+    {% if section.settings['color-body-text'] != blank and section.settings['color-body-text'] != 'transparent' and text_rgb != 'rgba(0, 0, 0, 0.0)' %}
+      --color-custom-text: {{ section.settings['color-body-text'] }};
+    {% endif %}
+
+    {% if section.settings['color-progress-active'] != blank and section.settings['color-progress-active'] != 'transparent' and progress_active_rgb != 'rgba(0, 0, 0, 0.0)' %}
+      --color-timeline-progress-active: {{ section.settings['color-progress-active'] }};
+    {% endif %}
+
+    {% if section.settings['color-progress-inactive'] != blank and section.settings['color-progress-inactive'] != 'transparent' and progress_inactive_rgb != 'rgba(0, 0, 0, 0.0)' %}
+      --color-timeline-progress-inactive: {{ section.settings['color-progress-inactive'] }};
+    {% endif %}
+
+    --timeline-gap-mobile: {{ section.settings.gap_mobile }}px;
+    --timeline-gap-desktop: {{ section.settings.gap_desktop }}px;
+    --timeline-max-block-width: {{ section.settings.max_block_width }}px;
+    --timeline-time-heading-scale: {{ section.settings.time_heading_scale_mobile | divided_by: 100.0 }};
+    --timeline-time-heading-scale-desk: {{ section.settings.time_heading_scale_desktop | divided_by: 100.0 }};
+    --timeline-heading-scale: {{ section.settings.heading_scale_mobile | divided_by: 100.0 }};
+    --timeline-heading-scale-desk: {{ section.settings.heading_scale_desktop | divided_by: 100.0 }};
+
+    {% if section.settings.text_style == 'headline' %}
+      --timeline-content-font: var(--font-headline);
+    {% else %}
+      --timeline-content-font: var(--font-base);
+    {% endif %}
+
+    .headline__title,
+    .headline {
+      {%- if section.settings['color-body-heading'] != blank and section.settings['color-body-heading'] != 'transparent' and heading_rgb != 'rgba(0, 0, 0, 0.0)' -%}
+        --color-custom-text: {{ section.settings['color-body-heading'] }};
+      {%- endif -%}
+    }
+  }
+
+  {%- for block in section.blocks -%}
+    {%- assign block_heading_rgb = block.settings.heading_color | color_to_rgb -%}
+    [data-block-id="{{ block.id }}"] {
+      {%- if block.settings.heading_color != blank and block.settings.heading_color != 'transparent' and block_heading_rgb != 'rgba(0, 0, 0, 0.0)' -%}
+        --heading-color: {{ block.settings.heading_color }};
+      {%- endif -%}
+      {%- if block.settings.time_heading_text_style == 'headline' -%}
+        --timeline-time-font: var(--font-headline);
+      {%- else -%}
+        --timeline-time-font: var(--font-base);
+      {%- endif -%}
+      {%- if block.settings.heading_text_style == 'headline' -%}
+        --timeline-heading-font: var(--font-headline);
+      {%- else -%}
+        --timeline-heading-font: var(--font-base);
+      {%- endif -%}
+    }
+  {%- endfor -%}
+</style>
+
+{% if section.settings['full-width-enabled'] %}
+  {% assign customwrapperclass = 'hero__wrapper--full' %}
+{% else %}
+  {% assign customwrapperclass = 'hero__wrapper' %}
+{% endif %}
+
+<script src="{{ 'drawer-content.js' | asset_url }}" defer="defer"></script>
+<script src="{{ 'section-timeline.js' | asset_url }}" defer="defer"></script>
+<wt-drawer-content></wt-drawer-content>
+
+<timeline-section class="wt-timeline {{ customwrapperclass }}" data-section-id="{{ section.id }}">
+
+  {% if section.settings.heading_richtext != blank %}
+    <div class="headline headline--rich {% if settings.animations %} scroll-trigger animate--slide-in {% endif %} {% if settings.disabled_animations_on_mobile %} disabled-on-mobile {% endif %}">
+      {{ section.settings.heading_richtext }}
+    </div>
+  {% endif %}
+
+  <div class="wt-timeline__track">
+    <div class="wt-timeline__line--full" aria-hidden="true"></div>
+    <div class="wt-timeline__line--progress" aria-hidden="true" data-timeline-progress></div>
+    <div class="wt-timeline__list">
+      {% for block in section.blocks %}
+        <div class="wt-timeline__item{% if block.settings.reversed %} wt-timeline__item--reversed{% endif %}" data-block-id="{{ block.id }}" {{ block.shopify_attributes }}>
+          <div class="wt-timeline__dot" aria-hidden="true">
+            {% if section.settings.icon != blank %}
+              {{
+                section.settings.icon
+                | image_url: width: 64
+                | image_tag:
+                  loading: 'lazy',
+                  widths: '32, 48, 64',
+                  class: 'wt-timeline__dot-icon'
+              }}
+            {% endif %}
+          </div>
+          {% if block.settings.time_heading != blank %}
+            <div class="wt-timeline__time">
+              <div class="wt-timeline__time-inner">{{ block.settings.time_heading }}</div>
+            </div>
+          {% endif %}
+          <div class="wt-timeline__content">
+            <div class="wt-timeline__content-inner">
+              {% if block.settings.show_image %}
+                <div class="wt-timeline__image-wrap">
+                  {% if block.settings.image != blank %}
+                    {{
+                      block.settings.image
+                      | image_url: width: 1200
+                      | image_tag:
+                        loading: 'lazy',
+                        widths: '375, 550, 750, 1100, 1200',
+                        sizes: '(min-width: 990px) 50vw, 100vw',
+                        class: 'wt-timeline__img'
+                    }}
+                  {% else %}
+                    {{ 'detailed-apparel-1' | placeholder_svg_tag: 'wt-timeline__img wt-timeline__img--placeholder' }}
+                  {% endif %}
+                </div>
+              {% endif %}
+              {% if block.settings.heading != blank %}
+                <h2 class="wt-timeline__heading">{{ block.settings.heading }}</h2>
+              {% endif %}
+              {% if block.settings.content != blank %}
+                <div class="wt-timeline__body rte">{{ block.settings.content }}</div>
+              {% endif %}
+            </div>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+</timeline-section>
+
+{% schema %}
+{
+  "name": "t:sections.timeline.name",
+  "tag": "section",
+  "class": "wt-shopify-section",
+  "settings": [
+    {
+      "type": "paragraph",
+      "content": "t:sections.timeline.settings.support_info.content"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.global.general"
+    },
+    {
+      "type": "richtext",
+      "id": "heading_richtext",
+      "label": "t:sections.settings.settings.heading.label",
+      "default": "<h2>Timeline</h2>"
+    },
+    {
+      "type": "image_picker",
+      "id": "icon",
+      "label": "t:sections.timeline.settings.icon.label",
+      "info": "t:sections.timeline.settings.icon.info"
+    },
+    {
+      "type": "checkbox",
+      "id": "full-width-enabled",
+      "label": "t:sections.settings.settings.section-full-width.label",
+      "default": false
+    },
+    {
+      "type": "select",
+      "id": "text_style",
+      "label": "t:sections.timeline.settings.text_style.label",
+      "options": [
+        {
+          "value": "headline",
+          "label": "t:sections.timeline.settings.text_style.options__1.label"
+        },
+        {
+          "value": "body",
+          "label": "t:sections.timeline.settings.text_style.options__2.label"
+        }
+      ],
+      "default": "body"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.global.desktop_version"
+    },
+    {
+      "type": "range",
+      "id": "gap_desktop",
+      "min": 0,
+      "max": 120,
+      "unit": "px",
+      "step": 4,
+      "default": 48,
+      "label": "t:sections.timeline.settings.gap_between_blocks.label"
+    },
+    {
+      "type": "range",
+      "id": "max_block_width",
+      "min": 300,
+      "max": 800,
+      "unit": "px",
+      "step": 10,
+      "default": 480,
+      "label": "t:sections.timeline.settings.max_block_width.label"
+    },
+    {
+      "type": "range",
+      "id": "time_heading_scale_desktop",
+      "min": 50,
+      "max": 300,
+      "unit": "%",
+      "step": 10,
+      "default": 100,
+      "label": "t:sections.timeline.settings.time_heading_scale.label"
+    },
+    {
+      "type": "range",
+      "id": "heading_scale_desktop",
+      "min": 50,
+      "max": 300,
+      "unit": "%",
+      "step": 10,
+      "default": 100,
+      "label": "t:sections.timeline.settings.heading_scale.label"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.global.mobile_version"
+    },
+    {
+      "type": "range",
+      "id": "gap_mobile",
+      "min": 0,
+      "max": 80,
+      "unit": "px",
+      "step": 4,
+      "default": 40,
+      "label": "t:sections.timeline.settings.gap_between_blocks.label"
+    },
+    {
+      "type": "range",
+      "id": "time_heading_scale_mobile",
+      "min": 50,
+      "max": 200,
+      "unit": "%",
+      "step": 10,
+      "default": 100,
+      "label": "t:sections.timeline.settings.time_heading_scale.label"
+    },
+    {
+      "type": "range",
+      "id": "heading_scale_mobile",
+      "min": 50,
+      "max": 200,
+      "unit": "%",
+      "step": 10,
+      "default": 100,
+      "label": "t:sections.timeline.settings.heading_scale.label"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.timeline.settings.progress_bar.header"
+    },
+    {
+      "type": "color",
+      "id": "color-progress-active",
+      "label": "t:sections.timeline.settings.color_progress_active.label"
+    },
+    {
+      "type": "color",
+      "id": "color-progress-inactive",
+      "label": "t:sections.timeline.settings.color_progress_inactive.label"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.global.colors",
+      "info": "t:sections.global.colors-info"
+    },
+    {
+      "type": "color",
+      "id": "color-body-heading",
+      "label": "t:sections.global.heading-color"
+    },
+    {
+      "type": "color",
+      "id": "color-overlay",
+      "label": "t:sections.settings.settings.background-color.label"
+    },
+    {
+      "type": "range",
+      "id": "color-overlay-opacity",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "%",
+      "default": 100,
+      "label": "t:sections.settings.settings.background-opacity.label"
+    },
+    {
+      "type": "color",
+      "id": "color-body-text",
+      "label": "t:sections.settings.settings.text-color.label"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.global.section_spacing"
+    },
+    {
+      "type": "range",
+      "id": "margin-top",
+      "min": 0,
+      "max": 100,
+      "unit": "px",
+      "step": 4,
+      "default": 20,
+      "label": "t:sections.settings.settings.distance-top.label"
+    },
+    {
+      "type": "range",
+      "id": "margin-bottom",
+      "min": 0,
+      "max": 100,
+      "unit": "px",
+      "step": 4,
+      "default": 20,
+      "label": "t:sections.settings.settings.distance-bottom.label",
+      "info": "t:sections.settings.settings.distance-bottom.info"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_mobile_spacing",
+      "label": "t:sections.settings.settings.show-mobile-spacing.label"
+    },
+    {
+      "type": "range",
+      "id": "margin-top-mobile",
+      "min": 0,
+      "max": 100,
+      "step": 2,
+      "default": 20,
+      "unit": "px",
+      "label": "t:sections.settings.settings.distance-top-mobile.label",
+      "visible_if": "{{ section.settings.show_mobile_spacing }}"
+    },
+    {
+      "type": "range",
+      "id": "margin-bottom-mobile",
+      "min": 0,
+      "max": 100,
+      "step": 2,
+      "default": 20,
+      "unit": "px",
+      "label": "t:sections.settings.settings.distance-bottom-mobile.label",
+      "visible_if": "{{ section.settings.show_mobile_spacing }}"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "item",
+      "name": "t:sections.timeline.blocks.item.name",
+      "settings": [
+        {
+          "type": "inline_richtext",
+          "id": "time_heading",
+          "label": "t:sections.timeline.blocks.item.time_heading.label",
+          "default": "2026"
+        },
+        {
+          "type": "select",
+          "id": "time_heading_text_style",
+          "label": "t:sections.timeline.blocks.item.time_heading_text_style.label",
+          "options": [
+            {
+              "value": "headline",
+              "label": "t:sections.timeline.blocks.item.time_heading_text_style.options__1.label"
+            },
+            {
+              "value": "body",
+              "label": "t:sections.timeline.blocks.item.time_heading_text_style.options__2.label"
+            }
+          ],
+          "default": "body"
+        },
+        {
+          "type": "checkbox",
+          "id": "show_image",
+          "label": "t:sections.timeline.blocks.item.show_image.label",
+          "default": true
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "t:sections.timeline.blocks.item.image.label",
+          "visible_if": "{{ block.settings.show_image }}"
+        },
+        {
+          "type": "inline_richtext",
+          "id": "heading",
+          "label": "t:sections.timeline.blocks.item.heading.label",
+          "default": "Heading"
+        },
+        {
+          "type": "select",
+          "id": "heading_text_style",
+          "label": "t:sections.timeline.blocks.item.heading_text_style.label",
+          "options": [
+            {
+              "value": "headline",
+              "label": "t:sections.timeline.blocks.item.heading_text_style.options__1.label"
+            },
+            {
+              "value": "body",
+              "label": "t:sections.timeline.blocks.item.heading_text_style.options__2.label"
+            }
+          ],
+          "default": "body"
+        },
+        {
+          "type": "richtext",
+          "id": "content",
+          "label": "t:sections.timeline.blocks.item.content.label",
+          "default": "<p>Content</p>"
+        },
+        {
+          "type": "header",
+          "content": "t:sections.global.desktop_version"
+        },
+        {
+          "type": "checkbox",
+          "id": "reversed",
+          "label": "t:sections.timeline.blocks.item.reversed.label",
+          "info": "t:sections.timeline.blocks.item.reversed.info",
+          "default": false
+        },
+        {
+          "type": "header",
+          "content": "t:sections.global.colors",
+          "info": "t:sections.global.colors-info"
+        },
+        {
+          "type": "color",
+          "id": "heading_color",
+          "label": "t:sections.timeline.blocks.item.heading_color.label",
+          "info": "t:sections.timeline.blocks.item.heading_color.info"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:sections.timeline.name",
+      "category": "t:sections.categories.storytelling",
+      "blocks": [
+        { "type": "item" },
+        { "type": "item" },
+        { "type": "item" }
+      ]
+    }
+  ],
+  "disabled_on": {
+    "groups": ["header", "footer"]
+  }
+}
+{% endschema %}

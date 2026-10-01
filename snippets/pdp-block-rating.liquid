@@ -1,0 +1,4 @@
+{% comment %}
+  Params: product
+{% endcomment %}
+{% render 'rating', reviews: product.metafields.reviews, main_product: true, show_review_count: block.settings.show_review_count %}

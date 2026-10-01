@@ -1,0 +1,153 @@
+{% comment %}
+  Params: block, section, product
+{% endcomment %}
+{% assign metafield = block.settings.option_value_metafield | strip | split: '.' %}
+{% assign metafield_namespace = metafield | first | strip %}
+{% assign metafield_key = metafield | last | strip %}
+
+{% assign option_name = nil %}
+{% assign current_option = product.metafields[metafield_namespace][metafield_key] %}
+{% if current_option.type contains 'metaobject_reference' %}
+  {% assign option_metaobject = current_option.value %}
+  {% if current_option.type contains 'list.' %}
+    {% assign option_metaobject = current_option.value | first %}
+  {% endif %}
+  {% assign option_name = option_metaobject.label %}
+{% elsif current_option.type contains 'single_line_text_field' %}
+  {% assign option_name = current_option.value %}
+  {% if current_option.type contains 'list.' %}
+    {% assign option_name = current_option.value | first %}
+  {% endif %}
+{% endif %}
+{% if option_name == nil %}
+  {% assign option_name = product.title %}
+{% endif %}
+
+{% if block.settings.picker_type == 'button' %}
+  {% assign options_container_class = 'f-button' %}
+  {% assign options_body_class = 'tiles' %}
+  {% assign picker_type = 'button' %}
+{% elsif block.settings.picker_type == 'product_image' %}
+  {% assign options_container_class = 'f-swatch' %}
+  {% assign options_body_class = 'swatches' %}
+  {% assign picker_type = 'product_image' %}
+{% else %}
+  {% assign options_container_class = 'f-swatch' %}
+  {% assign options_body_class = 'swatches' %}
+  {% assign picker_type = 'color_swatch' %}
+{% endif %}
+
+{% assign sorted_product_variations = block.settings.products | sort_natural %}
+
+{% if sorted_product_variations.size > 0 %}
+  <div
+    data-block-id="{{ block.id }}"
+    class="wt-product__option"
+    style="
+      {% if block.settings.radius == 'custom' %}--custom-border-radius: {{ block.settings.border_radius }}px;{% endif %}
+      --custom-size: {{ block.settings.swatch_size }}px;
+    "
+  >
+    <div class="wt-product__option__title{% if settings.animations %} scroll-trigger animate--slide-in{% endif %}{% if settings.disabled_animations_on_mobile %} disabled-on-mobile{% endif %}">
+      <span class="label">
+        {% if block.settings.option_name != empty and sorted_product_variations.size > 0 %}
+          {{ block.settings.option_name }}: <strong class="value">{{ option_name }}</strong>
+        {% endif %}
+      </span>
+    </div>
+
+    <div class="wt-product__option__body wt-product__option__body--{{ options_body_class }}">
+      {%- assign swatches_config = settings.swatches_config | newline_to_br | split: '<br />' -%}
+      <ul class="{{ options_container_class }}__list{% if settings.animations %} scroll-trigger animate--slide-in{% endif %}{% if settings.disabled_animations_on_mobile %} disabled-on-mobile{% endif %}">
+        {% assign current_product_id = product.id | append: '' %}
+        {% for product_variation in sorted_product_variations %}
+          {% assign product_variation_id = product_variation.id | append: '' %}
+          {% assign option_name = nil %}
+          {% assign option_image = nil %}
+          {% assign option_color = nil %}
+
+          {% assign option_value = product_variation.metafields[metafield_namespace][metafield_key] %}
+          {% if option_value.type contains 'metaobject_reference' %}
+            {% assign option_metaobject = option_value.value %}
+            {% if option_value.type contains 'list.' %}
+              {% assign option_metaobject = option_value.value | first %}
+            {% endif %}
+            {% assign option_image = option_metaobject.image %}
+            {% assign option_color = option_metaobject.color %}
+            {% assign option_name = option_metaobject.label %}
+          {% elsif option_value.type contains 'single_line_text_field' %}
+            {% assign option_name = option_value.value %}
+            {% if option_value.type contains 'list.' %}
+              {% assign option_name = option_value.value | first %}
+            {% endif %}
+          {% endif %}
+          {% if option_name == nil %}
+            {% assign option_name = product_variation.title %}
+          {% endif %}
+
+          {% assign swatch_img = nil %}
+          {% assign use_image_ratio = false %}
+          {% if block.settings.picker_type == 'product_image' %}
+            {% assign swatch_img = product_variation.featured_image | default: product_variation.images.first %}
+            {% if block.settings.image_fit == 'ratio' and swatch_img != nil %}
+              {% assign use_image_ratio = true %}
+            {% endif %}
+          {% endif %}
+          {%- comment -%} Request the swatch at 2× its display size so it stays crisp on retina. {%- endcomment -%}
+          {% assign swatch_src_width = block.settings.swatch_size | times: 2 %}
+
+          <li class="{{ options_container_class }}__list__item{% if use_image_ratio %} {{ options_container_class }}__list__item--ratio{% endif %}">
+            {% case block.settings.picker_type %}
+              {%- when 'button' -%}
+                <a
+                  href="{{ product_variation.url }}"
+                  tabindex="0"
+                  class="{{ options_container_class }}__list__link{% if settings.enable_round_color_swatches %} rounded{% endif %}{% if product_variation_id == current_product_id %} active{% endif %}{% if block.settings.radius == 'custom' %} custom-radius{% endif %}"
+                  for="{{ section.id }}-{{ block.id }}-{{ forloop.index0 }}"
+                >
+                  {{ option_name }}
+                </a>
+              {%- when 'swatch' -%}
+                <a
+                  href="{{ product_variation.url }}"
+                  tabindex="0"
+                  title="{{ option_name }}"
+                  aria-label="{{ block.settings.option_name }}: {{ option_name }}"
+                  class="{{ options_container_class }}__list__link{% if settings.enable_round_color_swatches %} rounded{% endif %}{% if product_variation_id == current_product_id %} active{% endif %}{% if block.settings.radius == 'custom' %} custom-radius{% endif %}"
+                >
+                  <div
+                    class="{{ options_container_class }}__list__link__content{% if settings.enable_round_color_swatches %} rounded{% endif %}{% if block.settings.radius == 'custom' %} custom-radius{% endif %}"
+                    style="{% render 'color-swatch-style', swatches_config: swatches_config, value: option_value, swatch_image: option_image, swatch_color: option_color %}"
+                  ></div>
+                </a>
+              {%- when 'product_image' -%}
+                <a
+                  href="{{ product_variation.url }}"
+                  tabindex="0"
+                  title="{{ option_name }}"
+                  aria-label="{{ block.settings.option_name }}: {{ option_name }}"
+                  class="{{ options_container_class }}__list__link{% if settings.enable_round_color_swatches %} rounded{% endif %}{% if product_variation_id == current_product_id %} active{% endif %}{% if block.settings.radius == 'custom' %} custom-radius{% endif %}"
+                >
+                  {% if use_image_ratio %}
+                    <img
+                      class="{{ options_container_class }}__list__link__content{% if settings.enable_round_color_swatches %} rounded{% endif %}{% if block.settings.radius == 'custom' %} custom-radius{% endif %}"
+                      src="{{ swatch_img | image_url: width: swatch_src_width }}"
+                      alt="{{ option_name | escape }}"
+                      loading="lazy"
+                      width="{{ swatch_img.width }}"
+                      height="{{ swatch_img.height }}"
+                    >
+                  {% else %}
+                    <div
+                      class="{{ options_container_class }}__list__link__content{% if settings.enable_round_color_swatches %} rounded{% endif %}{% if block.settings.radius == 'custom' %} custom-radius{% endif %}"
+                      style="{% render 'color-swatch-style', swatches_config: swatches_config, value: option_value, swatch_image: swatch_img %}"
+                    ></div>
+                  {% endif %}
+                </a>
+            {%- endcase -%}
+          </li>
+        {% endfor %}
+      </ul>
+    </div>
+  </div>
+{% endif %}

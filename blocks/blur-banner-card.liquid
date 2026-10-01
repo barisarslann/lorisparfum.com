@@ -1,0 +1,185 @@
+{% assign background_rgb = block.settings.background_color | color_to_rgb %}
+
+<style>
+  [data-block-id="{{ block.id }}"] .wt-blur-banner-card__heading {
+    --font-headline-scale-desk: {{ block.settings.size_heading | divided_by: 100.0 }};
+    --font-headline-scale: {{ block.settings.size_heading_mobile | divided_by: 100.0 }};
+  }
+
+  [data-block-id="{{ block.id }}"].wt-blur-banner-card {
+    {% if block.settings.background_color != blank and block.settings.background_color != 'transparent' and background_rgb != 'rgba(0, 0, 0, 0.0)' %}
+      --card-background-color-rgb: {{ block.settings.background_color | color_to_rgb | remove: 'rgb(' | remove: ')' }};
+      --card-background-opacity: {{ block.settings.background_opacity | divided_by: 100.0 }};
+    {% endif %}
+  }
+</style>
+
+<div class="wt-blur-banner-card {% if block.settings.background_color == blank or block.settings.background_color == 'transparent' or background_rgb == 'rgba(0, 0, 0, 0.0)' %}wt-blur-banner-card--no-bg{% endif %}" data-block-id="{{ block.id }}">
+  {% if block.settings.image != blank %}
+    <div class="wt-blur-banner-card__image">
+      {{
+        block.settings.image
+        | image_url: width: 800
+        | image_tag:
+          loading: 'lazy',
+          sizes: '(min-width: 1000px) 400px, 100vw',
+          widths: '375, 550, 750, 800',
+          class: 'wt-blur-banner-card__image-tag'
+      }}
+    </div>
+  {% else %}
+    <div class="wt-blur-banner-card__image wt-blur-banner-card__image--placeholder">
+      {{ 'product-apparel-1' | placeholder_svg_tag: 'wt-blur-banner-card__image-tag placeholder-svg' }}
+    </div>
+  {% endif %}
+
+  <div class="wt-blur-banner-card__content">
+    {% if block.settings.heading != blank %}
+      <div class="wt-blur-banner-card__heading headline headline--rich">
+        <h2>{{ block.settings.heading }}</h2>
+      </div>
+    {% endif %}
+
+    {% if block.settings.description != blank %}
+      <div class="wt-blur-banner-card__description rte">
+        {{ block.settings.description }}
+      </div>
+    {% endif %}
+
+    {% if block.settings.button_link and block.settings.button_label != blank %}
+      <div class="wt-blur-banner-card__button">
+        <a
+          href="{{ block.settings.button_link }}"
+          aria-label="{{ block.settings.button_label }}"
+          class="hero__button hero__button--primary {% if block.settings.button_select != 'primary' %} hero__button--secondary {% endif %}{% if block.settings.button_select == 'link' %} hero__button--link {% endif %}"
+          {% if block.settings.button_link_in_new_window %}target="_blank" rel="noreferrer noopener"{% endif %}
+        >
+          <span>{{ block.settings.button_label }}</span>
+        </a>
+      </div>
+    {% endif %}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "t:blocks.blur_banner_card.name",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "t:sections.settings.settings.image.label"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "heading",
+      "default": "Card heading",
+      "label": "t:sections.settings.settings.heading.label"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.global.desktop_version"
+    },
+    {
+      "type": "range",
+      "id": "size_heading",
+      "min": 50,
+      "max": 500,
+      "step": 10,
+      "default": 100,
+      "label": "t:sections.settings.settings.size-heading.label",
+      "unit": "%"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.global.mobile_version"
+    },
+    {
+      "type": "range",
+      "id": "size_heading_mobile",
+      "min": 80,
+      "max": 300,
+      "step": 10,
+      "default": 100,
+      "label": "t:sections.settings.settings.size-heading-mobile.label",
+      "unit": "%"
+    },
+    {
+      "type": "richtext",
+      "id": "description",
+      "default": "<p>Card description text goes here.</p>",
+      "label": "t:sections.settings.settings.text.label"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.global.colors",
+      "info": "t:sections.global.colors-info"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "t:sections.settings.settings.background-color.label"
+    },
+    {
+      "type": "range",
+      "id": "background_opacity",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "%",
+      "default": 100,
+      "label": "t:sections.settings.settings.background-opacity.label"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.global.button_1"
+    },
+    {
+      "type": "select",
+      "id": "button_select",
+      "options": [
+        {
+          "value": "primary",
+          "label": "t:sections.settings.settings.button_select.primary.label"
+        },
+        {
+          "value": "secondary",
+          "label": "t:sections.settings.settings.button_select.secondary.label"
+        },
+        {
+          "value": "link",
+          "label": "t:sections.settings.settings.button_select.link.label"
+        }
+      ],
+      "default": "primary",
+      "label": "t:sections.settings.settings.button_select.default.label"
+    },
+    {
+      "id": "button_label",
+      "type": "text",
+      "default": "Button label",
+      "label": "t:sections.settings.settings.button_label.label"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "t:sections.settings.settings.link.label"
+    },
+    {
+      "type": "checkbox",
+      "id": "button_link_in_new_window",
+      "label": "t:sections.global.button_link_in_new_window",
+      "default": false
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:blocks.blur_banner_card.name",
+      "settings": {
+        "heading": "Card heading",
+        "description": "<p>Card description text goes here.</p>"
+      }
+    }
+  ]
+}
+{% endschema %}

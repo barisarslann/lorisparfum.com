@@ -42,6 +42,7 @@ if (!customElements.get("secondary-nav")) {
           loop: false,
           slidesPerView: 'auto',
           spaceBetween: 0,
+          threshold: 10,
           init: false,
           navigation: {
             nextEl: this.querySelector('.swiper-button-next'),

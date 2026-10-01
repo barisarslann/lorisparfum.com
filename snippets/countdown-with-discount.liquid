@@ -1,0 +1,92 @@
+{{ 'block-countdown-timer.css' | asset_url | stylesheet_tag }}
+{{ 'block-countdown-with-discount.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'countdown-timer.js' | asset_url }}" defer="defer"></script>
+<script src="{{ 'countdown-discount.js' | asset_url }}" defer="defer"></script>
+
+{%- assign background_rgb = block.settings.background_color | color_to_rgb -%}
+{%- assign text_rgb = block.settings.text_color | color_to_rgb -%}
+{%- assign counter_item_bg_rgb = block.settings.counter_item_bg | color_to_rgb -%}
+<style>
+  [data-block-id="{{ block.id }}"] {
+    --countdown-col-width: {{ block.settings.countdown_width }}%;
+    --font-timer-scale: {{ block.settings.scale_timer_mobile | divided_by: 100.0 }};
+    --font-timer-scale-desk: {{ block.settings.scale_timer | divided_by: 100.0 }};
+    --font-timer: {% if block.settings.timer_style == 'headline' %}var(--font-headline){% endif %};
+    --font-headline-scale: {{ block.settings.size_heading_mobile | divided_by: 100.0 }};
+    --font-headline-scale-desk: {{ block.settings.size_heading | divided_by: 100.0 }};
+    --countdown-counter-item-width: {{ block.settings.counter_item_width }}px;
+    --countdown-counter-item-width-mobile: {{ block.settings.counter_item_width_mobile }}px;
+    {% if block.settings['background_color'] != blank and block.settings['background_color'] != 'transparent' and background_rgb != 'rgba(0, 0, 0, 0.0)' %}
+      --countdown-discount-bg: {{ block.settings.background_color }};
+      --countdown-discount-padding: calc(var(--gap, 8px) * 2.5) calc(var(--gap, 8px) * 2.5);
+    {% endif %}
+    {% if block.settings['text_color'] != blank and block.settings['text_color'] != 'transparent' and text_rgb != 'rgba(0, 0, 0, 0.0)' %}
+      --countdown-discount-color: {{ block.settings.text_color }};
+    {% endif %}
+    {% if block.settings['counter_item_bg'] != blank and block.settings['counter_item_bg'] != 'transparent' and counter_item_bg_rgb != 'rgba(0, 0, 0, 0.0)' %}
+      --countdown-counter-item-bg: {{ block.settings.counter_item_bg }};
+      --countdown-counter-item-radius: var(--border-radius);
+    {% endif %}
+  }
+</style>
+
+<div
+  class="wt-countdown-discount{% if settings.animations %} scroll-trigger animate--slide-in{% endif %}{% if settings.disabled_animations_on_mobile %} disabled-on-mobile{% endif %}"
+  data-block-id="{{ block.id }}"
+  not-quick-add
+  {% if block.settings.text_style == 'heading' %}data-text-style-headline{% else %}data-text-style-body{% endif %}
+  {{ block.shopify_attributes }}
+>
+  <div class="wt-countdown-discount__left">
+    {% if block.settings.heading != blank %}
+      <div class="wt-countdown-discount__heading">
+        {{ block.settings.heading }}
+      </div>
+    {% endif %}
+    {% if block.settings.discount_code != blank %}
+      <div class="wt-countdown-discount__code">
+        {{ block.settings.discount_code }}
+        <countdown-discount>
+          <button
+            class="wt-countdown-discount__copy-btn"
+            type="button"
+            data-copy="{{ block.settings.discount_code | escape }}"
+            aria-label="{{ 'general.copy' | t }}"
+            data-label-copied="{{ 'general.copied' | t }}"
+          >
+            {%- render 'icon-copy' -%}
+            <span>{{- 'general.copy' | t -}}</span>
+          </button>
+        </countdown-discount>
+      </div>
+    {% endif %}
+  </div>
+
+  <div class="wt-countdown-discount__right">
+    <countdown-timer
+      id="wt-countdown-{{ block.id }}"
+      end-date="{{ block.settings.end_datetime }}"
+      expired-message="{{ block.settings.expired_message | escape }}"
+      data-translation-days="{{ 'sections.countdown_timer.counter_labels.days.short' | t }}"
+      data-translation-hours="{{ 'sections.countdown_timer.counter_labels.hours.short' | t }}"
+      data-translation-minutes="{{ 'sections.countdown_timer.counter_labels.minutes.short' | t }}"
+      data-translation-seconds="{{ 'sections.countdown_timer.counter_labels.seconds.short' | t }}"
+      data-translation-days-long="{{ 'sections.countdown_timer.counter_labels.days.long' | t }}"
+      data-translation-hours-long="{{ 'sections.countdown_timer.counter_labels.hours.long' | t }}"
+      data-translation-minutes-long="{{ 'sections.countdown_timer.counter_labels.minutes.long' | t }}"
+      data-translation-seconds-long="{{ 'sections.countdown_timer.counter_labels.seconds.long' | t }}"
+      data-translation-invalid-date="{{ 'sections.countdown_timer.error.invalid_format' | t }}"
+      {% if block.settings.labels_below %}
+        data-long-labels
+      {% endif %}
+      class="wt-countdown-timer"
+      data-style="{{ block.settings.timer_style }}"
+    >
+      <div class="wt-countdown-timer__display"></div>
+      {% if request.design_mode %}
+        <div class="wt-countdown-timer__error"></div>
+      {% endif %}
+    </countdown-timer>
+  </div>
+</div>
+

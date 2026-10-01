@@ -13,7 +13,10 @@
     assign show_lang_selector = true
   endif
 
-  assign show_tabs = show_country_selector
+  assign show_tabs = false
+  if show_country_selector and show_lang_selector
+    assign show_tabs = true
+  endif
 %}
 
 <!-- Overlay behind drawer -->
@@ -24,11 +27,13 @@
     type="hidden"
     name="country_code"
     value="{{ localization.country.iso_code }}"
+    tabindex="-1"
   >
   <input
     type="hidden"
     name="return_to"
     value="{{ request.path | escape }}"
+    tabindex="-1"
   >
 {%- endform -%}
 
@@ -174,12 +179,14 @@
                         id="wt-lang_{{ language.iso_code }}"
                         class="wt-language-list__radio"
                         value="{{ language.iso_code }}"
+                        tabindex="-1"
                         {% if language.iso_code == localization.language.iso_code %}
                           checked
                         {% endif %}
                       >
                       <label
                         class="wt-language-list__label"
+                        tabindex="0"
                         for="wt-lang_{{ language.iso_code }}"
                       >
                         {{ language.endonym_name | capitalize }}
@@ -195,13 +202,3 @@
     </div>
   </div>
 </localization-drawer>
-{% comment %}
-
-This file has been rewritten to preserve the original behavior.
-
----
-Changes:
-- from: "  assign show_tabs = show_country_selector and show_lang_selector"
-  to: "  assign show_tabs = show_country_selector"
-  position: 418..460
-{% endcomment %}

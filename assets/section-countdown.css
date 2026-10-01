@@ -1,0 +1,126 @@
+.wt-countdown-section {
+  background: var(--wt-bg);
+  color: var(--wt-text);
+  padding: 18px 12px;
+}
+.wt-countdown-section .headline,
+.wt-countdown-section .headline__title {
+  color: var(--color-custom-text, var(--color-headings-text, var(--color-text)));
+}
+.wt-countdown-section .headline__title {
+  padding-bottom: calc(var(--gap, 8px) * 1);
+}
+.wt-countdown-section .headline--rich h1, .wt-countdown-section .headline--rich h2, .wt-countdown-section .headline--rich h3, .wt-countdown-section .headline--rich h4, .wt-countdown-section .headline--rich h5, .wt-countdown-section .headline--rich h6, .wt-countdown-section .headline--rich p {
+  padding-bottom: calc(var(--gap, 8px) * 1);
+}
+.wt-countdown-section__inner {
+  margin: 0 auto;
+  text-align: center;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: calc(var(--gap, 8px) * 2);
+}
+.wt-countdown-section__inner .headline {
+  width: 100%;
+}
+.wt-countdown-section__button {
+  margin-block: 0;
+}
+@media (min-width: 1200px) {
+  .wt-countdown-section[data-layout=vertical] .wt-countdown-section__inner {
+    flex-direction: column;
+    align-items: center;
+  }
+  .wt-countdown-section[data-layout=vertical] .headline {
+    margin-bottom: calc(var(--gap, 8px) * 1);
+  }
+  .wt-countdown-section[data-layout=horizontal] .wt-countdown-section__inner {
+    align-items: center;
+    justify-content: center;
+    gap: calc(var(--gap, 8px) * 2);
+  }
+  .wt-countdown-section[data-layout=horizontal] .wt-countdown-section__inner .headline {
+    width: auto;
+    max-width: 40%;
+    text-align: right;
+  }
+  .wt-countdown-section[data-layout=horizontal] .wt-countdown-section__timer {
+    margin-inline-start: var(--wt-timer-spacing-left);
+    margin-inline-end: var(--wt-timer-spacing-right);
+  }
+  .wt-countdown-section[data-layout=horizontal] .wt-countdown-section__timer[data-show-labels=false] {
+    margin-bottom: 0;
+  }
+  .wt-countdown-section[data-layout=horizontal] .wt-countdown-section__timer[data-show-labels=false] .wt-counter__item__label {
+    display: none;
+  }
+  .wt-countdown-section[data-layout=horizontal] .headline,
+  .wt-countdown-section[data-layout=horizontal] .headline__title {
+    padding: 0;
+    margin: 0;
+  }
+}
+.wt-countdown-section__cta {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.wt-countdown-section__timer {
+  display: inline-flex;
+  color: var(--color-custom-text);
+}
+.wt-countdown-section__timer .wt-countdown-timer__display {
+  display: inline-flex;
+  flex-wrap: nowrap;
+}
+.wt-countdown-section__timer .wt-counter__item {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 0 !important;
+  flex-shrink: 1 !important;
+}
+.wt-countdown-section__timer .wt-counter__item__value {
+  font-size: calc(100% * var(--wt-timer-scale-mobile));
+  line-height: 1;
+  padding: 6px 10px;
+  background: var(--color-counter-value-bg, transparent);
+  border-radius: var(--border-radius);
+  color: var(--wt-text);
+}
+@media (max-width: 599px) {
+  .wt-countdown-section__timer .wt-counter__item__value {
+    padding-inline: calc(var(--gap, 8px) * 0.5);
+    min-width: max(2.5ch + 1 * var(--gap), var(--wt-timer-mobile-number-width, 0));
+  }
+}
+@media (min-width: 900px) and (max-width: 1199px) {
+  .wt-countdown-section__timer .wt-counter__item__value {
+    font-size: calc(100% * var(--wt-timer-scale) * 0.8);
+  }
+}
+@media (min-width: 1200px) {
+  .wt-countdown-section__timer .wt-counter__item__value {
+    font-size: calc(100% * var(--wt-timer-scale));
+    min-width: calc(2.5ch + 2 * var(--gap));
+  }
+}
+.wt-countdown-section__timer .wt-counter__item__label {
+  margin-top: 2px;
+  font-size: 1rem !important;
+  color: var(--wt-text);
+  opacity: 0.85;
+}
+@media (min-width: 1200px) {
+  .wt-countdown-section__timer .wt-counter__item__label {
+    font-size: 1.2rem !important;
+    margin-top: 0;
+  }
+}
+.wt-countdown-section__timer[data-show-labels=false] .wt-counter__item__label {
+  display: none;
+}
+/*# sourceMappingURL=section-countdown.css.map */

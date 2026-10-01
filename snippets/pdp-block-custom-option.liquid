@@ -1,0 +1,65 @@
+{% comment %}
+  Params: block, product
+{% endcomment %}
+{% assign options = block.settings.options | newline_to_br | split: '<br />' %}
+
+<div class="js wt-product__option">
+  <drawer-select
+    class="wt-select"
+    data-option-id="size"
+    data-input-type="{{ block.settings.custom_option_type }}"
+    data-current-variant="{{ product.selected_or_first_available_variant.id }}"
+  >
+    {% if block.settings.custom_option_type == 'dropdown' %}
+      <div class="wt-product__option__title{% if settings.animations %} scroll-trigger animate--slide-in{% endif %}{% if settings.disabled_animations_on_mobile %} disabled-on-mobile{% endif %}">
+        <span class="label">{{ block.settings.heading }}</span>: <strong class="value"></strong>
+      </div>
+      <button
+        aria-label="{{ options.first }}"
+        class="wt-button wt-select__trigger wt-product__option__dropdown{% if settings.animations %} scroll-trigger animate--slide-in{% endif %}{% if settings.disabled_animations_on_mobile %} disabled-on-mobile{% endif %}"
+        data-default-label="{{ 'select' | t }}"
+        data-selected-label="{{ 'selected' | t }}: "
+      >
+        <span class="wt-select__trigger__label">{{ options.first }}</span>
+        {% render 'icons', id: 'arrow-down' %}
+      </button>
+      <div class="wt-select__drawer">
+        <header class="wt-select__drawer__header">
+          <div class="wt-drawer__title__text">{{ block.settings.heading }}</div>
+          <button class="wt-select__drawer__close" aria-label="{{ 'accessibility.close' | t }}">
+            {% render 'icons', id: 'close' %}
+          </button>
+        </header>
+        <div class="wt-select__drawer__body">
+          <ul class="wt-select__list" role="listbox" aria-label="{{ 'accessibility.select_option' | t }}">
+            {% for option in options %}
+              <li class="wt-select__item" data-value="{{ option }}" role="option">
+                <div class="label">{{ option }}</div>
+              </li>
+            {% endfor %}
+          </ul>
+        </div>
+      </div>
+    {% elsif block.settings.custom_option_type == 'text' %}
+      <div class="wt-product__option__title">
+        <span class="label">{{ block.settings.heading }}</span>: <strong class="value"></strong>
+      </div>
+      <input
+        type="textarea"
+        id="custom-option--{{ block.settings.heading }}"
+        class="form__field__input wt-product__option__text"
+        maxlength="250"
+      >
+    {% else %}
+      <div class="wt-product__option__title">
+        {% assign yes_value = 'yes' | t %}
+        {% render 'form-checkbox',
+          name: block.settings.heading,
+          value: yes_value,
+          label: block.settings.heading,
+          label_class: 'label'
+        %}
+      </div>
+    {% endif %}
+  </drawer-select>
+</div>

@@ -25,7 +25,7 @@
 }
 
 .customer button {
-  margin: 4rem 0 1.5rem;
+  margin: 2rem 0 1.5rem;
 }
 
 .customer ul {
@@ -686,7 +686,7 @@ label[for=AddressProvinceNew] {
 }
 
 li[data-address] {
-  margin-top: 5rem;
+  margin-top: 2rem;
 }
 
 .addresses [aria-expanded=false] ~ div[id] {
@@ -702,7 +702,7 @@ li[data-address] {
 }
 
 li[data-address] > h2 {
-  text-align: center;
+  text-align: left;
   font-size: calc(var(--font-heading-scale) * 1.8rem);
   margin-bottom: 0;
 }
@@ -1099,6 +1099,12 @@ li[data-address] > h2 {
   transform: translateX(-50%);
   background-color: currentColor;
 }
+.wt-customer__addresses {
+  margin: 0;
+  width: 100%;
+  max-width: 1000px;
+  align-items: flex-start;
+}
 @media (max-width: 599px) {
   .wt-customer__addresses {
     max-width: var(--site-max-width);
@@ -1166,15 +1172,16 @@ li[data-address] > h2 {
   text-align: center;
 }
 .wt-customer__addresses li[data-address] {
-  margin-top: 5rem;
+  margin-top: 2rem;
+  text-align: left;
 }
 .wt-customer__addresses h2 {
   text-align: left;
 }
 .wt-customer__addresses li[data-address] > h2 {
-  text-align: center;
+  text-align: left;
   font-size: calc(var(--font-heading-scale) * 1.8rem);
-  margin-bottom: 0;
+  margin-bottom: 5px;
 }
 @media (min-width: 900px) {
   .wt-customer__addresses li[data-address] > h2 {
@@ -1207,6 +1214,10 @@ li[data-address] > h2 {
 .wt-customer__addresses form > div:nth-of-type(7),
 .wt-customer__addresses form > div:nth-of-type(7) + div[id] {
   margin-top: 1.5rem;
+}
+.wt-customer #password-error,
+.wt-customer #password_confirmation-error {
+  display: none;
 }
 .wt-customer__form--container {
   max-width: 60rem;
@@ -1377,8 +1388,8 @@ li[data-address] > h2 {
   }
 }
 .wt-customer__link-details {
-  margin-top: 2rem;
-  margin-bottom: 4rem;
+  display: block;
+  margin-top: 15px;
 }
 .wt-customer__names {
   justify-content: flex-start;
@@ -1490,7 +1501,11 @@ li[data-address] > h2 {
 .customer__account-details .customer__account__link {
   display: flex;
   align-items: center;
-  margin-top: 16px;
+  margin-top: 10px;
+}
+.customer__account-details .customer__account-addresses {
+  display: block;
+  margin-top: 15px;
 }
 .customer__account-details .customer__details {
   margin-bottom: 0;
@@ -1509,3 +1524,4 @@ li[data-address] > h2 {
   margin-top: 24px;
   text-wrap: nowrap;
 }
+/*# sourceMappingURL=customers.css.map */

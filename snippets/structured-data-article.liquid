@@ -1,0 +1,89 @@
+{%- comment -%}
+  BlogPosting JSON-LD for the article template.
+
+  Rendered from sections/main-article.liquid so the markup only appears when the
+  article content is actually output.
+
+  Accepts:
+  - article: {Object} article object (required)
+  - blog: {Object} blog object (optional)
+{%- endcomment -%}
+
+{%- if article -%}
+  {%- liquid
+    assign article_url = request.origin | append: article.url
+    assign description = article.excerpt_or_content | strip_html | strip_newlines | truncate: 500
+    assign article_body = article.content | strip_html | strip_newlines
+
+    if article.image
+      if article.image.width > 1920
+        assign image_width = 1920
+        assign image_height = 1920 | divided_by: article.image.aspect_ratio | round
+      else
+        assign image_width = article.image.width
+        assign image_height = article.image.height
+      endif
+    endif
+  -%}
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BlogPosting",
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": {{ article_url | json }}
+      },
+      "url": {{ article_url | json }},
+      "headline": {{ article.title | json }},
+      {%- if description != blank %}
+      "description": {{ description | json }},
+      {%- endif %}
+      {%- if article_body != blank %}
+      "articleBody": {{ article_body | json }},
+      {%- endif %}
+      {%- if article.image %}
+      "image": {
+        "@type": "ImageObject",
+        "url": {{ article.image | image_url: width: image_width | prepend: 'https:' | json }},
+        "width": {{ image_width | json }},
+        "height": {{ image_height | json }}
+      },
+      {%- endif %}
+      {%- if article.tags.size > 0 %}
+      "keywords": {{ article.tags | join: ', ' | json }},
+      {%- endif %}
+      {%- if blog %}
+      "isPartOf": {
+        "@type": "Blog",
+        "@id": {{ request.origin | append: blog.url | json }},
+        "name": {{ blog.title | json }}
+      },
+      {%- endif %}
+      {%- if blog.comments_enabled? %}
+      "commentCount": {{ article.comments_count | json }},
+      {%- endif %}
+      "inLanguage": {{ request.locale.iso_code | json }},
+      "datePublished": {{ article.published_at | date: '%Y-%m-%dT%H:%M:%S%z' | json }},
+      "dateCreated": {{ article.created_at | date: '%Y-%m-%dT%H:%M:%S%z' | json }},
+      "dateModified": {{ article.updated_at | date: '%Y-%m-%dT%H:%M:%S%z' | json }},
+      "author": {
+        "@type": "Person",
+        "name": {{ article.author | json }}
+        {%- if article.user.homepage != blank -%}
+        ,"url": {{ article.user.homepage | json }}
+        {%- endif %}
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": {{ shop.name | json }},
+        "url": {{ shop.url | json }}
+        {%- if shop.brand.logo != blank -%}
+        ,"logo": {
+          "@type": "ImageObject",
+          "url": {{ shop.brand.logo | image_url: width: 600 | prepend: 'https:' | json }}
+        }
+        {%- endif %}
+      }
+    }
+  </script>
+{%- endif -%}

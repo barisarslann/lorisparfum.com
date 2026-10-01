@@ -18,7 +18,6 @@ document.addEventListener("shopify:block:select", function (event) {
   slideshows.forEach((slideshowSection) => {
     if (typeof slideshowSection.slideTo === "function") {
       slideshowSection.slideTo(event.target);
-      console.log(`Slide updated in <slideshow-section />`, slideshowSection);
     } else {
       console.error(
         `<slideshow-section /> does not have a slideTo method`,

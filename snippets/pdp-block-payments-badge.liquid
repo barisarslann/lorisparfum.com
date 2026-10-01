@@ -1,0 +1,29 @@
+{% comment %}
+  Params: block
+{% endcomment %}
+<div
+  data-block-id="{{ block.id }}"
+  class="{% if settings.animations %} scroll-trigger animate--slide-in{% endif %}{% if settings.disabled_animations_on_mobile %} disabled-on-mobile{% endif %}"
+>
+  <div class="wt-product__payments-badge">
+    <div class="wt-product__payments-badge__content rte">
+      {{ block.settings.content }}
+    </div>
+    <div class="wt-product__payments-badge__icons">
+      {% if block.settings.badge_type == 'payment_icons' %}
+        <ul class="wt-product__payments-badge__icons__list" role="list">
+          {%- for type in shop.enabled_payment_types -%}
+            <li class="wt-product__payments-badge__icons__item">
+              {{ type | payment_type_svg_tag: class: 'icon icon--full-color' }}
+            </li>
+          {%- endfor -%}
+        </ul>
+      {% else %}
+        {% render 'picture',
+          desktop_image: block.settings.desktop_image,
+          mobile_image: block.settings.mobile_image
+        %}
+      {% endif %}
+    </div>
+  </div>
+</div>

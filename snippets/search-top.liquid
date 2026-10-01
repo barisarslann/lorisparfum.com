@@ -1,32 +1,133 @@
-<div class="search-result-top__title">{{ section.settings.suggestions_title }}</div>
+{%- liquid
+  assign layout = section.settings.search_suggest_layout | default: 'menu'
+-%}
 
-<ul class="search-result-top__list collection-list">
-  {%- for link in section.settings.suggestions_menu.links -%}
-    <li class="search-result-top__item {% if link.links.size > 0 %}search-result-top__item--row {% endif %} collection-list__item">
-      {% if link.links.size > 0 %}
-        <a class="headline__title" href="{{ link.url }}"> {{ link.title }}</a>
-        <div class="search-result-top__item__sublinks">
-          {% for sublink in link.links %}
-            <div class="search-result-top__item__sublink">
-              {% if sublink.type == 'product_link' or sublink.type == 'collection_link' %}
-                {% render 'card',
-                  img: sublink.object.featured_image,
-                  url: sublink.object.url,
-                  title: sublink.object.title
+<div class="search-result-top">
+  <div class="search-result-top__title">{{ section.settings.suggestions_title }}</div>
+
+  {%- case layout -%}
+  {%- when 'results' -%}
+    {%- liquid
+      assign products = section.settings.suggest_products
+      assign collections = section.settings.suggest_collections
+      assign pages_links = section.settings.suggest_pages_menu.links
+      assign terms_raw = section.settings.suggest_search_terms
+      assign terms = terms_raw | newline_to_br | split: '<br />'
+
+      assign products_title = section.settings.suggest_products_title
+      if products_title == blank
+        assign products_title = 'templates.search.titles.products' | t
+      endif
+
+      assign collections_title = section.settings.suggest_collections_title
+      if collections_title == blank
+        assign collections_title = 'templates.search.titles.collections' | t
+      endif
+
+      assign pages_menu_title = section.settings.suggest_pages_menu_title
+      if pages_menu_title == blank
+        assign pages_menu_title = 'templates.search.titles.useful_links' | t
+      endif
+
+      assign search_terms_title = section.settings.suggest_search_terms_title
+      if search_terms_title == blank
+        assign search_terms_title = 'templates.search.titles.popular_searches' | t
+      endif
+    -%}
+
+    <div class="search-result search-result--suggest" {% if settings.animations %}data-cascade{% endif %}>
+      {%- if products.size > 0 -%}
+        <div class="search-result-products">
+          <div class="search-result__title {% if settings.animations %}scroll-trigger animate--slide-in{% endif %} {% if settings.disabled_animations_on_mobile %}disabled-on-mobile{% endif %}">{{ products_title }}</div>
+          <ul class="search-result-list" role="listbox">
+            {%- for product in products -%}
+              <li class="search-result-list__item {% if settings.animations %}scroll-trigger animate--slide-in{% endif %} {% if settings.disabled_animations_on_mobile %}disabled-on-mobile{% endif %}" role="option">
+                {% render 'suggest-product-item',
+                  url: product.url,
+                  name: product.title,
+                  featured_media: product.featured_media,
+                  product: product,
+                  rating: product.metafields.reviews.rating.value
                 %}
-              {% else %}
-                <a class="card__title" href="{{ sublink.url }}"> {{ sublink.title }}</a>
-              {% endif %}
-            </div>
-          {% endfor %}
+              </li>
+            {%- endfor -%}
+          </ul>
         </div>
-      {% else %}
-        {% if link.type == 'product_link' or link.type == 'collection_link' %}
-          {% render 'card', img: link.object.featured_image, url: link.object.url, title: link.object.title %}
-        {% else %}
-          <a class="card__title" href="{{ link.url }}"> {{ link.title }}</a>
-        {% endif %}
-      {% endif %}
-    </li>
-  {%- endfor -%}
-</ul>
+      {%- endif -%}
+
+      {%- if collections.size > 0 or pages_links.size > 0 or terms.size > 0 -%}
+        <div class="search-result-pages">
+          {%- if terms.size > 0 -%}
+            <div class="search-result__title {% if settings.animations %}scroll-trigger animate--slide-in{% endif %} {% if settings.disabled_animations_on_mobile %}disabled-on-mobile{% endif %}">{{ search_terms_title }}</div>
+            <ul class="search-result-pages__list">
+              {%- for term in terms -%}
+                {%- assign term_clean = term | strip -%}
+                {%- if term_clean != blank -%}
+                  <li class="search-result-pages__item {% if settings.animations %}scroll-trigger animate--slide-in{% endif %} {% if settings.disabled_animations_on_mobile %}disabled-on-mobile{% endif %}">
+                    <a href="{{ routes.search_url }}?q={{ term_clean | url_encode }}&type=product">{{ term_clean }}</a>
+                  </li>
+                {%- endif -%}
+              {%- endfor -%}
+            </ul>
+          {%- endif -%}
+
+          {%- if collections.size > 0 -%}
+            <div class="search-result__title {% if settings.animations %}scroll-trigger animate--slide-in{% endif %} {% if settings.disabled_animations_on_mobile %}disabled-on-mobile{% endif %}">{{ collections_title }}</div>
+            <ul class="search-result-pages__list">
+              {%- for collection in collections -%}
+                <li class="search-result-pages__item {% if settings.animations %}scroll-trigger animate--slide-in{% endif %} {% if settings.disabled_animations_on_mobile %}disabled-on-mobile{% endif %}">
+                  <a href="{{ collection.url }}">{{ collection.title }}</a>
+                </li>
+              {%- endfor -%}
+            </ul>
+          {%- endif -%}
+
+          {%- if pages_links.size > 0 -%}
+            <div class="search-result__title {% if settings.animations %}scroll-trigger animate--slide-in{% endif %} {% if settings.disabled_animations_on_mobile %}disabled-on-mobile{% endif %}">{{ pages_menu_title }}</div>
+            <ul class="search-result-pages__list">
+              {%- for link in pages_links -%}
+                <li class="search-result-pages__item {% if settings.animations %}scroll-trigger animate--slide-in{% endif %} {% if settings.disabled_animations_on_mobile %}disabled-on-mobile{% endif %}">
+                  <a href="{{ link.url }}">{{ link.title }}</a>
+                </li>
+              {%- endfor -%}
+            </ul>
+          {%- endif -%}
+        </div>
+      {%- endif -%}
+    </div>
+
+  {%- else -%}
+    <ul class="search-result-top__list collection-list" {% if settings.animations %}data-cascade{% endif %}>
+      {%- for link in section.settings.suggestions_menu.links -%}
+        <li class="search-result-top__item {% if link.links.size > 0 %}search-result-top__item--row {% endif %} collection-list__item {% if settings.animations %}scroll-trigger animate--slide-in{% endif %} {% if settings.disabled_animations_on_mobile %}disabled-on-mobile{% endif %}">
+          {% if link.links.size > 0 %}
+            <a class="headline__title" href="{{ link.url }}"> {{ link.title }}</a>
+            <div class="search-result-top__item__sublinks">
+              {% for sublink in link.links %}
+                <div class="search-result-top__item__sublink">
+                  {% if sublink.type == 'product_link' or sublink.type == 'collection_link' %}
+                    {% render 'card',
+                      img: sublink.object.featured_image,
+                      url: sublink.object.url,
+                      title: sublink.object.title,
+                      title_tag: 'div',
+                      product: nil
+                    %}
+                  {% else %}
+                    <a class="card__title" href="{{ sublink.url }}"> {{ sublink.title }}</a>
+                  {% endif %}
+                </div>
+              {% endfor %}
+            </div>
+          {% else %}
+            {% if link.type == 'product_link' or link.type == 'collection_link' %}
+              {% render 'card', img: link.object.featured_image, url: link.object.url, title: link.object.title, product: nil %}
+            {% else %}
+              <a class="card__title" href="{{ link.url }}"> {{ link.title }}</a>
+            {% endif %}
+          {% endif %}
+        </li>
+      {%- endfor -%}
+    </ul>
+  {%- endcase -%}
+</div>

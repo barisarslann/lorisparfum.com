@@ -1,10 +1,35 @@
 .wt-video {
   display: flex;
-  flex-direction: column-reverse;
+  flex-direction: column;
   max-width: var(--hero-max-width);
   margin: auto;
   overflow: hidden;
+  position: relative;
   border-radius: var(--border-radius);
+}
+.wt-video__poster-img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 0;
+}
+.wt-video__overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+}
+.wt-video__overlay__controls {
+  position: absolute;
+  display: flex;
+  gap: calc(var(--gap, 8px) * 1);
+  right: calc(var(--gap, 8px) * 1);
+  bottom: calc(var(--gap, 8px) * 1);
+}
+.wt-video__overlay__controls .shoppable-video__control-button,
+.wt-video__overlay__controls .wt-hero-video__sound-toggle {
+  position: static;
 }
 .wt-section__wrapper--full .wt-video {
   border-radius: 0;
@@ -13,6 +38,9 @@
   .wt-video {
     flex-direction: row;
   }
+}
+.wt-video--rev {
+  flex-direction: column-reverse;
 }
 @media (min-width: 900px) {
   .wt-video--rev {
@@ -27,6 +55,12 @@
   width: 100%;
   flex-grow: 1;
   flex-shrink: 0;
+  height: var(--section-height, 100%);
+}
+@media (min-width: 900px) {
+  .wt-video__item {
+    height: var(--section-height-desk, 100%);
+  }
 }
 .wt-video__item--second {
   width: 100%;
@@ -46,10 +80,8 @@
     position: absolute !important;
   }
 }
-@media (min-width: 900px) {
-  [data-content-position=over_image] .wt-video__item--over-video .hero__overlay {
-    display: none;
-  }
+[data-content-position=over_image] .wt-video__item--over-video .hero__overlay {
+  display: none;
 }
 @media (max-width: 899px) {
   [data-mobile=video] .wt-video__item.wt-video__movie--shopify-video {
@@ -61,14 +93,12 @@
   }
 }
 @media (max-width: 899px) {
-  [data-mobile=video] .wt-video__item--hero:not(.wt-video__item--over-video) {
+  [data-mobile=video] .wt-video__item--hero {
     display: none;
   }
 }
-@media (min-width: 900px) {
-  [data-content-position=over_video] .wt-video__item--hero .hero__overlay {
-    display: none;
-  }
+[data-content-position=over_video] .wt-video__item--hero .hero__overlay {
+  display: none;
 }
 .wt-video__item--bg {
   width: 100%;
@@ -84,6 +114,10 @@
 .wt-video__item.hero {
   border-radius: 0;
 }
+.wt-video__item > video {
+  position: relative;
+  z-index: 1;
+}
 @media (max-width: 599px) {
   .wt-video__section .hero__overlay {
     padding: 24px;
@@ -94,7 +128,7 @@
 }
 @media (min-width: 900px) {
   .wt-video .hero__overlay__content {
-    width: 85%;
+    width: var(--text-container-width, 85%);
   }
 }
 .wt-video__movie {
@@ -108,11 +142,17 @@
     height: var(--section-height-desk, auto);
   }
 }
+@media (max-width: 899px) {
+  .wt-video__movie {
+    position: relative;
+  }
+}
 .hero--video-background .wt-video__movie--shopify-video {
   width: 100%;
 }
 .wt-video__movie--shopify-video .wt-video-hosted,
 .wt-video__movie--shopify-video .wt-video__movie__video-hosted-wrapper {
+  position: relative;
   width: 100%;
   height: 100%;
 }
@@ -133,9 +173,15 @@
   }
 }
 .wt-video__movie--shopify-video video {
+  position: relative;
+  z-index: 1;
   width: 100%;
   height: 100%;
   object-fit: cover;
+  display: block;
+}
+.wt-video__movie--shopify-video video-controls {
+  height: 100%;
 }
 @media (max-width: 899px) {
   .wt-video__movie .mobile-hidden {
@@ -153,18 +199,18 @@
 @media (max-width: 899px) {
   .wt-video[data-mobile=video] .wt-video__item {
     position: relative;
-    z-index: 1;
-  }
-  .wt-video[data-mobile=video] .wt-video__item .hero__pic,
-  .wt-video[data-mobile=video] .wt-video__item .hero__img {
-    visibility: hidden;
+    z-index: 2;
   }
   .wt-video[data-mobile=video] .wt-video__movie {
     position: absolute;
     display: block;
     z-index: 0;
     width: 100%;
-    height: 100%;
+  }
+  .wt-video[data-mobile=video] .wt-video__iframe {
+    position: static;
+    display: block;
+    height: var(--section-height, auto);
   }
 }
 @media (max-width: 899px) {
@@ -181,9 +227,63 @@
   }
 }
 
+page-header-image-video .shoppable-video__control-button,
+page-header-image-video .wt-hero-video__sound-toggle,
+page-header-image-banner .shoppable-video__control-button,
+page-header-image-banner .wt-hero-video__sound-toggle,
+page-header-logo-banner .shoppable-video__control-button,
+page-header-logo-banner .wt-hero-video__sound-toggle,
+page-header-logo-banner-new .shoppable-video__control-button,
+page-header-logo-banner-new .wt-hero-video__sound-toggle {
+  top: unset;
+  bottom: calc(var(--gap, 8px) * 2);
+  z-index: 99;
+}
+
 page-header-image-video {
   display: block;
 }
 page-header-image-video .hero__overlay__content {
   margin-top: var(--top-header-space, 0);
 }
+
+page-header-image-banner .hero__overlay,
+.section-image-banner .hero__overlay {
+  pointer-events: none;
+}
+page-header-image-banner .hero__overlay__content,
+page-header-image-banner .hero__overlay a,
+page-header-image-banner .hero__overlay button,
+page-header-image-banner .hero__overlay [role=button],
+page-header-image-banner .hero__overlay input,
+page-header-image-banner .hero__overlay select,
+page-header-image-banner .hero__overlay textarea,
+.section-image-banner .hero__overlay__content,
+.section-image-banner .hero__overlay a,
+.section-image-banner .hero__overlay button,
+.section-image-banner .hero__overlay [role=button],
+.section-image-banner .hero__overlay input,
+.section-image-banner .hero__overlay select,
+.section-image-banner .hero__overlay textarea {
+  pointer-events: auto;
+}
+
+/* Fix blur-banner play/pause & sound buttons */
+.wt-blur-banner__hero > .hero::before {
+  pointer-events: none;
+}
+
+.section-blur-banner .wt-blur-banner__content {
+  pointer-events: none;
+}
+.section-blur-banner .wt-blur-banner__content .hero__overlay__content,
+.section-blur-banner .wt-blur-banner__content .wt-blur-banner__content__bottom__content,
+.section-blur-banner .wt-blur-banner__content a,
+.section-blur-banner .wt-blur-banner__content button,
+.section-blur-banner .wt-blur-banner__content [role=button],
+.section-blur-banner .wt-blur-banner__content input,
+.section-blur-banner .wt-blur-banner__content select,
+.section-blur-banner .wt-blur-banner__content textarea {
+  pointer-events: auto;
+}
+/*# sourceMappingURL=section-video.css.map */

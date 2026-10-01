@@ -1,5 +1,5 @@
 .wt-parallax {
-  min-height: 350vh;
+  min-height: calc((var(--parallax-image-count, 2) + 1) * 150vh);
   position: relative;
 }
 .wt-parallax__content {
@@ -10,8 +10,14 @@
   justify-content: center;
   align-items: center;
   background: var(--color-custom-background);
-  margin-top: var(--section-gap-top);
-  margin-bottom: var(--section-gap-bottom);
+  margin-top: var(--section-gap-top-mobile, var(--section-gap-top, calc(var(--gap, 8px) * var(--section-gap, 2))));
+  margin-bottom: var(--section-gap-bottom-mobile, var(--section-gap-bottom, calc(var(--gap, 8px) * var(--section-gap, 2))));
+}
+@media (min-width: 900px) {
+  .wt-parallax__content {
+    margin-top: var(--section-gap-top, calc(var(--gap, 8px) * var(--section-gap, 2)));
+    margin-bottom: var(--section-gap-bottom, calc(var(--gap, 8px) * var(--section-gap, 2)));
+  }
 }
 .wt-parallax__content .hero__button--gap {
   margin-block: calc(var(--gap, 8px) * 2);
@@ -93,3 +99,4 @@
 .wt-parallax .scroll-trigger {
   width: 100%;
 }
+/*# sourceMappingURL=section-parallax.css.map */

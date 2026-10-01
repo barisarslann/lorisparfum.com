@@ -10,6 +10,10 @@
   assign price_min = product.price_min
   assign price_max = product.price_max
   assign available = target.available | default: false
+  if selling_plan_price
+    assign price = selling_plan_price
+    assign compare_at_price = selling_plan_compare_at_price
+  endif
   assign money_price = price | money
   assign money_price_min = price_min | money
   assign money_price_max = price_max | money
@@ -25,6 +29,7 @@
 -%}
 
 <div
+  data-price-amount="{{ price }}"
   class="
     price
     {%- if price_class %} {{ price_class }}{% endif -%}
@@ -76,10 +81,12 @@
         <span class="price-item price-item--sale price-item--last wt-product__price__final">
           {{ money_price }}
         </span>
-        {% if compare_at_price > price %}
-          <span class="price-item--percent">
-            -{{ compare_at_price | minus: price | times: 100 | divided_by: compare_at_price }}%
-          </span>
+        {% if compare_at_price > price and settings.show_discount_percentage_badge %}
+          {% if use_variant or product.price_varies == false %}
+            <span class="price-item--percent">
+              -{{ compare_at_price | minus: price | times: 100 | divided_by: compare_at_price }}%
+            </span>
+          {% endif %}
         {% endif %}
       </div>
       {%- unless product.price_varies == false and product.compare_at_price_varies %}
@@ -101,15 +108,7 @@
     <small class="unit-price caption{% if product.selected_or_first_available_variant.unit_price_measurement == nil %} hidden{% endif %}">
       <span class="visually-hidden">{{ 'products.product.price.unit_price' | t }}</span>
       <span class="price-item price-item--last">
-        <span>{{- product.selected_or_first_available_variant.unit_price | money -}}</span>
-        <span aria-hidden="true">/</span>
-        <span class="visually-hidden">&nbsp;{{ 'accessibility.unit_price_separator' | t }}&nbsp;</span>
-        <span>
-          {%- if product.selected_or_first_available_variant.unit_price_measurement.reference_value != 1 -%}
-            {{- product.selected_or_first_available_variant.unit_price_measurement.reference_value -}}
-          {%- endif -%}
-          {{ product.selected_or_first_available_variant.unit_price_measurement.reference_unit }}
-        </span>
+        {{ product.selected_or_first_available_variant.unit_price | unit_price_with_measurement: product.selected_or_first_available_variant.unit_price_measurement }}
       </span>
     </small>
   </div>

@@ -1,0 +1,258 @@
+{% comment %}
+  Params: block, section, product, product_form_id, selected_variant, enabled_preselect, update_url
+  update_url: pass false (boolean) from featured-product to add data-update-url="false"
+{% endcomment %}
+<div
+  data-block-id="{{ block.id }}"
+  style="
+    {% if block.settings.radius == 'custom' %}--custom-border-radius: {{ block.settings.border_radius }}px;{% endif %}
+    {% if block.settings.thumb_size %}--custom-size: {{ block.settings.thumb_size }}px{% endif %}
+  "
+>
+  <div class="wt-product__options">
+    {% assign color_swatch_names = settings.color_swatch_names
+      | downcase
+      | newline_to_br
+      | strip_newlines
+      | split: '<br />'
+      | uniq
+    %}
+    {% if block.settings.color_swatch_names != '' %}
+      {%- assign color_swatch_names = block.settings.color_swatch_names
+        | downcase
+        | newline_to_br
+        | strip_newlines
+        | split: '<br />'
+        | uniq
+      -%}
+    {% endif %}
+    {% assign variant_picture_swatch_names = settings.variant_picture_swatch_names
+      | downcase
+      | newline_to_br
+      | strip_newlines
+      | split: '<br />'
+      | uniq
+    %}
+    {% if block.settings.variant_picture_swatch_names != '' %}
+      {% assign variant_picture_swatch_names = block.settings.variant_picture_swatch_names
+        | downcase
+        | newline_to_br
+        | strip_newlines
+        | split: '<br />'
+        | uniq
+      %}
+    {% endif %}
+    {% if block.settings.dropdown_swatch_names != '' %}
+      {% assign dropdown_swatch_names = block.settings.dropdown_swatch_names
+        | downcase
+        | newline_to_br
+        | strip_newlines
+        | split: '<br />'
+        | uniq
+      %}
+    {% endif %}
+
+    {%- unless product.has_only_default_variant -%}
+      <variant-options
+        class="no-js-hidden wt-variant-options"
+        data-section="{{ section.id }}"
+        data-url="{{ product.url | within: collection }}"
+        data-product-handle="{{ product.handle }}"
+        {% unless enabled_preselect %}
+          data-enabled-preselect="false"
+        {% endunless %}
+        {% if update_url == false %}data-update-url="false"{% endif %}
+        {% if product.variants_count > 250 %}
+          data-high-variants-product
+        {% endif %}
+        {% if block.settings.hide_unavailable_options %}data-hide-unavailable-options{% endif %}
+        {{ block.shopify_attributes }}
+      >
+        {%- for option in product.options_with_values -%}
+          {% assign swatch_option_key = 'option' | append: forloop.index %}
+          <div class="js wt-product__option">
+            <div class="wt-product__option__wrapper">
+              <div id="{{ option.name }}-option-label" class="wt-product__option__title{% if settings.animations %} scroll-trigger animate--slide-in{% endif %}{% if settings.disabled_animations_on_mobile %} disabled-on-mobile{% endif %}">
+                <span class="label">{{ option.name }}: </span> <strong class="value">{{ option.selected_value }}</strong>
+              </div>
+              {% assign variant_name = block.settings.variant_name | downcase %}
+              {% assign option_name = option.name | downcase %}
+              {% if variant_name == option_name %}
+                <div class="wt-product__option__size-guide">
+                  {% render 'popup',
+                    product: product,
+                    id: block.id,
+                    shopify_attributes: block.shopify_attributes,
+                    size_icon: block.settings.size_icon,
+                    size_link: block.settings.size_link,
+                    size_page: block.settings.size_page,
+                    size_content: block.settings.size_content,
+                    metafield_name: block.settings.metafield,
+                    enable-striped-rows: block.settings.enable-striped-rows
+                  %}
+                </div>
+              {% endif %}
+            </div>
+            {% assign options_body_class = 'tiles' %}
+            {% assign option_name_downcase = option.name | downcase %}
+            {% if variant_picture_swatch_names contains option_name_downcase %}
+              {% assign options_container_class = 'f-thumb' %}
+              {% assign options_body_class = 'thumbs' %}
+              {% assign picker_type = 'variant_picture' %}
+            {% elsif color_swatch_names contains option_name_downcase %}
+              {% assign options_container_class = 'f-swatch' %}
+              {% assign options_body_class = 'swatches' %}
+              {% assign picker_type = 'color_swatch' %}
+            {% elsif dropdown_swatch_names contains option_name_downcase %}
+              {% assign options_body_class = 'drawer' %}
+              {% assign options_container_class = 'drawer' %}
+              {% assign picker_type = 'dropdown' %}
+            {% else %}
+              {% assign picker_type = block.settings.picker_type %}
+              {%- case block.settings.picker_type -%}
+                {%- when 'dropdown' -%}
+                  {% assign options_body_class = 'drawer' %}
+                  {% assign options_container_class = 'drawer' %}
+                  {% assign picker_type = 'dropdown' %}
+                {%- when 'button' -%}
+                  {% assign options_container_class = 'f-button' %}
+              {%- endcase -%}
+            {% endif %}
+
+            {% if options_body_class == 'drawer' %}
+              {% assign current_value = null %}
+              {%- for value in option.values -%}
+                {% if value.name == option.selected_value %}
+                  {% assign current_value = value %}
+                {% endif %}
+              {%- endfor -%}
+
+              <div class="drawer__list-overlay hidden"></div>
+              <variant-dropdown>
+                <button
+                  aria-label="{{ 'aria-label.main-product-select-option' | t }}"
+                  class="wt-button wt-product__option__dropdown{% unless current_value.available %} wt-product__option__dropdown--unavailable{% endunless %}{% if settings.animations %} scroll-trigger animate--slide-in{% endif %}{% if settings.disabled_animations_on_mobile %} disabled-on-mobile{% endif %}"
+                >
+                  {% if option.selected_value == value %}
+                    <span>{{ option.selected_value }}</span>
+                  {% else %}
+                    <span>{{ 'placeholder.select_option' | t }}</span>
+                  {% endif %}
+                  {% render 'icons', id: 'arrow-down' %}
+                </button>
+            {% endif %}
+
+            <div class="wt-product__option__body wt-product__option__body--{{ options_body_class }}{% if options_body_class == 'drawer' %} {{ option.name | downcase }}{% endif %}">
+              {% if options_body_class == 'drawer' %}
+                <div class="drawer__list-nav">
+                  <div class="drawer__list-nav__title">{{ option.name }}:</div>
+                  <button class="drawer__list-nav__close" aria-label="{{ 'accessibility.close' | t }}">
+                    {% render 'icons', id: 'close', icon_class: 'wt-options__close' %}
+                  </button>
+                </div>
+              {% endif %}
+              <div class="{% if options_body_class == 'drawer' %}drawer__content{% else %}swiper-container{% endif %}">
+                <fieldset class="js product-form__input" aria-labelledby="{{ option.name }}-option-label">
+                  <legend class="js product-form__input-title hidden">{{ option.name }}</legend>
+                  <ul class="{{ options_container_class }}__list{% if picker_type == 'button' and block.settings.unavailable_style == 'diagonal_cross' %} {{ options_container_class }}__list--unavailable-diagonal{% endif %}{% if settings.animations %} scroll-trigger animate--slide-in{% endif %}{% if settings.disabled_animations_on_mobile %} disabled-on-mobile{% endif %}">
+                    {%- for value in option.values -%}
+                      {%- assign value_exists = true -%}
+                      {%- if block.settings.hide_unavailable_options and option.position > 1 and selected_variant -%}
+                        {%- assign value_exists = false -%}
+                        {%- for v in product.variants -%}
+                          {%- if option.position == 2 -%}
+                            {%- if v.option1 == selected_variant.option1 and v.option2 == value.name -%}
+                              {%- assign value_exists = true -%}
+                              {%- break -%}
+                            {%- endif -%}
+                          {%- elsif option.position == 3 -%}
+                            {%- if v.option1 == selected_variant.option1 and v.option2 == selected_variant.option2 and v.option3 == value.name -%}
+                              {%- assign value_exists = true -%}
+                              {%- break -%}
+                            {%- endif -%}
+                          {%- endif -%}
+                        {%- endfor -%}
+                      {%- endif -%}
+                      <li class="{{ options_container_class }}__list__item{% if block.settings.hide_unavailable_options and option.position > 1 and value_exists == false %} wt-variant-option--hidden{% endif %}">
+                        <input
+                          type="radio"
+                          tabindex="-1"
+                          id="{{ section.id }}-{{ option.position }}-{{ forloop.index0 }}"
+                          name="{{ option.name }}"
+                          value="{{ value | escape }}"
+                          form="{{ product_form_id }}"
+                          data-position="{{ option.position }}"
+                          data-value-id="{{ value.id }}"
+                          {% if selected_variant and option.selected_value == value %}
+                            checked
+                          {% endif %}
+                          {% if value.available == false %}
+                            class="disabled"
+                          {% endif %}
+                        >
+                        {%- case picker_type -%}
+                          {%- when 'dropdown' -%}
+                            <label
+                              tabindex="0"
+                              class="{{ options_container_class }}__list__link"
+                              for="{{ section.id }}-{{ option.position }}-{{ forloop.index0 }}"
+                            >
+                              <span>{{ value }}</span>
+                            </label>
+                          {%- when 'button' -%}
+                            <label
+                              tabindex="0"
+                              class="{{ options_container_class }}__list__link{% if settings.enable_round_color_swatches %} rounded{% endif %}"
+                              for="{{ section.id }}-{{ option.position }}-{{ forloop.index0 }}"
+                            >
+                              {{ value }}
+                            </label>
+                          {%- when 'variant_picture' -%}
+                            <label
+                              tabindex="0"
+                              class="{{ options_container_class }}__list__link"
+                              for="{{ section.id }}-{{ option.position }}-{{ forloop.index0 }}"
+                            >
+                              {% render 'swatch_image',
+                                swatch_product: product,
+                                swatch_option_key: swatch_option_key,
+                                swatch_search_color: value
+                              %}
+                            </label>
+                          {%- when 'color_swatch' -%}
+                            {%- assign swatches_config = settings.swatches_config
+                              | newline_to_br
+                              | split: '<br />'
+                            -%}
+                            <label
+                              tabindex="0"
+                              class="{{ options_container_class }}__list__link{% if settings.enable_round_color_swatches %} rounded{% endif %}{% if block.settings.radius == 'custom' %} custom-radius{% endif %}"
+                              for="{{ section.id }}-{{ option.position }}-{{ forloop.index0 }}"
+                            >
+                              <div
+                                class="{{ options_container_class }}__list__link__content{% if settings.enable_round_color_swatches %} rounded{% endif %}{% if block.settings.radius == 'custom' %} custom-radius{% endif %}"
+                                style="{% render 'color-swatch-style', swatches_config: swatches_config, value: value %}"
+                              ></div>
+                            </label>
+                        {% endcase %}
+                      </li>
+                    {%- endfor -%}
+                  </ul>
+                </fieldset>
+              </div>
+            </div>
+            {% if options_body_class == 'drawer' %}
+              </variant-dropdown>
+            {% endif %}
+          </div>
+        {%- endfor -%}
+        <script type="application/json">
+          {{ product.variants | json }}
+        </script>
+        <script type="application/json" data-selected-variant>
+          {{ product.selected_or_first_available_variant | json }}
+        </script>
+      </variant-options>
+    {%- endunless -%}
+  </div>
+</div>

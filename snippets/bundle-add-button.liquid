@@ -1,0 +1,46 @@
+
+{% if product.variants.size > 1 %}
+  {% assign first_available = product.selected_or_first_available_variant %}
+  <select
+    name="bundle-variant-{{ product.id }}"
+    class="wt-bundle__variant-select"
+    data-option-names="{{ product.options | join: '|' | escape }}"
+    aria-label="{{ 'products.product.select_option' | t }}"
+  >
+    {% for variant in product.variants %}
+      <option
+        value="{{ variant.id }}"
+        data-price="{{ variant.price }}"
+        data-compare-price="{{ variant.compare_at_price | default: 0 }}"
+        data-image="{{ variant.featured_media.preview_image | default: product.featured_image | image_url: width: 360 }}"
+        data-image-card="{{ variant.featured_media.preview_image | default: product.featured_image | image_url: width: 1000 }}"
+        data-options="{{ variant.options | join: '|' | escape }}"
+        {% unless variant.available %}disabled{% endunless %}
+        {% if variant.id == first_available.id %}selected{% endif %}
+      >{{ variant.title }}</option>
+    {% endfor %}
+  </select>
+{% endif %}
+
+{%- assign default_variant = product.selected_or_first_available_variant -%}
+<button
+  class="wt-bundle__add-btn hero__button hero__button--primary {% if button_select != 'primary' %} hero__button--secondary{% endif %}"
+  data-variant-id="{{ default_variant.id }}"
+  data-product-id="{{ product.id }}"
+  data-title="{{ product.title | escape }}"
+  data-price="{{ default_variant.price }}"
+  data-image="{{ default_variant.featured_media.preview_image | default: product.featured_image | image_url: width: 360 }}"
+  data-option-names="{{ product.options | join: '|' | escape }}"
+  data-variant-options="{{ default_variant.options | join: '|' | escape }}"
+  data-label-add="{{ 'sections.bundle-builder.add_to_bundle' | t | escape }}"
+  data-label-sold-out="{{ 'products.product.sold_out' | t | escape }}"
+  {% unless default_variant.available %}disabled data-sold-out="true"{% endunless %}
+>
+  <span>
+    {%- if default_variant.available -%}
+      {{- 'sections.bundle-builder.add_to_bundle' | t -}}
+    {%- else -%}
+      {{- 'products.product.sold_out' | t -}}
+    {%- endif -%}
+  </span>
+</button>

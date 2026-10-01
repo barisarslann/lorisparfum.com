@@ -1,0 +1,130 @@
+{% assign prefix = 'hero' %}
+{% if block.settings.heading %}
+  <style>
+    [data-block-id="{{ block.id }}"] {
+        --font-headline-scale-desk: {{ block.settings.size_heading | divided_by: 100.0 }};
+        --font-headline-scale: {{ block.settings.size_heading_mobile | divided_by: 100.0 }};
+        {% if block.settings.max_width > 0 %}
+        --block-max-width: {{ block.settings.max_width }}px;
+        {% endif %}
+        {% if block.settings.heading_alignment_mobile != 'inherit' %}
+        --text-alignment: {{ block.settings.heading_alignment_mobile }};
+        {% endif %}
+        {% if block.settings.heading_alignment_desktop != 'inherit' %}
+        --text-alignment-desktop: {{ block.settings.heading_alignment_desktop }};
+        {% endif %}
+    }
+  </style>
+  {% liquid
+    assign apply_gradient_class = false
+
+    if block.settings.heading_richtext_color != blank and block.settings.heading_richtext_color != 'rgba(0,0,0,0)' and block.settings.heading_richtext_color != 'transparent'
+      assign apply_gradient_class = true
+    endif
+
+    if block.settings.heading_richtext_gradient != blank and block.settings.heading_richtext_gradient != 'rgba(0,0,0,0)' and block.settings.heading_richtext_gradient != 'transparent'
+      assign apply_gradient_class = true
+    endif
+  %}
+  <div
+    data-block-id="{{ block.id }}"
+    class="
+      headline headline--rich wt-headline-block
+      {% if apply_gradient_class %} headline--rich-gradient{% endif %}
+      {% if settings.animations %} scroll-trigger animate--slide-in {% endif %} {% if settings.disabled_animations_on_mobile %} disabled-on-mobile {% endif %}{% if block.settings.disable_on_mobile %}{% if prefix %}{{ prefix }}{% else %}block{% endif %}__title--mobile{% endif %}
+    "
+  >
+    {{ block.settings.heading }}
+  </div>
+{% endif %}
+
+{% schema %}
+{
+  "name": "t:blocks.heading.name",
+  "settings": [
+    {
+      "type": "richtext",
+      "id": "heading",
+      "default": "<h2>Heading</h2>",
+      "label": "t:sections.settings.settings.heading.label"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.global.desktop_version"
+    },
+    {
+      "type": "select",
+      "id": "heading_alignment_desktop",
+      "options": [
+        { "value": "inherit", "label": "t:blocks.heading.settings.heading_alignment.inherit.label" },
+        { "value": "start", "label": "t:blocks.heading.settings.heading_alignment.left.label" },
+        { "value": "center", "label": "t:blocks.heading.settings.heading_alignment.center.label" },
+        { "value": "end", "label": "t:blocks.heading.settings.heading_alignment.right.label" }
+      ],
+      "default": "inherit",
+      "label": "t:blocks.heading.settings.heading_alignment.label"
+    },
+    {
+      "type": "range",
+      "id": "size_heading",
+      "min": 50,
+      "max": 500,
+      "step": 10,
+      "default": 100,
+      "label": "t:sections.settings.settings.size-heading.label",
+      "unit": "%"
+    },
+    {
+      "type": "range",
+      "id": "max_width",
+      "min": 0,
+      "max": 1000,
+      "step": 10,
+      "default": 0,
+      "label": "t:blocks.heading.settings.max_width.label",
+      "unit": "px",
+      "info": "t:blocks.heading.settings.max_width.info"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.global.mobile_version"
+    },
+    {
+      "type": "select",
+      "id": "heading_alignment_mobile",
+      "options": [
+        { "value": "inherit", "label": "t:blocks.heading.settings.heading_alignment.inherit.label" },
+        { "value": "start", "label": "t:blocks.heading.settings.heading_alignment.left.label" },
+        { "value": "center", "label": "t:blocks.heading.settings.heading_alignment.center.label" },
+        { "value": "end", "label": "t:blocks.heading.settings.heading_alignment.right.label" }
+      ],
+      "default": "inherit",
+      "label": "t:blocks.heading.settings.heading_alignment.label"
+    },
+    {
+      "type": "range",
+      "id": "size_heading_mobile",
+      "min": 80,
+      "max": 300,
+      "step": 10,
+      "default": 100,
+      "label": "t:sections.settings.settings.size-heading-mobile.label",
+      "unit": "%"
+    },
+    {
+      "type": "checkbox",
+      "id": "disable_on_mobile",
+      "label": "t:sections.global.disable_on_mobile",
+      "default": false
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:blocks.heading.name",
+      "settings": {
+        "heading": "<h2>Heading</h2>"
+      }
+    }
+  ]
+}
+{% endschema %}

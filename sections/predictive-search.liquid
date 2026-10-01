@@ -8,10 +8,11 @@
   <div
     id="predictive-search-results"
     class="search-result {% if total_results == 0 %}search-result--no-results{% endif %}"
+    {% if settings.animations %}data-cascade{% endif %}
   >
     {%- if predictive_search.resources.products.size > 0 -%}
       <div class="search-result-products">
-        <div id="predictive-search-products" class="search-result__title">
+        <div id="predictive-search-products" class="search-result__title {% if settings.animations %}scroll-trigger animate--slide-in{% endif %} {% if settings.disabled_animations_on_mobile %}disabled-on-mobile{% endif %}">
           {{ 'templates.search.titles.products' | t }}
         </div>
         <ul
@@ -23,7 +24,7 @@
           {%- for product in predictive_search.resources.products -%}
             <li
               id="predictive-search-option-{{ forloop.index }}"
-              class="search-result-list__item"
+              class="search-result-list__item {% if settings.animations %}scroll-trigger animate--slide-in{% endif %} {% if settings.disabled_animations_on_mobile %}disabled-on-mobile{% endif %}"
               role="option"
               aria-selected="false"
             >
@@ -34,7 +35,10 @@
                 name: product_name,
                 featured_media: product.featured_media,
                 product: product,
-                rating: product.metafields.reviews.rating.value
+                rating: settings.show_product_rating,
+                show_review_count: settings.show_review_count,
+                reviews: product.metafields.reviews,
+                hide_rating_no_reviews: settings.hide_rating_no_reviews
               %}
 
               <a
@@ -102,20 +106,20 @@
     -%}
       <div class="search-result-pages">
         {% if predictive_search.resources.queries.size > 0 and settings.enable_suggestions %}
-          <div class="search-result__title">{{ 'templates.search.titles.suggestions' | t }}</div>
+          <div class="search-result__title {% if settings.animations %}scroll-trigger animate--slide-in{% endif %} {% if settings.disabled_animations_on_mobile %}disabled-on-mobile{% endif %}">{{ 'templates.search.titles.suggestions' | t }}</div>
           <ul class="search-result-pages__list">
             {%- for suggestion in predictive_search.resources.queries limit: 3 -%}
-              <li class="search-result-pages__item">
+              <li class="search-result-pages__item {% if settings.animations %}scroll-trigger animate--slide-in{% endif %} {% if settings.disabled_animations_on_mobile %}disabled-on-mobile{% endif %}">
                 <a href="{{ suggestion.url }}">{{ suggestion.text | highlight: predictive_search.terms }}</a>
               </li>
             {%- endfor -%}
           </ul>
         {% endif %}
         {% if predictive_search.resources.pages.size > 0 %}
-          <div class="search-result__title">{{ 'templates.search.titles.pages' | t }}</div>
+          <div class="search-result__title {% if settings.animations %}scroll-trigger animate--slide-in{% endif %} {% if settings.disabled_animations_on_mobile %}disabled-on-mobile{% endif %}">{{ 'templates.search.titles.pages' | t }}</div>
           <ul class="search-result-pages__list">
             {%- for page in predictive_search.resources.pages limit: 3 -%}
-              <li class="search-result-pages__item">
+              <li class="search-result-pages__item {% if settings.animations %}scroll-trigger animate--slide-in{% endif %} {% if settings.disabled_animations_on_mobile %}disabled-on-mobile{% endif %}">
                 <a href="{{ page.url }}">{{ page.title | highlight: predictive_search.terms }}</a>
               </li>
             {%- endfor -%}
@@ -123,10 +127,10 @@
         {% endif %}
 
         {% if predictive_search.resources.articles.size > 0 %}
-          <div class="search-result__title">{{ 'templates.search.titles.articles' | t }}</div>
+          <div class="search-result__title {% if settings.animations %}scroll-trigger animate--slide-in{% endif %} {% if settings.disabled_animations_on_mobile %}disabled-on-mobile{% endif %}">{{ 'templates.search.titles.articles' | t }}</div>
           <ul class="search-result-pages__list">
             {%- for post in predictive_search.resources.articles limit: 3 -%}
-              <li class="search-result-pages__item">
+              <li class="search-result-pages__item {% if settings.animations %}scroll-trigger animate--slide-in{% endif %} {% if settings.disabled_animations_on_mobile %}disabled-on-mobile{% endif %}">
                 <a href="{{ post.url }}">{{ post.title | highlight: predictive_search.terms }}</a>
               </li>
             {%- endfor -%}
@@ -134,10 +138,10 @@
         {% endif %}
 
         {% if predictive_search.resources.collections.size > 0 %}
-          <div class="search-result__title">{{ 'templates.search.titles.collections' | t }}</div>
+          <div class="search-result__title {% if settings.animations %}scroll-trigger animate--slide-in{% endif %} {% if settings.disabled_animations_on_mobile %}disabled-on-mobile{% endif %}">{{ 'templates.search.titles.collections' | t }}</div>
           <ul class="search-result-pages__list">
             {%- for collection in predictive_search.resources.collections limit: 3 -%}
-              <li class="search-result-pages__item">
+              <li class="search-result-pages__item {% if settings.animations %}scroll-trigger animate--slide-in{% endif %} {% if settings.disabled_animations_on_mobile %}disabled-on-mobile{% endif %}">
                 <a href="{{ collection.url }}">{{ collection.title | highlight: predictive_search.terms }}</a>
               </li>
             {%- endfor -%}

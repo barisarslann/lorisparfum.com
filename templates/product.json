@@ -235,10 +235,6 @@
             "custom_liquid": "<collapsible-section class=\"wt-collapse wt-collapse--always  scroll-trigger animate--slide-in  \"\n  data-toggle-tabindex=\"button, [href], input, select\">\n  <div class=\"wt-collapse__trigger\" role=\"button\" tabindex=\"0\" data-open=\"false\" aria-expanded=\"false\"\n    aria-controls=\"CollapsibleTab-collapsible_tab_RfgVzn\">\n    <div class=\"wt-collapse__trigger__text\">\n\n      <div class=\"wt-collapse__trigger__icon\" style=\"display: none;\">\n        <svg class=\"svg-icon svg-icon--accordion color-foreground-\" aria-hidden=\"true\" focusable=\"false\"\n          role=\"presentation\" xmlns=\"http://www.w3.org/2000/svg\" width=\"16\" height=\"16\" viewBox=\"0 0 16 16\">\n          <path fill-rule=\"evenodd\"\n            d=\"M14.441 3.733a.5.5 0 010 .707l-7.94 7.94a.5.5 0 01-.707 0L2.52 9.105a.5.5 0 11.707-.707l2.922 2.922 7.586-7.587a.5.5 0 01.707 0z\"\n            clip-rule=\"evenodd\" />\n        </svg>\n      </div>\n\n      <span class=\"wt-collapse__trigger__title\">\n        {% if request.locale.iso_code == \"tr\" %}\n        Koku Profili\n        {% elsif request.locale.iso_code == \"ar\" %}\n        ملف العطر\n        {% else %}\n        Scent Profile\n        {% endif %}\n      </span>\n    </div>\n    <div class=\"wt-icon\" aria-hidden=\"true\">\n\n      <svg class=\"svg-icon svg-icon--plus \" aria-hidden=\"true\" id=\"\" focusable=\"false\" role=\"presentation\"\n        xmlns=\"http://www.w3.org/2000/svg\" data-icon-theme=\"option_1\" width=\"72\" height=\"72\" viewBox=\"0 0 72 72\">\n        <title></title>\n        <g id=\"Plus\">\n          <rect class=\"icon-plus-y\" width=\"54\" height=\"4\" rx=\"2\" y=\"34\" x=\"9\" />\n          <rect class=\"icon-plus-x\" width=\"4\" height=\"54\" rx=\"2\" y=\"9\" x=\"34\" />\n        </g>\n      </svg>\n\n    </div>\n  </div>\n  <div class=\"wt-collapse__target\" id=\"CollapsibleTab-collapsible_tab_RfgVzn\">\n\n    <div class=\"wt-collapse__target--text\" data-block-id-for-variant-metafield=\"collapsible_tab_RfgVzn\">\n      <div class=\"wt-collapse__target__content rte\">\n        <p>{{ product.metafields.custom.koku_profili | metafield_tag }}</p>\n\n      </div>\n    </div>\n  </div>\n</collapsible-section>"
           }
         },
-        "fragrance_family": {
-          "type": "fragrance_family",
-          "settings": {}
-        },
         "separator_HEwhhT": {
           "type": "separator",
           "settings": {
@@ -298,6 +294,10 @@
           "settings": {
             "custom_liquid": "{% if product.metafields.custom.ikon_gorseller.value %}\n<div class=\"tagImageList\" style=\"position: absolute;width: 100%;height: 100%;\">\n  {% for image_file in product.metafields.custom.ikon_gorseller.value %}\n    <img class=\"tagImage\" src=\"{{ image_file | image_url: width: 600 }}\" alt=\"{{ product.title }} - {{ forloop.index }}\">\n  {% endfor %}\n</div>\n{% endif %}"
           }
+        },
+        "fragrance_family": {
+          "type": "fragrance_family",
+          "settings": {}
         }
       },
       "block_order": [
@@ -352,13 +352,14 @@
         "text_color": "rgba(0,0,0,0)",
         "background_color": "rgba(0,0,0,0)",
         "margin-top": 12,
-        "margin-bottom": 0
+        "margin-bottom": 0,
+        "loris_mobile_sticky_enabled": true
       }
     },
     "custom_liquid_dC8Kcx": {
       "type": "custom-liquid",
       "disabled": true,
-      "name": "t:sections.custom-liquid.presets.name",
+      "name": "Custom Liquid",
       "settings": {
         "custom_liquid": "<style>\n@media (max-width: 767px) {\n  .wt-slider__container .swiper-button-next,\n  .wt-slider__container .swiper-button-prev {\n    display: grid;\n    opacity: 0.8;\n  }\n}\n</style>"
       }
@@ -389,7 +390,7 @@
     },
     "custom_liquid_Hh7Qm8": {
       "type": "custom-liquid",
-      "name": "t:sections.custom-liquid.presets.name",
+      "name": "Custom Liquid",
       "settings": {
         "custom_liquid": "<script>\ndocument.addEventListener(\"DOMContentLoaded\", () => {\nsetTimeout(() => {\nvar catVideoLink;\n\nif(\n  document.querySelector(\".breadcrumbs__list .breadcrumbs__item:nth-of-type(2)\").textContent.toUpperCase().includes(\"KREASYON\")\n){\n  catVideoLink = window.matchMedia(\"(min-width: 768px)\").matches ?\n  \"https://cdn.shopify.com/videos/c/o/v/2223c3d1bd8641eb90f333d50ba46724.mp4\" :\n  \"https://cdn.shopify.com/videos/c/o/v/5b5b3fb30d134a5c99c64e170847ba90.mp4\";\n}else{\n  catVideoLink =  window.matchMedia(\"(min-width: 768px)\").matches ?\n  \"https://cdn.shopify.com/videos/c/o/v/b1c2a12f5c214dec87a0a985d717543b.mp4\" :\n  \"https://cdn.shopify.com/videos/c/o/v/130490b3acc84ba697555629a1626e9f.mp4\";\n}\n\n/* .background-video .hero--video-background */\ndocument.querySelector(\".shopify-section.product-section + section\").insertAdjacentHTML(\n  \"afterend\",\n  `<video playsinline=\"playsinline\" autoplay=\"false\" loop=\"loop\" muted=\"muted\" class=\"lazycustom\" preload=\"metadata\" data-poster=\"\" style=\"width: 100%;margin: 60px 0 30px;\">\n    <source src=\"${catVideoLink}\" type=\"video/mp4\"><!-- <img src=\"\"> -->\n  </video>`\n);\n}, 1000);\n});\n</script>"
       }
@@ -397,7 +398,7 @@
     "custom_liquid_LbHibR": {
       "type": "custom-liquid",
       "disabled": true,
-      "name": "t:sections.custom-liquid.presets.name",
+      "name": "Custom Liquid",
       "settings": {
         "custom_liquid": "<div style=\"padding: 0 30px;\">\n{% if product.metafields.custom.video %}\n  <h3>Video Test:</h3>\n  <div class=\"product-video\">\n    <video controls width=\"100%\" style=\"max-width: 600px;\">\n      <source src=\"{{ product.metafields.custom.video | file_url }}\" type=\"video/mp4\">\n      Your browser does not support the video tag.\n    </video>\n  </div>\n{% endif %}\n</div>"
       }
@@ -607,7 +608,6 @@
         "product_CpwxCR",
         "product_gpe69J"
       ],
-      "name": "t:sections.shoppable-video-reels-section.name",
       "settings": {
         "heading": "Sosyal Medyada #TrendKokular",
         "quick-add-enabled": false,
@@ -985,7 +985,6 @@
         "product_nwJ4AK"
       ],
       "disabled": true,
-      "name": "t:sections.shoppable-video-reels-section.name",
       "settings": {
         "heading": "Shoppable video reels",
         "quick-add-enabled": false,

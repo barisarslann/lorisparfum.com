@@ -5,13 +5,16 @@
     <nav class="wt-pagination" role="navigation" aria-label="{{ 'general.pagination.label' | t }}">
       <ul class="wt-pagination__list list-unstyled" role="list">
         {%- if paginate.previous -%}
-          <li>
+          <li{% if show_labels %} class="wt-pagination__arrow"{% endif %}>
             <a
               href="{{ paginate.previous.url }}{{ anchor }}"
               class="wt-pagination__item wt-pagination__item--next wt-pagination__item-arrow link motion-reduce"
               aria-label="{{ 'general.pagination.previous' | t }}"
             >
               {% render 'icon-caret' %}
+              {%- if show_labels -%}
+                <span class="wt-pagination__item-label">{{ 'general.pagination.previous_label' | t }}</span>
+              {%- endif -%}
             </a>
           </li>
         {%- endif -%}
@@ -31,7 +34,6 @@
                 <span
                   class="wt-pagination__item wt-pagination__item--current"
                   aria-current="page"
-                  aria-label="{{ 'general.pagination.page' | t: number: part.title }}"
                 >
                   {{- part.title -}}
                 </span>
@@ -43,12 +45,15 @@
         {%- endfor -%}
 
         {%- if paginate.next -%}
-          <li>
+          <li{% if show_labels %} class="wt-pagination__arrow"{% endif %}>
             <a
               href="{{ paginate.next.url }}{{ anchor }}"
               class="wt-pagination__item wt-pagination__item--prev wt-pagination__item-arrow link motion-reduce"
               aria-label="{{ 'general.pagination.next' | t }}"
             >
+              {%- if show_labels -%}
+                <span class="wt-pagination__item-label">{{ 'general.pagination.next_label' | t }}</span>
+              {%- endif -%}
               {%- render 'icon-caret' -%}
             </a>
           </li>

@@ -1,25 +1,40 @@
+{{ 'swiper.css' | asset_url | stylesheet_tag }}
+
 {% assign background_rgb = section.settings.background_color | color_to_rgb %}
 {% assign text_rgb = section.settings['color-body-text'] | color_to_rgb %}
 {% assign active_background_rgb = section.settings.active_background_color | color_to_rgb %}
 {% assign active_text_rgb = section.settings.active_text_color | color_to_rgb %}
+{% assign hover_active_text_rgb = section.settings.hover_active_text_color | color_to_rgb %}
 
 <style>
   [id="shopify-section-{{ section.id }}"]
   {
-    {% if background_rgb != 'rgba(0, 0, 0, 0.0)' %}
+    {% if section.settings.background_color != blank and section.settings.background_color != 'transparent' and background_rgb != 'rgba(0, 0, 0, 0.0)' %}
       --color-background: {{ section.settings.background_color }};
     {% endif %}
 
-    {% if text_rgb != 'rgba(0, 0, 0, 0.0)' %}
+    {% if section.settings['color-body-text'] != blank and section.settings['color-body-text'] != 'transparent' and text_rgb != 'rgba(0, 0, 0, 0.0)' %}
       --color-custom-text: {{ section.settings.color-body-text }};
     {% endif %}
 
-    {% if active_background_rgb != 'rgba(0, 0, 0, 0.0)' %}
+    {% if section.settings.active_background_color != blank and section.settings.active_background_color != 'transparent' and active_background_rgb != 'rgba(0, 0, 0, 0.0)' %}
       --color-active-background: {{ section.settings.active_background_color }};
     {% endif %}
 
-    {% if active_text_rgb != 'rgba(0, 0, 0, 0.0)' %}
+    {% if section.settings.active_text_color != blank and section.settings.active_text_color != 'transparent' and active_text_rgb != 'rgba(0, 0, 0, 0.0)' %}
       --color-active-text: {{ section.settings.active_text_color }};
+    {% endif %}
+
+    {% if section.settings.hover_active_text_color != blank and section.settings.hover_active_text_color != 'transparent' and hover_active_text_rgb != 'rgba(0, 0, 0, 0.0)' %}
+      --color-hover-active-text: {{ section.settings.hover_active_text_color }};
+    {% endif %}
+
+    {% if section.settings.button_text_style == 'button' %}
+      --featured-nav-link-font: var(--font-button);
+      --featured-nav-link-font-style: var(--font-button-style);
+      --featured-nav-link-font-weight: var(--font-button-weight);
+      --featured-nav-link-transform: var(--font-button-transform, none);
+      --featured-nav-link-letter-spacing: var(--font-button-letter-spacing, normal);
     {% endif %}
   }
 
@@ -32,6 +47,14 @@
       {% if section.settings.margin-bottom %}
           --section-gap-bottom: {{ section.settings.margin-bottom }}px;
       {% endif %}
+
+      {%- if section.settings.show_mobile_spacing -%}
+          --section-gap-top-mobile: {{ section.settings.margin-top-mobile }}px;
+      {%- endif -%}
+
+      {%- if section.settings.show_mobile_spacing -%}
+          --section-gap-bottom-mobile: {{ section.settings.margin-bottom-mobile }}px;
+      {%- endif -%}
 
   }
 </style>
@@ -70,7 +93,17 @@
 <script src="{{ 'secondary-nav.js' | asset_url }}" type="module" defer="defer"></script>
 
 <div class="{% if settings.animations %} scroll-trigger animate--slide-in {% endif %}" data-section-id="{{ section.id }}">
-  {% render 'headline', title: section.settings.heading %}
+  {% if section.settings.advanced_heading %}
+    {% if section.settings.heading_richtext != blank %}
+        <div class="headline headline--rich {% if settings.animations %} scroll-trigger animate--slide-in {% endif %} {% if settings.disabled_animations_on_mobile %} disabled-on-mobile {% endif %}">
+            {{ section.settings.heading_richtext }}
+        </div>
+    {% endif %}
+  {% else %}
+    {% if section.settings.heading != blank %}
+        {% render 'headline', title: section.settings.heading %}
+    {% endif %}
+  {% endif %}
 
   <secondary-nav
     {% if section.settings.desktop_placement == 'center' %}
@@ -90,16 +123,19 @@
               <a
                 href="{{ link.url }}"
                 aria-label="{{ link.title }}"
-                class="hero__button  hero__button--primary {% if button_select != 'primary' %} hero__button--secondary{% endif %}{% if button_select == 'link' %} hero__button--link{% endif %}
-                 secondary-navigation__link {% if link.active %}secondary-navigation__link--active{% endif %}"
+                class="secondary-navigation__link hero__button hero__button--primary {% if link.active %}secondary-navigation__link--active{% endif %}{% if button_select != 'primary' %} hero__button--secondary{% endif %}{% if button_select == 'link' %} hero__button--link{% endif %}"
               >
                 {{ link.title }}
               </a>
             </div>
           {% endfor %}
         </div>
-        <div class="swiper-button-prev"></div>
-        <div class="swiper-button-next"></div>
+        <div class="swiper-button-prev wt-slider__nav-btn wt-slider__nav-prev">
+          {% render 'icons', id: 'arrow-left' %}
+        </div>
+        <div class="swiper-button-next wt-slider__nav-btn wt-slider__nav-next">
+          {% render 'icons', id: 'arrow-right' %}
+        </div>
       </div>
     </div>
   </secondary-nav>
@@ -112,10 +148,24 @@
   "class": "spaced-section wt-featured-nav",
   "settings": [
     {
+      "type": "checkbox",
+      "id": "advanced_heading",
+      "label": "t:sections.global.advanced_heading.label",
+      "info": "t:sections.global.advanced_heading.info"
+    },
+    {
       "type": "textarea",
       "id": "heading",
+      "label": "t:sections.settings.settings.heading.label",
       "default": "Featured Navigation",
-      "label": "t:sections.settings.settings.heading.label"
+      "visible_if": "{{ section.settings.advanced_heading == false }}"
+    },
+    {
+      "type": "richtext",
+      "id": "heading_richtext",
+      "label": "t:sections.logo-banner.settings.content.headline.label",
+      "default": "<h2>Featured Navigation</h2>",
+      "visible_if": "{{ section.settings.advanced_heading == true }}"
     },
     {
       "type": "link_list",
@@ -160,15 +210,34 @@
       "label": "t:sections.settings.settings.button_select.default.label"
     },
     {
+      "type": "select",
+      "id": "button_text_style",
+      "options": [
+        {
+          "value": "body",
+          "label": "t:sections.featured-navigation.settings.button_text_style.options.body.label"
+        },
+        {
+          "value": "button",
+          "label": "t:sections.featured-navigation.settings.button_text_style.options.button.label"
+        }
+      ],
+      "default": "body",
+      "label": "t:sections.featured-navigation.settings.button_text_style.label"
+    },
+    {
       "type": "color",
       "id": "active_text_color",
-      "default": "transparent",
       "label": "t:sections.featured-navigation.settings.active_text_color.label"
     },
     {
       "type": "color",
+      "id": "hover_active_text_color",
+      "label": "t:sections.featured-navigation.settings.hover_active_text_color.label"
+    },
+    {
+      "type": "color",
       "id": "active_background_color",
-      "default": "transparent",
       "label": "t:sections.featured-navigation.settings.active_background_color.label"
     },
     {
@@ -179,13 +248,11 @@
     {
       "type": "color",
       "id": "color-body-text",
-      "default": "transparent",
       "label": "t:sections.settings.settings.text-color.label"
     },
     {
       "type": "color",
       "id": "background_color",
-      "default": "transparent",
       "label": "t:sections.settings.settings.background-color.label"
     },
     {
@@ -212,11 +279,39 @@
       "unit": "px",
       "label": "t:sections.settings.settings.distance-bottom.label",
       "info": "t:sections.settings.settings.distance-bottom.info"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_mobile_spacing",
+      "label": "t:sections.settings.settings.show-mobile-spacing.label"
+    },
+    {
+      "type": "range",
+      "id": "margin-top-mobile",
+      "min": 0,
+      "max": 100,
+      "step": 2,
+      "default": 20,
+      "unit": "px",
+      "label": "t:sections.settings.settings.distance-top-mobile.label",
+      "visible_if": "{{ section.settings.show_mobile_spacing }}"
+    },
+    {
+      "type": "range",
+      "id": "margin-bottom-mobile",
+      "min": 0,
+      "max": 100,
+      "step": 2,
+      "default": 20,
+      "unit": "px",
+      "label": "t:sections.settings.settings.distance-bottom-mobile.label",
+      "visible_if": "{{ section.settings.show_mobile_spacing }}"
     }
   ],
   "presets": [
     {
       "name": "t:sections.featured-navigation.name",
+      "category": "t:sections.categories.other",
       "blocks": []
     }
   ],
@@ -225,13 +320,3 @@
   }
 }
 {% endschema %}
-{% comment %}
-
-This file has been rewritten to preserve the original behavior.
-
----
-Changes:
-- from: "{% render 'headline', title: section.settings.heading | newline_to_br %}"
-  to: "{% render 'headline', title: section.settings.heading %}"
-  position: 2144..2200
-{% endcomment %}

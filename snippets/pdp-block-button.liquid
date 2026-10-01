@@ -1,0 +1,16 @@
+{% if block.settings.button_label != blank %}
+  <div
+    class="wt-button-section__container{% if block.settings.button_horizontal_position == 'left' %} wt-button-section__left{% elsif block.settings.button_horizontal_position == 'right' %} wt-button-section__right{% endif %}{% if settings.animations %} scroll-trigger animate--slide-in{% endif %}{% if settings.disabled_animations_on_mobile %} disabled-on-mobile{% endif %}"
+    {{ block.shopify_attributes }}
+  >
+    <a
+      href="{{ block.settings.button_link }}"
+      tabindex="0"
+      aria-label="{{ block.settings.button_label }}"
+      class="hero__button{% if block.settings.button_disable_on_mobile %} hero__button--mobile{% endif %} hero__button--primary{% if block.settings.button_select != 'primary' %} hero__button--secondary{% endif %}{% if block.settings.button_select == 'link' %} hero__button--link{% endif %}{% if block.settings.button_full_width %} wt-button--full-width{% endif %}"
+      {% if block.settings.button_link_in_new_window %}target="_blank" rel="noreferrer noopener"{% endif %}
+    >
+      <span>{{ block.settings.button_label }}</span>
+    </a>
+  </div>
+{% endif %}

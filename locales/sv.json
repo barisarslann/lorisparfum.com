@@ -40,6 +40,11 @@
     },
     "continue_shopping": "Fortsätt shoppa",
     "pagination": {
+      "previous_label": "Föregående",
+      "next_label": "Nästa",
+      "load_more": "Ladda fler",
+      "load_previous": "Ladda tidigare",
+      "showing": "Visar {{ count }} av {{ total }} artiklar",
       "label": "Paginering",
       "page": "Sida {{ number }}",
       "next": "Nästa sida",
@@ -52,6 +57,8 @@
       "view": "Visa min varukorg ({{ count }})",
       "item_added": "Artikeln har lagts till i varukorgen"
     },
+    "copy": "Kopiera",
+    "copied": "Kopierat",
     "share": {
       "copy_to_clipboard": "Kopiera länk",
       "share_url": "Länk",
@@ -60,9 +67,6 @@
     },
     "quick_add": {
       "view_all_details": "Visa alla detaljer"
-    },
-    "icons": {
-      "icon_title": ""
     },
     "slider": {
       "of": "av",
@@ -74,7 +78,9 @@
   "newsletter": {
     "label": "Din e-postadress",
     "success": "Tack för att du prenumererar",
-    "button_label": "Prenumerera"
+    "button_label": "Prenumerera",
+    "close": "Stäng popup",
+    "consent_checkbox_label": "Jag vill anmäla mig till nyhetsbrevet (information om kampanjer, rabatter, lanseringar, tävlingar)."
   },
   "accessibility": {
     "skip_to_text": "Gå vidare till innehåll",
@@ -95,7 +101,10 @@
     "star_reviews_info": "{{ rating_value }} av {{ rating_max }} stjärnor",
     "collapsible_content_title": "Hopfällbart innehåll",
     "complementary_products": "Kompletterande produkter",
-    "searching": "Sökning pågår..."
+    "searching": "Sökning pågår...",
+    "scroll_to_top": "Scroll to top",
+    "open": "Öppna",
+    "subscription_widget__selling_plan_select": "Leveransfrekvens för {{ plan_group }}"
   },
   "blogs": {
     "article": {
@@ -115,7 +124,10 @@
       "back_to_blog": "Tillbaka till blogg",
       "share": "Dela denna artikel",
       "success": "Din kommentar har lagts upp! Tack!",
-      "success_moderated": "Din kommentar har lagts upp. Vi kommer publicera den lite senare, eftersom att bloggen är modererad."
+      "success_moderated": "Din kommentar har lagts upp. Vi kommer publicera den lite senare, eftersom att bloggen är modererad.",
+      "date_format": "%Y-%m-%d",
+      "published_on": "den {{ date }}",
+      "posted_by": "Skriven av {{ author }}"
     }
   },
   "onboarding": {
@@ -125,6 +137,7 @@
   "products": {
     "product": {
       "add_to_cart": "Lägg i varukorgen",
+      "pick_size": "Välj {{ option }}",
       "description": "Beskrivning",
       "on_sale": "Rea",
       "product_variants": "Produktvarianter",
@@ -138,7 +151,8 @@
         "from_price_html": "Från {{ price }}",
         "regular_price": "Ordinarie pris",
         "sale_price": "Försäljningspris",
-        "unit_price": "Enhetspris"
+        "unit_price": "Enhetspris",
+        "free": "Gratis"
       },
       "share": "Dela den här produkten",
       "sold_out": "Slutsåld",
@@ -185,7 +199,9 @@
       "volume_pricing": {
         "note": "TODO",
         "price_range": "TODO"
-      }
+      },
+      "select_option": "Välj alternativ",
+      "select_options": "Välj alternativ"
     },
     "modal": {
       "label": "Mediagalleri"
@@ -222,6 +238,10 @@
     }
   },
   "templates": {
+    "404": {
+      "title": "Sidan hittades inte",
+      "subtext": "404"
+    },
     "search": {
       "no_results": "Inga resultat hittades för \"{{ terms }}\". Kontrollera stavningen eller använd ett annat ord eller fras.",
       "results_with_count": {
@@ -242,7 +262,9 @@
         "products": "Produkter",
         "pages": "Sidor",
         "articles": "Artiklar",
-        "suggestions": "Förslag"
+        "suggestions": "Förslag",
+        "popular_searches": "Populära sökningar",
+        "useful_links": "Användbara länkar"
       },
       "search_for": "Visa alla för \"{{ terms }}\""
     },
@@ -260,13 +282,12 @@
         "error_heading": "Justera följande:",
         "title": "Kontaktformulär"
       }
-    },
-    "404": {
-      "title": "Sidan hittades inte",
-      "subtext": "404"
     }
   },
   "sections": {
+    "shoppable_buy_all": {
+      "add_all_to_cart": "Lägg till alla i varukorg"
+    },
     "header": {
       "announcement": "Meddelande",
       "menu": "Meny",
@@ -305,7 +326,29 @@
         "title": "Har du ett konto?",
         "paragraph_html": "<a href=\"{{ link }}\" tabindex=\"-1\" class=\"link underlined-link\">Logga in</a> för att betala snabbare."
       },
-      "view_cart": "Visa kundvagn"
+      "view_cart": "Visa kundvagn",
+      "checkbox": "Slå in som present",
+      "order_note": "Ordernotering",
+      "estimate_shipping": "Frakt",
+      "discount_code": "Rabattkod",
+      "features": {
+        "country_region": "Land/region",
+        "postal_zip": "Postnummer",
+        "apply": "Använd",
+        "calculate": "Beräkna",
+        "discount_placeholder": "Ange rabattkod",
+        "shipping_select_country_zip": "Välj ett land och ange ett postnummer.",
+        "shipping_calculating": "Beräknar…",
+        "shipping_no_rate": "Det finns ingen fraktkostnad för denna destination. Försök kontrollera adressen.",
+        "shipping_one_rate": "Det finns ett fraktalternativ för denna destination:",
+        "shipping_n_rates": "Det finns {{ count }} fraktalternativ för denna destination:",
+        "shipping_free": "Gratis",
+        "discount_enter_code": "Ange en rabattkod.",
+        "discount_applying": "Tillämpar…",
+        "discount_applied": "Rabatt tillämpad!",
+        "discount_invalid": "Rabattkoden är ogiltig eller gäller inte för den aktuella varukorgen.",
+        "discount_error": "Något gick fel. Försök igen."
+      }
     },
     "footer": {
       "payment": "Betalningsmetoder",
@@ -369,6 +412,54 @@
       },
       "error": {
         "invalid_format": "Ogiltigt datumformat. Vänligen ange datum och tid i formatet ÅÅÅÅ-MM-DD TT:MM."
+      }
+    },
+    "localization_drawer": {
+      "title": "Lokalisering",
+      "country_label": "Land/region",
+      "language_label": "Språk",
+      "drawer_title": "Lokaliseringsalternativ",
+      "current_country_info": "Du skickar för närvarande till {{ countryName }} och din beställning kommer att debiteras i {{ currencyIso }} {{ currencySymbol }}.",
+      "search_location": {
+        "label": "Sök plats",
+        "placeholder": "Sök plats..."
+      }
+    },
+    "bundle-builder": {
+      "add_to_bundle": "Lägg till i bundle",
+      "status": {
+        "discount": "🎉 Du fick en rabatt.",
+        "add_more": "Du kan fortfarande lägga till mer."
+      },
+      "toggle": "Växla paketpanel",
+      "remove_item": "Ta bort artikel",
+      "error_message": "Ett fel inträffade. Försök igen."
+    },
+    "quiz": {
+      "back": "Gå tillbaka",
+      "prev_question": "Föregående",
+      "next_question": "Nästa",
+      "see_results": "Se resultat"
+    },
+    "blog_posts": {
+      "tags_all": "Alla inlägg"
+    },
+    "compare_products": {
+      "name": "Jämför produkter",
+      "badge": {
+        "compare": "VS"
+      },
+      "placeholders": {
+        "left_text": "Vänster",
+        "right_text": "Höger"
+      },
+      "aria": {
+        "table": "Jämförelsetabell"
+      },
+      "blocks": {
+        "table_row": {
+          "center_text_default": "Skriv text..."
+        }
       }
     }
   },
@@ -534,7 +625,7 @@
   },
   "aria-label": {
     "announcement-bar": "Stäng meddelandefältet",
-    "contact-form": "Skicka ett formulär",
+    "contact-form": "Skicka",
     "featured-collection": "Visa alla",
     "featured-product-3d-model": "Visa 3D-modell",
     "main-product-video": "Spela video",
@@ -572,6 +663,15 @@
     "price-from": "Pris från",
     "price-to": "Pris till",
     "remove-price-range": "Ta bort prisintervallfilter",
-    "sort-options": "Sorteringsalternativ"
+    "sort-options": "Sorteringsalternativ",
+    "lookbook-button": "Se detaljer",
+    "pills-navigation": "Flikmenynavigering",
+    "collection-tabs": "Kollektionsflikar"
+  },
+  "placeholder": {
+    "select_option": "Välj ett alternativ"
+  },
+  "cross_sell": {
+    "empty_msg": "Inga produkter tillgängliga att visa. Detta block kommer inte att vara synligt för kunder på butiksfronten."
   }
 }

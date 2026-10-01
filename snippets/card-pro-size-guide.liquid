@@ -1,0 +1,75 @@
+{%- liquid
+  assign sg_link = link_text | default: '' | strip
+  assign sg_has_content = false
+  if content != blank
+    assign sg_has_content = true
+  endif
+  assign sg_meta = null
+  if metafield_name != blank
+    assign sg_mf = metafield_name | strip | split: '.'
+    assign sg_ns = sg_mf | first | strip
+    assign sg_key = sg_mf | last | strip
+    assign sg_meta = product.metafields[sg_ns][sg_key]
+  endif
+  assign sg_show = false
+  if sg_link != ''
+    if sg_meta
+      assign sg_show = true
+    elsif sg_has_content
+      assign sg_show = true
+    endif
+  endif
+-%}
+{% if sg_show %}
+  <button
+    type="button"
+    class="card-pro__qbp-guide-trigger"
+    data-qbp-guide-open
+    aria-haspopup="dialog"
+  >
+    {{ sg_link }}
+  </button>
+
+  <dialog class="card-pro__qbp-guide" data-qbp-guide>
+    <div class="card-pro__qbp-guide__top">
+      <button
+        type="button"
+        class="card-pro__qbp-guide__close"
+        aria-label="{{ 'accessibility.close' | t | default: 'Close' }}"
+        data-qbp-guide-close
+      >
+        {% render 'icons', id: 'close', icon_class: 'wt-cart__drawer__close' %}
+      </button>
+    </div>
+
+    <div class="card-pro__qbp-guide__body wt-product__modal--content-info rte">
+      <p class="headline__title">
+        {%- if sg_has_content -%}{{ content.title }}{%- else -%}{{ sg_link }}{%- endif -%}
+      </p>
+      {% if sg_meta %}
+        {% assign rows = sg_meta | newline_to_br | split: '<br />' %}
+        <div class="size-table__wrapper">
+          <table class="size-table size-table--striped">
+            {% for row in rows %}
+              <tr>
+                {% assign cells = row | split: '|' %}
+                {% for cell in cells %}
+                  {% assign clean_cell = cell | strip %}
+                  {% assign first_char = clean_cell | slice: 0, 1 %}
+                  {% if first_char == '#' %}
+                    <th>{{ clean_cell | remove_first: '#' | strip }}</th>
+                  {% else %}
+                    <td>{{ clean_cell }}</td>
+                  {% endif %}
+                {% endfor %}
+              </tr>
+            {% endfor %}
+          </table>
+        </div>
+      {% endif %}
+      {% if sg_has_content %}
+        {{ content.content }}
+      {% endif %}
+    </div>
+  </dialog>
+{% endif %}

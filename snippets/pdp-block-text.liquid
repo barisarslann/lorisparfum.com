@@ -1,0 +1,14 @@
+{% comment %}
+  Params: block
+{% endcomment %}
+<div class="wt-product__text-block__wrapper{% if settings.animations %} scroll-trigger animate--slide-in{% endif %}{% if settings.disabled_animations_on_mobile %} disabled-on-mobile{% endif %}">
+  {% if block.settings.heading != empty %}
+    <div class="wt-product__text-block__title" not-quick-add>
+      {{- block.settings.heading -}}
+    </div>
+  {% endif %}
+  <div class="wt-product__text-block rte" not-quick-add>
+    {{ block.settings.content }}
+    {{ block.settings.page.content }}
+  </div>
+</div>

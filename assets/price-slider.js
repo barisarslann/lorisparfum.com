@@ -14,7 +14,7 @@ class PriceSlider extends HTMLElement {
     const rangeMax = parseInt(priceSlider.dataset.max);
     const step = parseInt(priceSlider.dataset.step);
     const currency = priceSlider.dataset.currency;
-    const applyButton = document.querySelector(".btn-checkout.wt-cart__cta");
+    const applyButton = document.querySelector(".wt-filter__footer .wt-cart__cta");
     const facetForm = document.querySelector("facet-filters-form > form");
     const isSliderInCollapsible = this.closest(".f-price-slider ");
     const isRtl = document.documentElement.getAttribute("dir") === "rtl";

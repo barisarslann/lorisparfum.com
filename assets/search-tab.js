@@ -24,7 +24,7 @@ if (!customElements.get("search-tab")) {
           ...document.querySelectorAll("#product-grid .collection__grid__item"),
         );
         this.currentContainer = "products";
-        this.sectionId = this.dataset.sectionId;
+        this.sectionId = this.closest('[data-section-id]')?.dataset?.sectionId;
         this.terms = this.dataset.terms;
         this.eventCounter = 0;
         this.timeout;

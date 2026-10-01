@@ -1,6 +1,40 @@
-<li id="CartDrawer-Item-{{ item.index | plus: 1 }}" class="cart-item wt-cart__item">
+{%liquid
+ if request.page_type == 'cart'
+  assign tab_index = '0'
+ else
+   assign tab_index = '-1'
+ endif
+
+ assign is_service_product = false
+ assign show_qty_remove_controls = true
+ assign service_product = settings.cart_additional_service_product
+ if settings.cart_show_additional_service and service_product != blank and item.product_id == service_product.id
+   assign is_service_product = true
+   if settings.cart_additional_service_show_qty_remove == false
+     assign show_qty_remove_controls = false
+   endif
+ endif
+
+ # Detect a service line item whose product became unavailable after it
+ # was added to the cart (sold out / archived / draft). The user can
+ # still untick the additional-service checkbox to remove the line, so
+ # this is purely a visual hint — see _cart.scss `.wt-cart__item--unavailable`.
+ assign is_service_unavailable = false
+ if is_service_product and item.variant.available == false
+   assign is_service_unavailable = true
+ endif
+
+ # Service products render the same way on the cart page as in the
+ # cart drawer (compact row, no "price under title" block) — locally
+ # turn off the cart_page-specific layout for this row only.
+ if is_service_product
+   assign cart_page = false
+ endif
+%}
+
+<li id="CartDrawer-Item-{{ item.index | plus: 1 }}" data-loris-variant-id="{{ item.variant_id }}" class="cart-item wt-cart__item{% if is_service_unavailable %} wt-cart__item--unavailable{% endif %}">
   <picture class="wt-cart__item__thumb">
-    <a href="{{ item.url }}" aria-label="{{ item.title }}" tabindex="-1" class="wt-cart__item__link">
+    <a href="{{ item.url }}" aria-label="{{ item.title }}" tabindex="{{ tab_index }}" class="wt-cart__item__link">
       {% if item.image %}
         <img
           class="card__img"
@@ -36,9 +70,16 @@
         <span class="card__subtitle">{{ item.product.vendor | escape }}</span>
       {% endif %}
       <h2 class="wt-cart__item__name cart-item__name">
-        <a href="{{ item.product.url }}" tabindex="-1" class="wt-cart__item__link">{{ item.product.title | escape }}</a>
+        <a href="{{ item.product.url }}" tabindex="{{ tab_index }}" class="wt-cart__item__link">{{ item.product.title | escape }}</a>
       </h2>
-      {%- if item.original_price != item.final_price and cart_page -%}
+      {%- if is_service_unavailable -%}
+        <p class="wt-cart__item__unavailable">{{ 'products.product.unavailable' | t }}</p>
+      {%- endif -%}
+      {%- if item.final_price == 0 and cart_page -%}
+        <div class="product-option">
+          <span class="cart-item__price cart-item__price--free">{{ 'products.product.price.free' | t }}</span>
+        </div>
+      {%- elsif item.original_price != item.final_price and cart_page -%}
         <div class="cart-item__discounted-prices ">
           <span class="visually-hidden">
             {{ 'products.product.price.regular_price' | t }}
@@ -73,20 +114,22 @@
           <span class="cart-item__price">{{ item.original_price | money }}</span>
         </div>
       {%- endif -%}
-      <cart-remove-button
-        id="CartDrawer-Remove-{{ item.index | plus: 1 }}"
-        data-index="{{ item.index | plus: 1 }}"
-      >
-        <a
-          class="wt-cart__item__remove wt-cart__item__remove--title"
-          href="#"
-          role="button"
-          aria-label="{{ 'sections.cart.remove_title' | t: title: item.title }}"
-          tabindex="-1"
+      {%- if show_qty_remove_controls -%}
+        <cart-remove-button
+          id="CartDrawer-Remove-{{ item.index | plus: 1 }}"
+          data-index="{{ item.index | plus: 1 }}"
         >
-          {%- render 'icons', id: 'bin' -%}
-        </a>
-      </cart-remove-button>
+          <a
+            class="wt-cart__item__remove wt-cart__item__remove--title"
+            href="#"
+            role="button"
+            aria-label="{{ 'sections.cart.remove_title' | t: title: item.title }}"
+            tabindex="{{ tab_index }}"
+          >
+            {%- render 'icons', id: 'bin' -%}
+          </a>
+        </cart-remove-button>
+      {%- endif -%}
       <div class="options">
         {%- if item.product.has_only_default_variant == false
           or item.properties.size != 0
@@ -138,12 +181,13 @@
     </div>
     <div class="wt-cart__item__amount cart-page">
       <div class="item__details">
+        {%- if show_qty_remove_controls -%}
         <quantity-counter class="counter-wrapper" data-cart="true">
           <div class="counter">
             <button
               aria-label="{{- 'products.product.quantity.decrease' | t: product: item.product.title | escape -}}"
               type="button"
-              tabindex="-1"
+              tabindex="{{ tab_index }}"
               class="js-counter-decrease js-counter-button"
             >
               <span class="visually-hidden">
@@ -167,13 +211,13 @@
               aria-label="Counter quantity"
               id="Drawer-quantity-{{ item.index | plus: 1 }}"
               data-index="{{ item.index | plus: 1 }}"
-              tabindex="-1"
+              tabindex="{{ tab_index }}"
             >
             <button
               aria-label="{{- 'products.product.quantity.increase' | t: product: item.product.title | escape -}}"
               type="button"
               class="js-counter-increase js-counter-button"
-              tabindex="-1"
+              tabindex="{{ tab_index }}"
             >
               <span class="visually-hidden">
                 {{- 'products.product.quantity.increase' | t: product: item.product.title | escape -}}
@@ -192,18 +236,21 @@
             href="#"
             aria-label="{{ 'sections.cart.remove_title' | t: title: item.title }}"
             role="button"
-            tabindex="-1"
+            tabindex="{{ tab_index }}"
           >
             {%- render 'icons', id: 'bin' -%}
           </a>
         </cart-remove-button>
+        {%- endif -%}
       </div>
 
       <div class="wt-cart__item__price-wrapper">
         <div class="loading-overlay hidden">
           {% render 'button-loading-indicator', hidden: false %}
         </div>
-        {%- if item.original_line_price != item.final_line_price -%}
+        {%- if item.final_line_price == 0 -%}
+          <span class="price price--end price--end-free">{{ 'products.product.price.free' | t }}</span>
+        {%- elsif item.original_line_price != item.final_line_price -%}
           <div class="cart-item__discounted-prices">
             <span class="visually-hidden">
               {{ 'products.product.price.regular_price' | t }}
@@ -215,6 +262,21 @@
               {{ 'products.product.price.sale_price' | t }}
             </span>
             <span class="price price--end">
+              {{ item.final_line_price | money }}
+            </span>
+          </div>
+        {% elsif item.selling_plan_allocation.compare_at_price > item.selling_plan_allocation.price %}
+          <div class="cart-item__discounted-prices">
+            <span class="visually-hidden">
+              {{ 'products.product.price.regular_price' | t }}
+            </span>
+            <s class="cart-item__old-price price price--end">
+              {{ item.variant.selling_plan_allocations[0].compare_at_price | times: item.quantity | money }}
+            </s>
+            <span class="visually-hidden">
+              {{ 'products.product.price.sale_price' | t }}
+            </span>
+            <span class="price price--end price--end-sale">
               {{ item.final_line_price | money }}
             </span>
           </div>
@@ -230,7 +292,7 @@
               {{ 'products.product.price.sale_price' | t }}
             </span>
             <span class="price price--end price--end-sale">
-              {{ item.variant.price | times: item.quantity | money }}
+              {{ item.final_line_price | money }}
             </span>
           </div>
         {%- else -%}

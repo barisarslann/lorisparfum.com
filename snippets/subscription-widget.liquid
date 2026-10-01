@@ -1,0 +1,219 @@
+<script src="{{ 'subscription-widget.js' | asset_url }}" defer="defer"></script>
+
+{% assign subscription_plans_size = product.selling_plan_groups.size %}
+
+{% assign has_stock = false %}
+
+{% for variant in product.variants %}
+    {% if variant.available %}
+        {% assign has_stock = true %}
+        {% break %}
+    {% endif %}
+{% endfor %}
+
+{% assign current_variant = product.selected_or_first_available_variant %}
+{% assign hide_subscription = current_variant.metafields.custom.hide_subscription | default: false %}
+{% liquid
+  assign select_subscription = true
+  if block.settings.plan_order == 'one_time_first'
+    assign select_subscription = false
+  endif
+  if hide_subscription == true
+    assign select_subscription = false
+  endif
+  if current_variant.selected_selling_plan_allocation.selling_plan.id != blank
+    assign select_subscription = true
+  endif
+%}
+{% if subscription_plans_size > 0 and has_stock %}
+<div class="wt-subscription-widget {% if settings.animations %} scroll-trigger animate--slide-in {% endif %} {% if settings.disabled_animations_on_mobile %} disabled-on-mobile {% endif %}" data-block-id="{{ block.id }}" data-section-id="{{ section.id }}" data-update-url-on-plan-change="{% if section.type == 'featured-product' %}false{% else %}true{% endif %}" {{ block.shopify_attributes }}>
+        <style>
+          [data-block-id="{{ block.id }}"] {
+            --block-color-background: {{ block.settings.background_color }};
+            {%- if block.settings.heading_color != blank %} --block-color-heading-color: {{ block.settings.heading_color }};{% endif %}
+            {%- if block.settings.content_text_color != blank %} --block-color-content-text: {{ block.settings.content_text_color }};{% endif %}
+            {%- if block.settings.text_color != blank %} --block-color-heading-color: {{ block.settings.text_color }}; --block-color-content-text: {{ block.settings.text_color }};{% endif %}
+            --block-color-border: {{ block.settings.border_color }};
+            --block-color-active-background: {{ block.settings.active_background_color }};
+            --block-color-active-border: {{ block.settings.active_border_color }};
+            --block-color-accent: {{ block.settings.accent_color }};
+            {%- if block.settings.subscription_title_color != blank %} --block-color-subscription-title: {{ block.settings.subscription_title_color }};{% endif %}
+            --block-color-regular-price: {{ block.settings.regular_price_color }};
+            --block-color-sale-price: {{ block.settings.sale_price_color }};
+            --block-color-crossed-out-price: {{ block.settings.crossed_out_price_color }};
+          }
+        </style>
+        <sub-widget data-show-discount-percentage="{{ settings.show_discount_percentage_badge }}">
+            <div class="wt-subscription-widget__container" {% if block.settings.text_style == 'heading' %}data-text-style-headline{% endif %}>
+
+                {% capture selling_plans_html %}
+                {% for selling_plan_group in product.selling_plan_groups %}
+                    {% if selling_plan_group.options.size < 1 %}
+                        {% continue %}
+                    {% endif %}
+
+                    <div class="wt-subscription-widget__plans {% if select_subscription %}wt-subscription-widget__plans--selected{% elsif hide_subscription %}wt-subscription-widget__plans--disabled{% endif %}">
+                        {% if block.settings.subscription_title != blank %}
+                            <div class="wt-subscription-widget__plans-title">{{ block.settings.subscription_title }}</div>
+                        {% endif %}
+                        <div class="wt-subscription-widget__plan-header">
+                            <div class="wt-subscription-widget__plan-header__title">
+                                <div class="wt-subscription-widget__plan-header__circle">
+                                </div>
+                                <span class="wt-subscription-widget__plan-header__title-text">{{ selling_plan_group.name }}</span>
+                            </div>
+                            {% if block.settings.show_prices %}
+                            <div class="wt-subscription-widget__plan-header__price">
+
+                                <div class="wt-subscription-widget__plan-header__price-container">
+                                {% assign first_allocation = nil %}
+                                {% for alloc in product.selected_or_first_available_variant.selling_plan_allocations %}
+                                    {% if alloc.selling_plan_group_id == selling_plan_group.id %}
+                                        {% assign first_allocation = alloc %}
+                                        {% break %}
+                                    {% endif %}
+                                {% endfor %}
+                                
+                                {% if first_allocation.compare_at_price > first_allocation.price %}
+                                    <p class="wt-subscription-widget__plan-header__price-sale">{{ first_allocation.compare_at_price | money }}</p>
+                                {% endif %}
+                                
+                                {% liquid 
+                                    assign add_ss_discount = 0
+                                    if product.metafields.custom.additional_subscription_discount != blank
+                                        assign ss_discount = product.metafields.custom.additional_subscription_discount | split: "|"
+                                        if ss_discount[0] != ''
+                                            assign add_ss_discount = ss_discount[0] | times: 1.0
+                                        endif
+                                    endif
+                                %}
+                                <p class="wt-subscription-widget__plan-header__price-regular {% if first_allocation.compare_at_price > first_allocation.price %}wt-subscription-widget__plan-header__price-regular--sale{% endif %}">
+                                    {% if add_ss_discount > 0 %}
+                                        {{ 100 | minus: add_ss_discount | divided_by: 100.0 | times: first_allocation.price | money }}
+                                    {% else %}
+                                        {{ first_allocation.price | money }}
+                                    {% endif %}
+                                </p>
+                                
+                                </div>
+
+                            </div>
+                            {% endif %}
+                        </div>
+                
+                        <div class="wt-subscription-widget__plan-content">
+                                <label class="visually-hidden" for="selling_plan_select_{{ selling_plan_group.id }}">{{ 'accessibility.subscription_widget__selling_plan_select' | t: plan_group: selling_plan_group.name }}</label>
+                                <select class="wt-subscription-widget__plan-content__select" id="selling_plan_select_{{ selling_plan_group.id }}" form="{{ product_form_id }}">
+                                    {% for selling_plan_allocation in product.selected_or_first_available_variant.selling_plan_allocations %}
+                                        {% if selling_plan_group.id == selling_plan_allocation.selling_plan_group_id %}
+                                            
+                                            {% liquid 
+                                                assign add_ss_discount = 0
+                                                if product.metafields.custom.additional_subscription_discount != blank
+                                                    assign ss_discount = product.metafields.custom.additional_subscription_discount | split: "|"
+                                                    if ss_discount[0] != ''
+                                                        assign add_ss_discount = ss_discount[0] | times: 1.0
+                                                    endif
+                                                endif
+                                            %}
+
+                                            <option value="{{ selling_plan_allocation.selling_plan.id }}"
+                                                data-price="{% if add_ss_discount > 0 %}{{ 100 | minus: add_ss_discount | divided_by: 100.0 | times: selling_plan_allocation.price | money | escape }}{% else %}{{ selling_plan_allocation.price | money | escape }}{% endif %}"
+                                                data-compare-at-price="{{ selling_plan_allocation.compare_at_price | money | escape }}"
+                                                data-price-raw="{% if add_ss_discount > 0 %}{{ 100 | minus: add_ss_discount | divided_by: 100.0 | times: selling_plan_allocation.price | round }}{% else %}{{ selling_plan_allocation.price }}{% endif %}"
+                                                data-compare-at-price-raw="{{ selling_plan_allocation.compare_at_price }}"
+                                                data-price-formatted="{% if add_ss_discount > 0 %}{% if settings.currency_code_enabled %}{{ 100 | minus: add_ss_discount | divided_by: 100.0 | times: selling_plan_allocation.price | money_with_currency | escape }}{% else %}{{ 100 | minus: add_ss_discount | divided_by: 100.0 | times: selling_plan_allocation.price | money | escape }}{% endif %}{% else %}{% if settings.currency_code_enabled %}{{ selling_plan_allocation.price | money_with_currency | escape }}{% else %}{{ selling_plan_allocation.price | money | escape }}{% endif %}{% endif %}"
+                                                data-compare-at-price-formatted="{% if settings.currency_code_enabled %}{{ selling_plan_allocation.compare_at_price | money_with_currency | escape }}{% else %}{{ selling_plan_allocation.compare_at_price | money | escape }}{% endif %}"
+                                                {% if current_variant.selected_selling_plan_allocation.selling_plan.id == selling_plan_allocation.selling_plan.id %}
+                                                    selected
+                                                {% endif %}
+                                            >
+                                                {{ selling_plan_allocation.selling_plan.name }}
+                                            </option>
+                                        {% endif %}
+                                    {% endfor %}
+                                </select>
+
+                            <div class="wt-subscription-widget__plan-content__description">
+                                {% assign description = block.settings.description %}
+
+                                {% if block.settings.show_tick_icon %}
+                                    {% capture tick_icon %}
+                                        <li>{% render 'icons', id: 'check', icon_class: 'wt-subscription-widget__tick-icon' %}<div>
+                                    {% endcapture %}
+
+                                    {% assign description = description | replace: '<li>', tick_icon | replace: '</li>', '</div></li>' %}
+                                {% endif %}
+
+                                {{ description }}
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+                {% endcapture %}
+
+                {% capture one_time_html %}
+                <div class="wt-subscription-widget__plans{% unless select_subscription %} wt-subscription-widget__plans--selected{% endunless %}" id="single-purchase-plan"
+                    {% liquid
+                        assign ot_price = current_variant.price
+                        assign ot_compare_at_price = current_variant.compare_at_price | default: current_variant.price
+                        if ot_compare_at_price == 0
+                          assign ot_compare_at_price = current_variant.price
+                        endif
+                    %}
+                    data-price-raw="{{ ot_price }}"
+                    data-compare-at-price-raw="{{ ot_compare_at_price }}"
+                    data-price="{{ ot_price | money | escape }}"
+                    data-compare-at-price="{{ ot_compare_at_price | money | escape }}"
+                    data-price-formatted="{% if settings.currency_code_enabled %}{{ ot_price | money_with_currency | escape }}{% else %}{{ ot_price | money | escape }}{% endif %}"
+                    data-compare-at-price-formatted="{% if settings.currency_code_enabled %}{{ ot_compare_at_price | money_with_currency | escape }}{% else %}{{ ot_compare_at_price | money | escape }}{% endif %}"
+                >
+                    <div class="wt-subscription-widget__plan-header">
+                        <div class="wt-subscription-widget__plan-header__title wt-subscription-widget__plan-header__title--single-purchase">
+                            <div class="wt-subscription-widget__plan-header__circle">
+                            </div>
+                            <span class="wt-subscription-widget__plan-header__title-text">{{ block.settings.one_time_label }}</span>
+                        </div>
+                        {% if block.settings.show_prices %}
+                        <div class="wt-subscription-widget__plan-header__price-container{% if ot_compare_at_price > ot_price %} price__sale{% endif %}">
+                            {% if ot_compare_at_price > ot_price %}
+                                <p class="wt-subscription-widget__plan-header__price-sale">{{ ot_compare_at_price | money }}</p>
+                            {% endif %}
+                            <p class="wt-subscription-widget__plan-header__price-regular{% if ot_compare_at_price > ot_price %} wt-subscription-widget__plan-header__price-regular--sale{% endif %}">{{ ot_price | money }}</p>
+                        </div>
+                        {% endif %}
+                    </div>
+
+                    {% if block.settings.one_time_description != blank %}
+                    <div class="wt-subscription-widget__plan-content wt-subscription-widget__plan-content--one-time">
+                        <div class="wt-subscription-widget__plan-content__description">
+                            {% assign one_time_description = block.settings.one_time_description %}
+                            {% if block.settings.one_time_show_tick_icon %}
+                                {% capture tick_icon %}
+                                    <li>{% render 'icons', id: 'check', icon_class: 'wt-subscription-widget__tick-icon' %}<div>
+                                {% endcapture %}
+                                {% assign one_time_description = one_time_description | replace: '<li>', tick_icon | replace: '</li>', '</div></li>' %}
+                            {% endif %}
+                            {{ one_time_description }}
+                        </div>
+                    </div>
+                    {% endif %}
+
+                </div>
+                {% endcapture %}
+
+                {% if block.settings.plan_order == 'one_time_first' %}
+                    {{ one_time_html }}
+                    {{ selling_plans_html }}
+                {% else %}
+                    {{ selling_plans_html }}
+                    {{ one_time_html }}
+                {% endif %}
+
+                <input type='hidden' id="selling_plan_hidden" name="selling_plan" form="{{ product_form_id }}"
+                value="{{ current_variant.selected_selling_plan_allocation.selling_plan.id }}"
+                >
+            </div>
+        </sub-widget>
+</div>
+{% endif %}

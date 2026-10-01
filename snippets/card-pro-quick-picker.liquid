@@ -1,0 +1,67 @@
+{%- liquid
+  assign qp_mode = mode | default: 'picker'
+  assign qp_single_id = product.selected_or_first_available_variant.id
+  assign qp_uid = uid | default: product.id
+  assign qp_icon = settings.quick_buy_icon | default: 'plus'
+-%}
+<quick-size-picker
+  class="card-pro__qbp card-pro__qbp--{{ qp_mode }}"
+  data-mode="{{ qp_mode }}"
+  data-cart-type="{{ settings.cart_type }}"
+  {% if qp_mode == 'single' %}
+    data-variant-id="{{ qp_single_id }}"
+    data-available="{% if product.available %}true{% else %}false{% endif %}"
+  {% endif %}
+>
+  <button
+    type="button"
+    class="card-pro__qbp-trigger"
+    aria-haspopup="{% if qp_mode == 'picker' %}dialog{% else %}false{% endif %}"
+    aria-expanded="false"
+    {% if qp_mode == 'picker' %}aria-controls="qbp-sheet-{{ qp_uid }}-{{ product.id }}"{% endif %}
+    aria-label="{% if qp_mode == 'single' %}{{ 'products.product.add_to_cart' | t }}{% else %}{{ 'products.product.choose_options' | t }}{% endif %}"
+    data-qbp-trigger
+    {% if qp_mode == 'single' and product.available == false %}
+      disabled
+      aria-disabled="true"
+    {% endif %}
+  >
+    {% render 'icons', id: qp_icon %}
+    <span class="card-pro__qbp-spinner" aria-hidden="true"></span>
+  </button>
+
+  {% if qp_mode == 'picker' %}
+    <div class="card-pro__qbp-clip">
+      <dialog
+        class="card-pro__qbp-sheet"
+        id="qbp-sheet-{{ qp_uid }}-{{ product.id }}"
+        aria-labelledby="qbp-title-{{ qp_uid }}-{{ product.id }}"
+        data-qbp-sheet
+      >
+        <div class="card-pro__qbp-grabber" data-qbp-grabber aria-hidden="true"></div>
+        <div class="card-pro__qbp-head">
+          <span class="card-pro__qbp-title wt-drawer__title__text" id="qbp-title-{{ qp_uid }}-{{ product.id }}">{{ 'products.product.pick_size' | t: option: product.options[0] }}</span>
+          {% render 'card-pro-size-guide',
+            product: product,
+            link_text: size_guide_link,
+            content: size_guide_content,
+            metafield_name: size_guide_metafield
+          %}
+          <button
+            type="button"
+            class="card-pro__qbp-close"
+            aria-label="{{ 'accessibility.close' | t }}"
+            data-qbp-close
+          >
+            {% render 'icons', id: 'close', icon_class: 'wt-cart__drawer__close' %}
+          </button>
+        </div>
+        <ul class="card-pro__qbp-list" role="list">
+          {% render 'card-pro-qbp-rows', product: product, with_action: true %}
+        </ul>
+      </dialog>
+    </div>
+
+    <div class="card-pro__qbp-dim" data-qbp-dim aria-hidden="true"></div>
+  {% endif %}
+</quick-size-picker>

@@ -1,0 +1,338 @@
+{% comment %}
+  Discount Progress Bar
+  Renders a multi-milestone progress bar showing discount tier progress.
+  Milestones must be configured in ascending threshold order (1 < 2 < 3).
+{% endcomment %}
+
+{% if settings.enable_discount_progress_bar and cart != empty %}
+
+  {% comment %}--- Parse milestone thresholds with multicurrency support ---{% endcomment %}
+  {% assign current_currency = cart.currency.iso_code %}
+
+  {% comment %}Milestone 1{% endcomment %}
+  {% assign m1_enabled = settings.discount_bar_milestone_1_enabled %}
+  {% assign m1_threshold = 0 %}
+  {% if m1_enabled %}
+    {% assign raw_setting = settings.discount_bar_milestone_1_threshold | default: '0' %}
+    {% assign m1_threshold = raw_setting | split: '|' | first | strip | plus: 0 %}
+    {% assign threshold_parts = raw_setting | split: '|' %}
+    {% for threshold_part in threshold_parts %}
+      {% if threshold_part contains ':' %}
+        {% assign currency_pair = threshold_part | split: ':' %}
+        {% assign currency_code = currency_pair[0] | strip %}
+        {% if currency_code == current_currency %}
+          {% assign m1_threshold = currency_pair[1] | strip | plus: 0 %}
+          {% break %}
+        {% endif %}
+      {% endif %}
+    {% endfor %}
+    {% if m1_threshold <= 0 %}
+      {% assign m1_enabled = false %}
+    {% endif %}
+  {% endif %}
+
+  {% comment %}Milestone 2{% endcomment %}
+  {% assign m2_enabled = settings.discount_bar_milestone_2_enabled %}
+  {% assign m2_threshold = 0 %}
+  {% if m2_enabled %}
+    {% assign raw_setting = settings.discount_bar_milestone_2_threshold | default: '0' %}
+    {% assign m2_threshold = raw_setting | split: '|' | first | strip | plus: 0 %}
+    {% assign threshold_parts = raw_setting | split: '|' %}
+    {% for threshold_part in threshold_parts %}
+      {% if threshold_part contains ':' %}
+        {% assign currency_pair = threshold_part | split: ':' %}
+        {% assign currency_code = currency_pair[0] | strip %}
+        {% if currency_code == current_currency %}
+          {% assign m2_threshold = currency_pair[1] | strip | plus: 0 %}
+          {% break %}
+        {% endif %}
+      {% endif %}
+    {% endfor %}
+    {% if m2_threshold <= 0 %}
+      {% assign m2_enabled = false %}
+    {% endif %}
+  {% endif %}
+
+  {% comment %}Milestone 3{% endcomment %}
+  {% assign m3_enabled = settings.discount_bar_milestone_3_enabled %}
+  {% assign m3_threshold = 0 %}
+  {% if m3_enabled %}
+    {% assign raw_setting = settings.discount_bar_milestone_3_threshold | default: '0' %}
+    {% assign m3_threshold = raw_setting | split: '|' | first | strip | plus: 0 %}
+    {% assign threshold_parts = raw_setting | split: '|' %}
+    {% for threshold_part in threshold_parts %}
+      {% if threshold_part contains ':' %}
+        {% assign currency_pair = threshold_part | split: ':' %}
+        {% assign currency_code = currency_pair[0] | strip %}
+        {% if currency_code == current_currency %}
+          {% assign m3_threshold = currency_pair[1] | strip | plus: 0 %}
+          {% break %}
+        {% endif %}
+      {% endif %}
+    {% endfor %}
+    {% if m3_threshold <= 0 %}
+      {% assign m3_enabled = false %}
+    {% endif %}
+  {% endif %}
+
+  {% comment %}--- Count active milestones ---{% endcomment %}
+  {% assign active_count = 0 %}
+  {% if m1_enabled %}{% assign active_count = active_count | plus: 1 %}{% endif %}
+  {% if m2_enabled %}{% assign active_count = active_count | plus: 1 %}{% endif %}
+  {% if m3_enabled %}{% assign active_count = active_count | plus: 1 %}{% endif %}
+
+  {% if active_count > 0 %}
+
+    {% comment %}--- Segment width calculation (matching reference pattern) ---{% endcomment %}
+    {% if active_count == 3 %}
+      {% assign w1 = 16.8 %}
+      {% assign w2 = 33.33 %}
+    {% elsif active_count == 2 %}
+      {% assign w1 = 25.0 %}
+      {% assign w2 = 50.0 %}
+    {% elsif active_count == 1 %}
+      {% assign w1 = 50.0 %}
+      {% assign w2 = 100.0 %}
+    {% endif %}
+
+    {% comment %}--- Cart value in base units (e.g. 49.99) ---{% endcomment %}
+    {% assign cart_value = cart.original_total_price | divided_by: 100.0 %}
+
+    {% comment %}--- Build ordered thresholds string for progress calculation ---{% endcomment %}
+    {% assign ordered_thresholds = '' %}
+    {% if m1_enabled %}
+      {% if ordered_thresholds == '' %}
+        {% assign ordered_thresholds = m1_threshold %}
+      {% else %}
+        {% assign ordered_thresholds = ordered_thresholds | append: ',' | append: m1_threshold %}
+      {% endif %}
+    {% endif %}
+    {% if m2_enabled %}
+      {% if ordered_thresholds == '' %}
+        {% assign ordered_thresholds = m2_threshold %}
+      {% else %}
+        {% assign ordered_thresholds = ordered_thresholds | append: ',' | append: m2_threshold %}
+      {% endif %}
+    {% endif %}
+    {% if m3_enabled %}
+      {% if ordered_thresholds == '' %}
+        {% assign ordered_thresholds = m3_threshold %}
+      {% else %}
+        {% assign ordered_thresholds = ordered_thresholds | append: ',' | append: m3_threshold %}
+      {% endif %}
+    {% endif %}
+
+    {% assign thresholds_array = ordered_thresholds | split: ',' %}
+
+    {% comment %}--- Calculate progress percentage (segment-based) ---{% endcomment %}
+    {% assign percent = 0.0 %}
+    {% assign remaining_amount = 0 %}
+    {% assign active_message = '' %}
+    {% assign active_milestone_label = '' %}
+    {% assign all_achieved = false %}
+    {% assign found_segment = false %}
+
+    {% for threshold_str in thresholds_array %}
+      {% assign threshold_val = threshold_str | plus: 0.0 %}
+      {% assign idx = forloop.index0 %}
+
+      {% if cart_value < threshold_val and found_segment == false %}
+        {% assign found_segment = true %}
+
+        {% if idx == 0 %}
+          {% assign base = 0.0 %}
+          {% assign weight = w1 %}
+          {% assign range = threshold_val %}
+          {% assign progress_in_segment = cart_value %}
+        {% else %}
+          {% assign prev_idx = idx | minus: 1 %}
+          {% assign prev_threshold = thresholds_array[prev_idx] | plus: 0.0 %}
+          {% assign base = w1 %}
+          {% for j in (1..prev_idx) %}
+            {% assign base = base | plus: w2 %}
+          {% endfor %}
+
+            {% assign weight = w2 %}
+          {% assign range = threshold_val | minus: prev_threshold %}
+          {% assign progress_in_segment = cart_value | minus: prev_threshold %}
+        {% endif %}
+
+        {% if range > 0 %}
+          {% assign segment_contribution = progress_in_segment | times: weight | divided_by: range %}
+          {% assign percent = base | plus: segment_contribution %}
+        {% else %}
+          {% assign percent = base | plus: weight %}
+        {% endif %}
+
+        {% assign remaining_amount = threshold_val | minus: cart_value %}
+
+        {% comment %}Determine which milestone message and label to use{% endcomment %}
+        {% if m1_enabled and threshold_val == m1_threshold %}
+          {% assign active_message = settings.discount_bar_milestone_1_message %}
+          {% assign active_milestone_label = settings.discount_bar_milestone_1_label %}
+        {% elsif m2_enabled and threshold_val == m2_threshold %}
+          {% assign active_message = settings.discount_bar_milestone_2_message %}
+          {% assign active_milestone_label = settings.discount_bar_milestone_2_label %}
+        {% elsif m3_enabled and threshold_val == m3_threshold %}
+          {% assign active_message = settings.discount_bar_milestone_3_message %}
+          {% assign active_milestone_label = settings.discount_bar_milestone_3_label %}
+        {% endif %}
+
+        {% break %}
+      {% endif %}
+    {% endfor %}
+
+    {% unless found_segment %}
+      {% assign percent = 100.0 %}
+      {% assign all_achieved = true %}
+      {% assign remaining_amount = 0 %}
+    {% endunless %}
+
+    {% if percent > 100.0 %}
+      {% assign percent = 100.0 %}
+    {% endif %}
+
+    {% comment %}--- Format remaining amount and replace tokens ---{% endcomment %}
+    {% assign remaining_with_currency = remaining_amount | times: 100 | money %}
+    {% assign message_text = active_message | replace: '||amount||', remaining_with_currency | replace: '||label||', active_milestone_label %}
+
+    {%- comment -%}
+      --- Resolve colors with transparency guards ---
+      Theme convention (see snippets/countdown-with-discount.liquid for the
+      reference pattern): test each color setting against the transparent-
+      black `color_to_rgb` output and only emit the CSS-var assignment when
+      it's actually set. If the merchant clears a color setting in the
+      customizer, Liquid otherwise interpolates an empty string into the
+      style attribute and the corresponding piece of UI (text / background /
+      icon / etc.) becomes invisible.
+    {%- endcomment -%}
+    {%- assign _dbar_text_rgb = settings.discount_bar_text_color | color_to_rgb -%}
+    {%- assign _dbar_bg_rgb = settings.discount_bar_bg_color | color_to_rgb -%}
+    {%- assign _dbar_success_text_rgb = settings.discount_bar_success_text_color | color_to_rgb -%}
+    {%- assign _dbar_success_bg_rgb = settings.discount_bar_success_bg_color | color_to_rgb -%}
+    {%- assign _dbar_progress_rgb = settings.discount_bar_progress_color | color_to_rgb -%}
+    {%- assign _dbar_active_progress_rgb = settings.discount_bar_active_progress_color | color_to_rgb -%}
+    {%- assign _dbar_label_rgb = settings.discount_bar_label_color | color_to_rgb -%}
+    {%- assign _dbar_icon_rgb = settings.discount_bar_icon_color | color_to_rgb -%}
+    {%- assign _dbar_active_icon_rgb = settings.discount_bar_active_icon_color | color_to_rgb -%}
+
+    {% comment %}--- Render HTML ---{% endcomment %}
+    <discount-progress-bar
+      class="wt-discount-bar"
+      style="
+        {% if _dbar_text_rgb != 'rgba(0, 0, 0, 0.0)' %}--discount-bar-text: {{ settings.discount_bar_text_color }};{% endif %}
+        {% if _dbar_bg_rgb != 'rgba(0, 0, 0, 0.0)' %}--discount-bar-bg: {{ settings.discount_bar_bg_color }};{% endif %}
+        {% if _dbar_success_text_rgb != 'rgba(0, 0, 0, 0.0)' %}--discount-bar-success-text: {{ settings.discount_bar_success_text_color }};{% endif %}
+        {% if _dbar_success_bg_rgb != 'rgba(0, 0, 0, 0.0)' %}--discount-bar-success-bg: {{ settings.discount_bar_success_bg_color }};{% endif %}
+        {% if _dbar_progress_rgb != 'rgba(0, 0, 0, 0.0)' %}--discount-bar-progress: {{ settings.discount_bar_progress_color }};{% endif %}
+        {% if _dbar_active_progress_rgb != 'rgba(0, 0, 0, 0.0)' %}--discount-bar-active-progress: {{ settings.discount_bar_active_progress_color }};{% endif %}
+        {% if _dbar_label_rgb != 'rgba(0, 0, 0, 0.0)' %}--discount-bar-label: {{ settings.discount_bar_label_color }};{% endif %}
+        {% if _dbar_icon_rgb != 'rgba(0, 0, 0, 0.0)' %}--discount-bar-icon: {{ settings.discount_bar_icon_color }};{% endif %}
+        {% if _dbar_active_icon_rgb != 'rgba(0, 0, 0, 0.0)' %}--discount-bar-active-icon: {{ settings.discount_bar_active_icon_color }};{% endif %}
+      "
+    >
+      <div class="wt-discount-bar__message{% if all_achieved %} wt-discount-bar__message--success{% endif %}">
+        {% if all_achieved %}
+          <p>{{ settings.discount_bar_all_achieved_label }}</p>
+        {% elsif active_message != blank %}
+          <p>{{ message_text }}</p>
+        {% endif %}
+      </div>
+
+      <div class="wt-discount-bar__track{% if active_count == 1 %} wt-discount-bar__track--single{% endif %}" style="--progress-percentage: {{ percent }}%;">
+
+        {% if m1_enabled %}
+          {% assign m1_achieved = false %}
+          {% if cart_value >= m1_threshold %}{% assign m1_achieved = true %}{% endif %}
+          <div class="wt-discount-bar__milestone{% if m1_achieved %} wt-discount-bar__milestone--achieved{% endif %}"
+               style="width: {{ w2 }}%;">
+            <div class="wt-discount-bar__milestone__icon">
+              {% if settings.discount_bar_milestone_1_image != blank %}
+                <img
+                  src="{{ settings.discount_bar_milestone_1_image | image_url: width: 80 }}"
+                  alt=""
+                  width="80"
+                  height="80"
+                  loading="lazy"
+                >
+              {% elsif settings.discount_bar_milestone_1_icon_type == 'box' %}
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg>
+              {% elsif settings.discount_bar_milestone_1_icon_type == 'price_tag' %}
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"/><line x1="7" y1="7" x2="7.01" y2="7"/></svg>
+              {% elsif settings.discount_bar_milestone_1_icon_type == 'truck' %}
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
+              {% else %}
+                <span class="wt-discount-bar__milestone__icon-placeholder"></span>
+              {% endif %}
+            </div>
+            <div class="wt-discount-bar__milestone__label">
+              {{ settings.discount_bar_milestone_1_label }}
+            </div>
+          </div>
+        {% endif %}
+
+        {% if m2_enabled %}
+          {% assign m2_achieved = false %}
+          {% if cart_value >= m2_threshold %}{% assign m2_achieved = true %}{% endif %}
+          <div class="wt-discount-bar__milestone{% if m2_achieved %} wt-discount-bar__milestone--achieved{% endif %}"
+               style="width: {{ w2 }}%;">
+            <div class="wt-discount-bar__milestone__icon">
+              {% if settings.discount_bar_milestone_2_image != blank %}
+                <img
+                  src="{{ settings.discount_bar_milestone_2_image | image_url: width: 80 }}"
+                  alt=""
+                  width="80"
+                  height="80"
+                  loading="lazy"
+                >
+              {% elsif settings.discount_bar_milestone_2_icon_type == 'box' %}
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg>
+              {% elsif settings.discount_bar_milestone_2_icon_type == 'price_tag' %}
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"/><line x1="7" y1="7" x2="7.01" y2="7"/></svg>
+              {% elsif settings.discount_bar_milestone_2_icon_type == 'truck' %}
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
+              {% else %}
+                <span class="wt-discount-bar__milestone__icon-placeholder"></span>
+              {% endif %}
+            </div>
+            <div class="wt-discount-bar__milestone__label">
+              {{ settings.discount_bar_milestone_2_label }}
+            </div>
+          </div>
+        {% endif %}
+
+        {% if m3_enabled %}
+          {% assign m3_achieved = false %}
+          {% if cart_value >= m3_threshold %}{% assign m3_achieved = true %}{% endif %}
+          <div class="wt-discount-bar__milestone{% if m3_achieved %} wt-discount-bar__milestone--achieved{% endif %}"
+               style="width: {{ w2 }}%;">
+            <div class="wt-discount-bar__milestone__icon">
+              {% if settings.discount_bar_milestone_3_image != blank %}
+                <img
+                  src="{{ settings.discount_bar_milestone_3_image | image_url: width: 80 }}"
+                  alt=""
+                  width="80"
+                  height="80"
+                  loading="lazy"
+                >
+              {% elsif settings.discount_bar_milestone_3_icon_type == 'box' %}
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg>
+              {% elsif settings.discount_bar_milestone_3_icon_type == 'price_tag' %}
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"/><line x1="7" y1="7" x2="7.01" y2="7"/></svg>
+              {% elsif settings.discount_bar_milestone_3_icon_type == 'truck' %}
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
+              {% else %}
+                <span class="wt-discount-bar__milestone__icon-placeholder"></span>
+              {% endif %}
+            </div>
+            <div class="wt-discount-bar__milestone__label">
+              {{ settings.discount_bar_milestone_3_label }}
+            </div>
+          </div>
+        {% endif %}
+
+      </div>
+    </discount-progress-bar>
+
+  {% endif %}
+{% endif %}

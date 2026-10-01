@@ -1,0 +1,318 @@
+{%- case block.type -%}
+  {%- when 'title' -%}
+    [data-block-id="{{ block.id }}"] {
+      --font-text-scale-desk: {{ block.settings.size_text | divided_by: 100.0 }};
+      --font-text-scale: {{ block.settings.size_text_mobile | divided_by: 100.0 }};
+    }
+  {%- when 'price' -%}
+    [data-block-id="{{ block.id }}"] {
+      --font-text-scale-desk: {{ block.settings.size_text | divided_by: 100.0 }};
+      --font-text-scale: {{ block.settings.size_text_mobile | divided_by: 100.0 }};
+    }
+  {% when 'image' %}
+    [data-block-id="{{ block.id }}"] {
+      {% if block.settings.margin-top %}
+        --block-margin-top: {{ block.settings.margin-top }}px;
+      {% endif %}
+      {% if block.settings.margin-bottom %}
+        --block-margin-bottom: {{ block.settings.margin-bottom }}px;
+      {% endif %}
+      .featured-icon__title, .featured-icon__text {
+        --font-text-scale-desk: {{ block.settings.size_heading | divided_by: 100.0 }};
+        --font-text-scale: {{ block.settings.size_heading_mobile | divided_by: 100.0 }};
+      }
+      .svg-icon {
+        --size-icon: {{ block.settings.size_heading_mobile | divided_by: 100.0 }};
+        --size-icon-desk: {{ block.settings.size_heading | divided_by: 100.0 }};
+      }
+    }
+  {% when 'separator' %}
+    [data-block-id="{{ block.id }}"] .wt-product__separator {
+      --section-gap-top: {{ block.settings.margin-top }}px;
+      --section-gap-bottom: {{ block.settings.margin-bottom }}px;
+    }
+  {% when 'complementary' %}
+    [data-block-id="{{ block.id }}"] .wt-product__upsell__image {
+      {%- case block.settings.image-ratio -%}
+        {% when 'square' %}
+          --aspect-ratio: 1/1;
+        {% when 'portrait' %}
+          --aspect-ratio: var(--aspect-ratio-portait);
+      {%- endcase -%}
+    }
+  {% when 'upsell' %}
+    [data-block-id="{{ block.id }}"] .wt-product__upsell__image {
+      {%- case block.settings.image-ratio -%}
+        {% when 'square' %}
+          --aspect-ratio: 1/1;
+        {% when 'portrait' %}
+          --aspect-ratio: var(--aspect-ratio-portait);
+      {%- endcase -%}
+    }
+  {% when 'variant_picker' %}
+    .wt-product__options {
+      --section-gap-top: {{ block.settings.margin-top }}px;
+      --section-gap-bottom: {{ block.settings.margin-bottom }}px;
+      {% if block.settings.radius == 'custom' %}
+        --custom-border-radius: {{ block.settings.border_radius }}px;
+      {% endif %}
+      --custom-size: {{ block.settings.thumb_size }}px;
+    }
+    .wt-product__options .f-thumb__list__item label {
+      height: var(--custom-size, auto);
+      width: fit-content;
+    }
+  {% when 'bulletpoints' %}
+    [data-block-id="{{ block.id }}"] {
+      --icon-bulletpoints-height: {{ block.settings.icon_height | default: 16 }}px;
+      --icon-bulletpoints-height-desktop: {{ block.settings.icon_height_desktop | default: 16 }}px;
+      --icon-bulletpoints-margin: {{ block.settings.icon_margin | default: 4 }}px;
+      --icon-bulletpoints-margin-desktop: {{ block.settings.icon_margin_desktop | default: 4 }}px;
+    }
+  {% when 'promo' %}
+    [data-block-id="{{ block.id }}"] .wt-product__promo {
+      {%- assign background_rgb = block.settings['background_color'] | color_to_rgb -%}
+      {%- assign text_rgb = block.settings['color-body-text'] | color_to_rgb -%}
+      {% if background_rgb != blank and background_rgb != 'rgba(0, 0, 0, 0.0)' %}
+        --block-color-background: {{ block.settings.background_color }};
+      {% endif %}
+      {% if text_rgb != blank and text_rgb != 'rgba(0, 0, 0, 0.0)' %}
+        --block-color-text: {{ block.settings.color-body-text }};
+      {% endif %}
+      --block-text-alignment: {{ block.settings.text_alignment }};
+      --block-padding-top: {{ block.settings.padding-top }}px;
+      --block-padding-bottom: {{ block.settings.padding-bottom }}px;
+    }
+  {% when 'buy_buttons' %}
+    [data-block-id="{{ block.id }}"] {
+      {%- assign background_rgb = block.settings['background_color'] | color_to_rgb -%}
+      {%- assign text_rgb = block.settings['text_color'] | color_to_rgb -%}
+      {%- assign background_hover_rgb = block.settings['background_color_hover'] | color_to_rgb -%}
+      {%- assign text_hover_rgb = block.settings['text_color_hover'] | color_to_rgb -%}
+      {% if background_rgb != blank and background_rgb != 'rgba(0, 0, 0, 0.0)' %}
+        --color-button-primary-background: {{ block.settings.background_color }};
+        --color-button-primary-border: {{ block.settings.background_color }};
+        {% if background_hover_rgb != blank and background_hover_rgb != 'rgba(0, 0, 0, 0.0)' %}
+          --color-button-primary-background-hover: {{ block.settings.background_color_hover }};
+        {% else %}
+          --color-button-primary-background-hover: {{ block.settings.background_color }};
+        {% endif %}
+        --color-button-secondary-background: {{ block.settings.background_color }};
+        --color-button-secondary-border: {{ block.settings.background_color }};
+        {% if background_hover_rgb != blank and background_hover_rgb != 'rgba(0, 0, 0, 0.0)' %}
+          --color-button-secondary-background-hover: {{ block.settings.background_color_hover }};
+        {% else %}
+          --color-button-secondary-background-hover: {{ block.settings.background_color }};
+        {% endif %}
+      {% endif %}
+      {% if text_rgb != blank and text_rgb != 'rgba(0, 0, 0, 0.0)' %}
+        --color-button-primary-text: {{ block.settings.text_color }};
+        {% if text_hover_rgb != blank and text_hover_rgb != 'rgba(0, 0, 0, 0.0)' %}
+          --color-button-primary-text-hover: {{ block.settings.text_color_hover }};
+        {% else %}
+          --color-button-primary-text-hover: {{ block.settings.text_color }};
+        {% endif %}
+        --color-button-secondary-text: {{ block.settings.text_color }};
+        {% if text_hover_rgb != blank and text_hover_rgb != 'rgba(0, 0, 0, 0.0)' %}
+          --color-button-secondary-text-hover: {{ block.settings.text_color_hover }};
+        {% else %}
+          --color-button-secondary-text-hover: {{ block.settings.text_color }};
+        {% endif %}
+      {% endif %}
+    }
+  {% when 'feature_icons' %}
+    [data-block-id="{{ block.id }}"] {
+      --columns-number-mobile: {{ block.settings.items_per_row }};
+      --columns-number-desktop: {{ block.settings.items_per_row_desktop }};
+      --icon-size-mobile: {{ block.settings.icon_size_mobile }}px;
+      --icon-size-desktop: {{ block.settings.icon_size_desktop }}px;
+      --font-text-scale-mobile: {{ block.settings.size_text_mobile | divided_by: 100.0 }};
+      --font-text-scale-desktop: {{ block.settings.size_text | divided_by: 100.0 }};
+      {% if block.settings.show_advanced_settings_desktop %}
+        {% if block.settings.icons_container_gap_desktop != 0 %}
+          --icons-container-gap-desktop: {{ block.settings.icons_container_gap_desktop }}px;
+        {% endif %}
+        {% if block.settings.icon_container_width_desktop != 0 %}
+          --icon-container-width-desktop: {{ block.settings.icon_container_width_desktop }}px;
+        {% endif %}
+        {% if block.settings.icon_margin_top_desktop != 0 %}
+          --icon-margin-top-desktop: {{ block.settings.icon_margin_top_desktop }}px;
+        {% endif %}
+        {% if block.settings.icon_margin_bottom_desktop != 0 %}
+          --icon-margin-bottom-desktop: {{ block.settings.icon_margin_bottom_desktop }}px;
+        {% endif %}
+      {% endif %}
+      {% if block.settings.show_advanced_settings_mobile %}
+        {% if block.settings.icons_container_gap_mobile != 0 %}
+          --icons-container-gap-mobile: {{ block.settings.icons_container_gap_mobile }}px;
+        {% endif %}
+        {% if block.settings.icon_container_width_mobile != 0 %}
+          --icon-container-width-mobile: {{ block.settings.icon_container_width_mobile }}px;
+        {% endif %}
+        {% if block.settings.icon_margin_top_mobile != 0 %}
+          --icon-margin-top-mobile: {{ block.settings.icon_margin_top_mobile }}px;
+        {% endif %}
+        {% if block.settings.icon_margin_bottom_mobile != 0 %}
+          --icon-margin-bottom-mobile: {{ block.settings.icon_margin_bottom_mobile }}px;
+        {% endif %}
+      {% endif %}
+    }
+  {% when 'payments_badge' %}
+    [data-block-id="{{ block.id }}"] {
+      --text-align: {{ block.settings.desktop_text_horizontal_position }};
+      {%- assign background_rgb = block.settings['background_color'] | color_to_rgb -%}
+      {%- assign text_rgb = block.settings['color-body-text'] | color_to_rgb -%}
+      {% if background_rgb != blank and background_rgb != 'rgba(0, 0, 0, 0.0)' %}
+        --block-color-background: {{ block.settings.background_color }};
+        --block-padding: 8px;
+      {% endif %}
+      {% if text_rgb != blank and text_rgb != 'rgba(0, 0, 0, 0.0)' %}
+        --block-color-text: {{ block.settings.color-body-text }};
+      {% endif %}
+      {%- case block.settings.desktop_text_horizontal_position -%}
+        {% when 'left' %}
+          --justify-content: flex-start;
+        {% when 'center' %}
+          --justify-content: center;
+        {% when 'right' %}
+          --justify-content: flex-end;
+      {%- endcase -%}
+    }
+  {% when 'feature_tags' %}
+    [data-block-id="{{ block.id }}"] span {
+      {%- assign border_rgb = block.settings['border_color'] | color_to_rgb -%}
+      {%- assign text_rgb = block.settings['text_color'] | color_to_rgb -%}
+      {% if border_rgb != blank and border_rgb != 'rgba(0, 0, 0, 0.0)' %}
+        --color-body-text: {{ block.settings.border_color }};
+      {% endif %}
+      {% if text_rgb != blank and text_rgb != 'rgba(0, 0, 0, 0.0)' %}
+        --color-custom-text: {{ block.settings.text_color }};
+      {% endif %}
+    }
+  {% when 'product_variations' %}
+    [data-block-id="{{ block.id }}"] {
+      --custom-size: {{ block.settings.swatch_size }}px;
+      {% if block.settings.radius == 'custom' %}
+        --custom-border-radius: {{ block.settings.border_radius }}px;
+      {% endif %}
+    }
+  {% when 'specification' %}
+    [data-block-id="{{ block.id }}"] {
+      {%- assign bg_odd_rgb = block.settings.color-background-odd | color_to_rgb -%}
+      {%- assign text_odd_rgb = block.settings.color-text-odd | color_to_rgb -%}
+      {% if bg_odd_rgb != blank and bg_odd_rgb != 'rgba(0, 0, 0, 0.0)' %}
+        --color-background-odd: {{ block.settings.color-background-odd }};
+      {% endif %}
+      {% if text_odd_rgb != blank and text_odd_rgb != 'rgba(0, 0, 0, 0.0)' %}
+        --color-text-odd: {{ text_odd_rgb | remove: 'rgb(' | remove: ')' }};
+      {% endif %}
+      --left-column-opacity: {{ block.settings.color-text-left-opacity | divided_by: 100.0 }};
+    }
+  {% when 'collapsible_tab' %}
+    {% if block.settings.icon_advanced_settings %}
+      [data-block-id="{{ block.id }}"] {
+        --icon-height: {{ block.settings.icon_height }}px;
+        --icon-height-desktop: {{ block.settings.icon_height_desktop }}px;
+        --icon-margin: {{ block.settings.icon_margin }}px;
+        --icon-margin-desktop: {{ block.settings.icon_margin_desktop }}px;
+      }
+    {% endif %}
+  {% when 'collapsible_file_row' %}
+    {% if block.settings.icon_advanced_settings %}
+      [data-block-id="{{ block.id }}"] {
+        --icon-height: {{ block.settings.icon_height }}px;
+        --icon-height-desktop: {{ block.settings.icon_height_desktop }}px;
+        --icon-margin: {{ block.settings.icon_margin }}px;
+        --icon-margin-desktop: {{ block.settings.icon_margin_desktop }}px;
+      }
+    {% endif %}
+  {% when 'collapsible_drawer' %}
+    {% if block.settings.icon_advanced_settings %}
+      [data-block-id="{{ block.id }}"] {
+        --icon-height: {{ block.settings.icon_height }}px;
+        --icon-height-desktop: {{ block.settings.icon_height_desktop }}px;
+        --icon-margin: {{ block.settings.icon_margin }}px;
+        --icon-margin-desktop: {{ block.settings.icon_margin_desktop }}px;
+      }
+    {% endif %}
+  {% when 'description' %}
+    {% if block.settings.icon_advanced_settings %}
+      [data-block-id="{{ block.id }}"] {
+        --icon-height: {{ block.settings.icon_height }}px;
+        --icon-height-desktop: {{ block.settings.icon_height_desktop }}px;
+        --icon-margin: {{ block.settings.icon_margin }}px;
+        --icon-margin-desktop: {{ block.settings.icon_margin_desktop }}px;
+      }
+    {% endif %}
+  {% when 'icon_with_text' %}
+    {% if block.settings.icon_advanced_settings %}
+      [data-block-id="{{ block.id }}"] {
+        --icon-height: {{ block.settings.icon_height }}px;
+        --icon-height-desktop: {{ block.settings.icon_height_desktop }}px;
+        --icon-margin: {{ block.settings.icon_margin }}px;
+        --icon-margin-desktop: {{ block.settings.icon_margin_desktop }}px;
+      }
+    {% endif %}
+    [data-block-id="{{ block.id }}"] {
+      --size-heading-desktop: {{ block.settings.size_heading | divided_by: 100.0 }};
+      --size-heading: {{ block.settings.size_heading_mobile | divided_by: 100.0 }};
+      --gap: {{ block.settings.gap }}px;
+      --margin-top: {{ block.settings.margin_top }}px;
+      --margin-bottom: {{ block.settings.margin_bottom }}px;
+      --margin-left: {{ block.settings.margin_left }}px;
+      --margin-left-desktop: {{ block.settings.margin_left_desktop }}px;
+      --icon-alignment: {{ block.settings.icon_alignment }};
+      --icon-alignment-mobile: {{ block.settings.icon_alignment_mobile }};
+      {% if block.settings.icon_alignment == 'flex-start' %}
+        --icon-text-alignment: left;
+      {% elsif block.settings.icon_alignment == 'flex-end' %}
+        --icon-text-alignment: right;
+      {% else %}
+        --icon-text-alignment: center;
+      {% endif %}
+      {% if block.settings.icon_alignment_mobile == 'flex-start' %}
+        --icon-text-alignment-mobile: left;
+      {% elsif block.settings.icon_alignment_mobile == 'flex-end' %}
+        --icon-text-alignment-mobile: right;
+      {% else %}
+        --icon-text-alignment-mobile: center;
+      {% endif %}
+    }
+  {% when 'inventory' %}
+    {% if block.settings.show_progress_bar %}
+      {%- assign inventory_qty = product.selected_or_first_available_variant.inventory_quantity -%}
+      {%- assign bar_qty = inventory_qty | at_least: 0 -%}
+      {%- if block.settings.progress_bar_max_value > 0 -%}
+        {%- assign bar_percent = bar_qty | times: 100.0 | divided_by: block.settings.progress_bar_max_value | round | at_most: 100 -%}
+      {%- else -%}
+        {%- assign bar_percent = 0 -%}
+      {%- endif -%}
+      {%- assign progress_bar_color = block.settings.level_1_color | default: '#428445' -%}
+      {%- if block.settings.stock_levels_count >= 3 and block.settings.level_3_threshold > 0 and inventory_qty <= block.settings.level_3_threshold -%}
+        {%- assign progress_bar_color = block.settings.level_3_color | default: '#eb001b' -%}
+      {%- elsif block.settings.stock_levels_count >= 2 and block.settings.level_2_threshold > 0 and inventory_qty <= block.settings.level_2_threshold -%}
+        {%- assign progress_bar_color = block.settings.level_2_color | default: '#e0b252' -%}
+      {%- elsif block.settings.level_1_threshold > 0 and inventory_qty <= block.settings.level_1_threshold -%}
+        {%- assign progress_bar_color = block.settings.level_1_color | default: '#428445' -%}
+      {%- endif -%}
+      [data-block-id="{{ block.id }}"] {
+        --level-1-color: {{ block.settings.level_1_color | default: '#428445' }};
+        --level-2-color: {{ block.settings.level_2_color | default: '#e0b252' }};
+        --level-3-color: {{ block.settings.level_3_color | default: '#eb001b' }};
+        --progress-bar-color: {{ progress_bar_color }};
+        --inventory-bar-width: {{ bar_percent }}%;
+      }
+    {% endif %}
+  {% when 'pickup-availability' %}
+    {% if block.settings.enable_advanced_settings %}
+      [data-block-id="{{ block.id }}"] {
+        --pickup-text-scale: {{ block.settings.size_text_mobile | divided_by: 100.0 }};
+        --pickup-text-scale-desk: {{ block.settings.size_text | divided_by: 100.0 }};
+        {% if block.settings.text_style == 'body' %}
+          --pickup-font-family: var(--font-base);
+        {% else %}
+          --pickup-font-family: var(--font-headline);
+        {% endif %}
+      }
+    {% endif %}
+{%- endcase -%}

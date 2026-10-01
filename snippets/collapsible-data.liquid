@@ -1,0 +1,35 @@
+<script type="application/json" data-variants-metafields>
+  {
+    "variants": [
+      {%- for variant in product.variants -%}
+        {
+          "id": "{{ variant.id }}",
+          "metafields": [
+            {%- for variable in variables -%}
+              {%- assign variable_array = variable | replace: " ", "" | split: ':' -%}
+              {%- assign striped_name = variable_array[0] | strip -%}
+              {%- assign placeholder_name = "[[" | append: striped_name | append: "]]" | replace: " ", "" -%}
+              {%- assign metafield_array = variable_array[1] | split: '.' -%}
+              {%- assign metafield_value = variant.metafields[metafield_array[0]][metafield_array[1]].value -%}
+              {
+                "placeholder_name": {{ placeholder_name | json }},
+                "value": {{ metafield_value | json }}
+              }{%- unless forloop.last -%},{%- endunless -%}
+            {%- endfor -%}
+          ]
+        }{%- unless forloop.last -%},{%- endunless -%}
+      {%- endfor -%}
+    ]
+  }
+</script>
+{%- assign processed_content = content -%}
+{%- for variable in variables -%}
+  {%- assign variable_array = variable | replace: ' ', '' | split: ':' -%}
+  {%- assign striped_name = variable_array[0] | strip -%}
+  {%- assign variable_name = '[[' | append: striped_name | append: ']]' | replace: ' ', '' -%}
+  {%- assign metafield_array = variable_array[1] | split: '.' -%}
+  {%- assign metafield_value = variant.metafields[metafield_array[0]][metafield_array[1]].value -%}
+  {%- assign wrapped_value = '<span data-variant-metafield="' | append: variable_name | append: '">' | append: metafield_value | append: '</span>' -%}
+  {%- assign processed_content = processed_content | replace: variable_name, wrapped_value -%}
+{%- endfor -%}
+{{- processed_content -}}

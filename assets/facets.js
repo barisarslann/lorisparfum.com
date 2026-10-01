@@ -103,10 +103,6 @@ class FacetFiltersForm extends HTMLElement {
           { html, url },
         ];
 
-        const parser = new DOMParser();
-        const parsedHTML = parser.parseFromString(html, 'text/html')
-        const newActiveFilters = parsedHTML.querySelector('[active-filters]')?.innerText?.replace('var activeFilters = ', '');
-        if(newActiveFilters) activeFilters = JSON.parse(newActiveFilters);
 
         FacetFiltersForm.renderFilters(html, event);
         FacetFiltersForm.renderProductGridContainer(html);
@@ -119,6 +115,8 @@ class FacetFiltersForm extends HTMLElement {
 
   static renderSectionFromCache(filterDataUrl, event) {
     const html = FacetFiltersForm.filterData.find(filterDataUrl).html;
+    
+
     FacetFiltersForm.renderFilters(html, event);
     FacetFiltersForm.renderProductGridContainer(html);
     // FacetFiltersForm.renderProductCount(html);
@@ -255,7 +253,10 @@ class FacetFiltersForm extends HTMLElement {
   }
 
   createSearchParams(form) {
+    const q = new URL(location.href).searchParams.get('q'); 
     const formData = new FormData(form);
+    if(q && !formData.has('q'))formData.append('q', q);
+
     return new URLSearchParams(formData).toString();
   }
 
@@ -272,11 +273,12 @@ class FacetFiltersForm extends HTMLElement {
       const searchParams = this.createSearchParams(
         event.target.closest("form"),
       );
+      
       this.onSubmitForm(searchParams, event);
     } else {
       const forms = [];
       const isMobile =
-        event.target.closest("form").id === "FacetFiltersFormMobile";
+        event.target.closest("form")?.id === "FacetFiltersFormMobile";
 
       sortFilterForms.forEach((form) => {
         if (!isMobile) {

@@ -1,0 +1,25 @@
+{%- comment -%}
+  card-pro-sibling-fragment.liquid — fragment AJAX dla product-siblings (slajdy galerii, cena, rating).
+{%- endcomment -%}
+<div data-sibling-fragment>
+  <div data-sib-track>
+    {% render 'card-pro-gallery-slides', gallery_product: product, gallery_limit: 12, loading: 'lazy' %}
+  </div>
+  <div data-sib-price>
+    {% render 'price', product: product, show_compare_at_price: true, price_class: '' %}
+  </div>
+  <div data-sib-rating 
+    data-sib-rating-value="{{ product.metafields.reviews.rating.value.rating }}"
+  >
+      {% render 'rating', reviews: product.metafields.reviews, show_review_count: settings.show_review_count %}
+  </div>
+  <div
+    data-sib-qbp
+    data-single-id="{{ product.selected_or_first_available_variant.id }}"
+    data-single-available="{% if product.available %}true{% else %}false{% endif %}"
+  >
+    <ul data-sib-qbp-rows>
+      {% render 'card-pro-qbp-rows', product: product, with_action: true %}
+    </ul>
+  </div>
+</div>

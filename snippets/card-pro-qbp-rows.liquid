@@ -1,0 +1,38 @@
+{%- assign qp_option = product.options_with_values.first -%}
+{% for value in qp_option.values %}
+  {%- liquid
+    assign v_variant = null
+    for variant in product.variants
+      if variant.option1 == value
+        assign v_variant = variant
+        break
+      endif
+    endfor
+  -%}
+  {% if v_variant %}
+    <li class="card-pro__qbp-item{% unless v_variant.available %} card-pro__qbp-item--soldout{% endunless %}">
+      <button
+        type="button"
+        class="card-pro__qbp-row"
+        data-variant-id="{{ v_variant.id }}"
+        data-available="{% if v_variant.available %}true{% else %}false{% endif %}"
+        {% unless v_variant.available %}
+          disabled
+          aria-disabled="true"
+        {% endunless %}
+      >
+        <span class="card-pro__qbp-value">{{ value }}</span>
+        {% if with_action %}
+          <span class="card-pro__qbp-action">
+            {%- if v_variant.available -%}
+              {{ 'products.product.add_to_cart' | t }}
+            {%- else -%}
+              {{ 'products.product.sold_out' | t }}
+            {%- endif -%}
+          </span>
+        {% endif %}
+        <span class="card-pro__qbp-row-spinner" aria-hidden="true"></span>
+      </button>
+    </li>
+  {% endif %}
+{% endfor %}

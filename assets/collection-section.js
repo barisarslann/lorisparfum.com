@@ -33,7 +33,6 @@ class CollectionSection extends HTMLElement {
 
   init() {
     this.createOverlay();
-    this.updateTabindexes(this.isOpen());
 
     document.body.addEventListener("click", (e) => {
       if (this.triggerClasses.some((cls) => e.target.classList.contains(cls))) {
@@ -65,6 +64,11 @@ class CollectionSection extends HTMLElement {
 
     window.addEventListener("resize", this.handleResize.bind(this));
     this.handleResize();
+
+    if (this.isDrawerMode()) {
+      setTabindex(this.sectionsTriggers(), "-1");
+      setTabindex(this.toggleDrawerElements(), "-1");
+    }
   }
 
   isDrawerMode() {

@@ -1,0 +1,13 @@
+@media (max-width: 375px) {
+  .wt-logo-banner,
+  .wt-logo-banner__picture,
+  .wt-logo-banner--v2 .wt-logo-banner__content,
+  .hero--video-background .wt-video--fullscreen {
+    max-height: 813px !important;
+  }
+
+  .wt-logo-banner--v2 .wt-video {
+    min-height: 813px !important;
+    max-height: 813px !important;
+  }
+}
