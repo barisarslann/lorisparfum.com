@@ -52,7 +52,7 @@
         "animation_speed": "100",
         "checkbox_close_announcement": true,
         "color-body-text": "#fdfdfd",
-        "background_color": "#BD1130",
+        "background_color": "#bd1130",
         "size_text_desktop": 100,
         "size_text_mobile": 100
       }
@@ -326,6 +326,7 @@
       "blocks": {
         "heading_X6JJaV": {
           "type": "heading",
+          "disabled": true,
           "settings": {
             "heading": "Kadınlar Gününe Özel",
             "heading_disable_on_mobile": false,
@@ -335,6 +336,7 @@
         },
         "paragraph_Gp7F6m": {
           "type": "paragraph",
+          "disabled": true,
           "settings": {
             "paragraph": "<p>Loris'ten Kadınlar Günü'ne özel dev fırsat! 🌸 50ml + 10ml + Deodorant üçlüsü tek pakette, sadece 699 TL. Sınırlı stoklarla bu kokuyu kaçırma!</p><p><a href=\"/collections/kadinlar-gunune-ozel-kampanya\" title=\"Kadınlar Gününe Özel Kampanya\">🛍️ <strong>Hemen sepete ekle</strong></a></p>",
             "text_disable_on_mobile": false
@@ -354,15 +356,15 @@
         "paragraph_Gp7F6m",
         "email_form_Mm4nJa"
       ],
-      "disabled": true,
+      "custom_css": [],
       "name": "t:sections.notification_popup.name",
       "settings": {
-        "max_width": 600,
+        "max_width": 800,
         "delay": 0,
         "show_border": false,
-        "show_shadow": true,
-        "mobile_image": "shopify://shop_images/1194_x_796-DIKEY.jpg",
-        "desktop_image": "shopify://shop_images/1194_x_796.jpg",
+        "show_shadow": false,
+        "mobile_image": "shopify://shop_images/inflame_lansman.png",
+        "desktop_image": "shopify://shop_images/inflame_lansman.png",
         "desktop_vertical_position": "center",
         "desktop_horizontal_position": "center",
         "color-body-text": "rgba(0,0,0,0)",

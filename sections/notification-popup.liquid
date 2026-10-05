@@ -1,5 +1,23 @@
 <script src="{{ 'notification-popup.js' | asset_url }}" defer="defer"></script>
 {% assign has_discount_code_block = false %}
+{%- assign visible_block_count = section.blocks.size -%}
+{%- assign image_only = false -%}
+{%- if visible_block_count == 0 -%}
+  {%- assign image_only = true -%}
+{%- endif -%}
+
+{%- comment -%} Görsel oranları (genişlik / yükseklik) {%- endcomment -%}
+{%- assign ratio_desktop = 1 -%}
+{%- if section.settings.desktop_image != blank -%}
+  {%- assign ratio_desktop = section.settings.desktop_image.aspect_ratio -%}
+{%- elsif section.settings.mobile_image != blank -%}
+  {%- assign ratio_desktop = section.settings.mobile_image.aspect_ratio -%}
+{%- endif -%}
+{%- assign ratio_mobile = ratio_desktop -%}
+{%- if section.settings.mobile_image != blank -%}
+  {%- assign ratio_mobile = section.settings.mobile_image.aspect_ratio -%}
+{%- endif -%}
+
 {% for block in section.blocks %}
   {% if block.type == 'discount_code' %}
     {% assign has_discount_code_block = true %}
@@ -31,17 +49,13 @@
         {% if section.settings.margin-bottom %}
             --section-gap-bottom: {{ section.settings.margin-bottom }}px;
         {% endif %}
-
     }
 
   {%- for block in section.blocks -%}
     [data-block-id="{{ block.id }}"]
     {
-
           --font-headline-scale-desk: {{ block.settings.size_heading | divided_by: 100.0 }};
-
           --font-headline-scale: {{ block.settings.size_heading_mobile | divided_by: 100.0 }};
-
     }
   {%- endfor -%}
 
@@ -49,8 +63,74 @@
     color: var(--color-border);
   }
 
+  /* --- Görsel otomatik boyut (her durumda) --- */
+  [data-section-id="{{ section.id }}"] .newsletter__image,
+  [data-section-id="{{ section.id }}"] .newsletter__image picture {
+    height: auto !important;
+    padding: 0 !important;
+    aspect-ratio: auto !important;
+  }
+  [data-section-id="{{ section.id }}"] .newsletter__image img {
+    width: 100% !important;
+    height: auto !important;
+    object-fit: contain !important;
+  }
+
+  /* --- Sadece görsel modu --- */
+  [data-section-id="{{ section.id }}"].newsletter--image-only {
+    background: transparent !important;
+    padding: 0 !important;
+  }
+  [data-section-id="{{ section.id }}"].newsletter--image-only .newsletter__container {
+    position: relative;
+    padding: 0 !important;
+    background: transparent !important;
+    overflow: hidden;
+  }
+  [data-section-id="{{ section.id }}"].newsletter--image-only .newsletter__wrapper--popup {
+    position: absolute !important;
+    top: 10px;
+    right: 10px;
+    width: auto !important;
+    min-height: 0 !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    background: transparent !important;
+    z-index: 5;
+  }
+  [data-section-id="{{ section.id }}"].newsletter--image-only .newsletter__content {
+    display: none !important;
+  }
+  [data-section-id="{{ section.id }}"].newsletter--image-only .newsletter__nav {
+    position: static;
+    padding: 0;
+    margin: 0;
+  }
+  [data-section-id="{{ section.id }}"].newsletter--image-only .newsletter__close-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.85);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    transition: background .2s;
+  }
+  [data-section-id="{{ section.id }}"].newsletter--image-only .newsletter__close-btn:hover {
+    background: #fff;
+  }
+  [data-section-id="{{ section.id }}"].newsletter--image-only .newsletter__close-btn svg {
+    width: 16px;
+    height: 16px;
+  }
+
   #shopify-section-{{ section.id }}{
-        --max-width: {{ section.settings.max_width }}px;
+        {% if image_only %}
+          --max-width: min({{ section.settings.max_width }}px, calc(85vh * {{ ratio_desktop }}));
+        {% else %}
+          --max-width: {{ section.settings.max_width }}px;
+        {% endif %}
 
         {% case section.settings.desktop_vertical_position %}
             {% when 'top' %}
@@ -60,9 +140,9 @@
                 --translateY : -50%;
             {% when 'bottom' %}
                 --bottom: 32px;
-            {% endcase %}
+        {% endcase %}
 
-            {% case section.settings.desktop_horizontal_position %}
+        {% case section.settings.desktop_horizontal_position %}
             {% when 'left' %}
                 --left: 32px;
             {% when 'center' %}
@@ -72,6 +152,16 @@
                 --right: 32px;
         {% endcase %}
     }
+
+  @media (max-width: 749px) {
+    #shopify-section-{{ section.id }} {
+      {% if image_only %}
+        --max-width: min({{ section.settings.max_width }}px, 92vw, calc(85vh * {{ ratio_mobile }}));
+      {% else %}
+        --max-width: min({{ section.settings.max_width }}px, 92vw);
+      {% endif %}
+    }
+  }
 </style>
 
 {% assign has_subscription = false %}
@@ -87,6 +177,7 @@
     newsletter--hor-{{ section.settings.desktop_horizontal_position }}
     {% if section.settings.show_shadow %} newsletter--shadow{% endif %}
     {% if section.settings.show_border %} newsletter--border{% endif %}
+    {% if image_only %} newsletter--image-only{% endif %}
   "
 >
   <div class="newsletter__container">
@@ -180,7 +271,7 @@
                   >
 
                   <button
-                    aria-label="aria-label={% if block.settings.button_label != blank %}{{ block.settings.button_label }}{% else %}{{'newsletter.button_label' | t }}{% endif %}"
+                    aria-label="{% if block.settings.button_label != blank %}{{ block.settings.button_label }}{% else %}{{'newsletter.button_label' | t }}{% endif %}"
                     type="submit"
                     class="wt-newsletter__send wt-newsletter__send--{{ block.settings.button_select }}"
                     name="commit"
@@ -191,20 +282,20 @@
                   </button>
                 </div>
                 {%- if form.errors -%}
-                <div class="form__message">
-                  <div class="form__error-field">
-                {% for error in form.errors %}
-                  <p id="Newsletter-error--{{ section.id }}">
-                    {% if error == 'form' %}
-                      {{ form.errors.messages[error] }}
-                    {% else %}
-                      {{ form.errors.translated_fields[error] }} - {{ form.errors.messages[error] }}
-                    {% endif %}
-                  </p>
-                {% endfor %}
-              </div>
-              </div>
-              {%- endif -%}
+                  <div class="form__message">
+                    <div class="form__error-field">
+                      {% for error in form.errors %}
+                        <p id="Newsletter-error--{{ section.id }}">
+                          {% if error == 'form' %}
+                            {{ form.errors.messages[error] }}
+                          {% else %}
+                            {{ form.errors.translated_fields[error] }} - {{ form.errors.messages[error] }}
+                          {% endif %}
+                        </p>
+                      {% endfor %}
+                    </div>
+                  </div>
+                {%- endif -%}
 
                 {%- if form.posted_successfully? -%}
                   <div class="form__message">
@@ -287,18 +378,9 @@
       "type": "select",
       "id": "desktop_vertical_position",
       "options": [
-        {
-          "value": "top",
-          "label": "t:sections.image-banner.settings.desktop_text_vertical_position.top.label"
-        },
-        {
-          "value": "center",
-          "label": "t:sections.image-banner.settings.desktop_text_vertical_position.center.label"
-        },
-        {
-          "value": "bottom",
-          "label": "t:sections.image-banner.settings.desktop_text_vertical_position.bottom.label"
-        }
+        { "value": "top", "label": "t:sections.image-banner.settings.desktop_text_vertical_position.top.label" },
+        { "value": "center", "label": "t:sections.image-banner.settings.desktop_text_vertical_position.center.label" },
+        { "value": "bottom", "label": "t:sections.image-banner.settings.desktop_text_vertical_position.bottom.label" }
       ],
       "default": "center",
       "label": "t:sections.notification_popup.settings.desktop_vertical_position.label"
@@ -307,18 +389,9 @@
       "type": "select",
       "id": "desktop_horizontal_position",
       "options": [
-        {
-          "value": "left",
-          "label": "t:sections.image-banner.settings.desktop_text_horizontal_position.left.label"
-        },
-        {
-          "value": "center",
-          "label": "t:sections.image-banner.settings.desktop_text_horizontal_position.center.label"
-        },
-        {
-          "value": "right",
-          "label": "t:sections.image-banner.settings.desktop_text_horizontal_position.right.label"
-        }
+        { "value": "left", "label": "t:sections.image-banner.settings.desktop_text_horizontal_position.left.label" },
+        { "value": "center", "label": "t:sections.image-banner.settings.desktop_text_horizontal_position.center.label" },
+        { "value": "right", "label": "t:sections.image-banner.settings.desktop_text_horizontal_position.right.label" }
       ],
       "default": "center",
       "label": "t:sections.image-banner.settings.desktop_text_horizontal_position.label"
@@ -340,9 +413,7 @@
     }
   ],
   "blocks": [
-    {
-      "type": "@app"
-    },
+    { "type": "@app" },
     {
       "type": "image",
       "name": "t:sections.notification_popup.blocks.image.name",
@@ -367,18 +438,9 @@
           "id": "image_alignment",
           "label": "t:sections.notification_popup.blocks.image.settings.image_alignment.label",
           "options": [
-            {
-              "value": "left",
-              "label": "t:sections.image-banner.settings.desktop_text_horizontal_position.left.label"
-            },
-            {
-              "value": "center",
-              "label": "t:sections.image-banner.settings.desktop_text_horizontal_position.center.label"
-            },
-            {
-              "value": "right",
-              "label": "t:sections.image-banner.settings.desktop_text_horizontal_position.right.label"
-            }
+            { "value": "left", "label": "t:sections.image-banner.settings.desktop_text_horizontal_position.left.label" },
+            { "value": "center", "label": "t:sections.image-banner.settings.desktop_text_horizontal_position.center.label" },
+            { "value": "right", "label": "t:sections.image-banner.settings.desktop_text_horizontal_position.right.label" }
           ],
           "default": "center"
         }
@@ -475,14 +537,8 @@
           "type": "select",
           "id": "button_select",
           "options": [
-            {
-              "value": "primary",
-              "label": "t:sections.settings.settings.button_select.primary.label"
-            },
-            {
-              "value": "secondary",
-              "label": "t:sections.settings.settings.button_select.secondary.label"
-            }
+            { "value": "primary", "label": "t:sections.settings.settings.button_select.primary.label" },
+            { "value": "secondary", "label": "t:sections.settings.settings.button_select.secondary.label" }
           ],
           "default": "primary",
           "label": "t:sections.settings.settings.button_select.default.label"
@@ -491,7 +547,7 @@
           "type": "text",
           "id": "button_label",
           "label": "t:sections.image-with-text.button.settings.button_label.label"
-        },
+        }
       ]
     }
   ],
@@ -499,15 +555,9 @@
     {
       "name": "t:sections.notification_popup.name",
       "blocks": [
-        {
-          "type": "heading"
-        },
-        {
-          "type": "paragraph"
-        },
-        {
-          "type": "email_form"
-        }
+        { "type": "heading" },
+        { "type": "paragraph" },
+        { "type": "email_form" }
       ]
     }
   ],

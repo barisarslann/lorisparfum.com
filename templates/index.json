@@ -177,7 +177,6 @@
         },
         "slide_G88KU6": {
           "type": "slide",
-          "disabled": true,
           "settings": {
             "subheading": "",
             "subheading_disable_on_mobile": false,
@@ -215,12 +214,12 @@
             "color-overlay-opacity": 0,
             "out-background-color": "rgba(0,0,0,0)",
             "out-text-color": "rgba(0,0,0,0)",
-            "desktop_image": "shopify://shop_images/BANNER-TR_1407657f-e82d-4510-b676-43a5ba138010.jpg",
+            "desktop_image": "shopify://shop_images/1905x1071_INFLUENCE_BANNER-TR_FIYATLI.jpg",
             "desktop_text_vertical_position": "bottom",
             "desktop_text_horizontal_position": "center",
             "container_max_width": 0,
-            "mobile_image": "shopify://shop_images/ST-INFLUENCE-TR.jpg",
-            "mobile_text_vertical_position": "center",
+            "mobile_image": "shopify://shop_images/INFLAME-ST-FIYATLI.jpg",
+            "mobile_text_vertical_position": "bottom",
             "mobile_text_horizontal_position": "center"
           }
         },
@@ -1341,36 +1340,36 @@
         "product_4zdjEq": {
           "type": "product",
           "settings": {
-            "video_hosted": "shopify://files/videos/Funda Sevim - Loris - Ocak (normal anlatımlı).mp4",
-            "featured_product": "k-456-frequence-kadin-parfum-edp-50-ml"
+            "video_hosted": "shopify://files/videos/Meryem Özleşen - Loris - ağusto.mp4",
+            "featured_product": "influence-glow-edp-parfum-100-ml"
           }
         },
         "product_nziX76": {
           "type": "product",
           "settings": {
-            "video_hosted": "shopify://files/videos/Melis Abanoz.MOV",
-            "featured_product": "k-286-frequence-kadin-parfum-edp-50ml"
+            "video_hosted": "shopify://files/videos/Kübra Sevimer - Loris -Ağustos.mp4",
+            "featured_product": "influence-glow-edp-parfum-100-ml"
           }
         },
         "product_RTirm6": {
           "type": "product",
           "settings": {
-            "video_hosted": "shopify://files/videos/Utku Can Sürer - Loris Parfüm.mp4",
-            "featured_product": "e-259-frequence-erkek-edp-parfum-50-ml"
+            "video_hosted": "shopify://files/videos/Can Tarhan_Loris.mp4",
+            "featured_product": "e-269-frequence-erkek-parfum-edp-50-ml"
           }
         },
         "product_HTgnCB": {
           "type": "product",
           "settings": {
-            "video_hosted": "shopify://files/videos/Nisa Deniz - Loris - Ocak.mp4",
-            "featured_product": "k-299-frequence-kadin-parfumu-edp-50ml"
+            "video_hosted": "shopify://files/videos/Bensu Aydın - Loris - Temmuz - Trend İçerik.mp4",
+            "featured_product": "altheron-by-loris-black-shine-edp-100-ml"
           }
         },
         "product_gPVxee": {
           "type": "product",
           "settings": {
-            "video_hosted": "shopify://files/videos/Selen Kaba - Loris - Ocak (anlatımlı içerik).mp4",
-            "featured_product": "k-286-frequence-kadin-parfum-edp-50ml"
+            "video_hosted": "shopify://files/videos/Atakan Ata - Loris - Mayıs anlatımlı.mp4",
+            "featured_product": "e-82-frequence-perfumes-50-ml"
           }
         },
         "product_8AwwgL": {
