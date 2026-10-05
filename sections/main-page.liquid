@@ -48,6 +48,15 @@
   <div class="rte wt-page__wrapper">
     {{ page.content }}
   </div>
+  {% if page.handle == 'search-shop' %}
+    <script id="loris-store-data" type="application/json">{{ page.metafields.custom.magaza_liste.value | json | replace: '</', '<\/' }}</script>
+    <script
+      id="loris-store-locator"
+      src="{{ 'loris-store-locator.js' | asset_url }}"
+      data-maps-url="https://maps.googleapis.com/maps/api/js?key=AIzaSyCq9LR2SdhLzX3cHcJZy-i5ZGCa7n92RnY&amp;callback=lorisInitStoreLocatorMap&amp;region=TR&amp;language=tr"
+      defer
+    ></script>
+  {% endif %}
 </div>
 
 {% schema %}
