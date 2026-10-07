@@ -673,5 +673,18 @@
     "lookbook-button": "See details",
     "pills-navigation": "Pills navigation",
     "collection-tabs": "Collection tabs"
+  },
+  "loris_product": {
+    "campaigns": {
+      "heading": "Offers:"
+    },
+    "fomo": {
+      "loading": "Loading...",
+      "in_cart_html": "🛒 In <strong>{{ count }}</strong> shoppers’ carts right now!",
+      "views_html": "🚀 Popular pick! Viewed by <strong>{{ count }}</strong> people in the last 24 hours.",
+      "sold_html": "🛍️ <strong>{{ count }}+ items</strong> sold this week!",
+      "favorites_html": "❤️ Added to favorites by <strong>{{ count }}</strong> people.",
+      "low_stock_html": "⏳ Only <strong>{{ count }} left</strong> — get yours before they sell out!"
+    }
   }
 }

@@ -1,0 +1,29 @@
+{%- if product.available -%}
+  {%- assign current_variant = product.selected_or_first_available_variant -%}
+  <loris-fomo id="loris-fomo-box" class="loris-fomo-container" lang="{{ request.locale.iso_code }}" style="--fomo-color:#DBA4B4;display:flex;align-items:center;gap:8px;margin-bottom:15px;font-size:14px;color:#333;background:#f9f9f9;padding:8px 12px;border-radius:6px;border:1px solid #eee;" {{ block.shopify_attributes }}>
+    <span style="position:relative;display:flex;height:10px;width:10px;flex-shrink:0;" aria-hidden="true">
+      <span style="animation:fomoPing 1.5s cubic-bezier(0,0,0.2,1) infinite;position:absolute;display:inline-flex;height:100%;width:100%;border-radius:50%;background-color:var(--fomo-color);opacity:0.75;transition:background-color 0.5s ease-in-out;"></span>
+      <span style="position:relative;display:inline-flex;border-radius:50%;height:10px;width:10px;background-color:var(--fomo-color);transition:background-color 0.5s ease-in-out;"></span>
+    </span>
+    <span id="dynamic-fomo-text" data-fomo-text style="transition:opacity 0.5s ease-in-out;opacity:1;">{{ 'loris_product.fomo.loading' | t }}</span>
+    <script type="application/json" data-fomo-messages>
+      [
+        {"text":{{ 'loris_product.fomo.in_cart_html' | t: count: '__count__' | json | replace: '</', '<\/' }},"min":150,"max":800},
+        {"text":{{ 'loris_product.fomo.views_html' | t: count: '__count__' | json | replace: '</', '<\/' }},"min":1000,"max":9500},
+        {"text":{{ 'loris_product.fomo.sold_html' | t: count: '__count__' | json | replace: '</', '<\/' }},"min":500,"max":2500},
+        {"text":{{ 'loris_product.fomo.favorites_html' | t: count: '__count__' | json | replace: '</', '<\/' }},"min":5000,"max":15000}
+        {%- if current_variant.inventory_management == 'shopify' and current_variant.inventory_quantity > 0 and current_variant.inventory_quantity <= 15 -%}
+          ,{"text":{{ 'loris_product.fomo.low_stock_html' | t: count: '__count__' | json | replace: '</', '<\/' }},"count":{{ current_variant.inventory_quantity | json }}}
+        {%- endif -%}
+      ]
+    </script>
+  </loris-fomo>
+  <style>
+    @keyframes fomoPing { 75%,100% { transform:scale(2.5);opacity:0; } }
+    .loris-fomo-container strong { color:var(--fomo-color);font-weight:700;transition:color 0.5s ease-in-out; }
+    @media (prefers-reduced-motion:reduce) {
+      .loris-fomo-container [aria-hidden] span { animation:none!important; }
+    }
+  </style>
+  <script src="{{ 'loris-product-fomo.js' | asset_url }}" defer="defer"></script>
+{%- endif -%}

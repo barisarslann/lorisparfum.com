@@ -673,5 +673,18 @@
   },
   "cross_sell": {
     "empty_msg": "لا توجد منتجات متاحة للعرض. هذه الكتلة لن تكون مرئية للعملاء على واجهة المتجر."
+  },
+  "loris_product": {
+    "campaigns": {
+      "heading": "العروض:"
+    },
+    "fomo": {
+      "loading": "جارٍ التحميل...",
+      "in_cart_html": "🛒 موجود الآن في سلة <strong>{{ count }}</strong> متسوق!",
+      "views_html": "🚀 منتج رائج! شاهده <strong>{{ count }}</strong> شخص خلال آخر 24 ساعة.",
+      "sold_html": "🛍️ تم بيع أكثر من <strong>{{ count }} قطعة</strong> هذا الأسبوع!",
+      "favorites_html": "❤️ أضافه <strong>{{ count }}</strong> شخص إلى المفضلة.",
+      "low_stock_html": "⏳ تبقى <strong>{{ count }} قطعة</strong> فقط، اطلبه قبل نفاد الكمية!"
+    }
   }
 }

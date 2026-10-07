@@ -852,6 +852,10 @@
               {% render 'pdp-block-countdown-discount', block: block %}
             {%- when 'custom_liquid' -%}
               {{ block.settings.custom_liquid }}
+            {%- when 'loris_campaigns' -%}
+              {% render 'loris-product-campaigns', product: product, block: block %}
+            {%- when 'loris_fomo' -%}
+              {% render 'loris-product-fomo', product: product, block: block %}
             {%- when 'custom_option' -%}
               {% render 'pdp-block-custom-option', block: block, product: product %}
             {%- when 'fragrance_family' -%}
@@ -2591,6 +2595,35 @@
           "id": "custom_liquid",
           "label": "t:sections.custom-liquid.settings.custom_liquid.label",
           "info": "t:sections.custom-liquid.settings.custom_liquid.info"
+        }
+      ]
+    },
+    {
+      "type": "loris_campaigns",
+      "name": "Loris | Kampanyalar",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "collection_list",
+          "id": "campaign_collections",
+          "label": "Kampanya koleksiyonları",
+          "limit": 50,
+          "info": "Ürünün dahil olduğu seçili koleksiyonlar gösterilir. Koleksiyon adı ve dili değişse de seçim korunur."
+        },
+        {
+          "type": "paragraph",
+          "content": "Başlık: Translate & Adapt > Varsayılan tema içeriği > Loris product. Kampanya adları: Translate & Adapt > Koleksiyonlar."
+        }
+      ]
+    },
+    {
+      "type": "loris_fomo",
+      "name": "Loris | FOMO",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "paragraph",
+          "content": "Mesajlar: Translate & Adapt > Varsayılan tema içeriği > Loris product > Fomo. Çevirilerde {{ count }} değişkenini koruyun."
         }
       ]
     },

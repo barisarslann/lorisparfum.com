@@ -673,5 +673,18 @@
   },
   "cross_sell": {
     "empty_msg": "Gösterilecek ürün bulunmamaktadır. Bu blok, mağaza vitrininde müşterilere görünmez."
+  },
+  "loris_product": {
+    "campaigns": {
+      "heading": "Kampanyalar :"
+    },
+    "fomo": {
+      "loading": "Hesaplanıyor...",
+      "in_cart_html": "🛒 Şu an <strong>{{ count }}</strong> kişinin sepetinde!",
+      "views_html": "🚀 Popüler ürün! Son 24 saatte <strong>{{ count }}</strong> kişi görüntüledi.",
+      "sold_html": "🛍️ Bu hafta <strong>{{ count }}+ ürün</strong> satıldı!",
+      "favorites_html": "❤️ <strong>{{ count }}</strong> kişi favoriledi.",
+      "low_stock_html": "⏳ Sadece <strong>{{ count }} adet</strong> kaldı, tükenmeden al!"
+    }
   }
 }
