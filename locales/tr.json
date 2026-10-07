@@ -676,7 +676,11 @@
   },
   "loris_product": {
     "campaigns": {
-      "heading": "Kampanyalar :"
+      "heading": "Kampanyalar :",
+      "second_item_discount": "2. Ürüne %50 İndirim",
+      "wheel_discount": "Kazandın: Seçili Ürünlerde Çark İndirimi",
+      "online_discount": "Online Özel Net %30 İndirim",
+      "womens_day": "Kadınlar Gününe Özel Kampanya"
     },
     "fomo": {
       "loading": "Hesaplanıyor...",

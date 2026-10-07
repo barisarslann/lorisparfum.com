@@ -676,7 +676,11 @@
   },
   "loris_product": {
     "campaigns": {
-      "heading": "العروض:"
+      "heading": "العروض:",
+      "second_item_discount": "خصم 50% على المنتج الثاني",
+      "wheel_discount": "لقد ربحت: خصم عجلة الحظ على منتجات مختارة",
+      "online_discount": "خصم 30% حصريًا عبر الإنترنت",
+      "womens_day": "حملة خاصة بمناسبة يوم المرأة"
     },
     "fomo": {
       "loading": "جارٍ التحميل...",

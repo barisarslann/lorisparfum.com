@@ -1,12 +1,37 @@
-{%- comment -%}Use collection IDs for membership; translated titles are only display text.{%- endcomment -%}
-{%- assign product_collection_ids = product.collections | map: 'id' -%}
+{%- comment -%}Preserve the existing keyword matching and link order. Translate display text only.{%- endcomment -%}
+{%- assign discount_keywords = settings.discount_keywords | newline_to_br | split: '<br />' -%}
+{%- assign current_discounts = '|' -%}
 {%- capture campaign_links -%}
-  {%- for campaign in block.settings.campaign_collections -%}
-    {%- if product_collection_ids contains campaign.id -%}
-      <li style="border:1px solid #000;padding:2px 6px;border-radius:5px;margin:0;">
-        <a href="{{ campaign.url }}" style="text-decoration:none;font-size:15px;">{{ campaign.title | escape }}</a>
-      </li>
-    {%- endif -%}
+  {%- for collection in product.collections -%}
+    {%- assign collection_title = collection.title | downcase -%}
+    {%- for keyword in discount_keywords -%}
+      {%- assign keyword = keyword | strip -%}
+      {%- if keyword != blank -%}
+        {%- assign keyword_lower = keyword | downcase -%}
+        {%- if collection_title contains keyword_lower -%}
+          {%- assign unique_key = '|' | append: keyword | append: '|' -%}
+          {%- unless current_discounts contains unique_key -%}
+            {%- assign current_discounts = current_discounts | append: keyword | append: '|' -%}
+            {%- assign display_title = collection.title -%}
+            {%- unless request.locale.primary -%}
+              {%- case collection.handle -%}
+                {%- when 'cok-al-cok-kazan-tum-urunlerde-2-urune-30-3-urune-50-i̇ndirim' -%}
+                  {%- assign display_title = 'loris_product.campaigns.second_item_discount' | t -%}
+                {%- when 'secili-urunler-hediye-carki' -%}
+                  {%- assign display_title = 'loris_product.campaigns.wheel_discount' | t -%}
+                {%- when 'online-ozel-net-30-i̇ndirim' -%}
+                  {%- assign display_title = 'loris_product.campaigns.online_discount' | t -%}
+                {%- when 'kadinlar-gunune-ozel-kampanya' -%}
+                  {%- assign display_title = 'loris_product.campaigns.womens_day' | t -%}
+              {%- endcase -%}
+            {%- endunless -%}
+            <li style="border:1px solid #000;padding:2px 6px;border-radius:5px;margin:0;">
+              <a href="{{ collection.url }}" style="text-decoration:none;font-size:15px;">{{ display_title | escape }}</a>
+            </li>
+          {%- endunless -%}
+        {%- endif -%}
+      {%- endif -%}
+    {%- endfor -%}
   {%- endfor -%}
 {%- endcapture -%}
 {%- if campaign_links != blank -%}

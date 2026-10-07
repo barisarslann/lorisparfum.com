@@ -43,14 +43,7 @@
         },
         "custom_liquid_DzCWhM": {
           "type": "loris_campaigns",
-          "settings": {
-            "campaign_collections": [
-              "cok-al-cok-kazan-tum-urunlerde-2-urune-30-3-urune-50-i̇ndirim",
-              "secili-urunler-hediye-carki",
-              "online-ozel-net-30-i̇ndirim",
-              "kadinlar-gunune-ozel-kampanya"
-            ]
-          }
+          "settings": {}
         },
         "rating": {
           "type": "rating",

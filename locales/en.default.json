@@ -676,7 +676,11 @@
   },
   "loris_product": {
     "campaigns": {
-      "heading": "Offers:"
+      "heading": "Offers:",
+      "second_item_discount": "50% off the second item",
+      "wheel_discount": "You won: Wheel of Fortune Discount on Selected Products",
+      "online_discount": "Online exclusive: 30% off",
+      "womens_day": "Special Campaign for Women's Day"
     },
     "fomo": {
       "loading": "Loading...",

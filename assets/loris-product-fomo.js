@@ -24,6 +24,7 @@ if (!customElements.get('loris-fomo')) {
       let index = 0;
       let colorIndex = 0;
       text.innerHTML = messages[index];
+      text.style.opacity = '1';
       this.style.setProperty('--fomo-color', colors[colorIndex]);
       this.interval = setInterval(() => {
         text.style.opacity = '0';
