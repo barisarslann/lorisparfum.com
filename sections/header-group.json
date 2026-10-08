@@ -234,7 +234,7 @@
         "show_country_selector_flag": true,
         "show_language_selector": true,
         "drawer_title": "",
-        "enable_submenu_link_in_drawer": false,
+        "enable_submenu_link_in_drawer": true,
         "show_search": true,
         "show_search_without_button": false,
         "typing_search": "Arayın...",
